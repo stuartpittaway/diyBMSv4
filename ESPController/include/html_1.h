@@ -13,12 +13,13 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif}
-.header{overflow:hidden;background-color:#f1f1f1;padding:20px 10px}
+.header{overflow:hidden;background-color:#d4f0fb;padding:20px 10px}
 .header a{float:left;color:#000;text-align:center;padding:12px;text-decoration:none;font-size:18px;line-height:25px;border-radius:4px}
 .header a.logo{font-size:25px;font-weight:700}
 .header a:hover{background-color:#ddd;color:#000}
 .header a.active{background-color:#1e90ff;color:#fff}
 .header-right{float:right}
+.logo { float:left; background-image: url("logo.gif");  width:191px;  height:48px;}
 .left{float:left;}
 .bar {height:100%;margin-left:0.5%;margin-right:0.5%;float:left;}
 .bar .g {background-color:#3d9970;display:inline-block;}
@@ -39,11 +40,13 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif}
   .left{float:none;}
   .graph{height:300px; width:100%;}
 }
+
+
 </style>
 </head>
 <body>
 <div class="header">
-  <a href="#default" class="logo">DIY BMS Controller v4</a>
+  <div class="logo">&nbsp;</div>
   <div class="header-right">
     <a class="active" href="#home">Home</a>
     <a href="#contact">Settings</a>

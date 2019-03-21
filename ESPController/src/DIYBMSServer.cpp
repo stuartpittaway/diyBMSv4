@@ -33,8 +33,8 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 AsyncWebServer * DIYBMSServer::_myserver;
 
 #include "html_1.h"
-
 #include "jquery.h"
+#include "logo.h"
 
 void DIYBMSServer::handleNotFound(AsyncWebServerRequest *request) {
     request->send(404, "text/plain", "Not found");
@@ -86,6 +86,12 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/jquery.js", HTTP_GET, [](AsyncWebServerRequest *request){
     AsyncWebServerResponse *response = request->beginResponse_P(200,  "text/javascript", FILE_JQUERY, 29243);
     response->addHeader("Content-Encoding", "gzip");
+    request->send(response);
+  });
+
+  //Return GZIP'ed JQUERY code to browser
+  _myserver->on("/logo.gif", HTTP_GET, [](AsyncWebServerRequest *request){
+    AsyncWebServerResponse *response = request->beginResponse_P(200,  "image/gif", FILE_LOGO,FILE_LOGO_SIZE_BYTES );
     request->send(response);
   });
 
