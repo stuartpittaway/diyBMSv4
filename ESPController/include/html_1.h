@@ -5,11 +5,11 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name = "viewport" content = "width=device-width,initial-scale=1.0">
 <title>DIY BMS CONTROLLER v4</title>
-<script src="jquery.js" type="text/javascript"></script>
-
-<!--jquery-3.3.1.min.js-->
+<link rel="stylesheet" href="chartist.min.css">
+<!-- jquery-3.3.1.min.js -->
 <script src="jquery.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-
+<!-- https://gionkunz.github.io/chartist-js/ -->
+<script src="chartist.min.js" integrity="" crossorigin="anonymous"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif}
@@ -21,15 +21,15 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif}
 .header-right{float:right}
 .logo { float:left; background-image: url("logo.gif");  width:191px;  height:48px;}
 .left{float:left;}
-.bar {height:100%;margin-left:0.5%;margin-right:0.5%;float:left;}
-.bar .g {background-color:#3d9970;display:inline-block;}
-.bar .t {text-align:center;display:inline-block;font-size:small;}
-.graph {border: solid 2px gray; padding:0.1em;height:350px;background: repeating-linear-gradient(to top,#ddd,#ddd 1px,#fff 1px,#fff 5%);}
-.bypassovertemp { background-image: linear-gradient(#AA0000, #3d9970) !important;}
-.bypass { background-image: linear-gradient(#000050, #3d9970) !important;}
 #info {border: solid 2px gray; padding:0.1em;}
 .eighty { width:80%;}
 .twenty { width:20%;}
+
+
+.ct-series-a .ct-bar {
+  stroke: purple;
+  stroke-width: 30px;
+}
 
 @media screen and (max-width:500px){
   .header a,.header-right{float:none}
@@ -38,10 +38,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif}
 
 @media screen and (max-width:640px){
   .left{float:none;}
-  .graph{height:300px; width:100%;}
 }
-
-
 </style>
 </head>
 <body>
@@ -53,58 +50,79 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif}
     <a href="#about">About</a>
   </div>
 </div>
-<div class="graph left eighty"></div>
+<div class="left eighty" style="height:500px;">
+<div id="graph1" class="ct-chart"></div>
+<div id="graph2" class="ct-chart"></div>
+<div id="graph3" class="ct-chart"></div>
+</div>
 <div id="info" class="left twenty">
 <p>Vivamus eleifend, risus at ultrices ultricies, dolor risus luctus sem, ac convallis nunc diam a urna. Ut in iaculis lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc id vestibulum odio, sed consectetur nibh. Sed neque massa, blandit a tortor et, volutpat rutrum lacus. Phasellus id orci eros. Nam consectetur ultricies mollis. Vivamus rutrum cursus ex, sed pharetra erat tincidunt vel.</p>
 </div>
 <script type="text/javascript">
+var g1=null;
+var g2=null;
+var g3=null;
 
 function queryBMS() {
-  $.getJSON( "monitor.json", function( data ) {
-    //Allow multiple graphs for each bank
-    var graph=$(".graph").first();
+  $.getJSON( "monitor.json", function( jsondata ) {
 
-    if (data.cells.length!=$(graph).children().length) {
-      //Need to redraw all the cells
-      $(graph).empty();
-      $.each(data.cells, function( index, value ) {
-        $(graph).append("<div class='bar'><span class='t'></span><span class='g'></span></div>");
-      });
+
+    var labels=[];
+    var voltages=[];
+    var tempint=[];
+    var tempext=[];
+    $.each(jsondata.cells, function( index, value ) {
+      voltages.push((parseFloat(value.voltage)/1000.0));
+      labels.push(index);
+
+      tempint.push(value.int);
+      tempext.push(value.ext);
+    });
+
+
+    var data1 = {labels: labels, series: [voltages]};
+    var data2 = {labels: labels, series: [tempint] };
+    var data3 = {labels: labels, series: [tempext] };
+
+    //console.log(data);
+    //console.log(data2);
+
+    if (g1==null) {
+
+          var options1 = {
+             axisX: {onlyInteger: true},
+            axisY: { type: Chartist.FixedScaleAxis, ticks: [0, 1.0, 2.0, 3.0, 4.0, 5.0], low: 0 },
+
+            chartPadding: {    top: 15,    right: 10,    bottom: 5,    left: 5  },
+            seriesBarDistance: 5,
+          };
+          g1=new Chartist.Bar('#graph1', data1, options1);
+    } else {
+      g1.update(data1);
     }
 
-    //Cells now match number of items in graph
-    var bars=$(graph).children();
+    var graph1width=$('#graph1').width();
 
-    var barWidth=(100-bars.length)/bars.length;
 
-    $.each(data.cells, function( index, value ) {
-      $(bars[index]).css("width",barWidth+"%");
+    if (g2==null) {
+      var options2 = {
+        chartPadding: {    top: 5,    right: 10,    bottom: 5,    left: 5  },
+      };
+    g2=new Chartist.Bar('#graph2', data2, options2);
+  } else {
+    g2.update(data2);
+  }
 
-      //5000mV is max graph scale range
-      var h=value.voltage/5000*100;
-      var h1=100.0-h;
-      $(bars[index]).find(".t").css("width", "100%").css("height", h1+"%");
 
-      $(bars[index]).find(".t").html(
-        (parseFloat(value.voltage)/1000.0).toFixed(3)+"V<br/>"
-        +value.int
-        +"&deg;C<br/>"
-        +value.ext
-        +"&deg;C"
-      );
-
-      $(bars[index]).find(".g").css("width", "100%").css("height", h+"%");
-
-      if (value.bypass) {
-        $(bars[index]).find(".g").addClass("bypass");
-
-        if (value.bypassovertemp) {
-          $(bars[index]).find(".g").addClass("bypassovertemp");
-        }
+      if (g3==null) {
+        var options3 = {
+          chartPadding: {    top: 5,    right: 10,    bottom: 5,    left: 5  },
+        };
+        g3=new Chartist.Bar('#graph3', data3, options3);
       } else {
-        $(bars[index]).find(".g").removeClass("bypass").removeClass("bypassovertemp");
+        g3.update(data3);
       }
-    });
+
 
   });
 
@@ -112,7 +130,7 @@ function queryBMS() {
 }
 
 $(function() {
-  setTimeout(queryBMS,1000);
+  setTimeout(queryBMS,500);
 });
 </script>
 </body>

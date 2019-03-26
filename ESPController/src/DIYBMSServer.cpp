@@ -35,6 +35,8 @@ AsyncWebServer * DIYBMSServer::_myserver;
 #include "html_1.h"
 #include "jquery.h"
 #include "logo.h"
+#include "chartist_css.h"
+#include "chartist_js.h"
 
 void DIYBMSServer::handleNotFound(AsyncWebServerRequest *request) {
     request->send(404, "text/plain", "Not found");
@@ -84,14 +86,26 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
 
   //Return GZIP'ed JQUERY code to browser
   _myserver->on("/jquery.js", HTTP_GET, [](AsyncWebServerRequest *request){
-    AsyncWebServerResponse *response = request->beginResponse_P(200,  "text/javascript", FILE_JQUERY, 29243);
+    AsyncWebServerResponse *response = request->beginResponse_P(200,  "text/javascript", FILE_JQUERY, FILE_JQUERY_SIZE_BYTES);
     response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });
 
-  //Return GZIP'ed JQUERY code to browser
   _myserver->on("/logo.gif", HTTP_GET, [](AsyncWebServerRequest *request){
-    AsyncWebServerResponse *response = request->beginResponse_P(200,  "image/gif", FILE_LOGO,FILE_LOGO_SIZE_BYTES );
+    AsyncWebServerResponse *response = request->beginResponse_P(200,  "image/gif", FILE_LOGO,FILE_LOGO_SIZE_BYTES);
+    request->send(response);
+  });
+
+  _myserver->on("/chartist.min.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    AsyncWebServerResponse *response = request->beginResponse_P(200,  "text/javascript", FILE_CHARTIST_JS, FILE_CHARTIST_JS_SIZE_BYTES);
+    response->addHeader("Content-Encoding", "gzip");
+    request->send(response);
+  });
+
+
+  _myserver->on("/chartist.min.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    AsyncWebServerResponse *response = request->beginResponse_P(200,  "text/css", FILE_CHARTIST_CSS, FILE_CHARTIST_CSS_SIZE_BYTES);
+    response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });
 
