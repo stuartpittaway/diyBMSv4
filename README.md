@@ -23,7 +23,7 @@ The use of this project is done so entirely at your own risk.  It may involve el
 The use of this project may not be compliant with local laws or regulations - if in doubt, seek help.
 
 
-# Licensed
+# License
 
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 2.0 UK: England & Wales License.
 
@@ -64,19 +64,32 @@ Existing balancing solutions are available in the market place, but at a relativ
 Design Goals: 
 * Build upon my existing skill set and knowledge. 
 * Building something that others can contribute to using regular standard libraries and off the shelf components.
-
-
-How it works
-* Controller and module arrangement - each module linked together in a string via serial data transfer
-* Allow controller to take action on inverters, chargers, fuses to avert problems and shutdown systems
-* Use Arduino based libraries and tools 
+* Build something that is inheriently safe
 * Use platform.io to manage code and libraries
-* Use esp8266-12e (NodeMCU v1) as the controller - to take advantage of built in WIFI for monitoring/alerting and CPU/RAM performance
-* Use AVR ATTINY841 for each module
-* Provide internal and external temperature monitoring/alerting
-* Provide autonomous cell voltage balancing - it should still work even if controller is down
-* Ensure each cell voltage is isolated from other cells and that ground voltage is isolated
-* Isolated communications between controller and node is needed
+* Use Arduino based libraries and tools 
 * Put everything on GITHUB
-* Document it!
+* Document it (always gets left to the end!)
 
+# How it works
+
+Controller provides human interface over Wifi/Web and also integrates with other systems like MQTT, emonCMS and Grafana.
+
+Controller is esp8266-12e (NodeMCU v1) - although could be upgraded to ESP32 if really needed.
+
+Controller should be able to take action on alerts/events to shut down inverters/chargers/fuses.
+
+Each cell in a battery pack has a monitoring module.  This uses AVR ATTINY841 linked together by optoisolated serial ports for communication.
+
+ATTINY841 provides:
+* internal temperature monitoring
+* external temperature monitoring
+* Spare input/output for 3rd party use
+* autonomous cell voltage balancing - it should still work even if controller is down
+
+# How as v4 improved over v3?
+
+* Code is better!
+* Controller provides outputs for integration with other systems to avoid issues
+* Cell modules use different ATTINY chip which provides more pins and lower power usage
+* Removal of 3.3v regulator and ADUM chips lowers current usage significantly
+* v3 module uses 10-12mA current constantly and v4 uses 0.5mA
