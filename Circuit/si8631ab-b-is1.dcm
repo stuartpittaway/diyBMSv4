@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP Si8631AB-B-IS1
+D Low-Power 3-Channel Digital Isolator, SOIC-16
+K 3ch 2In 1Out Digital Isolator
+F https://www.mouser.co.uk/datasheet/2/368/Si86xx-1397918.pdf
+$ENDCMP
+#
+#End Doc Library

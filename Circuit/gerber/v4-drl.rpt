@@ -1,0 +1,25 @@
+Drill report for E:/source/diyBMSv4/Circuit/v4.kicad_pcb
+Created on 26/03/2019 19:26:26
+
+Copper Layer Stackup:
+    =============================================================
+    L1 :  F.Cu                      front
+    L2 :  B.Cu                      back
+
+
+Drill file 'v4-PTH.drl' contains
+    plated through holes:
+    =============================================================
+    T1  0.40mm  0.016"  (31 holes)
+    T2  0.75mm  0.030"  (6 holes)
+    T3  1.00mm  0.039"  (16 holes)
+    T4  3.00mm  0.118"  (3 holes)
+
+    Total plated holes count 56
+
+
+Drill file 'v4-NPTH.drl' contains
+    unplated through holes:
+    =============================================================
+
+    Total unplated holes count 0
