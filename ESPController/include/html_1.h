@@ -5,11 +5,9 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name = "viewport" content = "width=device-width,initial-scale=1.0">
 <title>DIY BMS CONTROLLER v4</title>
-<link rel="stylesheet" href="chartist.min.css">
 <!-- jquery-3.3.1.min.js -->
 <script src="jquery.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-<!-- https://gionkunz.github.io/chartist-js/ -->
-<script src="chartist.min.js" integrity="" crossorigin="anonymous"></script>
+<script src="echarts.simple.min.js" integrity="" crossorigin="anonymous"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif}
@@ -24,8 +22,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif}
 #info {border: solid 2px gray; padding:0.1em;}
 .eighty { width:80%;}
 .twenty { width:20%;}
-
-
+#refreshbar { width:100%; padding:0; margin:0; height:4px; background-color:#d3f9fa;}
 .ct-series-a .ct-bar {
   stroke: purple;
   stroke-width: 30px;
@@ -50,13 +47,13 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif}
     <a href="#about">About</a>
   </div>
 </div>
+<div id='refreshbar'></div>
 <div class="left eighty" style="height:500px;">
-<div id="graph1" class="ct-chart"></div>
-<div id="graph2" class="ct-chart"></div>
-<div id="graph3" class="ct-chart"></div>
+<div id="graph1" style="width:100%; height:100%;"></div>
 </div>
 <div id="info" class="left twenty">
 <p>Vivamus eleifend, risus at ultrices ultricies, dolor risus luctus sem, ac convallis nunc diam a urna. Ut in iaculis lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc id vestibulum odio, sed consectetur nibh. Sed neque massa, blandit a tortor et, volutpat rutrum lacus. Phasellus id orci eros. Nam consectetur ultricies mollis. Vivamus rutrum cursus ex, sed pharetra erat tincidunt vel.</p>
+<p id="count"></p>
 </div>
 <script type="text/javascript">
 var g1=null;
@@ -80,29 +77,41 @@ function queryBMS() {
     });
 
 
-    var data1 = {labels: labels, series: [voltages]};
-    var data2 = {labels: labels, series: [tempint] };
-    var data3 = {labels: labels, series: [tempext] };
+    //var data1 = {labels: labels, series: [voltages]};
+    //var data2 = {labels: labels, series: [tempint] };
+    //var data3 = {labels: labels, series: [tempext] };
 
     //console.log(data);
     //console.log(data2);
 
     if (g1==null) {
 
-          var options1 = {
-             axisX: {onlyInteger: true},
-            axisY: { type: Chartist.FixedScaleAxis, ticks: [0, 1.0, 2.0, 3.0, 4.0, 5.0], low: 0 },
+      // based on prepared DOM, initialize echarts instance
+      g1 = echarts.init(document.getElementById('graph1'));
 
-            chartPadding: {    top: 15,    right: 10,    bottom: 5,    left: 5  },
-            seriesBarDistance: 5,
-          };
-          g1=new Chartist.Bar('#graph1', data1, options1);
+      // specify chart configuration item and data
+      var option = {
+          tooltip: {},
+          legend: { data:['Voltage'] },
+          xAxis: { data: [] },
+          yAxis: [{name:'Volts',type:'value',max:5.0},{name:'Temperature',type:'value',max:100.0}],
+          series: [{ name: 'Voltage', type: 'bar', data: [] },{  yAxisIndex:1, name: 'BypassTemperature', type: 'line', data: [] }
+          ,{  yAxisIndex:1, name: 'CellTemperature', type: 'line', data: [] } ]
+      };
+
+      // use configuration item and data specified to show chart
+      g1.setOption(option);
+
     } else {
-      g1.update(data1);
+      g1.setOption({
+          xAxis: { data: labels },
+          series: [{ name: 'Voltage', data: voltages },{ name: 'BypassTemperature', data: tempint }
+          ,{ name: 'CellTemperature', data: tempext }]
+      });
     }
 
+/*
     var graph1width=$('#graph1').width();
-
 
     if (g2==null) {
       var options2 = {
@@ -122,15 +131,34 @@ function queryBMS() {
       } else {
         g3.update(data3);
       }
-
+*/
 
   });
+}
 
-  setTimeout(queryBMS,5000);
+//var refreshcounter=1;
+
+function countdown() {
+  //refreshcounter--;
+  //if (refreshcounter==0) {
+    queryBMS();
+    //Refresh every 5 seconds
+    //refreshcounter=5;
+  //}
+
+  //$("#count").html(refreshcounter);
+
+  //setTimeout(countdown,1000);
+
+  $("#refreshbar").width('100%').animate({ width: '-=100%' },{ duration:5000, complete: countdown, queue:false});
 }
 
 $(function() {
-  setTimeout(queryBMS,500);
+  countdown();
+  //setTimeout(countdown,1000);
+
+  //$("#refreshbar").animate({ width: '-=100%', done: countdown }, 5000);
+
 });
 </script>
 </body>
