@@ -10,7 +10,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <script src="echarts.simple.min.js" integrity="" crossorigin="anonymous"></script>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 .header{overflow:hidden;background-color:#d4f0fb;padding:20px 10px}
 .header a{float:left;color:#000;text-align:center;padding:12px;text-decoration:none;font-size:18px;line-height:25px;border-radius:4px}
 .header a.logo{font-size:25px;font-weight:700}
@@ -48,7 +48,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif}
   </div>
 </div>
 <div id='refreshbar'></div>
-<div class="left eighty" style="height:500px;">
+<div class="left eighty" style="height:768px;">
 <div id="graph1" style="width:100%; height:100%;"></div>
 </div>
 <div id="info" class="left twenty">
@@ -87,16 +87,17 @@ function queryBMS() {
       var option = {
         tooltip: { trigger: 'axis', axisPointer: { type: 'cross', crossStyle: { color: '#999' } } },
           legend: { data:['Voltage'] },
-          xAxis: { type:'category',  axisPointer: { type: 'shadow' }, data:[] },
+          xAxis: [{gridIndex: 0,type:'category' },{  gridIndex: 1,type:'category' }],
           yAxis: [
-            {name:'Volts',type:'value',min:0,max:5.0,interval:0.5,position:'left', axisLabel: { formatter: '{value}V' }}
-            ,{name:'Temperature',type:'value',min:-40.0,max:100.0,interval:10,position:'right'
+            {gridIndex: 0,name:'Volts',type:'value',min:0,max:5.0,interval:0.25,position:'left', axisLabel: { formatter: '{value}V' }}
+            ,{gridIndex: 1,name:'Temperature',type:'value',interval:10,position:'right'
             ,axisLabel:{ formatter: '{value} °C' }
             ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]
           ,series: [{ name: 'Voltage', type: 'bar', data: [] }
-            ,{yAxisIndex:1,name:'BypassTemperature',type:'line', data: [] }
-            ,{yAxisIndex:1,name:'CellTemperature',type:'line',data: [] }
-          ]
+            ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [] }
+            ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [] }
+          ],
+          grid: [{bottom: '30%'},{top: '70%'}],
       };
 
       // use configuration item and data specified to show chart
