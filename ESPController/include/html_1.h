@@ -77,12 +77,6 @@ function queryBMS() {
     });
 
 
-    //var data1 = {labels: labels, series: [voltages]};
-    //var data2 = {labels: labels, series: [tempint] };
-    //var data3 = {labels: labels, series: [tempext] };
-
-    //console.log(data);
-    //console.log(data2);
 
     if (g1==null) {
 
@@ -91,12 +85,18 @@ function queryBMS() {
 
       // specify chart configuration item and data
       var option = {
-          tooltip: {},
+        tooltip: { trigger: 'axis', axisPointer: { type: 'cross', crossStyle: { color: '#999' } } },
           legend: { data:['Voltage'] },
-          xAxis: { data: [] },
-          yAxis: [{name:'Volts',type:'value',max:5.0},{name:'Temperature',type:'value',max:100.0}],
-          series: [{ name: 'Voltage', type: 'bar', data: [] },{  yAxisIndex:1, name: 'BypassTemperature', type: 'line', data: [] }
-          ,{  yAxisIndex:1, name: 'CellTemperature', type: 'line', data: [] } ]
+          xAxis: { type:'category',  axisPointer: { type: 'shadow' }, data:[] },
+          yAxis: [
+            {name:'Volts',type:'value',min:0,max:5.0,interval:0.5,position:'left', axisLabel: { formatter: '{value}V' }}
+            ,{name:'Temperature',type:'value',min:-40.0,max:100.0,interval:10,position:'right'
+            ,axisLabel:{ formatter: '{value} °C' }
+            ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]
+          ,series: [{ name: 'Voltage', type: 'bar', data: [] }
+            ,{yAxisIndex:1,name:'BypassTemperature',type:'line', data: [] }
+            ,{yAxisIndex:1,name:'CellTemperature',type:'line',data: [] }
+          ]
       };
 
       // use configuration item and data specified to show chart
@@ -105,7 +105,8 @@ function queryBMS() {
     } else {
       g1.setOption({
           xAxis: { data: labels },
-          series: [{ name: 'Voltage', data: voltages },{ name: 'BypassTemperature', data: tempint }
+          series: [{ name: 'Voltage', data: voltages }
+          ,{ name: 'BypassTemperature', data: tempint }
           ,{ name: 'CellTemperature', data: tempext }]
       });
     }
