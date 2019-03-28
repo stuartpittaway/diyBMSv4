@@ -51,3 +51,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 .kicad_pcb-bak
+*.kicad_pcb-bak
