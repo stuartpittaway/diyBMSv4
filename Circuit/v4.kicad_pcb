@@ -1046,7 +1046,7 @@
     )
   )
 
-  (module Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm (layer F.Cu) (tedit 58A079E7) (tstamp 5BF1A179)
+  (module Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm (layer F.Cu) (tedit 5C9D1D66) (tstamp 5BF1A179)
     (at 73.8124 101.9556 180)
     (descr "4-Lead Plastic Small Outline http://www.vishay.com/docs/49633/sg2098.pdf")
     (tags "SOP 1.27")
@@ -1055,7 +1055,7 @@
     (fp_text reference U1 (at 1.1176 -0.8128 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "EL3H7(B)(TA)-VG" (at 0.1524 -3.302 180) (layer F.Fab)
+    (fp_text value HMHA2801 (at 0.1524 -3.302 180) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0 180) (layer F.Fab)

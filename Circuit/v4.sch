@@ -360,9 +360,9 @@ L EL3H7-G:EL3H7-G U1
 U 1 1 5BF1DCDE
 P 9190 4790
 F 0 "U1" H 9190 5115 50  0000 C CNN
-F 1 "EL3H7(B)(TA)-VG" H 9190 5024 50  0000 C CNN
+F 1 "HMHA2801" H 9190 5024 50  0000 C CNN
 F 2 "Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm" H 8990 4590 50  0001 L CIN
-F 3 "https://www.digikey.co.uk/product-detail/en/everlight-electronics-co-ltd/EL3H7-B-TA-VG/1080-1197-1-ND/2675931" H 9190 4790 50  0001 L CNN
+F 3 "https://www.mouser.co.uk/datasheet/2/308/HMHA2801-1306522.pdf" H 9190 4790 50  0001 L CNN
 	1    9190 4790
 	1    0    0    -1  
 $EndComp
