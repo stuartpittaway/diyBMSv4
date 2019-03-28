@@ -36,6 +36,10 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 @media screen and (max-width:640px){
   .left{float:none;}
 }
+
+.error:before { content: '!'; }
+.error { color:#D8000C;background-color:#FFBABA; padding:10px;display:none; width:100%;}
+
 </style>
 </head>
 <body>
@@ -48,12 +52,13 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
   </div>
 </div>
 <div id='refreshbar'></div>
+<div id='commserr' class='error'>The controller is having difficulty communicating with the cell monitoring modules.</div>
+<div id='iperror' class='error'>Cannot communicate with the controller for status updates.</div>
 <div class="left eighty" style="height:768px;">
 <div id="graph1" style="width:100%; height:100%;"></div>
 </div>
 <div id="info" class="left twenty">
 <p>Vivamus eleifend, risus at ultrices ultricies, dolor risus luctus sem, ac convallis nunc diam a urna. Ut in iaculis lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc id vestibulum odio, sed consectetur nibh. Sed neque massa, blandit a tortor et, volutpat rutrum lacus. Phasellus id orci eros. Nam consectetur ultricies mollis. Vivamus rutrum cursus ex, sed pharetra erat tincidunt vel.</p>
-<p id="count"></p>
 </div>
 <script type="text/javascript">
 var g1=null;
@@ -63,12 +68,11 @@ var g3=null;
 function queryBMS() {
   $.getJSON( "monitor.json", function( jsondata ) {
 
-
     var labels=[];
     var voltages=[];
     var tempint=[];
     var tempext=[];
-    $.each(jsondata.cells, function( index, value ) {
+    $.each(jsondata.monitor.cells, function( index, value ) {
       voltages.push((parseFloat(value.voltage)/1000.0));
       labels.push(index);
 
@@ -76,10 +80,7 @@ function queryBMS() {
       tempext.push(value.ext);
     });
 
-
-
     if (g1==null) {
-
       // based on prepared DOM, initialize echarts instance
       g1 = echarts.init(document.getElementById('graph1'));
 
@@ -97,7 +98,7 @@ function queryBMS() {
             ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [] }
             ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [] }
           ],
-          grid: [{bottom: '30%'},{top: '70%'}],
+          grid: [{containLabel:false, left:'5%',right:'5%',bottom:'30%'},{containLabel:false, left:'5%',right:'5%',top:'75%'}],
       };
 
       // use configuration item and data specified to show chart
@@ -112,29 +113,17 @@ function queryBMS() {
       });
     }
 
-/*
-    var graph1width=$('#graph1').width();
 
-    if (g2==null) {
-      var options2 = {
-        chartPadding: {    top: 5,    right: 10,    bottom: 5,    left: 5  },
-      };
-    g2=new Chartist.Bar('#graph2', data2, options2);
-  } else {
-    g2.update(data2);
-  }
+    if (jsondata.monitor.commserr==true) {
+      $("#commserr").show();
+    } else {
+      $("#commserr").fadeOut();
+    }
 
+    $("#iperror").hide();
 
-      if (g3==null) {
-        var options3 = {
-          chartPadding: {    top: 5,    right: 10,    bottom: 5,    left: 5  },
-        };
-        g3=new Chartist.Bar('#graph3', data3, options3);
-      } else {
-        g3.update(data3);
-      }
-*/
-
+  }).fail(function() {
+     $("#iperror").show();
   });
 }
 

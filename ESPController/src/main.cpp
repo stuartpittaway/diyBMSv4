@@ -184,12 +184,12 @@ void timerCallback(void *pArg) {
       //We didnt receive a reply to a packet we sent previously something went wrong
       //raise an error here and recover
       waitingForReply=false;
-      missedPacketCount=0;
+      //missedPacketCount=0;
     }
   }
 
-  Serial1.print('=');
-  Serial1.print(missedPacketCount);
+  //Serial1.print('=');
+  //Serial1.print(missedPacketCount);
 }
 
 void clearmoduledata() {

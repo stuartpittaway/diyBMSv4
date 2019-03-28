@@ -26,4 +26,8 @@ class DIYBMSServer {
 };
 
 
+extern bool waitingForReply;
+extern uint8_t missedPacketCount;
+
+
 #endif

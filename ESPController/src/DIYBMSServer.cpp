@@ -55,16 +55,18 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   JsonObject root = doc.to<JsonObject>();
 
-  JsonArray data = root.createNestedArray("cells");
+  JsonObject monitor = root.createNestedObject("monitor");
+  //JsonObject status= monitor.createNestedObject("status");
+  monitor["commserr"]=(waitingForReply || (missedPacketCount>0));
+
+  JsonArray data = monitor.createNestedArray("cells");
   uint8_t bank=0;
 
   for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
     JsonObject cell=data.createNestedObject();
-
     cell["voltage"] = cmi[bank][i].voltagemV;
     cell["bypass"] = cmi[bank][i].inBypass;
     cell["bypassovertemp"] = cmi[bank][i].bypassOverTemp;
-
     cell["int"] = cmi[bank][i].internalTemp;
     cell["ext"] = cmi[bank][i].externalTemp;
   }
