@@ -57,7 +57,7 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   JsonObject monitor = root.createNestedObject("monitor");
   //JsonObject status= monitor.createNestedObject("status");
-  monitor["commserr"]=(waitingForReply || (missedPacketCount>0));
+  monitor["commserr"]=(missedPacketCount>0);
 
   JsonArray data = monitor.createNestedArray("cells");
   uint8_t bank=0;

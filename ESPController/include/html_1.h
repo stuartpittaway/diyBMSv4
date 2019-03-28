@@ -77,29 +77,45 @@ function queryBMS() {
       labels.push(index);
 
       tempint.push(value.int);
-      tempext.push(value.ext);
+      tempext.push(value.ext==-40 ? 0:value.ext  );
     });
 
     if (g1==null) {
       // based on prepared DOM, initialize echarts instance
       g1 = echarts.init(document.getElementById('graph1'));
 
+      var labelOption = {
+          normal: {
+              show: true,
+              position: 'insideBottom',
+              distance: 15,
+              align: 'left',
+              verticalAlign: 'middle',
+              rotate: 90,
+              formatter: '{c}',
+              fontSize: 20
+          }
+      };
+
       // specify chart configuration item and data
       var option = {
+        color: ['#003366', '#006699', '#4cabce'],
         tooltip: { trigger: 'axis', axisPointer: { type: 'cross', crossStyle: { color: '#999' } } },
           legend: { data:['Voltage'] },
           xAxis: [{gridIndex: 0,type:'category' },{  gridIndex: 1,type:'category' }],
           yAxis: [
-            {gridIndex: 0,name:'Volts',type:'value',min:0,max:5.0,interval:0.25,position:'left', axisLabel: { formatter: '{value}V' }}
+            {gridIndex: 0,name:'Volts',type:'value',min:2.5,max:5.0,interval:0.25,position:'left', axisLabel: { formatter: '{value}V' }}
             ,{gridIndex: 1,name:'Temperature',type:'value',interval:10,position:'right'
             ,axisLabel:{ formatter: '{value} °C' }
             ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]
-          ,series: [{ name: 'Voltage', type: 'bar', data: [] }
-            ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [] }
-            ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [] }
+          ,series: [{ name: 'Voltage', type: 'bar', data: [], label: labelOption }
+            ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [], label: labelOption }
+            ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [], label: labelOption }
           ],
-          grid: [{containLabel:false, left:'5%',right:'5%',bottom:'30%'},{containLabel:false, left:'5%',right:'5%',top:'75%'}],
+          grid: [{containLabel:false,left:'5%',right:'5%',bottom:'32%'},{containLabel:false, left:'5%',right:'5%',top:'78%'}],
       };
+
+
 
       // use configuration item and data specified to show chart
       g1.setOption(option);
@@ -130,18 +146,8 @@ function queryBMS() {
 //var refreshcounter=1;
 
 function countdown() {
-  //refreshcounter--;
-  //if (refreshcounter==0) {
-    queryBMS();
-    //Refresh every 5 seconds
-    //refreshcounter=5;
-  //}
-
-  //$("#count").html(refreshcounter);
-
-  //setTimeout(countdown,1000);
-
-  $("#refreshbar").width('100%').animate({ width: '-=100%' },{ duration:5000, complete: countdown, queue:false});
+  queryBMS();
+  $("#refreshbar").width('100%').animate({ width: '-=100%' },{ duration:2500, complete: countdown, queue:false});
 }
 
 $(function() {

@@ -261,9 +261,9 @@ void setup() {
   Serial1.begin(115200, SERIAL_8N1);
   Serial1.setDebugOutput(true);
 
-  //Ensure we service the cell modules every 4 seconds
+  //Ensure we service the cell modules every 2 seconds
   os_timer_setfn(&myTimer, timerCallback, NULL);
-  os_timer_arm(&myTimer, 3000, true);
+  os_timer_arm(&myTimer, 2000, true);
 
   //D0 is used to reset access point WIFI details on boot up
   pinMode(D0,INPUT_PULLUP);
