@@ -283,13 +283,21 @@ void DiyBMSATTiny841::Sleep() {
     //ATTINY841 sleep mode
     byte old_ADCSRA = ADCSRA;
     //For low power applications, before entering sleep, remember to turn off the ADC
-    ADCSRA&=(~(1<<ADEN));
+    //ADCSRA&=(~(1<<ADEN));
+    // disable ADC
+    ADCSRA = 0;  
     set_sleep_mode (SLEEP_MODE_PWR_DOWN);
     power_spi_disable();
     power_timer0_disable();
     power_timer1_disable();
     power_timer2_disable() ;
     power_twi_disable();
+    power_adc_disable();
+
+    power_usart1_disable();
+
+    //Keep this alive
+    //power_usart0_enable();
 
     sei();
     interrupts();
@@ -299,7 +307,13 @@ void DiyBMSATTiny841::Sleep() {
     //Snoring can be heard at this point....
 
     sleep_disable();
-    power_all_enable();
+
+    power_adc_enable();
+    power_timer0_enable();
+    power_timer1_enable();
+    power_timer2_enable();
+
+    //power_all_enable();
 
     ADCSRA = old_ADCSRA;
 }

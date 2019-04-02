@@ -190,20 +190,10 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
     hardware.GreenLedOff();
 }
 
-/*
-ISR (PCINT0_vect) {
-  hardware.RedLedOn();
-  // Pin change 0 interrupt fires when RXD0 pin changes
-  // so reenable the serial port and wait for data
-  hardware.DisablePinChangeInterrupt();
-  hardware.EnableSerial0();
-}
-*/
 
 ISR (USART0_START_vect) {
   //Needs to be here!
   asm("NOP");
-  //hardware.RedLedOn();
 }
 
 void setup() {
@@ -286,8 +276,11 @@ void loop() {
   hardware.EnableStartFrameDetection();
   //hardware.EnablePinChangeInterrupt();
 
+  UCSR0B &= ~_BV(TXEN0);  //disable transmitter
   //Program stops here until woken by watchdog or pin change interrupt
   hardware.Sleep();
+
+  UCSR0B |=(1<<TXEN0); // enable TX Serial0
 
   //Loop here processing any packets then go back to sleep
   for (size_t i = 0; i <20; i++) {
