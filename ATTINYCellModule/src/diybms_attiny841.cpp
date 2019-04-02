@@ -161,6 +161,10 @@ void DiyBMSATTiny841::RedLedOff() {
   #endif
 }
 
+void DiyBMSATTiny841::FlushSerial0() {
+  Serial.flush();
+}
+
 void DiyBMSATTiny841::DisableSerial0() {
   //Disable serial0
   UCSR0B &= ~_BV(RXEN0);  //disable receiver
@@ -179,11 +183,22 @@ void DiyBMSATTiny841::EnableSerial1(){
   UCSR1B |=(1<<TXEN1); // enable TX Serial1
 }
 
+void DiyBMSATTiny841::EnableStartFrameDetection()
+{
+  noInterrupts();
+  // Enable Start Frame Detection
+  UCSR0D = (1 << RXSIE0) | (1 << SFDE0);
+
+  interrupts();
+}
+
 void DiyBMSATTiny841::EnablePinChangeInterrupt()
 {
   //Fire pin change interrupt on RXD0 changing state
   noInterrupts();
 
+  MCUCR |= (1 << ISC01);
+  MCUCR |= (1 << ISC00);
   // GIFR – General Interrupt Flag Register
   // PCIF0: Pin Change Interrupt Flag 0
   GIFR |= (1 << PCIF0);

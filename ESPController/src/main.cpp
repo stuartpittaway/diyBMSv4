@@ -54,7 +54,7 @@ int numberOfModules[4];
 #include "SoftAP.h"
 #include "DIYBMSServer.h"
 
-PacketSerial_<COBS, 0, 128> myPacketSerial;
+PacketSerial_<COBS, 0, 256> myPacketSerial;
 
 os_timer_t myTimer;
 
@@ -113,9 +113,14 @@ void ProcessReplyVoltage() {
   //Z = Not used
 }
 
+int badpacketcounter=0;
+
 void onPacketReceived(const uint8_t* receivebuffer, size_t len)
 {
   // Process your decoded incoming packet here.
+  Serial1.print("PR=");
+  Serial1.print(len);
+  Serial1.print(" bytes =");
 
   if (len > 0) {
 
@@ -125,7 +130,6 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     //Calculate the CRC and compare to received
     uint16_t validateCRC = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2) ;
 
-/*
     Serial1.print(buffer.address,HEX);
     Serial1.print(' ');
     Serial1.print(buffer.command,HEX);
@@ -137,11 +141,10 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     }
     Serial1.print(buffer.crc,HEX);
     Serial1.print('=');
-*/
 
     if (validateCRC==buffer.crc) {
 
-        Serial1.print('-');
+        Serial1.print("good");
 
         switch (buffer.command & 0x0F) {
           case 0:
@@ -152,11 +155,19 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
           break;
         }
     } else {
-      Serial1.print('X');
+      Serial1.print("bad");
+      badpacketcounter++;
     }
 
     waitingForReply=false;
   }
+
+  Serial1.print(' ');
+  Serial1.print(badpacketcounter);
+  Serial1.print(' ');
+  Serial1.print(missedPacketCount);
+
+  Serial1.println("*");
 }
 
 
@@ -168,9 +179,15 @@ void timerCallback(void *pArg) {
 
     requestPacketType++;
 
+    //Wake up the connected cell module from sleep
+    Serial.write(0x00);
+    delay(10);
+
     if (requestPacketType<5) {
+      Serial1.println("Sending voltage request");
       sendCellVoltageRequest();
     } else {
+      Serial1.println("Sending temp request");
       sendCellTemperatureRequest();
       requestPacketType=0;
     }
@@ -178,8 +195,14 @@ void timerCallback(void *pArg) {
     GREEN_LED_OFF;
     waitingForReply=true;
     missedPacketCount=0;
+
+    //Ensure we are empty for next reply
+    //Serial.flush();
+
   } else {
     missedPacketCount++;
+    Serial1.print('W');
+    Serial1.print(missedPacketCount);
     if (missedPacketCount>3) {
       //We didnt receive a reply to a packet we sent previously something went wrong
       //raise an error here and recover
@@ -188,8 +211,6 @@ void timerCallback(void *pArg) {
     }
   }
 
-  //Serial1.print('=');
-  //Serial1.print(missedPacketCount);
 }
 
 void clearmoduledata() {
@@ -292,7 +313,11 @@ void setup() {
 bool server_running=false;
 
 void loop() {
-//  yield();
+  // Call update to receive, decode and process incoming packets.
+  if (Serial.available()) {
+    myPacketSerial.update();
+  }
+
 /*
 TODO: CHECK ERROR CODES BETTER!
 0 : WL_IDLE_STATUS when Wi-Fi is in process of changing between statuses
@@ -316,166 +341,4 @@ TODO: CHECK ERROR CODES BETTER!
     //Do something clever here
   }
 
-
-  //x++;
-
-  // Call update to receive, decode and process incoming packets.
-  myPacketSerial.update();
-
-  /*
-    if (x == 100) {
-      GREEN_LED_ON;
-
-      //The serial data packet we send to the ATTINY is little endian so make the ESP chip do the work converting the bytes
-
-      //Broadcast
-      buffer.address = B10000000;
-      buffer.command = B00000000;
-
-      //AVR MCUs are little endian (least significant byte first in memory)
-      for ( int a = 0; a < maximum_cell_modules; a++ ) {
-        buffer.moduledata[a] = __builtin_bswap16(0x0000);
-      }
-
-      buffer.crc = uCRC16Lib::calculate((uint8_t*)&buffer, sizeof(buffer) - 2);
-      myPacketSerial.send((byte*)&buffer, sizeof(buffer));
-
-      GREEN_LED_OFF;
-
-      Serial1.print("\r\nSENT ");
-      for (size_t i = 0; i < sizeof(buffer); i++)
-      {
-        char receivedChar = ((char*)&buffer)[i];
-        if (receivedChar <= 0x0F) {
-          Serial1.print('0');
-        }
-        Serial1.print(receivedChar, HEX);
-      }
-      Serial1.print("\r\nRECV ");
-    }
-  */
-  /*
-     if (x == 300) {
-     //Identify module
-      GREEN_LED_ON;
-
-      //The serial data packet we send to the ATTINY is little endian so make the ESP chip do the work converting the bytes
-      buffer.address = B00000000;
-      buffer.command = 2;
-
-      //AVR MCUs are little endian (least significant byte first in memory)
-      clearmoduledata();
-
-      crc.clearCrc();
-      buffer.crc = crc.XModemCrc((uint8_t*)&buffer, 0, sizeof(buffer) - 2);
-      myPacketSerial.send((byte*)&buffer, sizeof(buffer));
-
-      GREEN_LED_OFF;
-
-      Serial1.print("\r\nSENT ");
-      for (size_t i = 0; i < sizeof(buffer); i++)
-      {
-        char receivedChar = ((char*)&buffer)[i];
-        if (receivedChar <= 0x0F) {
-          Serial1.print('0');
-        }
-        Serial1.print(receivedChar, HEX);
-      }
-      Serial1.print("\r\nRECV ");
-    }
-  */
-
-/*
-  if (x == 450) {
-    //Find temperature
-    GREEN_LED_ON;
-
-    //The serial data packet we send to the ATTINY is little endian so make the ESP chip do the work converting the bytes
-    buffer.address = B10000000;
-    buffer.command = 3;
-
-    //AVR MCUs are little endian (least significant byte first in memory)
-    clearmoduledata();
-
-
-    buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
-    myPacketSerial.send((byte*)&buffer, sizeof(buffer));
-
-    GREEN_LED_OFF;
-
-    Serial1.print("\r\nSENT ");
-    for (size_t i = 0; i < sizeof(buffer); i++)
-    {
-      char receivedChar = ((char*)&buffer)[i];
-      if (receivedChar <= 0x0F) {
-        Serial1.print('0');
-      }
-      Serial1.print(receivedChar, HEX);
-    }
-    Serial1.print("\r\nRECV ");
-  }
-*/
-  /*
-     if (x == 500) {
-      //Bad packet counter
-      GREEN_LED_ON;
-
-      //The serial data packet we send to the ATTINY is little endian so make the ESP chip do the work converting the bytes
-      buffer.address = B00000000;
-      buffer.command = 4;
-
-      //AVR MCUs are little endian (least significant byte first in memory)
-      clearmoduledata();
-
-      crc.clearCrc();
-      buffer.crc = uCRC16Lib::calculate((uint8_t*)&buffer, sizeof(buffer) - 2);
-      myPacketSerial.send((byte*)&buffer, sizeof(buffer));
-
-      GREEN_LED_OFF;
-
-      Serial1.print("\r\nSENT ");
-      for (size_t i = 0; i < sizeof(buffer); i++)
-      {
-        char receivedChar = ((char*)&buffer)[i];
-        if (receivedChar <= 0x0F) {
-          Serial1.print('0');
-        }
-        Serial1.print(receivedChar, HEX);
-      }
-      Serial1.print("\r\nRECV ");
-    }
-  */
-/*
-  if (x == 650) {
-    //Read voltage
-    GREEN_LED_ON;
-
-    //Read voltage (broadcast)
-    buffer.address = B10000000;
-    buffer.command = 1;
-
-    //AVR MCUs are little endian (least significant byte first in memory)
-    clearmoduledata();
-
-    buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
-    myPacketSerial.send((byte*)&buffer, sizeof(buffer));
-
-    GREEN_LED_OFF;
-
-    Serial1.print("\r\nSENT ");
-    for (size_t i = 0; i < sizeof(buffer); i++)
-    {
-      char receivedChar = ((char*)&buffer)[i];
-      if (receivedChar <= 0x0F) {
-        Serial1.print('0');
-      }
-      Serial1.print(receivedChar, HEX);
-    }
-    Serial1.print("\r\nRECV ");
-
-    x = 1;
-  }
-
-  delay(10);
-  */
 }

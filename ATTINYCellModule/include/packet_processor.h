@@ -54,7 +54,7 @@ private:
   void UpdateRingBuffer(uint16_t value);
   uint8_t TemperatureToByte(float TempInCelcius);
 
-  #define ringsize_bits 4
+  #define ringsize_bits 2
   #define ringsize 1 << ringsize_bits
 
   volatile uint8_t adcmode=0;

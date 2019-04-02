@@ -128,10 +128,8 @@ int PacketProcessor::GetBufferSize() {
 }
 
 bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len) {
-  if (len == 0) {
-    badpackets++;
-    return false;
-  }
+  //if (len == 0) {    badpackets++;    return false;  }
+
 
   // Process your decoded incoming packet here.
   if (len == sizeof(buffer)) {
@@ -149,8 +147,8 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
       }
       return true;
     }
-
   }
+
 
   //We need to do something here, the packet received was not correct
   //Time to do the checks on the cell to make sure everything is okay

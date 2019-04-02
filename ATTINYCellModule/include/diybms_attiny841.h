@@ -34,6 +34,7 @@ public:
    void ReferenceVoltageOn();
    void ReferenceVoltageOff();
 
+   void FlushSerial0();
    void DisableSerial0();
    void EnableSerial0();
 
@@ -54,7 +55,7 @@ public:
    void SelectCellVoltageChannel();
    void SelectInternalTemperatureChannel();
    void SelectExternalTemperatureChannel();
-
+   void EnableStartFrameDetection();
 
 
 

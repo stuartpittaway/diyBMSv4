@@ -45,8 +45,8 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 #ifdef DIYBMS_DEBUG
 
 #define DEBUG_PRINT(str) \
-   Serial1.print(__FUNCTION__); \
-   Serial1.print(':'); \
+   //Serial1.print(__FUNCTION__); \
+   //Serial1.print(':'); \
    Serial1.print(__LINE__); \
    Serial1.print(' '); \
    Serial1.println(str);

@@ -1,5 +1,5 @@
 /*
- ____  ____  _  _  ____  __  __  ___    _  _  __  
+ ____  ____  _  _  ____  __  __  ___    _  _  __
 (  _ \(_  _)( \/ )(  _ \(  \/  )/ __)  ( \/ )/. |
  )(_) )_)(_  \  /  ) _ < )    ( \__ \   \  /(_  _)
 (____/(____) (__) (____/(_/\/\_)(___/    \/   (_)
@@ -32,6 +32,7 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontro
 //If you want to DEBUG connect another serial reading device to RED_LED (TXD1/MISO) this disables the RED LED pin
 //#define DIYBMS_DEBUG
 
+
 #include <Arduino.h>
 
 #if !(F_CPU == 8000000)
@@ -43,7 +44,7 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontro
 #include <PacketSerial.h>
 
 //96 byte buffer
-PacketSerial_<COBS, 0, 96> myPacketSerial;
+PacketSerial_<COBS, 0, 100> myPacketSerial;
 
 //Our project code includes
 #include "defines.h"
@@ -169,20 +170,40 @@ void BeginSetupProcedure()
 }
 
 void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
+
+    if (len==0) return;
+
     //A data packet has just arrived, process it and forward the results to the next module (if valid)
     hardware.GreenLedOn();
+
     if (PP.onPacketReceived(receivebuffer,len)) {
       //Only forward on good packets (valid CRC etc...)
+
+      //Wake up the connected cell module from sleep
+      Serial.write((byte)0);
+      delay(10);
+
+      //Send the packet
       myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
     }
+
     hardware.GreenLedOff();
 }
 
+/*
 ISR (PCINT0_vect) {
+  hardware.RedLedOn();
   // Pin change 0 interrupt fires when RXD0 pin changes
   // so reenable the serial port and wait for data
   hardware.DisablePinChangeInterrupt();
   hardware.EnableSerial0();
+}
+*/
+
+ISR (USART0_START_vect) {
+  //Needs to be here!
+  asm("NOP");
+  //hardware.RedLedOn();
 }
 
 void setup() {
@@ -196,12 +217,13 @@ void setup() {
   hardware.ConfigurePorts();
 
   //More power saving changes
-  hardware.DisableSerial0();
+  hardware.EnableSerial0();
+
 
   #ifdef DIYBMS_DEBUG
   //UCSR1B |=(1<<TXEN1); // enable TX Serial1 for DEBUG output
   Serial1.begin(38400,SERIAL_8N1);
-  DEBUG_PRINT(F("\r\nDEBUG MODE " __DATE__ ", " __TIME__ ""))
+  DEBUG_PRINT(F("\r\nDEBUG MODE"))
   #else
   hardware.DisableSerial1();
   #endif
@@ -239,16 +261,15 @@ void loop() {
   //We always take a voltage reading on every loop cycle to check if we need to go into bypass
   //this is also triggered by the watchdog should comms fail or the module is running standalone
   hardware.ReferenceVoltageOn();
-  delay(5);
+  //allow 2V to stabalize
+  delay(8);
   PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
 
   //We also need to check temperatures here, perhaps not as often as
   //cell voltage??
-
   PP.BypassCheck();
 
   hardware.ReferenceVoltageOff();
-
 
   if (wdt_triggered) {
     hardware.RedLedOff();
@@ -256,21 +277,24 @@ void loop() {
   }
 
 
-  hardware.DisableSerial0();
+  //Save power
+  //Serial.end();
+  //hardware.DisableSerial0();
 
   //TODO: It may be better to use SFDE instead of pin change?
   //Bit 5 – SFDE: Start Frame Detection Enable
-  //UCSR0D |= (1<< RXSIE0)|(1<<SFDE0)|(1<<RXS0);
-  hardware.EnablePinChangeInterrupt();
+  hardware.EnableStartFrameDetection();
+  //hardware.EnablePinChangeInterrupt();
 
   //Program stops here until woken by watchdog or pin change interrupt
   hardware.Sleep();
 
   //Loop here processing any packets then go back to sleep
-  for (size_t i = 0; i <25; i++) {
+  for (size_t i = 0; i <20; i++) {
     //Allow data to be received in buffer
-    delay(4);
+    delay(10);
     // Call update to receive, decode and process incoming packets.
     myPacketSerial.update();
   }
+
 }
