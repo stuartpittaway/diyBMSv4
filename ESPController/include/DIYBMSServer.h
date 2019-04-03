@@ -28,6 +28,8 @@ class DIYBMSServer {
 
 extern bool waitingForReply;
 extern uint8_t missedPacketCount;
+extern uint16_t totalMissedPacketCount;
+extern uint16_t totalCRCErrors;
 
 
 #endif

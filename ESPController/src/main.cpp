@@ -64,6 +64,9 @@ void sendCellTemperatureRequest();
 bool waitingForReply=false;
 uint8_t missedPacketCount=0;
 
+uint16_t totalMissedPacketCount=0;
+uint16_t totalCRCErrors=0;
+
 uint8_t ReplyFromBank() {return (buffer.address & B00110000) >> 4;}
 uint8_t ReplyLastAddress() {return buffer.address & 0x0F;}
 
@@ -105,6 +108,15 @@ void ProcessReplyVoltage() {
     cmi[ReplyFromBank()][i].voltagemV = buffer.moduledata[i] & 0x1FFF;
     cmi[ReplyFromBank()][i].inBypass= (buffer.moduledata[i] & 0x8000)>0;
     cmi[ReplyFromBank()][i].bypassOverTemp= (buffer.moduledata[i] & 0x4000)>0;
+
+    if (cmi[ReplyFromBank()][i].voltagemV> cmi[ReplyFromBank()][i].voltagemVMax) {
+      cmi[ReplyFromBank()][i].voltagemVMax=cmi[ReplyFromBank()][i].voltagemV;
+    }
+
+    if (cmi[ReplyFromBank()][i].voltagemV<cmi[ReplyFromBank()][i].voltagemVMin) {
+      cmi[ReplyFromBank()][i].voltagemVMin=cmi[ReplyFromBank()][i].voltagemV;
+    }
+
   }
 
   //3 top bits remaining
@@ -113,7 +125,6 @@ void ProcessReplyVoltage() {
   //Z = Not used
 }
 
-int badpacketcounter=0;
 
 void onPacketReceived(const uint8_t* receivebuffer, size_t len)
 {
@@ -143,7 +154,6 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     Serial1.print('=');
 
     if (validateCRC==buffer.crc) {
-
         Serial1.print("good");
 
         switch (buffer.command & 0x0F) {
@@ -156,17 +166,16 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
         }
     } else {
       Serial1.print("bad");
-      badpacketcounter++;
+      totalCRCErrors++;
     }
 
     waitingForReply=false;
   }
 
   Serial1.print(' ');
-  Serial1.print(badpacketcounter);
+  Serial1.print(totalCRCErrors);
   Serial1.print(' ');
   Serial1.print(missedPacketCount);
-
   Serial1.println("*");
 }
 
@@ -201,9 +210,10 @@ void timerCallback(void *pArg) {
 
   } else {
     missedPacketCount++;
+    totalMissedPacketCount++;
     Serial1.print('W');
     Serial1.print(missedPacketCount);
-    if (missedPacketCount>3) {
+    if (missedPacketCount>2) {
       //We didnt receive a reply to a packet we sent previously something went wrong
       //raise an error here and recover
       waitingForReply=false;
@@ -268,6 +278,19 @@ void setup() {
   numberOfModules[1]=0;
   numberOfModules[2]=0;
   numberOfModules[3]=0;
+
+  for (size_t i = 0; i < maximum_cell_modules; i++)
+  {
+    cmi[0][i].voltagemVMax=0;
+    cmi[0][i].voltagemVMin=6000;
+    cmi[1][i].voltagemVMax=0;
+    cmi[1][i].voltagemVMin=6000;
+    cmi[2][i].voltagemVMax=0;
+    cmi[2][i].voltagemVMin=6000;
+    cmi[3][i].voltagemVMax=0;
+    cmi[3][i].voltagemVMin=6000;
+  }
+
 
   Serial.begin(9600, SERIAL_8N1);           // Serial for comms to modules
   //Use alternative GPIO pins of D7/D8

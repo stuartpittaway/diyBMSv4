@@ -59,14 +59,19 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
   //JsonObject status= monitor.createNestedObject("status");
   monitor["commserr"]=(missedPacketCount>0);
 
+  monitor["badpkt"]=totalMissedPacketCount;
+  monitor["badcrc"]=totalCRCErrors;
+
   JsonArray data = monitor.createNestedArray("cells");
   uint8_t bank=0;
 
   for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
     JsonObject cell=data.createNestedObject();
-    cell["voltage"] = cmi[bank][i].voltagemV;
+    cell["v"] = cmi[bank][i].voltagemV;
+    cell["minv"] = cmi[bank][i].voltagemVMin;
+    cell["maxv"] = cmi[bank][i].voltagemVMax;
     cell["bypass"] = cmi[bank][i].inBypass;
-    cell["bypassovertemp"] = cmi[bank][i].bypassOverTemp;
+    cell["bypasshot"] = cmi[bank][i].bypassOverTemp;
     cell["int"] = cmi[bank][i].internalTemp;
     cell["ext"] = cmi[bank][i].externalTemp;
   }

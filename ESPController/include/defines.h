@@ -21,6 +21,8 @@ extern packet buffer;
 struct CellModuleInfo {
   //uint8_t address;
   uint16_t voltagemV;
+  uint16_t voltagemVMin;
+  uint16_t voltagemVMax;
   //Signed integer
   int16_t internalTemp;
   int16_t externalTemp;

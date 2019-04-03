@@ -18,14 +18,17 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 .header a.active{background-color:#1e90ff;color:#fff}
 .header-right{float:right}
 .logo { float:left; background-image: url("logo.gif");  width:191px;  height:48px;}
-.left{float:left;}
-#info {border: solid 2px gray; padding:0.1em;}
-.eighty { width:80%;}
-.twenty { width:20%;}
+
+.info {width:100%;border:solid 2px gray;padding:0.1em;}
+.info .stat {display:inline-block;width:20%}
+
+.info .stat .t {font-size:small;display:block;width:100%;text-align:right;}
+.info .stat .v {font-size:large;display:block;width:100%;text-align:right;}
 #refreshbar { width:100%; padding:0; margin:0; height:4px; background-color:#d3f9fa;}
+
 .ct-series-a .ct-bar {
   stroke: purple;
-  stroke-width: 30px;
+  stroke-width: 25px;
 }
 
 @media screen and (max-width:500px){
@@ -34,7 +37,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 }
 
 @media screen and (max-width:640px){
-  .left{float:none;}
+
 }
 
 .error:before { content: '!'; }
@@ -54,11 +57,16 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <div id='refreshbar'></div>
 <div id='commserr' class='error'>The controller is having difficulty communicating with the cell monitoring modules.</div>
 <div id='iperror' class='error'>Cannot communicate with the controller for status updates.</div>
-<div class="left eighty" style="height:768px;">
-<div id="graph1" style="width:100%; height:100%;"></div>
+
+<div id="info" class="info">
+<div class="stat"><span class="t">Voltage:</span><span class="v" id="voltage"></span></div>
+<div class="stat"><span class="t">Current:</span><span class="v" id="current"></span></div>
+<div class="stat"><span class="t">Packet Errors:</span><span class="v" id="badpkt"></span></div>
+<div class="stat"><span class="t">CRC Errors:</span><span class="v" id="badcrc"></span></div>
 </div>
-<div id="info" class="left twenty">
-<p>Vivamus eleifend, risus at ultrices ultricies, dolor risus luctus sem, ac convallis nunc diam a urna. Ut in iaculis lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc id vestibulum odio, sed consectetur nibh. Sed neque massa, blandit a tortor et, volutpat rutrum lacus. Phasellus id orci eros. Nam consectetur ultricies mollis. Vivamus rutrum cursus ex, sed pharetra erat tincidunt vel.</p>
+
+<div class="" style="height:768px;width:100%;">
+<div id="graph1" style="width:100%; height:100%;"></div>
 </div>
 <script type="text/javascript">
 var g1=null;
@@ -68,16 +76,26 @@ var g3=null;
 function queryBMS() {
   $.getJSON( "monitor.json", function( jsondata ) {
 
+    var voltage=0.0;
     var labels=[];
     var voltages=[];
+    var voltagesmin=[];
+    var voltagesmax=[];
     var tempint=[];
     var tempext=[];
     $.each(jsondata.monitor.cells, function( index, value ) {
-      voltages.push((parseFloat(value.voltage)/1000.0));
+      voltages.push((parseFloat(value.v)/1000.0));
+
+      voltagesmin.push((parseFloat(value.minv)/1000.0));
+      voltagesmax.push((parseFloat(value.maxv)/1000.0));
+
       labels.push(index);
 
       tempint.push(value.int);
       tempext.push(value.ext==-40 ? 0:value.ext  );
+
+      //TODO: This needs to be voltage per bank not total
+      voltage+=(parseFloat(value.v)/1000.0);
     });
 
     if (g1==null) {
@@ -97,6 +115,19 @@ function queryBMS() {
           }
       };
 
+      var labelOption1 = {
+          normal: {
+              show: true,
+              position: 'end',
+              //distance: 15,
+              //align: 'left',
+              //verticalAlign: 'middle',
+              //rotate: 0,
+              formatter: '{c}',
+              fontSize: 20
+          }
+      };
+
       // specify chart configuration item and data
       var option = {
         color: ['#003366', '#006699', '#4cabce'],
@@ -109,6 +140,8 @@ function queryBMS() {
             ,axisLabel:{ formatter: '{value} °C' }
             ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]
           ,series: [{ name: 'Voltage', type: 'bar', data: [], label: labelOption }
+,{ name: 'Min V', type: 'line', data: [], label: labelOption1 }
+,{ name: 'Max V', type: 'line', data: [], label: labelOption1 }
             ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [], label: labelOption }
             ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [], label: labelOption }
           ],
@@ -124,11 +157,19 @@ function queryBMS() {
       g1.setOption({
           xAxis: { data: labels },
           series: [{ name: 'Voltage', data: voltages }
+          ,{ name: 'Min V', data: voltagesmin }
+          ,{ name: 'Max V', data: voltagesmax }
           ,{ name: 'BypassTemperature', data: tempint }
           ,{ name: 'CellTemperature', data: tempext }]
       });
     }
 
+    $("#badcrc").html(jsondata.monitor.badcrc);
+    $("#badpkt").html(jsondata.monitor.badpkt);
+
+    $("#voltage").html(voltage.toFixed(2));
+
+    $("#current").html("");
 
     if (jsondata.monitor.commserr==true) {
       $("#commserr").show();
