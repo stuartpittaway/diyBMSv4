@@ -110,7 +110,7 @@ function queryBMS() {
               align: 'left',
               verticalAlign: 'middle',
               rotate: 90,
-              formatter: '{c}',
+              formatter: '{c}V',
               fontSize: 20
           }
       };
@@ -119,15 +119,24 @@ function queryBMS() {
           normal: {
               show: true,
               position: 'end',
-              //distance: 15,
-              //align: 'left',
-              //verticalAlign: 'middle',
-              //rotate: 0,
-              formatter: '{c}',
+              formatter: '{c}V',
               fontSize: 20
           }
       };
 
+
+            var labelOption2 = {
+                normal: {
+                    show: true,
+                    position: 'insideBottom',
+                    distance: 15,
+                    align: 'left',
+                    verticalAlign: 'middle',
+                    rotate: 90,
+                    formatter: '{c}°C',
+                    fontSize: 20
+                }
+            };
       // specify chart configuration item and data
       var option = {
         color: ['#003366', '#006699', '#4cabce'],
@@ -140,10 +149,10 @@ function queryBMS() {
             ,axisLabel:{ formatter: '{value} °C' }
             ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]
           ,series: [{ name: 'Voltage', type: 'bar', data: [], label: labelOption }
-,{ name: 'Min V', type: 'line', data: [], label: labelOption1 }
-,{ name: 'Max V', type: 'line', data: [], label: labelOption1 }
-            ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [], label: labelOption }
-            ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [], label: labelOption }
+              ,{ name: 'Min V', type: 'line', data: [], label: labelOption1 }
+              ,{ name: 'Max V', type: 'line', data: [], label: labelOption1 }
+              ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [], label: labelOption2 }
+              ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [], label: labelOption2 }
           ],
           grid: [{containLabel:false,left:'5%',right:'5%',bottom:'32%'},{containLabel:false, left:'5%',right:'5%',top:'78%'}],
       };
