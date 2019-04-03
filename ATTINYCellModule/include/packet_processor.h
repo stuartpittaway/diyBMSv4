@@ -40,6 +40,7 @@ public:
   uint16_t ReadRawRingValue();
   uint16_t IncrementWatchdogCounter() { watchdog_counter++; return watchdog_counter; }
   void BypassCheck();
+  uint16_t TemperatureMeasurement();
 
 
 private:

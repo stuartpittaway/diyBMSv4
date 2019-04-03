@@ -240,17 +240,11 @@ void PacketProcessor::processPacket() {
       //Allow reference voltage to stabalize
       delay(5);
 
-      //Internal temperature
-      TakeAnAnalogueReading(ADC_INTERNAL_TEMP);
-      uint8_t value = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
+      //Return both readings inside the uint16_t
+      buffer.moduledata[mymoduleaddress] =TemperatureMeasurement();
 
-      //External temperature
-      TakeAnAnalogueReading(ADC_EXTERNAL_TEMP);
-      uint8_t value2 = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->External_BCoefficient, external_temperature));
       _hardware->ReferenceVoltageOff();
 
-      //Return both readings inside the uint16_t
-      buffer.moduledata[mymoduleaddress] = (value << 8) + value2;
       break;
     }
 
@@ -263,6 +257,18 @@ void PacketProcessor::processPacket() {
   }
 
   buffer.crc = uCRC16Lib::calculate((char * ) & buffer, sizeof(buffer) - 2);
+}
+
+uint16_t PacketProcessor::TemperatureMeasurement() {
+  //Internal temperature
+  TakeAnAnalogueReading(ADC_INTERNAL_TEMP);
+  uint8_t value = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
+
+  //External temperature
+  TakeAnAnalogueReading(ADC_EXTERNAL_TEMP);
+  uint8_t value2 = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->External_BCoefficient, external_temperature));
+
+  return (value << 8) + value2;
 }
 
 void PacketProcessor::PrefillRingBuffer() {

@@ -259,8 +259,12 @@ void loop() {
   delay(8);
   PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
 
-  //We also need to check temperatures here, perhaps not as often as
-  //cell voltage??
+
+  if (wdt_triggered) {
+    //If watchdog then check the temperature as well
+    uint16_t temperatures=PP.TemperatureMeasurement();
+  }
+
   PP.BypassCheck();
 
   hardware.ReferenceVoltageOff();
