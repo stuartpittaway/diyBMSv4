@@ -292,7 +292,7 @@ void setup() {
   }
 
 
-  Serial.begin(9600, SERIAL_8N1);           // Serial for comms to modules
+  Serial.begin(4800, SERIAL_8N1);           // Serial for comms to modules
   //Use alternative GPIO pins of D7/D8
   //D7 = GPIO13 = RECEIVE SERIAL
   //D8 = GPIO15 = TRANSMIT SERIAL

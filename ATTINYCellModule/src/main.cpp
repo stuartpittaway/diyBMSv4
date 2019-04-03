@@ -32,7 +32,6 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontro
 //If you want to DEBUG connect another serial reading device to RED_LED (TXD1/MISO) this disables the RED LED pin
 //#define DIYBMS_DEBUG
 
-
 #include <Arduino.h>
 
 #if !(F_CPU == 8000000)
@@ -110,7 +109,11 @@ ISR(WDT_vect){
   //This is the watchdog timer - something went wrong and no activity recieved in a while
   wdt_triggered=true;
   PP.IncrementWatchdogCounter();
-}
+
+    hardware.GreenLedOff();
+    hardware.RedLedOff();
+
+  }
 
 void double_tap_green_led() {
   hardware.GreenLedOn();
@@ -171,19 +174,18 @@ void BeginSetupProcedure()
 
 void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
 
-    if (len==0) return;
+    if (len>0) {
 
-    //A data packet has just arrived, process it and forward the results to the next module (if valid)
-    hardware.GreenLedOn();
+      //A data packet has just arrived, process it and forward the results to the next module (if valid)
+      if (PP.onPacketReceived(receivebuffer,len)) {
 
-    if (PP.onPacketReceived(receivebuffer,len)) {
-      //Only forward on good packets (valid CRC etc...)
+      }
 
       //Wake up the connected cell module from sleep
       Serial.write((byte)0);
       delay(10);
 
-      //Send the packet
+      //Send the packet (even if it was invalid so controller can count crc errors)
       myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
     }
 
@@ -194,6 +196,8 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
 ISR (USART0_START_vect) {
   //Needs to be here!
   asm("NOP");
+
+  hardware.GreenLedOn();
 }
 
 void setup() {
@@ -234,7 +238,7 @@ void setup() {
   double_tap_green_led();
 
   //Set up data handler
-  Serial.begin(9600, SERIAL_8N1);
+  Serial.begin(4800, SERIAL_8N1);
   myPacketSerial.setStream(&Serial);           // start serial for output
   myPacketSerial.setPacketHandler(&onPacketReceived);
 }
@@ -279,8 +283,8 @@ void loop() {
   UCSR0B &= ~_BV(TXEN0);  //disable transmitter
   //Program stops here until woken by watchdog or pin change interrupt
   hardware.Sleep();
-
   UCSR0B |=(1<<TXEN0); // enable TX Serial0
+
 
   //Loop here processing any packets then go back to sleep
   for (size_t i = 0; i <20; i++) {
