@@ -4,6 +4,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name = "viewport" content = "width=device-width,initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <title>DIY BMS CONTROLLER v4</title>
 <!-- jquery-3.3.1.min.js -->
 <script src="jquery.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
@@ -19,11 +20,12 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 .header-right{float:right}
 .logo { float:left; background-image: url("logo.gif");  width:191px;  height:48px;}
 
-.info {width:100%;border:solid 2px gray;padding:0.1em;}
-.info .stat {display:inline-block;width:20%}
+.info {width:100%;}
+.info .stat {display:inline-block;width:20%;border:solid 2px gray;padding:2px;margin:2px;}
 
-.info .stat .t {font-size:small;display:block;width:100%;text-align:right;}
-.info .stat .v {font-size:large;display:block;width:100%;text-align:right;}
+.info .stat .x {display:block;width:100%;text-align:right;}
+.info .stat .t {font-size:small;}
+.info .stat .v {font-size:large;font-family: 'Montserrat', sans-serif;}
 #refreshbar { width:100%; padding:0; margin:0; height:4px; background-color:#d3f9fa;}
 
 .ct-series-a .ct-bar {
@@ -59,10 +61,10 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <div id='iperror' class='error'>Cannot communicate with the controller for status updates.</div>
 
 <div id="info" class="info">
-<div class="stat"><span class="t">Voltage:</span><span class="v" id="voltage"></span></div>
-<div class="stat"><span class="t">Current:</span><span class="v" id="current"></span></div>
-<div class="stat"><span class="t">Packet Errors:</span><span class="v" id="badpkt"></span></div>
-<div class="stat"><span class="t">CRC Errors:</span><span class="v" id="badcrc"></span></div>
+<div class="stat"><span class="x t">Voltage:</span><span class="x v" id="voltage"></span></div>
+<div class="stat"><span class="x t">Current:</span><span class="x v" id="current"></span></div>
+<div class="stat"><span class="x t">Packet Errors:</span><span class="x v" id="badpkt"></span></div>
+<div class="stat"><span class="x t">CRC Errors:</span><span class="x v" id="badcrc"></span></div>
 </div>
 
 <div class="" style="height:768px;width:100%;">
