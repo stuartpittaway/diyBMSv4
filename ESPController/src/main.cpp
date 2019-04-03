@@ -22,11 +22,11 @@
 
 /*
    PINS
-
+   D6 = GREEN_LED
    D7 = GPIO13 = RECEIVE SERIAL
    D8 = GPIO15 = TRANSMIT SERIAL
 
-   D4 = GPIO2 = TXD1 = TRANSMIT DEBUG SERIAL
+   D4 = GPIO2 = TXD1 = TRANSMIT DEBUG SERIAL (and blue led on esp8266)
 
    DIAGRAM
    https://www.hackster.io/Aritro/getting-started-with-esp-nodemcu-using-arduinoide-aa7267
