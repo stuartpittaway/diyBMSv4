@@ -51,7 +51,7 @@ void DIYBMSServer::sendHeaders()
 void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
   AsyncResponseStream *response = request->beginResponseStream("application/json");
 
-  DynamicJsonDocument doc(2048);
+  DynamicJsonDocument doc(4096);
 
   JsonObject root = doc.to<JsonObject>();
 
@@ -62,9 +62,11 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
   monitor["badpkt"]=totalMissedPacketCount;
   monitor["badcrc"]=totalCRCErrors;
 
-  JsonArray data = monitor.createNestedArray("cells");
-  uint8_t bank=0;
+JsonArray bankArray = root.createNestedArray("bank");
 
+  for (uint8_t bank = 0; bank < 4; bank++) {
+
+    JsonArray data = bankArray.createNestedArray();
   for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
     JsonObject cell=data.createNestedObject();
     cell["v"] = cmi[bank][i].voltagemV;
@@ -75,7 +77,7 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
     cell["int"] = cmi[bank][i].internalTemp;
     cell["ext"] = cmi[bank][i].externalTemp;
   }
-
+}
   serializeJson(doc, *response);
   request->send(response);
 }

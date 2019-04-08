@@ -101,6 +101,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <table id="settingsTable">
 <thead>
 <tr>
+<th>Bank</th>
 <th>Cell</th>
 <th>Voltage</th>
 <th>V. Min</th>
@@ -128,19 +129,22 @@ function queryBMS() {
 
     var voltage=0.0;
     var labels=[];
+    var bank=[];
     var voltages=[];
     var voltagesmin=[];
     var voltagesmax=[];
     var tempint=[];
     var tempext=[];
 
+    for (var bankNumber = 0; bankNumber <4; bankNumber++) {
     //Need to cater for banks of cells
-    $.each(jsondata.monitor.cells, function( index, value ) {
+    $.each(jsondata.bank[bankNumber], function( index, value ) {
       voltages.push((parseFloat(value.v)/1000.0));
 
       voltagesmin.push((parseFloat(value.minv)/1000.0));
       voltagesmax.push((parseFloat(value.maxv)/1000.0));
 
+      bank.push(bankNumber);
       labels.push(index);
 
       tempint.push(value.int);
@@ -149,6 +153,7 @@ function queryBMS() {
       //TODO: This needs to be voltage per bank not total
       voltage+=(parseFloat(value.v)/1000.0);
     });
+  }
 
 
     $("#badcrc").html(jsondata.monitor.badcrc);
@@ -175,7 +180,7 @@ function queryBMS() {
             $(tbody).find("tr").remove();
 
             $.each(labels, function( index, value ) {
-                $(tbody).append("<tr><td>"+value+"</td><td></td><td></td><td></td><td></td><td></td></tr>")
+                $(tbody).append("<tr><td>"+bank[index]+"</td><td>"+value+"</td><td></td><td></td><td></td><td></td><td></td></tr>")
             });
         }
 

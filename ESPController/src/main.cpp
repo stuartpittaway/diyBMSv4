@@ -35,7 +35,7 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <Hash.h>
-#include <ESPAsyncTCP.h>
+//#include <ESPAsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <PacketSerial.h>
 //Tiny and cross-device compatible CCITT CRC16 calculator library - uCRC16Lib
@@ -89,7 +89,7 @@ void ProcessReplyTemperature() {
   //Called when a decoded packet has arrived in buffer for command 3
 
   ProcessReplyAddressByte();
-
+  //40 offset for below zero temps
   for (size_t i = 0; i < maximum_cell_modules; i++)
   {
     cmi[ReplyFromBank()][i].internalTemp = ((buffer.moduledata[i] & 0xFF00)>>8)-40;
@@ -103,18 +103,20 @@ void ProcessReplyVoltage() {
 
   ProcessReplyAddressByte();
 
+  uint8_t b=ReplyFromBank();
+
   for (size_t i = 0; i < maximum_cell_modules; i++)
   {
-    cmi[ReplyFromBank()][i].voltagemV = buffer.moduledata[i] & 0x1FFF;
-    cmi[ReplyFromBank()][i].inBypass= (buffer.moduledata[i] & 0x8000)>0;
-    cmi[ReplyFromBank()][i].bypassOverTemp= (buffer.moduledata[i] & 0x4000)>0;
+    cmi[b][i].voltagemV = buffer.moduledata[i] & 0x1FFF;
+    cmi[b][i].inBypass= (buffer.moduledata[i] & 0x8000)>0;
+    cmi[b][i].bypassOverTemp= (buffer.moduledata[i] & 0x4000)>0;
 
-    if (cmi[ReplyFromBank()][i].voltagemV> cmi[ReplyFromBank()][i].voltagemVMax) {
-      cmi[ReplyFromBank()][i].voltagemVMax=cmi[ReplyFromBank()][i].voltagemV;
+    if (cmi[b][i].voltagemV> cmi[b][i].voltagemVMax) {
+      cmi[b][i].voltagemVMax=cmi[b][i].voltagemV;
     }
 
-    if (cmi[ReplyFromBank()][i].voltagemV<cmi[ReplyFromBank()][i].voltagemVMin) {
-      cmi[ReplyFromBank()][i].voltagemVMin=cmi[ReplyFromBank()][i].voltagemV;
+    if (cmi[b][i].voltagemV<cmi[b][i].voltagemVMin) {
+      cmi[b][i].voltagemVMin=cmi[b][i].voltagemV;
     }
 
   }
