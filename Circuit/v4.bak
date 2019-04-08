@@ -356,7 +356,7 @@ Wire Wire Line
 Text Notes 920  2250 0    50   ~ 0
 PA7 has a higher current output than other pins
 $Comp
-L EL3H7-G:EL3H7-G U1
+L Isolator:PC817 U1
 U 1 1 5BF1DCDE
 P 9190 4790
 F 0 "U1" H 9190 5115 50  0000 C CNN

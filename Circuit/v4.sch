@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:v4-cache
-EELAYER 26 0
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L MCU_Microchip_ATtiny:ATtiny841-SSU U4
+L v4-rescue:ATtiny841-SSU-MCU_Microchip_ATtiny U4
 U 1 1 5BC63D51
 P 1650 3670
 F 0 "U4" H 1120 3716 50  0000 R CNN

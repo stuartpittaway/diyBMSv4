@@ -1,0 +1,27 @@
+EESchema Schematic File Version 4
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Module:WeMos_D1_mini U1
+U 1 1 5CA8B511
+P 4520 3860
+F 0 "U1" H 4520 2971 50  0000 C CNN
+F 1 "WeMos_D1_mini" H 4520 2880 50  0000 C CNN
+F 2 "Modules:A20_OLINUXINO_LIME2" H 4520 2710 50  0001 C CNN
+F 3 "https://wiki.wemos.cc/products:d1:d1_mini#documentation" H 2670 2710 50  0001 C CNN
+	1    4520 3860
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
