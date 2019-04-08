@@ -51,6 +51,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 #settingsTable tbody td {min-width:100px;font-family: 'Nova Mono', monospace;text-align:right;}
 
 #settingsTable th {text-align:right;}
+#settingsTable .selected {background-color:#d3f9fa;}
 </style>
 </head>
 <body>
@@ -113,6 +114,13 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <tbody>
 </tbody>
 </table>
+
+<div id="settingConfig">
+<h2>Settings for </h2>
+<form id="settingsForm" method="POST" action="savesetting">
+<div class="settings"></div>
+</div>
+</form>
 </div>
 
 <div class="page" id="integrationPage">
@@ -123,6 +131,49 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 var g1=null;
 var g2=null;
 var g3=null;
+
+
+function configureModule(button, bank, module) {
+  $(button).parent().parent().parent().find(".selected").removeClass("selected");
+  $(button).parent().parent().addClass("selected");
+  $("#settingConfig h2").html("Settings for bank:"+bank+" module:"+module);
+  $("#settingConfig").show();
+
+  $.getJSON( "settings.json",
+  {
+       b: bank,
+       m: module
+    },
+    function(data) {
+
+      var div=$("#settingConfig .settings");
+      $(div).empty();
+      $(div).append("<input id='bank' type='hidden' value='"+data.settings.bank+"'/>");
+      $(div).append("<input id='module' type='hidden' value='"+data.settings.module+"'/>");
+
+      if (data.settings.Cached==true && data.settings.Requested==false){
+
+      $(div).append("<div><label for='BypassOverTempShutdown'>BypassOverTempShutdown</label><input id='BypassOverTempShutdown' type='input' value='"+data.settings.BypassOverTempShutdown+"'/></div>");
+      $(div).append("<div><label for='BypassThresholdmV'>BypassThresholdmV</label><input id='BypassThresholdmV' type='input' value='"+data.settings.BypassThresholdmV+"'/></div>");
+      $(div).append("<div><label for='Calib'>Calib</label><input id='Calib' type='input' value='"+data.settings.Calib+"'/></div>");
+      $(div).append("<div><label for='ExtBCoef'>ExtBCoef</label><input id='ExtBCoef' type='input' value='"+data.settings.ExtBCoef+"'/></div>");
+      $(div).append("<div><label for='IntBCoef'>IntBCoef</label><input id='IntBCoef' type='input' value='"+data.settings.IntBCoef+"'/></div>");
+      $(div).append("<div><label for='LoadRes'>LoadRes</label><input id='LoadRes' type='input' value='"+data.settings.LoadRes+"'/></div>");
+      $(div).append("<div><label for='LoadRes'>LoadRes</label><input id='LoadRes' type='input' value='"+data.settings.LoadRes+"'/></div>");
+      $(div).append("<div><label for='mVPerADC'>mVPerADC</label><input id='mVPerADC' type='input' value='"+data.settings.mVPerADC+"'/></div>");
+    } else {
+      //Data not ready yet
+      $(div).append("<div>Configuration data has been requested from cell module, refresh in a few seconds to view and amend.</div>")
+    }
+/*
+Cached: false
+Requested: true
+*/
+
+    }).fail(function() {
+     $("#iperror").show();
+  });
+}
 
 function queryBMS() {
   $.getJSON( "monitor.json", function( jsondata ) {
@@ -176,11 +227,12 @@ function queryBMS() {
         var tbody=$("#settingsTable tbody");
 
         if ($('#settingsTable tbody tr').length!=labels.length) {
+            $("#settingConfig").hide();
             //Add rows if they dont exist (or incorrect amount)
             $(tbody).find("tr").remove();
 
             $.each(labels, function( index, value ) {
-                $(tbody).append("<tr><td>"+bank[index]+"</td><td>"+value+"</td><td></td><td></td><td></td><td></td><td></td></tr>")
+                $(tbody).append("<tr><td>"+bank[index]+"</td><td>"+value+"</td><td></td><td></td><td></td><td></td><td></td><td><button type='button' onclick='return configureModule(this,"+bank[index]+","+value+");'>Configure</button></td></tr>")
             });
         }
 
@@ -190,11 +242,11 @@ function queryBMS() {
             var columns=$(rows[index]).find("td");
 
             //$(columns[0]).html(value);
-            $(columns[1]).html(voltages[index].toFixed(3));
-            $(columns[2]).html(voltagesmin[index].toFixed(3));
-            $(columns[3]).html(voltagesmax[index].toFixed(3));
-            $(columns[4]).html(tempint[index]);
-            $(columns[5]).html(tempext[index]);
+            $(columns[2]).html(voltages[index].toFixed(3));
+            $(columns[3]).html(voltagesmin[index].toFixed(3));
+            $(columns[4]).html(voltagesmax[index].toFixed(3));
+            $(columns[5]).html(tempint[index]);
+            $(columns[6]).html(tempext[index]);
         });
     }
 
@@ -309,9 +361,10 @@ $(function() {
     $(this).addClass("active");
     $(".page").hide();
 
+
     //Remove existing table
     $("#settingsTable tbody").find("tr").remove();
-
+    $("#settingConfig").hide();
     $("#settingsPage").show();
     return true;
   });

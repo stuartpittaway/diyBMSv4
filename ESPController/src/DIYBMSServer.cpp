@@ -47,6 +47,61 @@ void DIYBMSServer::sendHeaders()
   //_myserver->sendHeader("Cache-Control", "private");
 }
 
+void DIYBMSServer::settings(AsyncWebServerRequest *request) {
+
+  if(request->hasParam("m", false) && request->hasParam("b", false)){
+
+  AsyncWebParameter* module = request->getParam("m", false);
+  AsyncWebParameter* bank = request->getParam("b", false);
+
+  int b=bank->value().toInt();
+  int m=module->value().toInt();
+
+  if ((b>3) || (m+1>numberOfModules[b]))
+  {
+    request->send(500, "text/plain", "Wrong parameters");
+  } else {
+
+    if (cmi[b][m].settingsCached==false) {
+      cmi[b][m].settingsRequested=true;
+    }
+
+
+    AsyncResponseStream *response = request->beginResponseStream("application/json");
+
+    DynamicJsonDocument doc(4096);
+    JsonObject root = doc.to<JsonObject>();
+    JsonObject settings = root.createNestedObject("settings");
+
+    settings["bank"]=b;
+    settings["module"]=m;
+
+
+
+    settings["Cached"] = cmi[b][m].settingsCached;
+    settings["Requested"] = cmi[b][m].settingsRequested;
+
+    settings["BypassOverTempShutdown"] = cmi[b][m].BypassOverTempShutdown;
+    settings["BypassThresholdmV"] = cmi[b][m].BypassThresholdmV;
+
+    settings["LoadRes"] = cmi[b][m].LoadResistance;
+    settings["Calib"] = cmi[b][m].Calibration;
+    settings["mVPerADC"] = cmi[b][m].mVPerADC;
+    settings["IntBCoef"] = cmi[b][m].Internal_BCoefficient;
+    settings["ExtBCoef"] = cmi[b][m].External_BCoefficient;
+
+    serializeJson(doc, *response);
+    request->send(response);
+
+  }
+
+} else {
+
+    request->send(500, "text/plain", "Missing parameters");
+}
+
+}
+
 
 void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
   AsyncResponseStream *response = request->beginResponseStream("application/json");
@@ -111,6 +166,7 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   });
 
 
+  _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
 
 
   _myserver->onNotFound(DIYBMSServer::handleNotFound);

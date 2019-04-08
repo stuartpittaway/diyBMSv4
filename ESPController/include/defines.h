@@ -28,6 +28,24 @@ struct CellModuleInfo {
   int16_t externalTemp;
   bool inBypass;
   bool bypassOverTemp;
+
+
+  bool settingsCached;
+  bool settingsRequested;
+  uint8_t BypassOverTempShutdown;
+  uint16_t BypassThresholdmV;
+
+  // Resistance of bypass load
+  float LoadResistance;
+  //Voltage Calibration
+  float Calibration;
+  //Reference voltage (millivolt) normally 2.00mV
+  float mVPerADC;
+  //Internal Thermistor settings
+  uint16_t Internal_BCoefficient;
+  //External Thermistor settings
+  uint16_t External_BCoefficient;
+
 };
 
 //This holds all the cell information in a large array 2D array (4x16)
