@@ -49,7 +49,7 @@ private:
 
   PacketStruct buffer;
 
-  void processPacket();
+  bool processPacket();
   void incrementPacketAddress();
   bool isPacketForMe();
   void UpdateRingBuffer(uint16_t value);

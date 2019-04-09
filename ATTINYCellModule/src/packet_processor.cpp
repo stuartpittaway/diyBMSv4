@@ -56,7 +56,7 @@ bool PacketProcessor::isPacketForMe() {
   }
 
   //Is this packet addressed directly to me?
-  if ((buffer.address & 0x0F) == mymoduleaddress) return true;
+  if ((buffer.address & 0x0F) == mymoduleaddress && mymoduleaddress!=0xFF) return true;
 
   return false;
 }
@@ -143,7 +143,14 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
     if (validateCRC == buffer.crc) {
       //It's a good packet
       if (isPacketForMe()) {
-        processPacket();
+          if (processPacket()) {
+
+            //Set flag to indicate we processed packet
+            buffer.command=buffer.command | B10000000;
+
+            //Calculate new checksum over whole buffer
+            buffer.crc = uCRC16Lib::calculate((char * ) & buffer, sizeof(buffer) - 2);
+        }
       }
       return true;
     }
@@ -171,7 +178,7 @@ uint16_t PacketProcessor::ReadCellVoltageFromBuffer() {
 
 uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
   //This function reduces the scale of temperatures from float types to a single byte (unsigned)
-  //We have an artifical floor at 40oC, anything below 40 is considered negative (below freezing)
+  //We have an artifical floor at 40oC, anything below +40 is considered negative (below freezing)
   //Gives range of -40 to +216 degrees C
 
   TempInCelcius += 40;
@@ -185,14 +192,15 @@ uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
 
 //command byte
 // RRRR CCCC
-// R    = 4 bits reserved not used
+// X    = 1 bit indicate if packet processed
+// R    = 3 bits reserved not used
 // C    = 4 bits command (16 possible commands)
 
 //commands
 // 0000 0000  = identify and provision
 // 0000 0001  = read voltage and status
 // 0000 0010  = identify module (flash leds)
-void PacketProcessor::processPacket() {
+bool PacketProcessor::processPacket() {
   switch (buffer.command & 0x0F) {
   case 0:
     {
@@ -200,23 +208,23 @@ void PacketProcessor::processPacket() {
       _config->mybank = buffer.moduledata[mymoduleaddress] & 0x30;
       //Indicate we processed this packet
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
-      break;
+      return true;
     }
+
   case 1:
     {
       //Read voltage of VCC
-      if (mymoduleaddress != 0xFF) {
-        //Maximum voltage 8191mV
-        buffer.moduledata[mymoduleaddress] = ReadCellVoltageFromBuffer() & 0x1FFF;
+      //Maximum voltage 8191mV
+      buffer.moduledata[mymoduleaddress] = ReadCellVoltageFromBuffer() & 0x1FFF;
 
-
-        //3 top bits remaining
-        //X = In bypass
-        //Y = Bypass over temperature
-        //Z = Not used
-      }
-      break;
+      //TODO: SET THESE...
+      //3 top bits remaining
+      //X = In bypass
+      //Y = Bypass over temperature
+      //Z = Not used
+      return true;
     }
+
   case 2:
     {
       //identify module (flash leds)
@@ -227,10 +235,11 @@ void PacketProcessor::processPacket() {
 
       _hardware->GreenLedOn();
       _hardware->RedLedOn();
-      delay(100);
+      delay(200);
       _hardware->GreenLedOff();
       _hardware->RedLedOff();
-      break;
+      return true;
+    break;
     }
 
   case 3:
@@ -245,18 +254,33 @@ void PacketProcessor::processPacket() {
 
       _hardware->ReferenceVoltageOff();
 
-      break;
+      return true;
     }
 
   case 4:
     {
       //Report number of bad packets
       buffer.moduledata[mymoduleaddress] = badpackets;
-      break;
+      return true;
+    }
+
+    case 5:
+    {
+      //Report settings/configuration
+
+      buffer.moduledata[0] =_config->LoadResistance;
+      buffer.moduledata[1] =_config->Calibration;
+      buffer.moduledata[2] =_config->mVPerADC;
+      buffer.moduledata[3] =_config->BypassOverTempShutdown;
+      buffer.moduledata[4] =_config->BypassThresholdmV;
+      buffer.moduledata[5] =_config->Internal_BCoefficient;
+      buffer.moduledata[6] =_config->External_BCoefficient;
+      buffer.moduledata[7] = 0xFFFF;
+      return true;
     }
   }
 
-  buffer.crc = uCRC16Lib::calculate((char * ) & buffer, sizeof(buffer) - 2);
+  return false;
 }
 
 uint16_t PacketProcessor::TemperatureMeasurement() {
