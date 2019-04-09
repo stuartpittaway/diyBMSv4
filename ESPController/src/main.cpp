@@ -91,8 +91,19 @@ void ProcessReplyAddressByte() {
 
   //Only set if it was a reply from a broadcast message
   if (broadcast>0) {
-    //TODO if this has changed value we should clear all the cached config flags from the modules as they have probably moved address
-    numberOfModules[ReplyFromBank()]=ReplyLastAddress();
+    if (numberOfModules[ReplyFromBank()]!=ReplyLastAddress()) {
+        numberOfModules[ReplyFromBank()]=ReplyLastAddress();
+
+        //if we have a different number of modules in this bank
+        //we should clear all the cached config flags from the modules
+        //as they have probably moved address
+        for (size_t i = 0; i < maximum_cell_modules; i++)
+        {
+          cmi[ReplyFromBank()][i].settingsCached=false;
+          cmi[ReplyFromBank()][i].voltagemVMin=6000;
+          cmi[ReplyFromBank()][i].voltagemVMax=0;
+        }
+    }
   }
 }
 
