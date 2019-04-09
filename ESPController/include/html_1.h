@@ -73,6 +73,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <div class="stat"><span class="x t">Current:</span><span class="x v" id="current"></span></div>
 <div class="stat"><span class="x t">Packet Errors:</span><span class="x v" id="badpkt"></span></div>
 <div class="stat"><span class="x t">CRC Errors:</span><span class="x v" id="badcrc"></span></div>
+<div class="stat"><span class="x t">Ignored request errors:</span><span class="x v" id="ignored"></span></div>
 </div>
 
 <div class="page" id="homePage">
@@ -158,14 +159,13 @@ function configureModule(button, bank, module) {
 
       if (data.settings.Cached==true && data.settings.Requested==false){
 
-      $(div).append("<div><label for='BypassOverTempShutdown'>BypassOverTempShutdown</label><input id='BypassOverTempShutdown' type='input' value='"+data.settings.BypassOverTempShutdown+"'/></div>");
-      $(div).append("<div><label for='BypassThresholdmV'>BypassThresholdmV</label><input id='BypassThresholdmV' type='input' value='"+data.settings.BypassThresholdmV+"'/></div>");
-      $(div).append("<div><label for='Calib'>Calib</label><input id='Calib' type='input' value='"+data.settings.Calib+"'/></div>");
-      $(div).append("<div><label for='ExtBCoef'>ExtBCoef</label><input id='ExtBCoef' type='input' value='"+data.settings.ExtBCoef+"'/></div>");
-      $(div).append("<div><label for='IntBCoef'>IntBCoef</label><input id='IntBCoef' type='input' value='"+data.settings.IntBCoef+"'/></div>");
-      $(div).append("<div><label for='LoadRes'>LoadRes</label><input id='LoadRes' type='input' value='"+data.settings.LoadRes+"'/></div>");
-      $(div).append("<div><label for='LoadRes'>LoadRes</label><input id='LoadRes' type='input' value='"+data.settings.LoadRes+"'/></div>");
-      $(div).append("<div><label for='mVPerADC'>mVPerADC</label><input id='mVPerADC' type='input' value='"+data.settings.mVPerADC+"'/></div>");
+      $(div).append("<div><label for='BypassOverTempShutdown'>Bypass Over Temp Shutdown</label><input id='BypassOverTempShutdown' type='input' value='"+data.settings.BypassOverTempShutdown+"'/></div>");
+      $(div).append("<div><label for='BypassThresholdmV'>Bypass Threshold mV</label><input id='BypassThresholdmV' type='input' value='"+data.settings.BypassThresholdmV+"'/></div>");
+      $(div).append("<div><label for='Calib'>Calibration multiplier</label><input id='Calib' type='input' value='"+data.settings.Calib+"'/></div>");
+      $(div).append("<div><label for='ExtBCoef'>External temperature BCoef</label><input id='ExtBCoef' type='input' value='"+data.settings.ExtBCoef+"'/></div>");
+      $(div).append("<div><label for='IntBCoef'>Internal temperature BCoef</label><input id='IntBCoef' type='input' value='"+data.settings.IntBCoef+"'/></div>");
+      $(div).append("<div><label for='LoadRes'>Load resistance</label><input id='LoadRes' type='input' value='"+data.settings.LoadRes+"'/></div>");
+      $(div).append("<div><label for='mVPerADC'>mV per ADC reading</label><input id='mVPerADC' type='input' value='"+data.settings.mVPerADC+"'/></div>");
     } else {
       //Data not ready yet
       $(div).append("<div>Configuration data has been requested from cell module, page will automatically refresh in 5 seconds.  Please wait.</div>");
@@ -217,6 +217,7 @@ function queryBMS() {
 
     $("#badcrc").html(jsondata.monitor.badcrc);
     $("#badpkt").html(jsondata.monitor.badpkt);
+    $("#ignored").html(jsondata.monitor.ignored);
 
     $("#voltage").html(voltage.toFixed(2));
 

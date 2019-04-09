@@ -58,17 +58,24 @@ PacketSerial_<COBS, 0, 256> myPacketSerial;
 
 os_timer_t myTimer;
 
+void sendGetSettingsRequest(uint8_t b,uint8_t m);
 void sendCellVoltageRequest();
 void sendCellTemperatureRequest();
+void dumpPacketToDebug();
 
 bool waitingForReply=false;
 uint8_t missedPacketCount=0;
 
 uint16_t totalMissedPacketCount=0;
 uint16_t totalCRCErrors=0;
+uint16_t totalNotProcessedErrors=0;
 
 uint8_t ReplyFromBank() {return (buffer.address & B00110000) >> 4;}
 uint8_t ReplyLastAddress() {return buffer.address & 0x0F;}
+
+bool ReplyWasProcessedByAModule() {return (buffer.command & B10000000)>0;}
+
+bool requestPending;
 
 void ProcessReplyAddressByte() {
   //address byte
@@ -78,11 +85,15 @@ void ProcessReplyAddressByte() {
   // KK   = 2 bits module bank select (4 possible banks of 16 modules) - reserved and not used
   // AAAA = 4 bits for address (module id 0 to 15)
 
-  //uint8_t broadcast=(buffer.address & B10000000) >> 7;
+  uint8_t broadcast=(buffer.address & B10000000) >> 7;
   //uint8_t bank=(buffer.address & B00110000) >> 4;
   //uint8_t lastAddress=buffer.address & 0x0F;
 
-  numberOfModules[ReplyFromBank()]=ReplyLastAddress();
+  //Only set if it was a reply from a broadcast message
+  if (broadcast>0) {
+    //TODO if this has changed value we should clear all the cached config flags from the modules as they have probably moved address
+    numberOfModules[ReplyFromBank()]=ReplyLastAddress();
+  }
 }
 
 void ProcessReplyTemperature() {
@@ -127,13 +138,31 @@ void ProcessReplyVoltage() {
   //Z = Not used
 }
 
+void ProcessReplySettings() {
+  uint8_t b=ReplyFromBank();
+  uint8_t m=ReplyLastAddress();
+
+  //TODO Validate b and m here to prevent array overflow
+  cmi[b][m].settingsCached=true;
+  cmi[b][m].settingsRequested=false;
+
+  cmi[b][m].BypassOverTempShutdown=buffer.moduledata[3] & 0x00FF;
+  cmi[b][m].BypassThresholdmV=buffer.moduledata[4];
+  cmi[b][m].LoadResistance=buffer.moduledata[0];
+  cmi[b][m].Calibration=buffer.moduledata[1];
+  cmi[b][m].mVPerADC=buffer.moduledata[2];
+  cmi[b][m].Internal_BCoefficient=buffer.moduledata[5];
+  cmi[b][m].External_BCoefficient=buffer.moduledata[6];
+}
 
 void onPacketReceived(const uint8_t* receivebuffer, size_t len)
 {
   // Process your decoded incoming packet here.
-  Serial1.print("PR=");
-  Serial1.print(len);
-  Serial1.print(" bytes =");
+  //Serial1.print("PR=");
+  //Serial1.print(len);
+  //Serial1.print(" bytes =");
+
+  Serial1.print("Recv:");
 
   if (len > 0) {
 
@@ -143,29 +172,27 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     //Calculate the CRC and compare to received
     uint16_t validateCRC = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2) ;
 
-    Serial1.print(buffer.address,HEX);
-    Serial1.print(' ');
-    Serial1.print(buffer.command,HEX);
-    Serial1.print(' ');
-    for (size_t i = 0; i < maximum_cell_modules; i++)
-    {
-      Serial1.print(buffer.moduledata[i],HEX);
-      Serial1.print(' ');
-    }
-    Serial1.print(buffer.crc,HEX);
+    dumpPacketToDebug();
     Serial1.print('=');
 
     if (validateCRC==buffer.crc) {
         Serial1.print("good");
 
+        if (ReplyWasProcessedByAModule()) {
+
         switch (buffer.command & 0x0F) {
-          case 0:
-          break;
-          case 1: ProcessReplyVoltage();
-          break;
-          case 3: ProcessReplyTemperature();
-          break;
+          case 0: break;
+          case 1: ProcessReplyVoltage();          break;
+          case 2: break;
+          case 3: ProcessReplyTemperature();          break;
+          case 4: break;
+          case 5: ProcessReplySettings();          break;
         }
+      } else {
+        totalNotProcessedErrors++;
+        Serial1.print("request ignored");
+      }
+
     } else {
       Serial1.print("bad");
       totalCRCErrors++;
@@ -174,26 +201,49 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     waitingForReply=false;
   }
 
-  Serial1.print(' ');
-  Serial1.print(totalCRCErrors);
-  Serial1.print(' ');
-  Serial1.print(missedPacketCount);
-  Serial1.println("*");
+  Serial1.println("");
 }
 
 
 uint8_t requestPacketType=0;
 
 void timerCallback(void *pArg) {
+  //this is called regularly on a timer, it determines what packet to request next from the cell modules
   if (!waitingForReply) {
     GREEN_LED_ON;
-
-    requestPacketType++;
 
     //Wake up the connected cell module from sleep
     Serial.write(0x00);
     delay(10);
 
+    if (requestPending) {
+
+        bool found=false;
+        for (uint8_t b = 0; b < 4; b++) {
+        for (uint8_t m = 0; m < numberOfModules[b]; m++) {
+
+          if (cmi[b][m].settingsRequested==true && found==false) {
+            //Request settings from module
+            Serial1.println("Sending get settings request");
+            sendGetSettingsRequest(b,m);
+
+            cmi[b][m].settingsRequested=false;
+            found=true;
+            //Assume there are no more requests
+            requestPending=false;
+          }
+
+          if (cmi[b][m].settingsRequested==true && found==false) {
+            //We found another request pending so set flag for next iteration
+              requestPending=true;
+              break;
+          }
+          }
+        }
+
+    } else {
+
+    requestPacketType++;
     if (requestPacketType<5) {
       Serial1.println("Sending voltage request");
       sendCellVoltageRequest();
@@ -202,13 +252,11 @@ void timerCallback(void *pArg) {
       sendCellTemperatureRequest();
       requestPacketType=0;
     }
+}
 
     GREEN_LED_OFF;
     waitingForReply=true;
     missedPacketCount=0;
-
-    //Ensure we are empty for next reply
-    //Serial.flush();
 
   } else {
     missedPacketCount++;
@@ -222,7 +270,6 @@ void timerCallback(void *pArg) {
       //missedPacketCount=0;
     }
   }
-
 }
 
 void clearmoduledata() {
@@ -234,38 +281,85 @@ void clearmoduledata() {
 
 //command byte
 // WRRR CCCC
-// W    = 1 bit read (0) or write (1)
+// W    = 1 bit controller send (0) module processed (1)
 // R    = 3 bits reserved not used
 // C    = 4 bits command (16 possible commands)
 
 //commands
 // 1000 0000  = identify and provision
 // 0000 0001  = read voltage and status
+// 0000 0010  = identify module (flash leds)
+// 0000 0011  = Read temperature
+// 0000 0100  = Report number of bad packets
+// 0000 0101  = Report settings/configuration
+
+void dumpPacketToDebug() {
+  Serial1.print(buffer.address,HEX);
+  Serial1.print(' ');
+  Serial1.print(buffer.command,HEX);
+  Serial1.print(' ');
+  for (size_t i = 0; i < maximum_cell_modules; i++)
+  {
+    Serial1.print(buffer.moduledata[i],HEX);
+    Serial1.print(' ');
+  }
+  Serial1.print(buffer.crc,HEX);
+}
+
+void sendPacket() {
+  buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
+  myPacketSerial.send((byte*)&buffer, sizeof(buffer));
+
+  Serial1.print("Send:");
+  dumpPacketToDebug();
+  Serial1.println("");
+}
+
+void setPacketAddress(bool broadcast,uint8_t bank,uint8_t module) {
+  if (broadcast) {
+    buffer.address = B10000000;
+  } else {
+    buffer.address = ((bank & B00000011)<<4) + (module & B00001111);
+  }
+}
 
 void sendCellVoltageRequest() {
   //Read voltage (broadcast) to bank 00
-  buffer.address = B10000000;
+  setPacketAddress(true,0,0);
+
   //Command 1 - read voltage
   buffer.command = B00000001;
 
   //AVR MCUs are little endian (least significant byte first in memory)
   clearmoduledata();
 
-  buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
-  myPacketSerial.send((byte*)&buffer, sizeof(buffer));
+  sendPacket();
 }
+
+
+void sendGetSettingsRequest(uint8_t b,uint8_t m) {
+  //Read settings from single module
+  setPacketAddress(false,b,m);
+  //Command 5 - read settings
+  buffer.command = B00000101;
+
+  //AVR MCUs are little endian (least significant byte first in memory)
+  clearmoduledata();
+
+  sendPacket();
+}
+
 
 void sendCellTemperatureRequest() {
   //Read voltage (broadcast) to bank 00
-  buffer.address = B10000000;
+  setPacketAddress(true,0,0);
   //Command 3 - read temperatures
   buffer.command = B00000011;
 
   //AVR MCUs are little endian (least significant byte first in memory)
   clearmoduledata();
 
-  buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
-  myPacketSerial.send((byte*)&buffer, sizeof(buffer));
+  sendPacket();
 }
 
 

@@ -62,10 +62,10 @@ void DIYBMSServer::settings(AsyncWebServerRequest *request) {
     request->send(500, "text/plain", "Wrong parameters");
   } else {
 
-    if (cmi[b][m].settingsCached==false) {
+    if ((cmi[b][m].settingsCached==false) && (cmi[b][m].settingsRequested==false)) {
       cmi[b][m].settingsRequested=true;
+      requestPending=true;
     }
-
 
     AsyncResponseStream *response = request->beginResponseStream("application/json");
 
@@ -75,8 +75,6 @@ void DIYBMSServer::settings(AsyncWebServerRequest *request) {
 
     settings["bank"]=b;
     settings["module"]=m;
-
-
 
     settings["Cached"] = cmi[b][m].settingsCached;
     settings["Requested"] = cmi[b][m].settingsRequested;
@@ -116,6 +114,7 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   monitor["badpkt"]=totalMissedPacketCount;
   monitor["badcrc"]=totalCRCErrors;
+  monitor["ignored"]=totalNotProcessedErrors;
 
 JsonArray bankArray = root.createNestedArray("bank");
 
