@@ -134,8 +134,13 @@ var g3=null;
 
 
 function configureModule(button, bank, module) {
+  console.log(button,bank,module);
+
+  //Select correct row in table
   $(button).parent().parent().parent().find(".selected").removeClass("selected");
   $(button).parent().parent().addClass("selected");
+
+  //Populate settings div
   $("#settingConfig h2").html("Settings for bank:"+bank+" module:"+module);
   $("#settingConfig").show();
 
@@ -163,7 +168,10 @@ function configureModule(button, bank, module) {
       $(div).append("<div><label for='mVPerADC'>mVPerADC</label><input id='mVPerADC' type='input' value='"+data.settings.mVPerADC+"'/></div>");
     } else {
       //Data not ready yet
-      $(div).append("<div>Configuration data has been requested from cell module, refresh in a few seconds to view and amend.</div>")
+      $(div).append("<div>Configuration data has been requested from cell module, page will automatically refresh in 5 seconds.  Please wait.</div>");
+
+      //Call back in 5 seconds to refresh page
+      setTimeout(configureModule, 5000, button, bank, module);
     }
 /*
 Cached: false
