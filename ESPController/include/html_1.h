@@ -168,10 +168,10 @@ function configureModule(button, bank, module) {
       $(div).append("<div><label for='mVPerADC'>mV per ADC reading</label><input id='mVPerADC' type='input' value='"+data.settings.mVPerADC+"'/></div>");
     } else {
       //Data not ready yet
-      $(div).append("<div>Configuration data has been requested from cell module, page will automatically refresh in 5 seconds.  Please wait.</div>");
+      $(div).append("<div>Configuration data has been requested from cell module.  Please wait 5 seconds and click button again.</div>");
 
-      //Call back in 5 seconds to refresh page
-      setTimeout(configureModule, 5000, button, bank, module);
+      //Call back in 5 seconds to refresh page - this is a bad idea!
+      //setTimeout(configureModule, 5000, button, bank, module);
     }
 /*
 Cached: false
