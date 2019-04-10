@@ -194,6 +194,10 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     if (validateCRC==buffer.crc) {
         Serial1.print("good");
 
+        //Subtract good packets from total sent count
+        //totalMissedPacketCount should be near zero as possible
+        totalMissedPacketCount--;
+
         if (ReplyWasProcessedByAModule()) {
 
         switch (buffer.command & 0x0F) {
@@ -235,6 +239,9 @@ void timerTransmitCallback(void *pArg) {
 
     myPacketSerial.send((byte*)&transmitBuffer, sizeof(transmitBuffer));
 
+    //Increase the count of sent packets
+    totalMissedPacketCount++;
+
     Serial1.print("Send:");
     dumpPacketToDebug(&transmitBuffer);
     Serial1.println("");
@@ -248,79 +255,21 @@ void timerTransmitCallback(void *pArg) {
   }
 }
 
+uint8_t packetType=0;
+
 void timerCallback(void *pArg) {
-  //this is called regularly on a timer, it determines what packet to request next from the cell modules
-  //if (!waitingForReply) {
-    //GREEN_LED_ON;
+  //this is called regularly on a timer, it determines what request to make
+  //to the modules (via the request queue)
 
-    //Wake up the connected cell module from sleep
-    //Serial.write(0x00);
-    //delay(10);
+  packetType++;
 
-    //if (requestPending) {
-      //This needs to be improved, perhaps a processing queue/list?
+  prg.sendCellVoltageRequest();
 
-/*
-        bool found=false;
-        for (uint8_t b = 0; b < 4; b++) {
-        for (uint8_t m = 0; m < numberOfModules[b]; m++) {
-
-          if (cmi[b][m].identifyModule==true && found==false) {
-            //Request settings from module
-            Serial1.println("Sending identify module request");
-            prg.sendIdentifyModuleRequest(b,m);
-
-            cmi[b][m].identifyModule=false;
-            found=true;
-            //Assume there are no more requests
-            requestPending=false;
-          }
-
-
-          if (cmi[b][m].settingsRequested==true && found==false) {
-            //Request settings from module
-            Serial1.println("Sending get settings request");
-            prg.sendGetSettingsRequest(b,m);
-
-            cmi[b][m].settingsRequested=false;
-            found=true;
-            //Assume there are no more requests
-            requestPending=false;
-          }
-
-          if ((cmi[b][m].settingsRequested==true || cmi[b][m].identifyModule==true)  && found==false) {
-            //We found another request pending so set flag for next iteration
-              requestPending=true;
-              break;
-          }
-          }
-        }
-
-    } else {
-*/
-      prg.sendCellVoltageRequest();
-      prg.sendCellTemperatureRequest();
-/*
-}
-
-    //GREEN_LED_OFF;
-    //waitingForReply=true;
-    //missedPacketCount=0;
-
-  } else {
-    missedPacketCount++;
-    totalMissedPacketCount++;
-    Serial1.print('W');
-    Serial1.print(missedPacketCount);
-    if (missedPacketCount>2) {
-      //We didnt receive a reply to a packet we sent previously something went wrong
-      //raise an error here and recover
-      waitingForReply=false;
-      //missedPacketCount=0;
-    }
+  if (packetType==3) {
+    //Every few packets also get the temperature
+    prg.sendCellTemperatureRequest();
+    packetType=0;
   }
-  */
-//}
 }
 
 //command byte
