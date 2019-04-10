@@ -62,7 +62,7 @@ void DefaultConfig() {
   myConfig.LoadResistance=4.40;
   myConfig.Calibration=2.18000;
   //2mV per ADC resolution
-  myConfig.mVPerADC=2048.0/1024.0;
+  myConfig.mVPerADC=2.0;  //2048.0/1024.0;
   //Stop running bypass if temperature over 70 degrees C
   myConfig.BypassOverTempShutdown=70;
   myConfig.mybank=0;
@@ -297,7 +297,7 @@ void loop() {
     UCSR0B |=(1<<TXEN0); // enable TX Serial0
 
     //Loop here processing any packets then go back to sleep
-    for (size_t i = 0; i <5; i++) {
+    for (size_t i = 0; i <10; i++) {
       //Allow data to be received in buffer
       delay(10);
       // Call update to receive, decode and process incoming packets.

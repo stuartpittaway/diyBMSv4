@@ -39,15 +39,14 @@ struct CellModuleInfo {
   //Used as part of the enquiry functions
   bool settingsCached;
   bool settingsRequested;
-  bool identifyModule;
 
 
   uint16_t voltagemV;
   uint16_t voltagemVMin;
   uint16_t voltagemVMax;
   //Signed integer - should these be byte?
-  int16_t internalTemp;
-  int16_t externalTemp;
+  int8_t internalTemp;
+  int8_t externalTemp;
 
   bool inBypass;
   bool bypassOverTemp;

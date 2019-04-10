@@ -228,17 +228,9 @@ bool PacketProcessor::processPacket() {
   case COMMAND::Identify :
     {
       //identify module (flash leds)
-      //TODO: WE NEED TO DO BETTER THAN THIS MOVE TO TIMER/INTERRUPT/FLASHER?
-
       //Indicate that we received and did something
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
-
-      identifyModule=25;
-      //_hardware->GreenLedOn();
-      //_hardware->RedLedOn();
-      //delay(200);
-      //_hardware->GreenLedOff();
-      //_hardware->RedLedOff();
+      identifyModule=35;
       return true;
     break;
     }
@@ -252,9 +244,7 @@ bool PacketProcessor::processPacket() {
 
       //Return both readings inside the uint16_t
       buffer.moduledata[mymoduleaddress] =TemperatureMeasurement();
-
       _hardware->ReferenceVoltageOff();
-
       return true;
     }
 
@@ -269,14 +259,24 @@ bool PacketProcessor::processPacket() {
     {
       //Report settings/configuration
 
-      buffer.moduledata[0] =_config->LoadResistance;
-      buffer.moduledata[1] =_config->Calibration;
-      buffer.moduledata[2] =_config->mVPerADC;
-      buffer.moduledata[3] =_config->BypassOverTempShutdown;
-      buffer.moduledata[4] =_config->BypassThresholdmV;
-      buffer.moduledata[5] =_config->Internal_BCoefficient;
-      buffer.moduledata[6] =_config->External_BCoefficient;
-      buffer.moduledata[7] = 0xFFFF;
+      FLOATUNION_t myFloat;
+      myFloat.number = _config->LoadResistance;
+      buffer.moduledata[0] =myFloat.word[0];
+      buffer.moduledata[1] =myFloat.word[1];
+
+      myFloat.number = _config->Calibration;
+      buffer.moduledata[2] =myFloat.word[0];
+      buffer.moduledata[3] =myFloat.word[1];
+
+      myFloat.number = _config->mVPerADC;
+      buffer.moduledata[4] =myFloat.word[0];
+      buffer.moduledata[5] =myFloat.word[1];
+
+      buffer.moduledata[6] =_config->BypassOverTempShutdown;
+      buffer.moduledata[7] =_config->BypassThresholdmV;
+      buffer.moduledata[8] =_config->Internal_BCoefficient;
+      buffer.moduledata[9] =_config->External_BCoefficient;
+
       return true;
     }
   }

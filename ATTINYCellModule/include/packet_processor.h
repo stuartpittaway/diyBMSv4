@@ -24,6 +24,12 @@ struct PacketStruct {
   uint16_t crc;
 }  __attribute__((packed));
 
+typedef union
+{
+ float number;
+ uint8_t bytes[4];
+ uint16_t word[2];
+} FLOATUNION_t;
 
 
 class PacketProcessor {

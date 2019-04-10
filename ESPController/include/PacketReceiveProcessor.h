@@ -8,6 +8,14 @@
 //https://github.com/Naguissa/uCRC16Lib
 #include <uCRC16Lib.h>
 
+typedef union
+{
+ float number;
+ uint8_t bytes[4];
+ uint16_t word[2];
+} FLOATUNION_t;
+
+
 
 class PacketReceiveProcessor {
    public:
@@ -17,7 +25,6 @@ class PacketReceiveProcessor {
      uint16_t totalMissedPacketCount=0;
      uint16_t totalCRCErrors=0;
      uint16_t totalNotProcessedErrors=0;
-     bool requestPending;
 
   private:
     packet _packetbuffer;

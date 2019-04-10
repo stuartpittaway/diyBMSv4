@@ -122,11 +122,62 @@ void PacketReceiveProcessor::ProcessReplySettings() {
   cmi[b][m].settingsCached=true;
   cmi[b][m].settingsRequested=false;
 
-  cmi[b][m].BypassOverTempShutdown=_packetbuffer.moduledata[3] & 0x00FF;
-  cmi[b][m].BypassThresholdmV=_packetbuffer.moduledata[4];
-  cmi[b][m].LoadResistance=_packetbuffer.moduledata[0];
-  cmi[b][m].Calibration=_packetbuffer.moduledata[1];
-  cmi[b][m].mVPerADC=_packetbuffer.moduledata[2];
-  cmi[b][m].Internal_BCoefficient=_packetbuffer.moduledata[5];
-  cmi[b][m].External_BCoefficient=_packetbuffer.moduledata[6];
+/*
+
+
+Recv:
+Recv:84 81 FE8 FEB CD1 100F 0 0 0 0 0 0 0 0 0 0 0 0 EF48
+Recv:
+Send:2 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2E08/ Q depth:0
+Recv:
+Recv:2 85
+
+//CCCD 408C
+//0E11 4011
+//0 4000
+//46 1004 1036 1036 0 0 0 0 0 0 6A0D
+Recv:
+Send:80 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3006/ Q depth:0
+
+
+uint8_t mybank;
+uint8_t BypassOverTempShutdown;
+uint16_t BypassThresholdmV;
+
+// Resistance of bypass load
+float LoadResistance;
+//Voltage Calibration
+float Calibration;
+//Reference voltage (millivolt) normally 2.00mV
+float mVPerADC;
+//Internal Thermistor settings
+uint16_t Internal_BCoefficient;
+//External Thermistor settings
+uint16_t External_BCoefficient;
+*/
+
+ FLOATUNION_t myFloat;
+
+ myFloat.word[0]=_packetbuffer.moduledata[0];
+ myFloat.word[1]=_packetbuffer.moduledata[1];
+
+  //Arduino float (4 byte)
+  cmi[b][m].LoadResistance=myFloat.number;
+  //Arduino float(4 byte)
+  myFloat.word[0]=_packetbuffer.moduledata[2];
+  myFloat.word[1]=_packetbuffer.moduledata[3];
+  cmi[b][m].Calibration=myFloat.number;
+  
+  //Arduino float(4 byte)
+  myFloat.word[0]=_packetbuffer.moduledata[4];
+  myFloat.word[1]=_packetbuffer.moduledata[5];
+  cmi[b][m].mVPerADC=myFloat.number;
+  //uint8_t
+  cmi[b][m].BypassOverTempShutdown=_packetbuffer.moduledata[6] & 0x00FF;
+  //uint16_t
+  cmi[b][m].BypassThresholdmV=_packetbuffer.moduledata[7];
+  //uint16_t
+  cmi[b][m].Internal_BCoefficient=_packetbuffer.moduledata[8];
+  //uint16_t
+  cmi[b][m].External_BCoefficient=_packetbuffer.moduledata[9];
 }
