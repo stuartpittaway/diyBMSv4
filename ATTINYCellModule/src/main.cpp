@@ -256,9 +256,8 @@ void loop() {
   //this is also triggered by the watchdog should comms fail or the module is running standalone
   hardware.ReferenceVoltageOn();
   //allow 2V to stabalize
-  delay(8);
+  delay(10);
   PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
-
 
   if (wdt_triggered) {
     //If watchdog then check the temperature as well
@@ -275,27 +274,25 @@ void loop() {
   }
 
 
-  //Save power
-  //Serial.end();
-  //hardware.DisableSerial0();
-
-  //TODO: It may be better to use SFDE instead of pin change?
-  //Bit 5 – SFDE: Start Frame Detection Enable
   hardware.EnableStartFrameDetection();
-  //hardware.EnablePinChangeInterrupt();
 
-  UCSR0B &= ~_BV(TXEN0);  //disable transmitter
+  UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
+
   //Program stops here until woken by watchdog or pin change interrupt
   hardware.Sleep();
-  UCSR0B |=(1<<TXEN0); // enable TX Serial0
+
+  //We may have got here because the watchdog (8seconds) went off - we didnt receive a packet of data
+  if (!wdt_triggered) {
+    UCSR0B |=(1<<TXEN0); // enable TX Serial0
 
 
-  //Loop here processing any packets then go back to sleep
-  for (size_t i = 0; i <20; i++) {
-    //Allow data to be received in buffer
-    delay(10);
-    // Call update to receive, decode and process incoming packets.
-    myPacketSerial.update();
+    //Loop here processing any packets then go back to sleep
+    for (size_t i = 0; i <20; i++) {
+      //Allow data to be received in buffer
+      delay(10);
+      // Call update to receive, decode and process incoming packets.
+      myPacketSerial.update();
+    }
   }
 
 }
