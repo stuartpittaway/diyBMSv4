@@ -47,6 +47,45 @@ void DIYBMSServer::sendHeaders()
   //_myserver->sendHeader("Cache-Control", "private");
 }
 
+
+void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
+  if(request->hasParam("m", false) && request->hasParam("b", false)){
+
+    AsyncWebParameter* module = request->getParam("m", false);
+    AsyncWebParameter* bank = request->getParam("b", false);
+
+    int b=bank->value().toInt();
+    int m=module->value().toInt();
+
+    if ((b>3) || (m+1>numberOfModules[b]))
+    {
+      request->send(500, "text/plain", "Wrong parameters");
+    } else {
+
+
+      if (cmi[b][m].identifyModule==false) {
+        cmi[b][m].identifyModule=true;
+        requestPending=true;
+      }
+
+      AsyncResponseStream *response = request->beginResponseStream("application/json");
+
+      DynamicJsonDocument doc(2048);
+      JsonObject root = doc.to<JsonObject>();
+      JsonObject a = root.createNestedObject("identifyModule");
+
+      a["bank"]=b;
+      a["module"]=m;
+
+      serializeJson(doc, *response);
+      request->send(response);
+}
+
+} else {
+
+    request->send(500, "text/plain", "Missing parameters");
+}
+}
 void DIYBMSServer::settings(AsyncWebServerRequest *request) {
 
   if(request->hasParam("m", false) && request->hasParam("b", false)){
@@ -69,7 +108,7 @@ void DIYBMSServer::settings(AsyncWebServerRequest *request) {
 
     AsyncResponseStream *response = request->beginResponseStream("application/json");
 
-    DynamicJsonDocument doc(4096);
+    DynamicJsonDocument doc(2048);
     JsonObject root = doc.to<JsonObject>();
     JsonObject settings = root.createNestedObject("settings");
 
@@ -166,6 +205,7 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
 
 
   _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
+  _myserver->on("/identifyModule.json", HTTP_GET, DIYBMSServer::identifyModule);
 
 
   _myserver->onNotFound(DIYBMSServer::handleNotFound);

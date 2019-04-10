@@ -247,6 +247,11 @@ void setup() {
 void loop() {
   wdt_reset();
 
+  if (PP.identifyModule>0) {
+    hardware.RedLedOn();
+    hardware.GreenLedOn();
+  }
+
   if (wdt_triggered) {
     //Put RED LED on whilst we sample after a watchdog event
     hardware.RedLedOn();
@@ -273,13 +278,16 @@ void loop() {
     wdt_triggered=false;
   }
 
+  if (PP.identifyModule==0) {
+    //We dont sleep if we are in identify mode
 
-  hardware.EnableStartFrameDetection();
+    hardware.EnableStartFrameDetection();
 
-  UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
+    UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
 
-  //Program stops here until woken by watchdog or pin change interrupt
-  hardware.Sleep();
+    //Program stops here until woken by watchdog or pin change interrupt
+    hardware.Sleep();
+  }
 
   //We may have got here because the watchdog (8seconds) went off - we didnt receive a packet of data
   if (!wdt_triggered) {
@@ -294,5 +302,13 @@ void loop() {
       myPacketSerial.update();
     }
   }
+
+  if (PP.identifyModule>0) {
+    hardware.RedLedOff();
+    hardware.GreenLedOff();
+    delay(50);
+    PP.identifyModule--;
+  }
+
 
 }

@@ -197,7 +197,7 @@ uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
 // C    = 4 bits command (16 possible commands)
 
 //commands
-// 0000 0000  = identify and provision
+// 0000 0000  = set bank
 // 0000 0001  = read voltage and status
 // 0000 0010  = identify module (flash leds)
 bool PacketProcessor::processPacket() {
@@ -233,11 +233,12 @@ bool PacketProcessor::processPacket() {
       //Indicate that we received and did something
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
 
-      _hardware->GreenLedOn();
-      _hardware->RedLedOn();
-      delay(200);
-      _hardware->GreenLedOff();
-      _hardware->RedLedOff();
+      identifyModule=25;
+      //_hardware->GreenLedOn();
+      //_hardware->RedLedOn();
+      //delay(200);
+      //_hardware->GreenLedOff();
+      //_hardware->RedLedOff();
       return true;
     break;
     }

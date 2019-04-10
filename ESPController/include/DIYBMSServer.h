@@ -23,7 +23,7 @@ class DIYBMSServer {
       static void monitor(AsyncWebServerRequest *request);
       static void sendHeaders();
       static void settings(AsyncWebServerRequest *request);
-
+      static void identifyModule(AsyncWebServerRequest *request);
 };
 
 

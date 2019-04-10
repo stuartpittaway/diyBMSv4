@@ -59,6 +59,7 @@ PacketSerial_<COBS, 0, 256> myPacketSerial;
 os_timer_t myTimer;
 
 void sendGetSettingsRequest(uint8_t b,uint8_t m);
+void sendIdentifyModuleRequest(uint8_t b,uint8_t m);
 void sendCellVoltageRequest();
 void sendCellTemperatureRequest();
 void dumpPacketToDebug();
@@ -194,7 +195,7 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
         switch (buffer.command & 0x0F) {
           case 0: break;
           case 1: ProcessReplyVoltage();          break;
-          case 2: break;
+          case 2: break;  //Ignore reply
           case 3: ProcessReplyTemperature();          break;
           case 4: break;
           case 5: ProcessReplySettings();          break;
@@ -228,10 +229,23 @@ void timerCallback(void *pArg) {
     delay(10);
 
     if (requestPending) {
+      //This needs to be improved, perhaps a processing queue/list?
 
         bool found=false;
         for (uint8_t b = 0; b < 4; b++) {
         for (uint8_t m = 0; m < numberOfModules[b]; m++) {
+
+          if (cmi[b][m].identifyModule==true && found==false) {
+            //Request settings from module
+            Serial1.println("Sending identify module request");
+            sendIdentifyModuleRequest(b,m);
+
+            cmi[b][m].identifyModule=false;
+            found=true;
+            //Assume there are no more requests
+            requestPending=false;
+          }
+
 
           if (cmi[b][m].settingsRequested==true && found==false) {
             //Request settings from module
@@ -244,7 +258,7 @@ void timerCallback(void *pArg) {
             requestPending=false;
           }
 
-          if (cmi[b][m].settingsRequested==true && found==false) {
+          if ((cmi[b][m].settingsRequested==true || cmi[b][m].identifyModule==true)  && found==false) {
             //We found another request pending so set flag for next iteration
               requestPending=true;
               break;
@@ -347,6 +361,20 @@ void sendCellVoltageRequest() {
   sendPacket();
 }
 
+
+void sendIdentifyModuleRequest(uint8_t b,uint8_t m)
+{
+  //Read settings from single module
+  setPacketAddress(false,b,m);
+  //Command 3 - identify
+  buffer.command = B00000010;
+
+  //AVR MCUs are little endian (least significant byte first in memory)
+  clearmoduledata();
+
+  sendPacket();
+
+}
 
 void sendGetSettingsRequest(uint8_t b,uint8_t m) {
   //Read settings from single module

@@ -134,6 +134,21 @@ var g2=null;
 var g3=null;
 
 
+function identifyModule(button, bank, module) {
+
+  //Populate settings div
+
+  $.getJSON( "identifyModule.json",
+  {
+       b: bank,
+       m: module
+    },
+    function(data) {
+
+    }
+  ).fail(function() {   $("#iperror").show();});
+}
+
 function configureModule(button, bank, module) {
   console.log(button,bank,module);
 
@@ -173,10 +188,6 @@ function configureModule(button, bank, module) {
       //Call back in 5 seconds to refresh page - this is a bad idea!
       //setTimeout(configureModule, 5000, button, bank, module);
     }
-/*
-Cached: false
-Requested: true
-*/
 
     }).fail(function() {
      $("#iperror").show();
@@ -241,7 +252,7 @@ function queryBMS() {
             $(tbody).find("tr").remove();
 
             $.each(labels, function( index, value ) {
-                $(tbody).append("<tr><td>"+bank[index]+"</td><td>"+value+"</td><td></td><td></td><td></td><td></td><td></td><td><button type='button' onclick='return configureModule(this,"+bank[index]+","+value+");'>Configure</button></td></tr>")
+                $(tbody).append("<tr><td>"+bank[index]+"</td><td>"+value+"</td><td></td><td></td><td></td><td></td><td></td><td><button type='button' onclick='return identifyModule(this,"+bank[index]+","+value+");'>Identify</button></td><td><button type='button' onclick='return configureModule(this,"+bank[index]+","+value+");'>Configure</button></td></tr>")
             });
         }
 

@@ -19,19 +19,22 @@ struct packet {
 extern packet buffer;
 
 struct CellModuleInfo {
-  //uint8_t address;
+  //Used as part of the enquiry functions
+  bool settingsCached;
+  bool settingsRequested;
+  bool identifyModule;
+
+
   uint16_t voltagemV;
   uint16_t voltagemVMin;
   uint16_t voltagemVMax;
-  //Signed integer
+  //Signed integer - should these be byte?
   int16_t internalTemp;
   int16_t externalTemp;
+
   bool inBypass;
   bool bypassOverTemp;
 
-
-  bool settingsCached;
-  bool settingsRequested;
   uint8_t BypassOverTempShutdown;
   uint16_t BypassThresholdmV;
 
