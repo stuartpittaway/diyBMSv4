@@ -38,7 +38,7 @@ extern packet buffer;
 struct CellModuleInfo {
   //Used as part of the enquiry functions
   bool settingsCached;
-  bool settingsRequested;
+  //bool settingsRequested;
 
 
   uint16_t voltagemV;

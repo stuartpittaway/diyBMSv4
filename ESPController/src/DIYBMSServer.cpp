@@ -111,7 +111,7 @@ void DIYBMSServer::settings(AsyncWebServerRequest *request) {
     settings["module"]=m;
 
     settings["Cached"] = cmi[b][m].settingsCached;
-    settings["Requested"] = cmi[b][m].settingsRequested;
+    //settings["Requested"] = cmi[b][m].settingsRequested;
 
     settings["BypassOverTempShutdown"] = cmi[b][m].BypassOverTempShutdown;
     settings["BypassThresholdmV"] = cmi[b][m].BypassThresholdmV;
