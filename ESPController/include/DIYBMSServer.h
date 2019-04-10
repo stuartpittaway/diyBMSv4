@@ -10,6 +10,7 @@
 #include <EEPROM.h>
 
 #include "ArduinoJson.h"
+#include "PacketRequestGenerator.h"
 
 class DIYBMSServer {
    public:
@@ -31,5 +32,7 @@ extern uint16_t totalMissedPacketCount;
 extern uint16_t totalCRCErrors;
 extern uint16_t totalNotProcessedErrors;
 extern bool requestPending;
+
+extern PacketRequestGenerator prg;
 
 #endif

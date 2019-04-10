@@ -44,25 +44,30 @@
 
 AsyncWebServer server(80);
 
+#include "PacketRequestGenerator.h"
 #include "defines.h"
+
+void dumpPacketToDebug(packet *buffer);
 
 packet buffer;
 CellModuleInfo cmi[4][maximum_cell_modules];
 int numberOfModules[4];
 
+#include <cppQueue.h>
+
 #include "settings.h"
 #include "SoftAP.h"
 #include "DIYBMSServer.h"
 
+// Instantiate queue
+Queue	requestQueue(sizeof(packet), 25, FIFO);
+
+PacketRequestGenerator prg=PacketRequestGenerator(&requestQueue);
+
 PacketSerial_<COBS, 0, 256> myPacketSerial;
 
 os_timer_t myTimer;
-
-void sendGetSettingsRequest(uint8_t b,uint8_t m);
-void sendIdentifyModuleRequest(uint8_t b,uint8_t m);
-void sendCellVoltageRequest();
-void sendCellTemperatureRequest();
-void dumpPacketToDebug();
+os_timer_t myTransmitTimer;
 
 bool waitingForReply=false;
 uint8_t missedPacketCount=0;
@@ -141,7 +146,6 @@ void ProcessReplyVoltage() {
     if (cmi[b][i].voltagemV<cmi[b][i].voltagemVMin) {
       cmi[b][i].voltagemVMin=cmi[b][i].voltagemV;
     }
-
   }
 
   //3 top bits remaining
@@ -184,7 +188,7 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     //Calculate the CRC and compare to received
     uint16_t validateCRC = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2) ;
 
-    dumpPacketToDebug();
+    dumpPacketToDebug(&buffer);
     Serial1.print('=');
 
     if (validateCRC==buffer.crc) {
@@ -216,21 +220,47 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
   Serial1.println("");
 }
 
-
-uint8_t requestPacketType=0;
-
-void timerCallback(void *pArg) {
-  //this is called regularly on a timer, it determines what packet to request next from the cell modules
-  if (!waitingForReply) {
+void timerTransmitCallback(void *pArg) {
+  //Called every second to transmit anything that remains in the queue
+  if (!waitingForReply && !requestQueue.isEmpty()) {
     GREEN_LED_ON;
 
     //Wake up the connected cell module from sleep
     Serial.write(0x00);
     delay(10);
 
-    if (requestPending) {
+    packet transmitBuffer;
+
+    requestQueue.pop(&transmitBuffer);
+
+    myPacketSerial.send((byte*)&transmitBuffer, sizeof(transmitBuffer));
+
+    Serial1.print("Send:");
+    dumpPacketToDebug(&transmitBuffer);
+    Serial1.println("");
+
+    //waitingForReply=true;
+    missedPacketCount=0;
+    GREEN_LED_OFF;
+
+    Serial1.print("Q depth:");
+    Serial1.println(requestQueue.getCount());
+  }
+}
+
+void timerCallback(void *pArg) {
+  //this is called regularly on a timer, it determines what packet to request next from the cell modules
+  //if (!waitingForReply) {
+    //GREEN_LED_ON;
+
+    //Wake up the connected cell module from sleep
+    //Serial.write(0x00);
+    //delay(10);
+
+    //if (requestPending) {
       //This needs to be improved, perhaps a processing queue/list?
 
+/*
         bool found=false;
         for (uint8_t b = 0; b < 4; b++) {
         for (uint8_t m = 0; m < numberOfModules[b]; m++) {
@@ -238,7 +268,7 @@ void timerCallback(void *pArg) {
           if (cmi[b][m].identifyModule==true && found==false) {
             //Request settings from module
             Serial1.println("Sending identify module request");
-            sendIdentifyModuleRequest(b,m);
+            prg.sendIdentifyModuleRequest(b,m);
 
             cmi[b][m].identifyModule=false;
             found=true;
@@ -250,7 +280,7 @@ void timerCallback(void *pArg) {
           if (cmi[b][m].settingsRequested==true && found==false) {
             //Request settings from module
             Serial1.println("Sending get settings request");
-            sendGetSettingsRequest(b,m);
+            prg.sendGetSettingsRequest(b,m);
 
             cmi[b][m].settingsRequested=false;
             found=true;
@@ -267,21 +297,15 @@ void timerCallback(void *pArg) {
         }
 
     } else {
-
-    requestPacketType++;
-    if (requestPacketType<5) {
-      Serial1.println("Sending voltage request");
-      sendCellVoltageRequest();
-    } else {
-      Serial1.println("Sending temp request");
-      sendCellTemperatureRequest();
-      requestPacketType=0;
-    }
+*/
+      prg.sendCellVoltageRequest();
+      prg.sendCellTemperatureRequest();
+/*
 }
 
-    GREEN_LED_OFF;
-    waitingForReply=true;
-    missedPacketCount=0;
+    //GREEN_LED_OFF;
+    //waitingForReply=true;
+    //missedPacketCount=0;
 
   } else {
     missedPacketCount++;
@@ -295,14 +319,9 @@ void timerCallback(void *pArg) {
       //missedPacketCount=0;
     }
   }
+  */
+//}
 }
-
-void clearmoduledata() {
-  for ( int a = 0; a < maximum_cell_modules; a++ ) {
-    buffer.moduledata[a] = __builtin_bswap16(0x0000);
-  }
-}
-
 
 //command byte
 // WRRR CCCC
@@ -318,87 +337,17 @@ void clearmoduledata() {
 // 0000 0100  = Report number of bad packets
 // 0000 0101  = Report settings/configuration
 
-void dumpPacketToDebug() {
-  Serial1.print(buffer.address,HEX);
+void dumpPacketToDebug(packet *buffer) {
+  Serial1.print(buffer->address,HEX);
   Serial1.print(' ');
-  Serial1.print(buffer.command,HEX);
+  Serial1.print(buffer->command,HEX);
   Serial1.print(' ');
   for (size_t i = 0; i < maximum_cell_modules; i++)
   {
-    Serial1.print(buffer.moduledata[i],HEX);
+    Serial1.print(buffer->moduledata[i],HEX);
     Serial1.print(' ');
   }
-  Serial1.print(buffer.crc,HEX);
-}
-
-void sendPacket() {
-  buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
-  myPacketSerial.send((byte*)&buffer, sizeof(buffer));
-
-  Serial1.print("Send:");
-  dumpPacketToDebug();
-  Serial1.println("");
-}
-
-void setPacketAddress(bool broadcast,uint8_t bank,uint8_t module) {
-  if (broadcast) {
-    buffer.address = B10000000;
-  } else {
-    buffer.address = ((bank & B00000011)<<4) + (module & B00001111);
-  }
-}
-
-void sendCellVoltageRequest() {
-  //Read voltage (broadcast) to bank 00
-  setPacketAddress(true,0,0);
-
-  //Command 1 - read voltage
-  buffer.command = B00000001;
-
-  //AVR MCUs are little endian (least significant byte first in memory)
-  clearmoduledata();
-
-  sendPacket();
-}
-
-
-void sendIdentifyModuleRequest(uint8_t b,uint8_t m)
-{
-  //Read settings from single module
-  setPacketAddress(false,b,m);
-  //Command 3 - identify
-  buffer.command = B00000010;
-
-  //AVR MCUs are little endian (least significant byte first in memory)
-  clearmoduledata();
-
-  sendPacket();
-
-}
-
-void sendGetSettingsRequest(uint8_t b,uint8_t m) {
-  //Read settings from single module
-  setPacketAddress(false,b,m);
-  //Command 5 - read settings
-  buffer.command = B00000101;
-
-  //AVR MCUs are little endian (least significant byte first in memory)
-  clearmoduledata();
-
-  sendPacket();
-}
-
-
-void sendCellTemperatureRequest() {
-  //Read voltage (broadcast) to bank 00
-  setPacketAddress(true,0,0);
-  //Command 3 - read temperatures
-  buffer.command = B00000011;
-
-  //AVR MCUs are little endian (least significant byte first in memory)
-  clearmoduledata();
-
-  sendPacket();
+  Serial1.print(buffer->crc,HEX);
 }
 
 
@@ -426,7 +375,6 @@ void setup() {
     cmi[3][i].voltagemVMin=6000;
   }
 
-
   Serial.begin(4800, SERIAL_8N1);           // Serial for comms to modules
   //Use alternative GPIO pins of D7/D8
   //D7 = GPIO13 = RECEIVE SERIAL
@@ -442,7 +390,10 @@ void setup() {
 
   //Ensure we service the cell modules every 2 seconds
   os_timer_setfn(&myTimer, timerCallback, NULL);
-  os_timer_arm(&myTimer, 2000, true);
+  os_timer_arm(&myTimer, 4000, true);
+
+  os_timer_setfn(&myTransmitTimer, timerTransmitCallback, NULL);
+  os_timer_arm(&myTransmitTimer, 1000, true);
 
   //D0 is used to reset access point WIFI details on boot up
   pinMode(D0,INPUT_PULLUP);

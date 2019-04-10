@@ -55,11 +55,14 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
       request->send(500, "text/plain", "Wrong parameters");
     } else {
 
+      prg.sendIdentifyModuleRequest(b,m);
 
+      /*
       if (cmi[b][m].identifyModule==false) {
         cmi[b][m].identifyModule=true;
         requestPending=true;
       }
+      */
 
       AsyncResponseStream *response = request->beginResponseStream("application/json");
 
@@ -94,9 +97,8 @@ void DIYBMSServer::settings(AsyncWebServerRequest *request) {
     request->send(500, "text/plain", "Wrong parameters");
   } else {
 
-    if ((cmi[b][m].settingsCached==false) && (cmi[b][m].settingsRequested==false)) {
-      cmi[b][m].settingsRequested=true;
-      requestPending=true;
+    if (cmi[b][m].settingsCached==false) {
+      prg.sendGetSettingsRequest(b,m);
     }
 
     AsyncResponseStream *response = request->beginResponseStream("application/json");
@@ -122,11 +124,8 @@ void DIYBMSServer::settings(AsyncWebServerRequest *request) {
 
     serializeJson(doc, *response);
     request->send(response);
-
   }
-
 } else {
-
     request->send(500, "text/plain", "Missing parameters");
 }
 
