@@ -140,12 +140,13 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
   JsonObject root = doc.to<JsonObject>();
 
   JsonObject monitor = root.createNestedObject("monitor");
-  //JsonObject status= monitor.createNestedObject("status");
-  monitor["commserr"]=(missedPacketCount>0);
 
-  monitor["badpkt"]=totalMissedPacketCount;
-  monitor["badcrc"]=totalCRCErrors;
-  monitor["ignored"]=totalNotProcessedErrors;
+  //Set error flag if we have sent 5 packets without a reply
+  monitor["commserr"]=(commsError>5);
+
+  monitor["badpkt"]=receiveProc.totalMissedPacketCount;
+  monitor["badcrc"]=receiveProc.totalCRCErrors;
+  monitor["ignored"]=receiveProc.totalNotProcessedErrors;
 
 JsonArray bankArray = root.createNestedArray("bank");
 

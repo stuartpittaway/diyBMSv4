@@ -52,6 +52,23 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
   #define DEBUG_PRINT(str);
 #endif
 
+enum COMMAND: uint8_t
+{
+    SetBankIdentity=B00000000,
+    ReadVoltageAndStatus=B00000001,
+    Identify=B00000010,
+    ReadTemperature=B00000011,
+    ReadBadPacketCounter=B00000100,
+    ReadSettings=B00000101
+
+    // 0000 0000  = set bank identity
+    // 0000 0001  = read voltage and status
+    // 0000 0010  = identify module (flash leds)
+    // 0000 0011  = Read temperature
+    // 0000 0100  = Report number of bad packets
+    // 0000 0101  = Report settings/configuration
+};
+
 
 //Default values
 struct CellModuleConfig {

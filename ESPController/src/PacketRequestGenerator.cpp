@@ -6,7 +6,7 @@ void PacketRequestGenerator::sendCellVoltageRequest() {
   setPacketAddress(true,0,0);
 
   //Command 1 - read voltage
-  _packetbuffer.command = B00000001;
+  _packetbuffer.command = COMMAND::ReadVoltageAndStatus;
 
   //AVR MCUs are little endian (least significant byte first in memory)
   clearmoduledata();
@@ -20,7 +20,7 @@ void PacketRequestGenerator::sendIdentifyModuleRequest(uint8_t b,uint8_t m)
   //Read settings from single module
   setPacketAddress(false,b,m);
   //Command 3 - identify
-  _packetbuffer.command = B00000010;
+  _packetbuffer.command = COMMAND::Identify;
 
   //AVR MCUs are little endian (least significant byte first in memory)
   clearmoduledata();
@@ -33,7 +33,7 @@ void PacketRequestGenerator::sendGetSettingsRequest(uint8_t b,uint8_t m) {
   //Read settings from single module
   setPacketAddress(false,b,m);
   //Command 5 - read settings
-  _packetbuffer.command = B00000101;
+  _packetbuffer.command = COMMAND::ReadSettings;
 
   //AVR MCUs are little endian (least significant byte first in memory)
   clearmoduledata();
@@ -46,7 +46,7 @@ void PacketRequestGenerator::sendCellTemperatureRequest() {
   //Read voltage (broadcast) to bank 00
   setPacketAddress(true,0,0);
   //Command 3 - read temperatures
-  _packetbuffer.command = B00000011;
+  _packetbuffer.command = COMMAND::ReadTemperature;
 
   //AVR MCUs are little endian (least significant byte first in memory)
   clearmoduledata();
@@ -59,7 +59,7 @@ void PacketRequestGenerator::pushPacketToQueue() {
   _packetbuffer.crc = uCRC16Lib::calculate((char*)&_packetbuffer, sizeof(packet) - 2);
 
   _requestq->push(&_packetbuffer);
-  
+
 }
 
 void PacketRequestGenerator::setPacketAddress(bool broadcast,uint8_t bank,uint8_t module) {

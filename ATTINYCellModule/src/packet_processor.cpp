@@ -202,7 +202,7 @@ uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
 // 0000 0010  = identify module (flash leds)
 bool PacketProcessor::processPacket() {
   switch (buffer.command & 0x0F) {
-  case 0:
+  case COMMAND::SetBankIdentity:
     {
       //Set this modules bank address and store in EEPROM
       _config->mybank = buffer.moduledata[mymoduleaddress] & 0x30;
@@ -211,7 +211,7 @@ bool PacketProcessor::processPacket() {
       return true;
     }
 
-  case 1:
+  case COMMAND::ReadVoltageAndStatus:
     {
       //Read voltage of VCC
       //Maximum voltage 8191mV
@@ -225,7 +225,7 @@ bool PacketProcessor::processPacket() {
       return true;
     }
 
-  case 2:
+  case COMMAND::Identify :
     {
       //identify module (flash leds)
       //TODO: WE NEED TO DO BETTER THAN THIS MOVE TO TIMER/INTERRUPT/FLASHER?
@@ -243,7 +243,7 @@ bool PacketProcessor::processPacket() {
     break;
     }
 
-  case 3:
+  case COMMAND::ReadTemperature:
     {
       //Read temperature
       _hardware->ReferenceVoltageOn();
@@ -258,14 +258,14 @@ bool PacketProcessor::processPacket() {
       return true;
     }
 
-  case 4:
+  case COMMAND::ReadBadPacketCounter:
     {
       //Report number of bad packets
       buffer.moduledata[mymoduleaddress] = badpackets;
       return true;
     }
 
-    case 5:
+    case COMMAND::ReadSettings:
     {
       //Report settings/configuration
 

@@ -6,6 +6,23 @@
 #define GREEN_LED_ON digitalWrite(GREEN_LED,HIGH)
 #define GREEN_LED_OFF digitalWrite(GREEN_LED,LOW)
 
+enum COMMAND: uint8_t
+{
+    SetBankIdentity=B00000000,
+    ReadVoltageAndStatus=B00000001,
+    Identify=B00000010,
+    ReadTemperature=B00000011,
+    ReadBadPacketCounter=B00000100,
+    ReadSettings=B00000101
+
+    // 0000 0000  = set bank identity
+    // 0000 0001  = read voltage and status
+    // 0000 0010  = identify module (flash leds)
+    // 0000 0011  = Read temperature
+    // 0000 0100  = Report number of bad packets
+    // 0000 0101  = Report settings/configuration
+};
+
 //Maximum of 16 cell modules (dont change this!)
 #define maximum_cell_modules 16
 //NOTE THIS MUST BE EVEN IN SIZE (BYTES) ESP8266 IS 32 BIT AND WILL ALIGN AS SUCH!
