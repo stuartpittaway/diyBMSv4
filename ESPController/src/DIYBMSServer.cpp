@@ -41,13 +41,6 @@ void DIYBMSServer::handleNotFound(AsyncWebServerRequest *request) {
     request->send(404, "text/plain", "Not found");
 }
 
-void DIYBMSServer::sendHeaders()
-{
-  //_myserver->sendHeader("Connection", "close");
-  //_myserver->sendHeader("Cache-Control", "private");
-}
-
-
 void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
   if(request->hasParam("m", false) && request->hasParam("b", false)){
 
@@ -175,7 +168,7 @@ JsonArray bankArray = root.createNestedArray("bank");
   request->send(response);
 }
 
-// int m, int n,CellModuleInfo arr[][n]
+
 void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver=webserver;
 

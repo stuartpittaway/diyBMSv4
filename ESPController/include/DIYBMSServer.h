@@ -18,10 +18,8 @@ class DIYBMSServer {
   private:
       static AsyncWebServer * _myserver;
 
-      static void handleRedirect();
       static void handleNotFound(AsyncWebServerRequest *request);
       static void monitor(AsyncWebServerRequest *request);
-      static void sendHeaders();
       static void settings(AsyncWebServerRequest *request);
       static void identifyModule(AsyncWebServerRequest *request);
 };
