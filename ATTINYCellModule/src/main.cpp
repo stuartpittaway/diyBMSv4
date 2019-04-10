@@ -252,6 +252,19 @@ void loop() {
     hardware.GreenLedOn();
   }
 
+
+  if (PP.identifyModule==0) {
+    //We dont sleep if we are in identify mode
+
+    hardware.EnableStartFrameDetection();
+
+    UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
+
+    //Program stops here until woken by watchdog or pin change interrupt
+    hardware.Sleep();
+  }
+
+
   if (wdt_triggered) {
     //Put RED LED on whilst we sample after a watchdog event
     hardware.RedLedOn();
@@ -278,24 +291,13 @@ void loop() {
     wdt_triggered=false;
   }
 
-  if (PP.identifyModule==0) {
-    //We dont sleep if we are in identify mode
-
-    hardware.EnableStartFrameDetection();
-
-    UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
-
-    //Program stops here until woken by watchdog or pin change interrupt
-    hardware.Sleep();
-  }
 
   //We may have got here because the watchdog (8seconds) went off - we didnt receive a packet of data
   if (!wdt_triggered) {
     UCSR0B |=(1<<TXEN0); // enable TX Serial0
 
-
     //Loop here processing any packets then go back to sleep
-    for (size_t i = 0; i <20; i++) {
+    for (size_t i = 0; i <5; i++) {
       //Allow data to be received in buffer
       delay(10);
       // Call update to receive, decode and process incoming packets.
