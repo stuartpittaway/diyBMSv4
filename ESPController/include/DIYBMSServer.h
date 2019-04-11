@@ -27,14 +27,6 @@ class DIYBMSServer {
 };
 
 
-extern bool waitingForReply;
-//extern uint8_t missedPacketCount;
-extern uint8_t commsError;
-extern uint16_t totalMissedPacketCount;
-extern uint16_t totalCRCErrors;
-extern uint16_t totalNotProcessedErrors;
-extern bool requestPending;
-
 extern PacketRequestGenerator prg;
 extern PacketReceiveProcessor receiveProc;
 

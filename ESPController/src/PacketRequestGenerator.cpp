@@ -2,6 +2,8 @@
 
 
 void PacketRequestGenerator::sendCellVoltageRequest() {
+  //Serial1.println("sendCellVoltageRequest");
+
   //Read voltage (broadcast) to bank 00
   setPacketAddress(true,0,0);
 
@@ -17,6 +19,8 @@ void PacketRequestGenerator::sendCellVoltageRequest() {
 
 void PacketRequestGenerator::sendIdentifyModuleRequest(uint8_t b,uint8_t m)
 {
+  //Serial1.println("sendIdentifyModuleRequest");
+
   //Read settings from single module
   setPacketAddress(false,b,m);
   //Command 3 - identify
@@ -30,6 +34,8 @@ void PacketRequestGenerator::sendIdentifyModuleRequest(uint8_t b,uint8_t m)
 }
 
 void PacketRequestGenerator::sendGetSettingsRequest(uint8_t b,uint8_t m) {
+  //Serial1.println("sendGetSettingsRequest");
+
   //Read settings from single module
   setPacketAddress(false,b,m);
   //Command 5 - read settings
@@ -43,6 +49,8 @@ void PacketRequestGenerator::sendGetSettingsRequest(uint8_t b,uint8_t m) {
 
 
 void PacketRequestGenerator::sendCellTemperatureRequest() {
+  //Serial1.println("sendCellTemperatureRequest");
+
   //Read voltage (broadcast) to bank 00
   setPacketAddress(true,0,0);
   //Command 3 - read temperatures
@@ -56,10 +64,9 @@ void PacketRequestGenerator::sendCellTemperatureRequest() {
 
 
 void PacketRequestGenerator::pushPacketToQueue() {
-  _packetbuffer.crc = uCRC16Lib::calculate((char*)&_packetbuffer, sizeof(packet) - 2);
-
+  //Serial1.println("pushPacketToQueue");
+  //_packetbuffer.crc = uCRC16Lib::calculate((char*)&_packetbuffer, sizeof(packet) - 2);
   _requestq->push(&_packetbuffer);
-
 }
 
 void PacketRequestGenerator::setPacketAddress(bool broadcast,uint8_t bank,uint8_t module) {

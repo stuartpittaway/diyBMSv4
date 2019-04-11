@@ -127,9 +127,8 @@ int PacketProcessor::GetBufferSize() {
   return sizeof(buffer);
 }
 
-bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len) {
+bool PacketProcessor::onPacketReceived(const uint8_t* receivebuffer, size_t len) {
   //if (len == 0) {    badpackets++;    return false;  }
-
 
   // Process your decoded incoming packet here.
   if (len == sizeof(buffer)) {
@@ -149,17 +148,14 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
             buffer.command=buffer.command | B10000000;
 
             //Calculate new checksum over whole buffer
-            buffer.crc = uCRC16Lib::calculate((char * ) & buffer, sizeof(buffer) - 2);
+            buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
         }
       }
       return true;
     }
   }
 
-
   //We need to do something here, the packet received was not correct
-  //Time to do the checks on the cell to make sure everything is okay
-  //treat it as if its a watchdog event
   badpackets++;
   return false;
 }

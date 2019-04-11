@@ -57,13 +57,6 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
 
       prg.sendIdentifyModuleRequest(b,m);
 
-      /*
-      if (cmi[b][m].identifyModule==false) {
-        cmi[b][m].identifyModule=true;
-        requestPending=true;
-      }
-      */
-
       AsyncResponseStream *response = request->beginResponseStream("application/json");
 
       DynamicJsonDocument doc(2048);
@@ -141,8 +134,8 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   JsonObject monitor = root.createNestedObject("monitor");
 
-  //Set error flag if we have sent 5 packets without a reply
-  monitor["commserr"]=(commsError>5);
+  //Set error flag if we have attempted to send 2 without a reply
+  monitor["commserr"]=(receiveProc.commsError>2);
 
   monitor["badpkt"]=receiveProc.totalMissedPacketCount;
   monitor["badcrc"]=receiveProc.totalCRCErrors;

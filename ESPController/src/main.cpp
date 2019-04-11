@@ -44,7 +44,7 @@
 AsyncWebServer server(80);
 
 bool server_running=false;
-uint8_t commsError=0;
+
 uint8_t packetType=0;
 
 //This large array holds all the information about the modules
@@ -60,7 +60,7 @@ int numberOfModules[4];
 #include "PacketReceiveProcessor.h"
 
 // Instantiate queue to hold packets ready for transmission
-Queue	requestQueue(sizeof(packet), 25, FIFO);
+Queue	requestQueue(sizeof(packet), 16, FIFO);
 
 PacketRequestGenerator prg=PacketRequestGenerator(&requestQueue);
 
@@ -68,75 +68,115 @@ PacketReceiveProcessor receiveProc=PacketReceiveProcessor();
 
 PacketSerial_<COBS, 0, 128> myPacketSerial;
 
+volatile bool waitingForReply=false;
+
 os_timer_t myTimer;
 
 os_timer_t myTransmitTimer;
 
+uint16_t sequence=0;
 
 void dumpPacketToDebug(packet *buffer) {
   Serial1.print(buffer->address,HEX);
-  Serial1.print(' ');
+  Serial1.print('/');
   Serial1.print(buffer->command,HEX);
-  Serial1.print(' ');
+  Serial1.print('/');
+  Serial1.print(buffer->sequence,HEX);
+  Serial1.print('=');
   for (size_t i = 0; i < maximum_cell_modules; i++)
   {
     Serial1.print(buffer->moduledata[i],HEX);
-    Serial1.print(' ');
+    Serial1.print(" ");
   }
+  Serial1.print(" =");
   Serial1.print(buffer->crc,HEX);
 }
 
+
 void onPacketReceived(const uint8_t* receivebuffer, size_t len)
 {
-  // Process decoded incoming packet
-  Serial1.print("Recv:");
+  //Note that this function gets called frequently with zero length packets
+  //due to the way the modules operate
 
-  if (len ==sizeof(packet)) {
+  if (len==sizeof(packet)) {
+    // Process decoded incoming packet
+    Serial1.print("Recv:");
+
     dumpPacketToDebug((packet*)receivebuffer);
-    receiveProc.ProcessReply(receivebuffer);
-    commsError=0;
+
+    if (!receiveProc.ProcessReply(receivebuffer,sequence)) {
+      Serial1.println("** FAILED PROCESS REPLY **");
+    }
+
+    //We are in communication with modules
+    receiveProc.commsError=0;
+
+    //We received a packet (although may have been an error)
+    waitingForReply=false;
+
+    Serial1.println();
   }
 
-  Serial1.println("");
 }
 
+
 void timerTransmitCallback(void *pArg) {
-  //Called every second to transmit anything that remains in the queue
+
+  //Don't send another message until we have received reply from the last one
+  //this slows the transmit process down a lot so potentially need to look at a better
+  //way to do this and also keep track of mising messages replies for error tracking
+  if (waitingForReply) {
+
+    Serial1.print('E');
+    Serial1.print(receiveProc.commsError);
+    //Increment the counter to watch for complete comms failures
+    receiveProc.commsError++;
+
+    //After 5 attempts give up and send another packet
+    if (receiveProc.commsError>10) {
+      waitingForReply=false;
+    } else {
+        return;
+    }
+  }
+
+  //Called every second to transmit anything that remains in the transmit queue
   if (!requestQueue.isEmpty()) {
+    packet transmitBuffer;
+
     GREEN_LED_ON;
 
     //Wake up the connected cell module from sleep
     Serial.write(0x00);
     delay(10);
 
-    packet transmitBuffer;
-
     requestQueue.pop(&transmitBuffer);
+
+    sequence++;
+
+    transmitBuffer.sequence=sequence;
+    transmitBuffer.crc = uCRC16Lib::calculate((char*)&transmitBuffer, sizeof(packet) - 2);
 
     myPacketSerial.send((byte*)&transmitBuffer, sizeof(transmitBuffer));
 
-    //Increase the count of sent packets
-    receiveProc.totalMissedPacketCount++;
-
-    //Also increment the counter to watch for complete comms failures
-    commsError++;
+    waitingForReply=true;
 
     Serial1.print("Send:");
     dumpPacketToDebug(&transmitBuffer);
 
-
-    Serial1.print("/ Q depth:");
-    Serial1.println(requestQueue.getCount());
+    Serial1.print("/Q:");
+    Serial1.print(requestQueue.getCount());
+    Serial1.print(" # ");
 
     GREEN_LED_OFF;
+
+
   }
 }
 
 
 void timerEnqueueCallback(void *pArg) {
-  //this is called regularly on a timer, it determines what request to make
-  //to the modules (via the request queue)
-
+  //this is called regularly on a timer, it determines what request to make to the modules (via the request queue)
   packetType++;
 
   prg.sendCellVoltageRequest();
@@ -191,7 +231,7 @@ void setup() {
   os_timer_arm(&myTimer, 4000, true);
 
   os_timer_setfn(&myTransmitTimer, timerTransmitCallback, NULL);
-  os_timer_arm(&myTransmitTimer, 1000, true);
+  os_timer_arm(&myTransmitTimer, 500, true);
 
   //D0 is used to reset access point WIFI details on boot up
   pinMode(D0,INPUT_PULLUP);

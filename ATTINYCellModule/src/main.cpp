@@ -176,9 +176,11 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
 
     if (len>0) {
 
-      //A data packet has just arrived, process it and forward the results to the next module (if valid)
-      if (PP.onPacketReceived(receivebuffer,len)) {
-
+      //A data packet has just arrived, process it and forward the results to the next module
+      if (!PP.onPacketReceived(receivebuffer,len)) {
+        //hardware.RedLedOn();
+        //delay(20);
+        //hardware.RedLedOff();
       }
 
       //Wake up the connected cell module from sleep
@@ -297,7 +299,10 @@ void loop() {
     UCSR0B |=(1<<TXEN0); // enable TX Serial0
 
     //Loop here processing any packets then go back to sleep
-    for (size_t i = 0; i <10; i++) {
+    //NOTE this loop size is dependant on the size of the packet buffer (34 bytes)
+    //     too small a loop will prevent anything being processed as we go back to Sleep
+    //     before packet is received
+    for (size_t i = 0; i <15; i++) {
       //Allow data to be received in buffer
       delay(10);
       // Call update to receive, decode and process incoming packets.

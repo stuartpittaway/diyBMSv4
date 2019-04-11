@@ -21,10 +21,11 @@ class PacketReceiveProcessor {
    public:
      PacketReceiveProcessor() {}
      ~PacketReceiveProcessor() {}
-     void ProcessReply(const uint8_t* receivebuffer);
+     bool ProcessReply(const uint8_t* receivebuffer, uint16_t sequenceToExpect);
      uint16_t totalMissedPacketCount=0;
      uint16_t totalCRCErrors=0;
      uint16_t totalNotProcessedErrors=0;
+     uint8_t commsError=0;
 
   private:
     packet _packetbuffer;

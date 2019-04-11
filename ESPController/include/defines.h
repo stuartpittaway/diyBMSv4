@@ -29,17 +29,14 @@ enum COMMAND: uint8_t
 struct packet {
   uint8_t address;
   uint8_t command;
+  uint16_t sequence;
   uint16_t moduledata[maximum_cell_modules];
   uint16_t crc;
 }  __attribute__((packed));
 
-extern packet buffer;
-
 struct CellModuleInfo {
   //Used as part of the enquiry functions
   bool settingsCached;
-  //bool settingsRequested;
-
 
   uint16_t voltagemV;
   uint16_t voltagemVMin;
@@ -69,7 +66,6 @@ struct CellModuleInfo {
 
 //This holds all the cell information in a large array 2D array (4x16)
 extern CellModuleInfo cmi[4][maximum_cell_modules];
-
 extern int numberOfModules[4];
 
 

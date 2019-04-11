@@ -33,6 +33,10 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
   stroke-width: 25px;
 }
 
+#settingsForm label {width:250px;display:inline-block;}
+#settingsForm input {width:100px;display:inline-block;padding-left:10px;padding-right:10px;margin-left:10px;}
+#settingsForm > div > div { padding-bottom:8px;}
+
 @media screen and (max-width:500px){
   .header a,.header-right{float:none}
   .header a{display:block;text-align:left}
@@ -118,9 +122,13 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 
 <div id="settingConfig">
 <h2>Settings for </h2>
-<form id="settingsForm" method="POST" action="savesetting">
-<div class="settings"></div>
+<div id='waitforsettings'>Configuration data has been requested from cell module.  Please wait 5 seconds and click button again.</div>
+<form id="settingsForm" method="POST" action="savesetting.json">
+<div class="settings"><input name="bank" id="bank" type="hidden" value="0"><input name="module" id="module" type="hidden" value="0"><div><label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label><input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required=""></div><div><label for="BypassThresholdmV">Bypass Threshold mV</label><input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required=""></div><div><label for="Calib">Calibration multiplier</label><input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required=""></div><div><label for="ExtBCoef">External temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required=""></div><div><label for="IntBCoef">Internal temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required=""></div><div><label for="LoadRes">Load resistance</label><input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required=""></div><div><label for="mVPerADC">mV per ADC reading</label><input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required=""></div>
+
+<input type="submit" value="Save settings"></input>
 </div>
+
 </form>
 </div>
 
@@ -135,17 +143,10 @@ var g3=null;
 
 
 function identifyModule(button, bank, module) {
-
   //Populate settings div
-
   $.getJSON( "identifyModule.json",
-  {
-       b: bank,
-       m: module
-    },
-    function(data) {
-
-    }
+  {       b: bank,       m: module    },
+    function(data) {    }
   ).fail(function() {   $("#iperror").show();});
 }
 
@@ -168,27 +169,26 @@ function configureModule(button, bank, module) {
     function(data) {
 
       var div=$("#settingConfig .settings");
-      $(div).empty();
-      $(div).append("<input id='bank' type='hidden' value='"+data.settings.bank+"'/>");
-      $(div).append("<input id='module' type='hidden' value='"+data.settings.module+"'/>");
+      $('#bank').val( data.settings.bank);
+      $('#module').val(data.settings.module);
 
-      if (data.settings.Cached==true && data.settings.Requested==false){
-
-      $(div).append("<div><label for='BypassOverTempShutdown'>Bypass Over Temp Shutdown</label><input id='BypassOverTempShutdown' type='input' value='"+data.settings.BypassOverTempShutdown+"'/></div>");
-      $(div).append("<div><label for='BypassThresholdmV'>Bypass Threshold mV</label><input id='BypassThresholdmV' type='input' value='"+data.settings.BypassThresholdmV+"'/></div>");
-      $(div).append("<div><label for='Calib'>Calibration multiplier</label><input id='Calib' type='input' value='"+data.settings.Calib+"'/></div>");
-      $(div).append("<div><label for='ExtBCoef'>External temperature BCoef</label><input id='ExtBCoef' type='input' value='"+data.settings.ExtBCoef+"'/></div>");
-      $(div).append("<div><label for='IntBCoef'>Internal temperature BCoef</label><input id='IntBCoef' type='input' value='"+data.settings.IntBCoef+"'/></div>");
-      $(div).append("<div><label for='LoadRes'>Load resistance</label><input id='LoadRes' type='input' value='"+data.settings.LoadRes+"'/></div>");
-      $(div).append("<div><label for='mVPerADC'>mV per ADC reading</label><input id='mVPerADC' type='input' value='"+data.settings.mVPerADC+"'/></div>");
-    } else {
-      //Data not ready yet
-      $(div).append("<div>Configuration data has been requested from cell module.  Please wait 5 seconds and click button again.</div>");
-
-      //Call back in 5 seconds to refresh page - this is a bad idea!
-      //setTimeout(configureModule, 5000, button, bank, module);
-    }
-
+      if (data.settings.Cached==true){
+        $('#BypassOverTempShutdown').val(data.settings.BypassOverTempShutdown);
+        $('#BypassThresholdmV').val(data.settings.BypassThresholdmV);
+        $('#Calib').val(data.settings.Calib.toFixed(4));
+        $('#ExtBCoef').val(data.settings.ExtBCoef);
+        $('#IntBCoef').val(data.settings.IntBCoef);
+        $('#LoadRes').val(data.settings.LoadRes.toFixed(2));
+        $('#mVPerADC').val(data.settings.mVPerADC.toFixed(2));
+        $('#settingsForm').show();
+        $('#waitforsettings').hide();
+      } else {
+        //Data not ready yet
+        $('#settingsForm').hide();
+        $('#waitforsettings').show();
+        //Call back in 5 seconds to refresh page - this is a bad idea!
+        //setTimeout(configureModule, 5000, button, bank, module);
+      }
     }).fail(function() {
      $("#iperror").show();
   });
@@ -396,6 +396,25 @@ $(function() {
     $("#integrationPage").show();
     return true;
   });
+
+  $("#settingsForm").submit(function (e) {
+       e.preventDefault();
+
+       $.ajax({
+           type: $(this).attr('method'),
+           url: $(this).attr('action'),
+           data: $(this).serialize(),
+           success: function (data) {
+               console.log('Submission was successful.');
+               //console.log(data);
+           },
+           error: function (data) {
+               console.log('An error occurred.');
+               //console.log(data);
+           },
+       });
+   });
+
 
   $("#homePage").show();
 });

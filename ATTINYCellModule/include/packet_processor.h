@@ -20,6 +20,7 @@
 struct PacketStruct {
   uint8_t address;
   uint8_t command;
+  uint16_t sequence;
   uint16_t moduledata[maximum_cell_modules];
   uint16_t crc;
 }  __attribute__((packed));
