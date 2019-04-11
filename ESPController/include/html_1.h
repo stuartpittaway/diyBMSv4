@@ -124,10 +124,11 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <h2>Settings for </h2>
 <div id='waitforsettings'>Configuration data has been requested from cell module.  Please wait 5 seconds and click button again.</div>
 <form id="settingsForm" method="POST" action="savesetting.json">
-<div class="settings"><input name="bank" id="bank" type="hidden" value="0"><input name="module" id="module" type="hidden" value="0"><div><label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label><input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required=""></div><div><label for="BypassThresholdmV">Bypass Threshold mV</label><input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required=""></div><div><label for="Calib">Calibration multiplier</label><input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required=""></div><div><label for="ExtBCoef">External temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required=""></div><div><label for="IntBCoef">Internal temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required=""></div><div><label for="LoadRes">Load resistance</label><input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required=""></div><div><label for="mVPerADC">mV per ADC reading</label><input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required=""></div>
+<div class="settings"><input name="b" id="b" type="hidden" value="0"><input name="m" id="m" type="hidden" value="0"><div><label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label><input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required=""></div><div><label for="BypassThresholdmV">Bypass Threshold mV</label><input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required=""></div><div><label for="Calib">Calibration multiplier</label><input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required=""></div><div><label for="ExtBCoef">External temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required=""></div><div><label for="IntBCoef">Internal temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required=""></div><div><label for="LoadRes">Load resistance</label><input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required=""></div><div><label for="mVPerADC">mV per ADC reading</label><input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required=""></div>
 
 <input type="submit" value="Save settings"></input>
 </div>
+<div id='savesettingerror' class='error'>Save failed</div>
 
 </form>
 </div>
@@ -169,8 +170,8 @@ function configureModule(button, bank, module) {
     function(data) {
 
       var div=$("#settingConfig .settings");
-      $('#bank').val( data.settings.bank);
-      $('#module').val(data.settings.module);
+      $('#b').val( data.settings.bank);
+      $('#m').val(data.settings.module);
 
       if (data.settings.Cached==true){
         $('#BypassOverTempShutdown').val(data.settings.BypassOverTempShutdown);
@@ -182,10 +183,12 @@ function configureModule(button, bank, module) {
         $('#mVPerADC').val(data.settings.mVPerADC.toFixed(2));
         $('#settingsForm').show();
         $('#waitforsettings').hide();
+        $('#savesettingerror').hide();
       } else {
         //Data not ready yet
         $('#settingsForm').hide();
         $('#waitforsettings').show();
+        $('#savesettingerror').hide();
         //Call back in 5 seconds to refresh page - this is a bad idea!
         //setTimeout(configureModule, 5000, button, bank, module);
       }
@@ -405,12 +408,10 @@ $(function() {
            url: $(this).attr('action'),
            data: $(this).serialize(),
            success: function (data) {
-               console.log('Submission was successful.');
-               //console.log(data);
+               $('#settingConfig').hide();
            },
            error: function (data) {
-               console.log('An error occurred.');
-               //console.log(data);
+               $('#savesettingerror').show();
            },
        });
    });

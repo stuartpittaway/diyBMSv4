@@ -224,10 +224,11 @@ void setup() {
   Serial1.begin(115200, SERIAL_8N1);
   Serial1.setDebugOutput(true);
 
-  //Ensure we service the cell modules every 2 seconds
+  //Ensure we service the cell modules every 5 seconds
   os_timer_setfn(&myTimer, timerEnqueueCallback, NULL);
-  os_timer_arm(&myTimer, 4000, true);
+  os_timer_arm(&myTimer, 5000, true);
 
+  //We process the transmit queue every 0.5 seconds
   os_timer_setfn(&myTransmitTimer, timerTransmitCallback, NULL);
   os_timer_arm(&myTransmitTimer, 500, true);
 

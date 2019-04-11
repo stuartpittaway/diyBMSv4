@@ -267,6 +267,8 @@ void loop() {
   //Program stops here until woken by watchdog or pin change interrupt
   hardware.Sleep();
 
+  //We are awake....
+
   if (wdt_triggered) {
     //Put RED LED on whilst we sample after a watchdog event
     hardware.RedLedOn();
@@ -289,13 +291,11 @@ void loop() {
   hardware.ReferenceVoltageOff();
 
   if (wdt_triggered) {
+    //We got here because the watchdog (8seconds) went off - we didnt receive a packet of data
     hardware.RedLedOff();
     wdt_triggered=false;
-  }
-
-
-  //We may have got here because the watchdog (8seconds) went off - we didnt receive a packet of data
-  if (!wdt_triggered) {
+  } else
+  {
     UCSR0B |=(1<<TXEN0); // enable TX Serial0
 
     //Loop here processing any packets then go back to sleep

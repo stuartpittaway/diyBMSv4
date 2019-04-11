@@ -6,6 +6,13 @@
 #define GREEN_LED_ON digitalWrite(GREEN_LED,HIGH)
 #define GREEN_LED_OFF digitalWrite(GREEN_LED,LOW)
 
+typedef union
+{
+ float number;
+ uint8_t bytes[4];
+ uint16_t word[2];
+} FLOATUNION_t;
+
 enum COMMAND: uint8_t
 {
     SetBankIdentity=B00000000,
@@ -13,7 +20,8 @@ enum COMMAND: uint8_t
     Identify=B00000010,
     ReadTemperature=B00000011,
     ReadBadPacketCounter=B00000100,
-    ReadSettings=B00000101
+    ReadSettings=B00000101,
+    WriteSettings=B00000110
 
     // 0000 0000  = set bank identity
     // 0000 0001  = read voltage and status

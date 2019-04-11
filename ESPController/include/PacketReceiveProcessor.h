@@ -8,12 +8,6 @@
 //https://github.com/Naguissa/uCRC16Lib
 #include <uCRC16Lib.h>
 
-typedef union
-{
- float number;
- uint8_t bytes[4];
- uint16_t word[2];
-} FLOATUNION_t;
 
 
 

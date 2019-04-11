@@ -24,6 +24,7 @@ class DIYBMSServer {
       static void monitor(AsyncWebServerRequest *request);
       static void settings(AsyncWebServerRequest *request);
       static void identifyModule(AsyncWebServerRequest *request);
+      static void saveSetting(AsyncWebServerRequest *request);
 };
 
 
