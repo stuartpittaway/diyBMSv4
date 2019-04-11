@@ -108,9 +108,6 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
       Serial1.println("** FAILED PROCESS REPLY **");
     }
 
-    //We are in communication with modules
-    receiveProc.commsError=0;
-
     //We received a packet (although may have been an error)
     waitingForReply=false;
 
@@ -127,14 +124,15 @@ void timerTransmitCallback(void *pArg) {
   //way to do this and also keep track of mising messages replies for error tracking
   if (waitingForReply) {
 
-    Serial1.print('E');
-    Serial1.print(receiveProc.commsError);
+    //Serial1.print('E');Serial1.print(receiveProc.commsError);
+
     //Increment the counter to watch for complete comms failures
     receiveProc.commsError++;
 
     //After 5 attempts give up and send another packet
     if (receiveProc.commsError>10) {
       waitingForReply=false;
+      receiveProc.totalMissedPacketCount++;
     } else {
         return;
     }

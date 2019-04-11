@@ -252,20 +252,20 @@ void loop() {
   if (PP.identifyModule>0) {
     hardware.RedLedOn();
     hardware.GreenLedOn();
+    PP.identifyModule--;
+
+    if (PP.identifyModule==0) {
+      hardware.RedLedOff();
+      hardware.GreenLedOff();
+    }
   }
 
+  hardware.EnableStartFrameDetection();
 
-  if (PP.identifyModule==0) {
-    //We dont sleep if we are in identify mode
+  UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
 
-    hardware.EnableStartFrameDetection();
-
-    UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
-
-    //Program stops here until woken by watchdog or pin change interrupt
-    hardware.Sleep();
-  }
-
+  //Program stops here until woken by watchdog or pin change interrupt
+  hardware.Sleep();
 
   if (wdt_triggered) {
     //Put RED LED on whilst we sample after a watchdog event
@@ -309,12 +309,4 @@ void loop() {
       myPacketSerial.update();
     }
   }
-
-  if (PP.identifyModule>0) {
-    hardware.RedLedOff();
-    hardware.GreenLedOff();
-    delay(50);
-    PP.identifyModule--;
-  }
-
 }

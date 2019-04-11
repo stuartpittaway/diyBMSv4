@@ -223,10 +223,12 @@ bool PacketProcessor::processPacket() {
 
   case COMMAND::Identify :
     {
-      //identify module (flash leds)
+      //identify module
       //Indicate that we received and did something
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
-      identifyModule=35;
+
+      //For the next 10 receied packets - keep the LEDs lit up
+      identifyModule=10;
       return true;
     break;
     }
