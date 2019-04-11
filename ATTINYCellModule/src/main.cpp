@@ -60,7 +60,9 @@ PacketProcessor PP(&hardware,&myConfig);
 
 void DefaultConfig() {
   myConfig.LoadResistance=4.40;
-  myConfig.Calibration=2.18000;
+
+  //About 2.2100 seems about right
+  myConfig.Calibration=2.21000;
   //2mV per ADC resolution
   myConfig.mVPerADC=2.0;  //2048.0/1024.0;
   //Stop running bypass if temperature over 70 degrees C

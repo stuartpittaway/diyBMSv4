@@ -1,6 +1,38 @@
 #include "PacketRequestGenerator.h"
 
+void PacketRequestGenerator::clearSettingsForAllModules() {
+  // Force refresh of settings
+  for (size_t i = 0; i < maximum_cell_modules; i++) {
+    cmi[0][i].settingsCached = false;
+    cmi[1][i].settingsCached = false;
+    cmi[2][i].settingsCached = false;
+    cmi[3][i].settingsCached = false;
+  }
 
+
+}
+void PacketRequestGenerator::sendSaveGlobalSetting(uint16_t BypassThresholdmV,uint8_t BypassOverTempShutdown)
+{
+  //Set all modules to bypass and temperature shutdown to save values
+
+  setPacketAddress(true,0,0);
+  //Command - WriteSettings
+  _packetbuffer.command = COMMAND::WriteSettings;
+
+  //Fill packet with 0xFFFF values - module ignores settings
+  //with this value
+  for ( int a = 0; a < maximum_cell_modules; a++ ) {
+    _packetbuffer.moduledata[a] = 0xFFFF;
+  }
+
+  clearSettingsForAllModules();
+
+  _packetbuffer.moduledata[6]=BypassOverTempShutdown;
+  _packetbuffer.moduledata[7]=BypassThresholdmV;
+
+  pushPacketToQueue();
+
+}
 void PacketRequestGenerator::sendSaveSetting(uint8_t b,uint8_t m,uint16_t BypassThresholdmV,uint8_t BypassOverTempShutdown,float LoadResistance,float Calibration,float mVPerADC,uint16_t Internal_BCoefficient,uint16_t External_BCoefficient) {
   setPacketAddress(false,b,m);
   //Command - WriteSettings

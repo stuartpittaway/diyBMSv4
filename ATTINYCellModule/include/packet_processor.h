@@ -7,6 +7,8 @@
 #include "Steinhart.h"
 #include "defines.h"
 
+#include "settings.h"
+
 //Tiny and cross-device compatible CCITT CRC16 calculator library - uCRC16Lib
 //https://github.com/Naguissa/uCRC16Lib
 #include <uCRC16Lib.h>

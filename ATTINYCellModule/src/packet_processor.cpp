@@ -313,9 +313,13 @@ bool PacketProcessor::processPacket() {
     }
       if(buffer.moduledata[8]!=0xFFFF) {
       _config->Internal_BCoefficient=buffer.moduledata[8];}
-      
+
         if(buffer.moduledata[9]!=0xFFFF) {
       _config->External_BCoefficient=buffer.moduledata[9];}
+
+
+      //Save settings
+      Settings::WriteConfigToEEPROM((char*)_config, sizeof(CellModuleConfig), EEPROM_CONFIG_ADDRESS);
 
       return true;
     }

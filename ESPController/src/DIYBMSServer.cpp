@@ -38,6 +38,32 @@ distribute your   contributions under the same license as the original.
 
 AsyncWebServer *DIYBMSServer::_myserver;
 
+
+
+void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
+  if (request->hasParam("BypassOverTempShutdown", true) && request->hasParam("BypassThresholdmV", true)) {
+
+    AsyncWebParameter *p1 = request->getParam("BypassOverTempShutdown", true);
+    uint8_t BypassOverTempShutdown=p1->value().toInt();
+
+    AsyncWebParameter *p2 = request->getParam("BypassThresholdmV", true);
+    uint16_t BypassThresholdmV=p2->value().toInt();
+
+    prg.sendSaveGlobalSetting(BypassThresholdmV,BypassOverTempShutdown);
+
+    AsyncResponseStream *response = request->beginResponseStream("application/json");
+
+    DynamicJsonDocument doc(2048);
+
+    serializeJson(doc, *response);
+    request->send(response);
+
+  } else {
+    request->send(500, "text/plain", "Missing parameters");
+  }
+}
+
+
 void DIYBMSServer::handleNotFound(AsyncWebServerRequest *request) {
   request->send(404, "text/plain", "Not found");
 }
@@ -108,12 +134,6 @@ void DIYBMSServer::saveSetting(AsyncWebServerRequest *request) {
     AsyncResponseStream *response = request->beginResponseStream("application/json");
 
     DynamicJsonDocument doc(2048);
-    JsonObject root = doc.to<JsonObject>();
-    JsonObject a = root.createNestedObject("identifyModule");
-
-    a["bank"] = b;
-    a["module"] = m;
-
     serializeJson(doc, *response);
     request->send(response);
 }
@@ -268,6 +288,7 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
   _myserver->on("/identifyModule.json", HTTP_GET, DIYBMSServer::identifyModule);
   _myserver->on("/savesetting.json", HTTP_POST, DIYBMSServer::saveSetting);
+  _myserver->on("/saveglobalsetting.json", HTTP_POST, DIYBMSServer::saveGlobalSetting);
 
   _myserver->onNotFound(DIYBMSServer::handleNotFound);
   _myserver->begin();

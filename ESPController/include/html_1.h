@@ -47,8 +47,10 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
   .graphs {height:500px;}
 }
 
-.error:before { content: '!'; }
 .error { color:#D8000C;background-color:#FFBABA; padding:10px;display:none; width:100%;}
+
+.success { color:#000000;background-color:#49BE3B; padding:10px;display:none; width:100%;}
+
 
 .page {clear:both; width:100%; display:none;}
 
@@ -71,6 +73,8 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <div id='refreshbar'></div>
 <div id='commserr' class='error'>The controller is having difficulty communicating with the cell monitoring modules.</div>
 <div id='iperror' class='error'>Cannot communicate with the controller for status updates.</div>
+<div id='saveerror' class='error'>Failed to save settings.</div>
+<div id='savesuccess' class='success'>Settings saved</div>
 
 <div id="info" class="info">
 <div class="stat"><span class="x t">Voltage:</span><span class="x v" id="voltage"></span></div>
@@ -103,44 +107,83 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 </div>
 
 <div class="page" id="settingsPage">
-<h1>Settings</h1>
-<table id="settingsTable">
-<thead>
-<tr>
-<th>Bank</th>
-<th>Cell</th>
-<th>Voltage</th>
-<th>V. Min</th>
-<th>V. Max</th>
-<th>Temp Int °C</th>
-<th>Temp Ext °C</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
+    <h1>Settings</h1>
+    <table id="settingsTable">
+        <thead>
+            <tr>
+                <th>Bank</th>
+                <th>Cell</th>
+                <th>Voltage</th>
+                <th>V. Min</th>
+                <th>V. Max</th>
+                <th>Temp Int °C</th>
+                <th>Temp Ext °C</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-<div id="settingConfig">
-<h2>Settings for </h2>
-<div id='waitforsettings'>Configuration data has been requested from cell module.  Please wait 5 seconds and click button again.</div>
-<form id="settingsForm" method="POST" action="savesetting.json">
-<div class="settings"><input name="b" id="b" type="hidden" value="0"><input name="m" id="m" type="hidden" value="0"><div><label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label><input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required=""></div><div><label for="BypassThresholdmV">Bypass Threshold mV</label><input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required=""></div>
+    <div id="settingConfig">
+        <h2>Settings for </h2>
+        <div id='waitforsettings'>Configuration data has been requested from cell module. Please wait 5 seconds and click button again.</div>
+        <form id="settingsForm" method="POST" action="savesetting.json">
+            <div class="settings">
+                <input name="b" id="b" type="hidden" value="0">
+                <input name="m" id="m" type="hidden" value="0">
+                <div>
+                    <label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label>
+                    <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required="">
+                </div>
+                <div>
+                    <label for="BypassThresholdmV">Bypass Threshold mV</label>
+                    <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required="">
+                </div>
+                <div>
+                    <label for="Calib">Calibration multiplier</label>
+                    <input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required="">
+                    <label for="ActualVoltage">Calculator - Actual measured voltage</label>
+                    <input id="ActualVoltage" name="ActualVoltage" type="number" min="0" max="5" step="0.001" value="4.2">
+                    <button type="button" id="CalculateCalibration">Calculate</button>
+                </div>
+                <div>
+                    <label for="ExtBCoef">External temperature BCoef</label>
+                    <input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required="">
+                </div>
+                <div>
+                    <label for="IntBCoef">Internal temperature BCoef</label>
+                    <input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required="">
+                </div>
+                <div>
+                    <label for="LoadRes">Load resistance</label>
+                    <input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required="">
+                </div>
+                <div>
+                    <label for="mVPerADC">mV per ADC reading</label>
+                    <input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required="">
+                </div>
+                <input type="submit" value="Save settings"></input>
+        </form>
+        </div>
+    </div>
 
-<div><label for="Calib">Calibration multiplier</label><input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required="">
-
-<label for="ActualVoltage">Calculator - Actual measured voltage</label><input id="ActualVoltage" name="ActualVoltage" type="number" min="0" max="5" step="0.001" value="4.2">
-<button type="button" id="CalculateCalibration">Calculate</button>
-</div>
-
-
-<div><label for="ExtBCoef">External temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required=""></div>
-
-<div><label for="IntBCoef">Internal temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required=""></div><div><label for="LoadRes">Load resistance</label><input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required=""></div><div><label for="mVPerADC">mV per ADC reading</label><input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required=""></div>
-
-<input type="submit" value="Save settings"></input>
-</div>
-<div id='savesettingerror' class='error'>Save failed</div>
-</form>
+    <div id="globalConfig">
+    <h2>Global Settings</h2>
+    <p>Configure all modules using these parameters</p>
+    <form id="globalSettingsForm" method="POST" action="saveglobalsetting.json">
+        <div class="settings">
+            <div>
+                <label for="g1">Bypass Over Temp Shutdown</label>
+                <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="g1" value="70" required="">
+            </div>
+            <div>
+                <label for="g2">Bypass Threshold mV</label>
+                <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="g2" value="4100" required="">
+            </div>
+          </div>
+          <input id="globalSettingsButton" type="submit" value="Save settings"></input>
+      </form>
+    </div>
 
 </div>
 
@@ -193,12 +236,10 @@ function configureModule(button, bank, module) {
         $('#mVPerADC').val(data.settings.mVPerADC.toFixed(2));
         $('#settingsForm').show();
         $('#waitforsettings').hide();
-        $('#savesettingerror').hide();
       } else {
         //Data not ready yet
         $('#settingsForm').hide();
         $('#waitforsettings').show();
-        $('#savesettingerror').hide();
         //Call back in 5 seconds to refresh page - this is a bad idea!
         //setTimeout(configureModule, 5000, button, bank, module);
       }
@@ -435,12 +476,29 @@ $(function() {
            data: $(this).serialize(),
            success: function (data) {
                $('#settingConfig').hide();
+               $("#savesuccess").show().delay(2000).fadeOut(500);
            },
            error: function (data) {
-               $('#savesettingerror').show();
+               $("#saveerror").show().delay(2000).fadeOut(500);
            },
        });
    });
+
+   $("#globalSettingsForm").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (data) {
+              $("#savesuccess").show().delay(2000).fadeOut(500);
+            },
+            error: function (data) {
+                $("#saveerror").show().delay(2000).fadeOut(500);
+            },
+        });
+    });
 
 
   $("#homePage").show();
