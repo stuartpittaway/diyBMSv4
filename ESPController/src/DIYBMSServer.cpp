@@ -105,7 +105,6 @@ void DIYBMSServer::saveSetting(AsyncWebServerRequest *request) {
 
     prg.sendSaveSetting(b, m,BypassThresholdmV,BypassOverTempShutdown,LoadResistance,Calibration,mVPerADC,Internal_BCoefficient,External_BCoefficient);
 
-
     AsyncResponseStream *response = request->beginResponseStream("application/json");
 
     DynamicJsonDocument doc(2048);

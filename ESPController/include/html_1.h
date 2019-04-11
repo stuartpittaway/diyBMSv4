@@ -124,13 +124,24 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 <h2>Settings for </h2>
 <div id='waitforsettings'>Configuration data has been requested from cell module.  Please wait 5 seconds and click button again.</div>
 <form id="settingsForm" method="POST" action="savesetting.json">
-<div class="settings"><input name="b" id="b" type="hidden" value="0"><input name="m" id="m" type="hidden" value="0"><div><label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label><input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required=""></div><div><label for="BypassThresholdmV">Bypass Threshold mV</label><input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required=""></div><div><label for="Calib">Calibration multiplier</label><input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required=""></div><div><label for="ExtBCoef">External temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required=""></div><div><label for="IntBCoef">Internal temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required=""></div><div><label for="LoadRes">Load resistance</label><input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required=""></div><div><label for="mVPerADC">mV per ADC reading</label><input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required=""></div>
+<div class="settings"><input name="b" id="b" type="hidden" value="0"><input name="m" id="m" type="hidden" value="0"><div><label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label><input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required=""></div><div><label for="BypassThresholdmV">Bypass Threshold mV</label><input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required=""></div>
+
+<div><label for="Calib">Calibration multiplier</label><input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required="">
+
+<label for="ActualVoltage">Calculator - Actual measured voltage</label><input id="ActualVoltage" name="ActualVoltage" type="number" min="0" max="5" step="0.001" value="4.2">
+<button type="button" id="CalculateCalibration">Calculate</button>
+</div>
+
+
+<div><label for="ExtBCoef">External temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required=""></div>
+
+<div><label for="IntBCoef">Internal temperature BCoef</label><input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required=""></div><div><label for="LoadRes">Load resistance</label><input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required=""></div><div><label for="mVPerADC">mV per ADC reading</label><input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required=""></div>
 
 <input type="submit" value="Save settings"></input>
 </div>
 <div id='savesettingerror' class='error'>Save failed</div>
-
 </form>
+
 </div>
 
 <div class="page" id="integrationPage">
@@ -152,7 +163,6 @@ function identifyModule(button, bank, module) {
 }
 
 function configureModule(button, bank, module) {
-  console.log(button,bank,module);
 
   //Select correct row in table
   $(button).parent().parent().parent().find(".selected").removeClass("selected");
@@ -362,6 +372,22 @@ function countdown() {
 $(function() {
   //On page ready
   countdown();
+
+  $('#CalculateCalibration').click(function() {
+
+    var currentReading=parseFloat($("#settingsTable > tbody > tr.selected > td:nth-child(3)").text());
+    var currentCalib=parseFloat($("#Calib").val());
+    var actualV=parseFloat($("#ActualVoltage").val());
+
+    console.log(currentReading,currentCalib,actualV);
+
+    var result=(currentCalib/currentReading)*actualV;
+
+    console.log(result);
+
+    $("#Calib").val(result.toFixed(4));
+    return true;
+  });
 
   $("#home").click(function() {
     $(".header-right a").removeClass("active");
