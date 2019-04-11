@@ -59,7 +59,8 @@ enum COMMAND: uint8_t
     Identify=B00000010,
     ReadTemperature=B00000011,
     ReadBadPacketCounter=B00000100,
-    ReadSettings=B00000101
+    ReadSettings=B00000101,
+    WriteSettings=B00000110
 
     // 0000 0000  = set bank identity
     // 0000 0001  = read voltage and status
@@ -67,6 +68,7 @@ enum COMMAND: uint8_t
     // 0000 0011  = Read temperature
     // 0000 0100  = Report number of bad packets
     // 0000 0101  = Report settings/configuration
+    // 0000 0110  = Write settings/configuration
 };
 
 

@@ -198,10 +198,15 @@ uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
 // 0000 0010  = identify module (flash leds)
 bool PacketProcessor::processPacket() {
   switch (buffer.command & 0x0F) {
+
   case COMMAND::SetBankIdentity:
     {
       //Set this modules bank address and store in EEPROM
       _config->mybank = buffer.moduledata[mymoduleaddress] & 0x30;
+
+      //TODO: Need to write into EEPROM....
+
+
       //Indicate we processed this packet
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
       return true;
@@ -230,7 +235,6 @@ bool PacketProcessor::processPacket() {
       //For the next 10 receied packets - keep the LEDs lit up
       identifyModule=10;
       return true;
-    break;
     }
 
   case COMMAND::ReadTemperature:
@@ -274,6 +278,44 @@ bool PacketProcessor::processPacket() {
       buffer.moduledata[7] =_config->BypassThresholdmV;
       buffer.moduledata[8] =_config->Internal_BCoefficient;
       buffer.moduledata[9] =_config->External_BCoefficient;
+
+      return true;
+    }
+
+    case COMMAND::WriteSettings:
+    {
+      FLOATUNION_t myFloat;
+
+      myFloat.word[0]=buffer.moduledata[0];
+      myFloat.word[1]=buffer.moduledata[1];
+      if (myFloat.number<0xFFFF) {
+      _config->LoadResistance=myFloat.number;
+      }
+
+      myFloat.word[0]=buffer.moduledata[2];
+      myFloat.word[1]=buffer.moduledata[3];
+
+      if (myFloat.number<0xFFFF) {
+      _config->Calibration=myFloat.number;
+      }
+
+      myFloat.word[0]=buffer.moduledata[4];
+      myFloat.word[1]=buffer.moduledata[5];
+      if (myFloat.number<0xFFFF) {
+      _config->mVPerADC=myFloat.number;
+      }
+
+      if(buffer.moduledata[6]!=0xFF) {
+      _config->BypassOverTempShutdown=buffer.moduledata[6];}
+
+      if(buffer.moduledata[7]!=0xFFFF) {
+      _config->BypassThresholdmV=buffer.moduledata[7];
+    }
+      if(buffer.moduledata[8]!=0xFFFF) {
+      _config->Internal_BCoefficient=buffer.moduledata[8];}
+      
+        if(buffer.moduledata[9]!=0xFFFF) {
+      _config->External_BCoefficient=buffer.moduledata[9];}
 
       return true;
     }
