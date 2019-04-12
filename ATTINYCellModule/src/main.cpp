@@ -112,10 +112,9 @@ ISR(WDT_vect){
   wdt_triggered=true;
   PP.IncrementWatchdogCounter();
 
-    hardware.GreenLedOff();
-    hardware.RedLedOff();
-
-  }
+  hardware.GreenLedOff();
+  hardware.RedLedOff();
+}
 
 void double_tap_green_led() {
   hardware.GreenLedOn();
@@ -130,19 +129,25 @@ void double_tap_green_led() {
 ISR(ADC_vect)
 {
   // when ADC completed, take an interrupt and process result
-  uint16_t value=hardware.ReadADC();
-  PP.ADCReading(value);
+  PP.ADCReading(hardware.ReadADC());
 }
 
 void BeginSetupProcedure()
 {
-  //This should be called AFTER PrefillRingBuffer has already ran
-
   //Assume that we have just been programmed via ISP header so VCC is now at 3.3 volts (approx)
   //Configure our ADC readings accordingly (will need fine tuning later on)
 
-  //Determine ADC value (averaged)
-  uint16_t raw=PP.ReadRawRingValue();
+  hardware.ReferenceVoltageOn();
+
+  //Allow the 2.048V reference to stabalize
+  delay(100);
+
+  //Determine ADC value
+  for (size_t i = 0; i < 32; i++) {
+    PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
+  }
+
+  uint16_t raw=PP.RawADCValue();
 
   //3300 millivolt should be the voltage from our ISP programmer
   //in reality it won't be this accurate but is a reasonable starting point
@@ -158,7 +163,7 @@ void BeginSetupProcedure()
   Settings::WriteConfigToEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
 
   //We leave the reference voltages enabled so they can be probed with a multimeter if needed at this point
-  hardware.ReferenceVoltageOn();
+  //hardware.ReferenceVoltageOn();
 
   //Flash LED to indicate we are finished and wait for a power cycle
   while(1) {
@@ -189,8 +194,13 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
       Serial.write((byte)0);
       delay(10);
 
+      hardware.EnableSerial0TX();
+
       //Send the packet (even if it was invalid so controller can count crc errors)
       myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
+
+      hardware.WaitForSerial0TXFlush();
+      hardware.DisableSerial0TX();
     }
 
     hardware.GreenLedOff();
@@ -230,14 +240,14 @@ void setup() {
   if (!Settings::ReadConfigFromEEPROM((char*)&myConfig, sizeof(myConfig),EEPROM_CONFIG_ADDRESS)) {
     hardware.GreenLedOn();
     DefaultConfig();
-    PP.PrefillRingBuffer();
+    //PP.PrefillRingBuffer();
     hardware.GreenLedOff();
 
     BeginSetupProcedure();
   }
 
   //Normal start up
-  PP.PrefillRingBuffer();
+  //PP.PrefillRingBuffer();
 
   double_tap_green_led();
 
@@ -264,8 +274,6 @@ void loop() {
 
   hardware.EnableStartFrameDetection();
 
-  UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
-
   //Program stops here until woken by watchdog or pin change interrupt
   hardware.Sleep();
 
@@ -279,8 +287,10 @@ void loop() {
   //We always take a voltage reading on every loop cycle to check if we need to go into bypass
   //this is also triggered by the watchdog should comms fail or the module is running standalone
   hardware.ReferenceVoltageOn();
-  //allow 2V to stabalize
+
+  //allow 2.048V to stabalize
   delay(10);
+
   PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
 
   if (wdt_triggered) {
@@ -288,22 +298,30 @@ void loop() {
     uint16_t temperatures=PP.TemperatureMeasurement();
   }
 
-  PP.BypassCheck();
-
   hardware.ReferenceVoltageOff();
 
+  //Once the bypass resistor is powered on, the voltage of the cells will drop
+  //we really should take into account this internal cell resistance
+  if (PP.BypassCheck()==true && PP.BypassOverheatCheck()==false) {
+      hardware.RedLedOn();
+      hardware.DumpLoadOn();
+  } else {
+    hardware.DumpLoadOff();
+    hardware.RedLedOff();
+  }
+
   if (wdt_triggered) {
-    //We got here because the watchdog (8seconds) went off - we didnt receive a packet of data
+    //We got here because the watchdog (after 8 seconds) went off - we didnt receive a packet of data
     hardware.RedLedOff();
     wdt_triggered=false;
   } else
   {
-    UCSR0B |=(1<<TXEN0); // enable TX Serial0
 
     //Loop here processing any packets then go back to sleep
+
     //NOTE this loop size is dependant on the size of the packet buffer (34 bytes)
     //     too small a loop will prevent anything being processed as we go back to Sleep
-    //     before packet is received
+    //     before packet is received correctly
     for (size_t i = 0; i <15; i++) {
       //Allow data to be received in buffer
       delay(10);

@@ -57,7 +57,9 @@ public:
    void SelectExternalTemperatureChannel();
    void EnableStartFrameDetection();
 
-
+   void DisableSerial0TX();
+   void EnableSerial0TX();
+   void WaitForSerial0TXFlush();
 
 };
 

@@ -41,16 +41,18 @@ public:
   ~PacketProcessor() {}
   void ADCReading(uint16_t value);
   bool onPacketReceived(const uint8_t* receivebuffer, size_t len);
-  void PrefillRingBuffer();
-  uint16_t ReadCellVoltageFromBuffer();
+  //void PrefillRingBuffer();
+  //uint16_t ReadCellVoltageFromBuffer();
   byte* GetBufferPointer();
   int GetBufferSize();
   void TakeAnAnalogueReading(uint8_t mode);
-  uint16_t ReadRawRingValue();
+  uint16_t CellVoltage();
   uint16_t IncrementWatchdogCounter() { watchdog_counter++; return watchdog_counter; }
-  void BypassCheck();
+  bool BypassCheck();
   uint16_t TemperatureMeasurement();
   byte identifyModule;
+  bool BypassOverheatCheck();
+  uint16_t RawADCValue();
 
 
 private:
@@ -62,23 +64,23 @@ private:
   bool processPacket();
   void incrementPacketAddress();
   bool isPacketForMe();
-  void UpdateRingBuffer(uint16_t value);
+  //void UpdateRingBuffer(uint16_t value);
   uint8_t TemperatureToByte(float TempInCelcius);
 
-  #define ringsize_bits 2
-  #define ringsize 1 << ringsize_bits
+  //#define ringsize_bits 2
+  //#define ringsize 1 << ringsize_bits
 
   volatile uint8_t adcmode=0;
   volatile bool ByPassEnabled=false;
-  volatile uint16_t ringbuffer[ringsize];
-  volatile uint32_t ringtotal=0;
-  volatile uint8_t ringptr=0;
+  volatile bool ByPassOverheat;
+  //volatile uint16_t ringbuffer[ringsize];
+  //volatile uint32_t ringtotal=0;
+  //volatile uint8_t ringptr=0;
+  volatile uint16_t raw_adc_voltage;
   volatile uint16_t onboard_temperature;
   volatile uint16_t external_temperature;
-
-  uint8_t mymoduleaddress = 0xFF;
-  uint16_t badpackets = 0;
-
+  volatile uint8_t mymoduleaddress = 0xFF;
+  volatile uint16_t badpackets = 0;
   volatile uint16_t watchdog_counter=0;
 
 };

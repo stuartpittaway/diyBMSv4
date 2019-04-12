@@ -340,18 +340,30 @@ function queryBMS() {
                 verticalAlign: 'middle',
                 rotate: 90,
                 formatter: '{c}V',
-                fontSize: 20
+                fontSize: 24
             }
         };
 
-        var labelOption1 = {
+        var labelOption3 = {
             normal: {
                 show: true,
-                position: 'end',
+                position: 'top',
+                distance:5,
                 formatter: '{c}V',
-                fontSize: 20
+                fontSize: 14
             }
         };
+
+        var labelOption4 = {
+            normal: {
+                show: true,
+                position: 'bottom',
+                distance:5,
+                formatter: '{c}V',
+                fontSize: 14
+            }
+        };
+
 
             var labelOption2 = {
                   normal: {
@@ -362,7 +374,7 @@ function queryBMS() {
                       verticalAlign: 'middle',
                       rotate: 90,
                       formatter: '{c}°C',
-                      fontSize: 20
+                      fontSize: 22
                   }
               };
         // specify chart configuration item and data
@@ -377,8 +389,8 @@ function queryBMS() {
               ,axisLabel:{ formatter: '{value} °C' }
               ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]
             ,series: [{ name: 'Voltage', type: 'bar', data: [], label: labelOption }
-                ,{ name: 'Min V', type: 'line', data: [], label: labelOption1 }
-                ,{ name: 'Max V', type: 'line', data: [], label: labelOption1 }
+                ,{ name: 'Min V', type: 'line', data: [], label: labelOption4,symbolSize: 20, symbol:['circle'], itemStyle:{normal:{lineStyle:{color:'transparent',type:'dotted'}} } }
+                ,{ name: 'Max V', type: 'line', data: [], label: labelOption3,symbolSize: 20, symbol:['triangle'], itemStyle:{normal:{lineStyle:{color:'transparent',type:'dotted'}} } }
                 ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [], label: labelOption2 }
                 ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [], label: labelOption2 }
             ],

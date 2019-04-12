@@ -33,6 +33,7 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 
 #include "diybms_attiny841.h"
 
+
 /*
 void FadeRedLED() {
   //Redled is on PA5 which maps to TOCC4
@@ -86,6 +87,20 @@ void FadeRedLED() {
    }
 }
 */
+
+void DiyBMSATTiny841::WaitForSerial0TXFlush() {
+  Serial.flush();
+}
+
+void DiyBMSATTiny841::DisableSerial0TX() {
+  UCSR0B &= ~_BV(TXEN0);  //disable transmitter (saves 6mA)
+}
+
+void DiyBMSATTiny841::EnableSerial0TX(){
+  UCSR0B |=(1<<TXEN0); // enable TX Serial0
+}
+
+
 
 void DiyBMSATTiny841::ConfigurePorts()  {
   //PUEA – Port A Pull-Up Enable Control Register (All disabled)
@@ -285,7 +300,7 @@ void DiyBMSATTiny841::Sleep() {
     //For low power applications, before entering sleep, remember to turn off the ADC
     //ADCSRA&=(~(1<<ADEN));
     // disable ADC
-    ADCSRA = 0;  
+    ADCSRA = 0;
     set_sleep_mode (SLEEP_MODE_PWR_DOWN);
     power_spi_disable();
     power_timer0_disable();

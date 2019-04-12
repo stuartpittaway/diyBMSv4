@@ -30,14 +30,28 @@ void PacketProcessor::incrementPacketAddress() {
   buffer.address = (buffer.address & 0xF0) + ((buffer.address & 0x0F) + 1);
 }
 
-void PacketProcessor::BypassCheck() {
-  if (ReadCellVoltageFromBuffer() >= _config->BypassThresholdmV  ) {
+bool PacketProcessor::BypassOverheatCheck() {
+  if (TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature)) > _config->BypassOverTempShutdown ) {
+      ByPassOverheat=true;
+      return ByPassOverheat;
+  }
+
+  ByPassOverheat=false;
+  return ByPassOverheat;
+}
+
+
+
+bool PacketProcessor::BypassCheck() {
+  if (CellVoltage() > _config->BypassThresholdmV  ) {
       //We need to start bypass
       ByPassEnabled=true;
-      return;
+      return ByPassEnabled;
   }
 
   ByPassEnabled=false;
+
+  return ByPassEnabled;
 }
 
 bool PacketProcessor::isPacketForMe() {
@@ -65,7 +79,8 @@ void PacketProcessor::ADCReading(uint16_t value) {
   switch (adcmode) {
   case ADC_CELL_VOLTAGE:
     {
-      UpdateRingBuffer(value);
+      //UpdateRingBuffer(value);
+      raw_adc_voltage=value;
       break;
     }
   case ADC_INTERNAL_TEMP:
@@ -81,6 +96,7 @@ void PacketProcessor::ADCReading(uint16_t value) {
   }
 }
 
+/*
 void PacketProcessor::UpdateRingBuffer(uint16_t value) {
   //Pop off value from ring buffer
   ringtotal -= ringbuffer[ringptr];
@@ -91,6 +107,7 @@ void PacketProcessor::UpdateRingBuffer(uint16_t value) {
     ringptr = 0;
   }
 }
+*/
 
 void PacketProcessor::TakeAnAnalogueReading(uint8_t mode) {
   adcmode = mode;
@@ -160,16 +177,20 @@ bool PacketProcessor::onPacketReceived(const uint8_t* receivebuffer, size_t len)
   return false;
 }
 
-uint16_t PacketProcessor::ReadRawRingValue() {
-  return ringtotal >> ringsize_bits;
-}
+//uint16_t PacketProcessor::ReadRawRingValue() {
+  //return ringtotal >> ringsize_bits;
+//}
 
 //Read cell voltage and return millivolt reading (16 bit unsigned)
-uint16_t PacketProcessor::ReadCellVoltageFromBuffer() {
+uint16_t PacketProcessor::CellVoltage() {
   //TODO: Get rid of the need for float variables?
-  float voltage = ((float) ReadRawRingValue() * _config->mVPerADC) * _config->Calibration;
+  float v = ((float) raw_adc_voltage * _config->mVPerADC) * _config->Calibration;
 
-  return (uint16_t) voltage;
+  return (uint16_t) v;
+}
+
+uint16_t PacketProcessor::RawADCValue() {
+  return raw_adc_voltage;
 }
 
 uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
@@ -216,7 +237,7 @@ bool PacketProcessor::processPacket() {
     {
       //Read voltage of VCC
       //Maximum voltage 8191mV
-      buffer.moduledata[mymoduleaddress] = ReadCellVoltageFromBuffer() & 0x1FFF;
+      buffer.moduledata[mymoduleaddress] = CellVoltage() & 0x1FFF;
 
       //TODO: SET THESE...
       //3 top bits remaining
@@ -226,7 +247,7 @@ bool PacketProcessor::processPacket() {
       return true;
     }
 
-  case COMMAND::Identify :
+  case COMMAND::Identify:
     {
       //identify module
       //Indicate that we received and did something
@@ -340,6 +361,7 @@ uint16_t PacketProcessor::TemperatureMeasurement() {
   return (value << 8) + value2;
 }
 
+/*
 void PacketProcessor::PrefillRingBuffer() {
   _hardware->ReferenceVoltageOn();
 
@@ -352,3 +374,4 @@ void PacketProcessor::PrefillRingBuffer() {
   }
   _hardware->ReferenceVoltageOff();
 }
+*/
