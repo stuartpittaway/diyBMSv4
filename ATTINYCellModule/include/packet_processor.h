@@ -41,8 +41,6 @@ public:
   ~PacketProcessor() {}
   void ADCReading(uint16_t value);
   bool onPacketReceived(const uint8_t* receivebuffer, size_t len);
-  //void PrefillRingBuffer();
-  //uint16_t ReadCellVoltageFromBuffer();
   byte* GetBufferPointer();
   int GetBufferSize();
   void TakeAnAnalogueReading(uint8_t mode);
@@ -71,8 +69,8 @@ private:
   //#define ringsize 1 << ringsize_bits
 
   volatile uint8_t adcmode=0;
-  volatile bool ByPassEnabled=false;
-  volatile bool ByPassOverheat;
+  //volatile bool ByPassEnabled=false;
+  //volatile bool ByPassOverheat;
   //volatile uint16_t ringbuffer[ringsize];
   //volatile uint32_t ringtotal=0;
   //volatile uint8_t ringptr=0;

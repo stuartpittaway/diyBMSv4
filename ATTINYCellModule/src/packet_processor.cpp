@@ -31,13 +31,11 @@ void PacketProcessor::incrementPacketAddress() {
 }
 
 bool PacketProcessor::BypassOverheatCheck() {
-  if (TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature)) > _config->BypassOverTempShutdown ) {
-      ByPassOverheat=true;
-      return ByPassOverheat;
+  if (Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature) > _config->BypassOverTempShutdown ) {
+      return true;
   }
 
-  ByPassOverheat=false;
-  return ByPassOverheat;
+  return false;
 }
 
 
@@ -45,13 +43,10 @@ bool PacketProcessor::BypassOverheatCheck() {
 bool PacketProcessor::BypassCheck() {
   if (CellVoltage() > _config->BypassThresholdmV  ) {
       //We need to start bypass
-      ByPassEnabled=true;
-      return ByPassEnabled;
+      return true;
   }
 
-  ByPassEnabled=false;
-
-  return ByPassEnabled;
+  return false;
 }
 
 bool PacketProcessor::isPacketForMe() {

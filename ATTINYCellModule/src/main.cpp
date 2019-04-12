@@ -257,6 +257,8 @@ void setup() {
   myPacketSerial.setPacketHandler(&onPacketReceived);
 }
 
+bool weAreInBypass=false;
+uint16_t bypassCountDown=0;
 
 void loop() {
   wdt_reset();
@@ -272,10 +274,13 @@ void loop() {
     }
   }
 
-  hardware.EnableStartFrameDetection();
+  if (!PP.BypassCheck()) {
+    //We don't sleep if we are in bypass mode
+    hardware.EnableStartFrameDetection();
 
-  //Program stops here until woken by watchdog or pin change interrupt
-  hardware.Sleep();
+    //Program stops here until woken by watchdog or pin change interrupt
+    hardware.Sleep();
+  }
 
   //We are awake....
 
@@ -293,21 +298,42 @@ void loop() {
 
   PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
 
-  if (wdt_triggered) {
-    //If watchdog then check the temperature as well
+  if (PP.BypassCheck() || wdt_triggered) {
+    //If bypass enabled or watchdog then check the temperature as well
     uint16_t temperatures=PP.TemperatureMeasurement();
   }
 
   hardware.ReferenceVoltageOff();
 
-  //Once the bypass resistor is powered on, the voltage of the cells will drop
-  //we really should take into account this internal cell resistance
-  if (PP.BypassCheck()==true && PP.BypassOverheatCheck()==false) {
-      hardware.RedLedOn();
-      hardware.DumpLoadOn();
-  } else {
-    hardware.DumpLoadOff();
-    hardware.RedLedOff();
+  if (bypassCountDown==0) {
+    //Once the bypass resistor is powered on, the voltage of the cells will drop
+    //we really should take into account this internal cell resistance
+    if (PP.BypassCheck()==true && PP.BypassOverheatCheck()==false) {
+        hardware.RedLedOn();
+        hardware.DumpLoadOn();
+
+        //This controls how many loop of loop() we make before re-checking the situation
+        bypassCountDown=200;
+        weAreInBypass=true;
+    } else {
+        hardware.DumpLoadOff();
+        hardware.RedLedOff();
+        bypassCountDown=0;
+        weAreInBypass=false;
+    }
+  }
+
+  if (weAreInBypass && PP.BypassOverheatCheck()==true) {
+      //If we are in bypass mode, ensure we don't over heat!
+      hardware.DumpLoadOff();
+      hardware.RedLedOff();
+
+      bypassCountDown=0;
+      weAreInBypass=false;
+  }
+
+  if (weAreInBypass && bypassCountDown>0) {
+    bypassCountDown--;
   }
 
   if (wdt_triggered) {
@@ -325,6 +351,7 @@ void loop() {
     for (size_t i = 0; i <15; i++) {
       //Allow data to be received in buffer
       delay(10);
+
       // Call update to receive, decode and process incoming packets.
       myPacketSerial.update();
     }
