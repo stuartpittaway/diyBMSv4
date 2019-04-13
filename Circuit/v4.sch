@@ -535,7 +535,7 @@ L Device:R R15
 U 1 1 5BF2E6E2
 P 7780 3560
 F 0 "R15" H 7850 3606 50  0000 L CNN
-F 1 "47K YAGEO RC0805FR-0747KL" H 6550 3430 50  0000 L CNN
+F 1 "10K" H 7560 3560 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 7710 3560 50  0001 C CNN
 F 3 "YAGEO RC0805FR-0747KL" H 7780 3560 50  0001 C CNN
 	1    7780 3560
@@ -600,7 +600,7 @@ Wire Wire Line
 	2790 3360 2790 3370
 Wire Wire Line
 	2790 3370 2250 3370
-Text GLabel 7360 3580 0    50   Input ~ 0
+Text GLabel 7060 3580 0    50   Input ~ 0
 DUMP_LOAD_ENABLE
 Wire Wire Line
 	7780 3410 7360 3410
@@ -898,14 +898,14 @@ $EndComp
 Wire Wire Line
 	4280 6330 4280 6190
 $Comp
-L Connector:Conn_01x04_Male J8
+L Connector:Conn_01x05_Male J8
 U 1 1 5BF61617
-P 4870 5750
-F 0 "J8" H 4843 5630 50  0000 R CNN
-F 1 "Remote temp input 47K @ 25oC" H 4850 5990 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 4870 5750 50  0001 C CNN
-F 3 "~" H 4870 5750 50  0001 C CNN
-	1    4870 5750
+P 4870 5650
+F 0 "J8" H 4843 5530 50  0000 R CNN
+F 1 "Remote temp input 47K @ 25oC" H 4850 5890 50  0000 R CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm" H 4870 5650 50  0001 C CNN
+F 3 "~" H 4870 5650 50  0001 C CNN
+	1    4870 5650
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
@@ -989,4 +989,28 @@ Wire Wire Line
 Connection ~ 950  4570
 Wire Wire Line
 	950  4570 950  4590
+$Comp
+L Device:R R14
+U 1 1 5CB1F559
+P 7210 3580
+F 0 "R14" H 7280 3626 50  0000 L CNN
+F 1 "510R" H 7280 3520 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 7140 3580 50  0001 C CNN
+F 3 "" H 7210 3580 50  0001 C CNN
+	1    7210 3580
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5CB35AE2
+P 4090 5450
+F 0 "#PWR?" H 4090 5200 50  0001 C CNN
+F 1 "GND" H 4095 5277 50  0000 C CNN
+F 2 "" H 4090 5450 50  0001 C CNN
+F 3 "" H 4090 5450 50  0001 C CNN
+	1    4090 5450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4670 5450 4090 5450
 $EndSCHEMATC
