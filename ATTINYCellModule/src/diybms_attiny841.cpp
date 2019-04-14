@@ -18,9 +18,9 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
   PA1 = PIN 12 SERIAL TRANSMIT (TXD0)
   PA2 = PIN 11 SERIAL RECEIVE (RXD0)
 
-  PA3 = DUMP LOAD ENABLE / PIN 10 /  ARDUINO PIN 7/A3
+  PA3 = DUMP LOAD ENABLE / PIN 10 /  ARDUINO PIN 7/A3 / TOCC2
   PA4 = ADC4 PIN 9 ARDUINO PIN 6/A4 = ON BOARD TEMP sensor
-  PA5 = RED_LED / PIN 8 / ARDUINO PIN 5/A5  (SERIAL PORT 1 TXD1)
+  PA5 = RED_LED / PIN 8 / ARDUINO PIN 5/A5  (SERIAL PORT 1 TXD1) // TOCC4
   PA6 = GREEN_LED / PIN 7 / ARDUINO PIN 4/A6
   PA7 = ADC7 = PIN 6 = ARDUINO PIN 3/A7 = 2.048V REFERENCE ENABLE
 
@@ -29,6 +29,10 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
   PB1 = ADC10 PIN 3 ARDUINO PIN 1/A10 = SPARE INPUT/OUTPUT
 
   //TODO: We should have mapped PA5 to spare PIN on sensor header its TXD1 and mapped RED_LED to PB1 to assist debugging
+
+  ATTiny841 data sheet
+  http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf
+
 */
 
 #include "diybms_attiny841.h"

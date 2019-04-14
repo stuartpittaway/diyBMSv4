@@ -25,8 +25,6 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 * No additional restrictions — You may not apply legal terms or technological measures
   that legally restrict others from doing anything the license permits.
 
-ATTiny841 data sheet
-http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf
 */
 
 //If you want to DEBUG connect another serial reading device to RED_LED (TXD1/MISO) this disables the RED LED pin
@@ -214,9 +212,114 @@ ISR (USART0_START_vect) {
   hardware.GreenLedOn();
 }
 
+
+#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+
+
+uint16_t value=0;
+
+uint8_t direction=0;
+
+ISR(TIMER2_OVF_vect) {
+  if (direction==0) {
+  value+=100;
+
+  if (value==10000) {
+    direction=1;
+  }
+
+} else {
+  value-=100;
+  if (value==0) {
+    direction=0;
+  }
+}
+
+  OCR2B=value;
+}
+
+void setTimer1() {
+  //Redled is on PA5 which maps to TOCC4
+
+  // TOCC[0:2] = OC1A, OC1B, OC2B (01, 01, 10)
+  //Enable OC2B for TOCC2 & TOCC4
+  TOCPMSA0 = (1<<TOCC2S1);
+  TOCPMSA1 = (1<<TOCC4S1);
+  // Timer/Counter Output Compare Pin Mux Channel Output Enable
+  TOCPMCOE = (1<<TOCC4OE) | (1<<TOCC2OE);
+  //TOCPMCOE =  (1<<TOCC2OE);
+  //PA5 OUTPUT
+  //DDRA |=  _BV(DDA5);
+
+  // Fast PWM, mode 14, non inverting, presc 1:8
+  TCCR2A = (1<<COM2B1) | 1<<WGM21;
+  TCCR2B =  1<<CS22|  1<<WGM23 | 1<<WGM22;
+
+  ICR2 = 10000 - 1;
+
+  //OFF
+  OCR2B=0;
+
+  TIMSK2 |= (1<<TOIE2); // set interrupts=enabled
+
+  return;
+}
+
+void FadeRedLED() {
+  DDRA |= _BV(DDA3) | _BV(DDA6)| _BV(DDA7);
+  DDRA |=  _BV(DDA5);
+  DDRB = 0;
+
+  for (size_t i = 0; i < 25; i++) {
+    PORTA |= _BV(PORTA5);
+    PORTA |= _BV(PORTA6);
+    delay(100);
+    PORTA &= (~_BV(PORTA5));
+    PORTA &= (~_BV(PORTA6));
+    delay(100);
+  }
+
+  while (1) {
+
+      PORTA |= _BV(PORTA3);
+      PORTA |= _BV(PORTA5);
+      delay(25);
+      PORTA &= (~_BV(PORTA5));
+      PORTA &= (~_BV(PORTA3));
+      delay(250);
+  }
+
+
+
+uint16_t counter=0;
+
+while (1) {
+
+    PORTA |= _BV(PORTA6);
+    //PORTA |= _BV(PORTA5);
+    delay(1000);
+    PORTA &= (~_BV(PORTA6));
+    //PORTA &= (~_BV(PORTA5));
+
+
+  if (counter==5) {
+    setTimer1();
+  }
+
+  counter++;
+  delay(1000);
+}
+
+
+}
+
+
 void setup() {
   //Must be first line of code
   wdt_disable();
+
+  FadeRedLED();
 
   //8 second between watchdogs
   hardware.SetWatchdog8sec();
