@@ -51,6 +51,8 @@ public:
   byte identifyModule;
   bool BypassOverheatCheck();
   uint16_t RawADCValue();
+  int8_t InternalTemperature();
+  bool WeAreInBypass;
 
 
 private:

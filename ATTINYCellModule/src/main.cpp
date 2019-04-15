@@ -41,11 +41,13 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 #include <PacketSerial.h>
 
 //96 byte buffer
-PacketSerial_<COBS, 0, 100> myPacketSerial;
+PacketSerial_<COBS, 0, 64> myPacketSerial;
 
 //Our project code includes
 #include "defines.h"
 #include "settings.h"
+
+#include <PID_v1.h>
 
 //Default values which get overwritten by EEPROM on power up
 CellModuleConfig myConfig;
@@ -109,8 +111,15 @@ ISR(WDT_vect){
   //This is the watchdog timer - something went wrong and no activity recieved in a while
   wdt_triggered=true;
   PP.IncrementWatchdogCounter();
+}
 
-  hardware.GreenLedOff();
+void double_tap_red_led() {
+  hardware.RedLedOn();
+  delay(60);
+  hardware.RedLedOff();
+  delay(60);
+  hardware.RedLedOn();
+  delay(60);
   hardware.RedLedOff();
 }
 
@@ -213,12 +222,8 @@ ISR (USART0_START_vect) {
 }
 
 
-#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
-#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
-
-
+/*
 uint16_t value=0;
-
 uint8_t direction=0;
 
 ISR(TIMER2_OVF_vect) {
@@ -239,32 +244,6 @@ ISR(TIMER2_OVF_vect) {
   OCR2B=value;
 }
 
-void setTimer1() {
-  //Redled is on PA5 which maps to TOCC4
-
-  // TOCC[0:2] = OC1A, OC1B, OC2B (01, 01, 10)
-  //Enable OC2B for TOCC2 & TOCC4
-  TOCPMSA0 = (1<<TOCC2S1);
-  TOCPMSA1 = (1<<TOCC4S1);
-  // Timer/Counter Output Compare Pin Mux Channel Output Enable
-  TOCPMCOE = (1<<TOCC4OE) | (1<<TOCC2OE);
-  //TOCPMCOE =  (1<<TOCC2OE);
-  //PA5 OUTPUT
-  //DDRA |=  _BV(DDA5);
-
-  // Fast PWM, mode 14, non inverting, presc 1:8
-  TCCR2A = (1<<COM2B1) | 1<<WGM21;
-  TCCR2B =  1<<CS22|  1<<WGM23 | 1<<WGM22;
-
-  ICR2 = 10000 - 1;
-
-  //OFF
-  OCR2B=0;
-
-  TIMSK2 |= (1<<TOIE2); // set interrupts=enabled
-
-  return;
-}
 
 void FadeRedLED() {
   DDRA |= _BV(DDA3) | _BV(DDA6)| _BV(DDA7);
@@ -280,6 +259,7 @@ void FadeRedLED() {
     delay(100);
   }
 
+/*
   while (1) {
 
       PORTA |= _BV(PORTA3);
@@ -289,8 +269,6 @@ void FadeRedLED() {
       PORTA &= (~_BV(PORTA3));
       delay(250);
   }
-
-
 
 uint16_t counter=0;
 
@@ -313,13 +291,11 @@ while (1) {
 
 
 }
-
+*/
 
 void setup() {
   //Must be first line of code
   wdt_disable();
-
-  FadeRedLED();
 
   //8 second between watchdogs
   hardware.SetWatchdog8sec();
@@ -329,7 +305,6 @@ void setup() {
 
   //More power saving changes
   hardware.EnableSerial0();
-
 
   #ifdef DIYBMS_DEBUG
   //UCSR1B |=(1<<TXEN1); // enable TX Serial1 for DEBUG output
@@ -341,30 +316,41 @@ void setup() {
 
   //Check if setup routine needs to be run
   if (!Settings::ReadConfigFromEEPROM((char*)&myConfig, sizeof(myConfig),EEPROM_CONFIG_ADDRESS)) {
-    hardware.GreenLedOn();
     DefaultConfig();
-    //PP.PrefillRingBuffer();
-    hardware.GreenLedOff();
-
     BeginSetupProcedure();
   }
 
-  //Normal start up
-  //PP.PrefillRingBuffer();
-
   double_tap_green_led();
+  double_tap_red_led();
 
   //Set up data handler
   Serial.begin(4800, SERIAL_8N1);
-  myPacketSerial.setStream(&Serial);           // start serial for output
+
+  myPacketSerial.setStream(&Serial);
   myPacketSerial.setPacketHandler(&onPacketReceived);
 }
 
-bool weAreInBypass=false;
+
 uint16_t bypassCountDown=0;
+
+//Define Variables we'll be connecting to
+double Setpoint, Input, Output;
+
+//Specify the links and initial tuning parameters
+//double Kp=2, Ki=5, Kd=1;
+//P_ON_M specifies that Proportional on Measurement be used
+//P_ON_E (Proportional on Error) is the default behavior
+
+//Kp: Determines how aggressively the PID reacts to the current amount of error (Proportional) (double >=0)
+//Ki: Determines how aggressively the PID reacts to error over time (Integral) (double>=0)
+//Kd: Determines how aggressively the PID reacts to the change in error (Derivative) (double>=0)
+PID myPID(&Input, &Output, &Setpoint, 20, 6, 4,P_ON_E, DIRECT);
+
+bool bypassSleepOnNextLoop=false;
 
 void loop() {
   wdt_reset();
+
 
   if (PP.identifyModule>0) {
     hardware.RedLedOn();
@@ -377,75 +363,96 @@ void loop() {
     }
   }
 
-  if (!PP.BypassCheck()) {
+  if (!PP.WeAreInBypass && bypassSleepOnNextLoop==false) {
     //We don't sleep if we are in bypass mode
     hardware.EnableStartFrameDetection();
 
     //Program stops here until woken by watchdog or pin change interrupt
     hardware.Sleep();
+    bypassSleepOnNextLoop=false;
   }
 
   //We are awake....
 
   if (wdt_triggered) {
-    //Put RED LED on whilst we sample after a watchdog event
-    hardware.RedLedOn();
+    //Flash green LED twice after a watchdog wake up
+    double_tap_green_led();
   }
 
-  //We always take a voltage reading on every loop cycle to check if we need to go into bypass
+  //We always take a voltage and temperature reading on every loop cycle to check if we need to go into bypass
   //this is also triggered by the watchdog should comms fail or the module is running standalone
+  //Probably over kill to do it this frequently
   hardware.ReferenceVoltageOn();
 
   //allow 2.048V to stabalize
   delay(10);
 
   PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
-
-  if (PP.BypassCheck() || wdt_triggered) {
-    //If bypass enabled or watchdog then check the temperature as well
-    uint16_t temperatures=PP.TemperatureMeasurement();
-  }
+  //Internal temperature
+  PP.TakeAnAnalogueReading(ADC_INTERNAL_TEMP);
+  //External temperature
+  PP.TakeAnAnalogueReading(ADC_EXTERNAL_TEMP);
 
   hardware.ReferenceVoltageOff();
 
-  if (bypassCountDown==0) {
-    //Once the bypass resistor is powered on, the voltage of the cells will drop
-    //we really should take into account this internal cell resistance
-    if (PP.BypassCheck()==true && PP.BypassOverheatCheck()==false) {
-        hardware.RedLedOn();
-        hardware.DumpLoadOn();
+  if (PP.BypassCheck()) {
+      //Our cell voltage is OVER the setpoint limit, start draining cell using load bypass resistor
 
-        //This controls how many loop of loop() we make before re-checking the situation
+      if (!PP.WeAreInBypass) {
+        //We have just entered the bypass code
+
+        //We want the PID to keep at this temperature
+        Setpoint=myConfig.BypassOverTempShutdown;
+
+        //The TIMER2 can vary between 0 and 10,000
+        myPID.SetOutputLimits(0, 10000);
+
+        //Start timer2 with zero value
+        hardware.StartTimer2();
+
+        //Run the PID
+        myPID.SetMode(AUTOMATIC);
+        PP.WeAreInBypass=true;
+
+        //This controls how many cycles of loop() we make before re-checking the situation
         bypassCountDown=200;
-        weAreInBypass=true;
-    } else {
-        hardware.DumpLoadOff();
-        hardware.RedLedOff();
-        bypassCountDown=0;
-        weAreInBypass=false;
+      }
+  }
+
+  if (bypassCountDown>0) {
+    //Compare the real temperature against max setpoint
+    Input = PP.InternalTemperature();
+    if (myPID.Compute()) {
+        //Change Timer2 if needed
+        hardware.SetTimer2Value(Output);
     }
-  }
 
-  if (weAreInBypass && PP.BypassOverheatCheck()==true) {
-      //If we are in bypass mode, ensure we don't over heat!
-      hardware.DumpLoadOff();
-      hardware.RedLedOff();
-
-      bypassCountDown=0;
-      weAreInBypass=false;
-  }
-
-  if (weAreInBypass && bypassCountDown>0) {
     bypassCountDown--;
+
+    if (bypassCountDown==0) {
+      //Switch everything off for this cycle
+
+      PP.WeAreInBypass=false;
+
+      myPID.SetMode(MANUAL);
+      hardware.StopTimer2();
+
+      //Just to be sure, switch everything off
+      hardware.RedLedOff();
+      hardware.DumpLoadOff();
+
+      //On the next iteration of loop, don't sleep so we are forced to take another
+      //cell voltage reading without the bypass being enabled, and we can then
+      //evaludate if we need to stay in bypass mode
+      bypassSleepOnNextLoop=true;
+    }
   }
 
   if (wdt_triggered) {
     //We got here because the watchdog (after 8 seconds) went off - we didnt receive a packet of data
-    hardware.RedLedOff();
     wdt_triggered=false;
   } else
   {
-
     //Loop here processing any packets then go back to sleep
 
     //NOTE this loop size is dependant on the size of the packet buffer (34 bytes)

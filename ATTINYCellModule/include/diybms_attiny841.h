@@ -60,6 +60,9 @@ public:
    void EnableSerial0TX();
    void WaitForSerial0TXFlush();
 
+   void StopTimer2();
+   void StartTimer2();
+   void SetTimer2Value(uint16_t value);
 };
 
 #endif

@@ -31,11 +31,16 @@ void PacketProcessor::incrementPacketAddress() {
 }
 
 bool PacketProcessor::BypassOverheatCheck() {
-  if (Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature) > _config->BypassOverTempShutdown ) {
+  if (InternalTemperature() > _config->BypassOverTempShutdown ) {
       return true;
   }
 
   return false;
+}
+
+int8_t PacketProcessor::InternalTemperature() {
+
+return round(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
 }
 
 
@@ -345,12 +350,8 @@ bool PacketProcessor::processPacket() {
 }
 
 uint16_t PacketProcessor::TemperatureMeasurement() {
-  //Internal temperature
-  TakeAnAnalogueReading(ADC_INTERNAL_TEMP);
   uint8_t value = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
 
-  //External temperature
-  TakeAnAnalogueReading(ADC_EXTERNAL_TEMP);
   uint8_t value2 = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->External_BCoefficient, external_temperature));
 
   return (value << 8) + value2;

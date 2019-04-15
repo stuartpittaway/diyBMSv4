@@ -175,15 +175,15 @@ void timerTransmitCallback(void *pArg) {
 
 void timerEnqueueCallback(void *pArg) {
   //this is called regularly on a timer, it determines what request to make to the modules (via the request queue)
-  packetType++;
+  //packetType++;
 
   prg.sendCellVoltageRequest();
 
-  if (packetType==3) {
+  //if (packetType==3) {
     //Every few packets also get the temperature
     prg.sendCellTemperatureRequest();
-    packetType=0;
-  }
+    //packetType=0;
+  //}
 }
 
 

@@ -92,6 +92,47 @@ void FadeRedLED() {
 }
 */
 
+void DiyBMSATTiny841::SetTimer2Value(uint16_t value) {
+  OCR2B=value;
+}
+void DiyBMSATTiny841::StopTimer2() {
+  TOCPMCOE = 0;
+  TCCR2B = 0;
+  OCR2B=0;
+  //TIMSK2 = 0;
+}
+
+
+void DiyBMSATTiny841::StartTimer2() {
+  //Redled is on PA5 which maps to TOCC4
+  //Dump resistor is on PA3 which maps to TOCC2
+
+  //Before this is called, the DDR register has already been set
+
+  //Enable OC2B for TOCC2 & TOCC4
+  TOCPMSA0 = (1<<TOCC2S1);
+  TOCPMSA1 = (1<<TOCC4S1);
+
+  // Timer/Counter Output Compare Pin Mux Channel Output Enable
+  TOCPMCOE = (1<<TOCC4OE) | (1<<TOCC2OE);
+
+  // Fast PWM, mode 14, non inverting, presc 1:8
+  //COM2b1= Clear OCnA/OCnB on Compare Match (Set output to low level)
+  TCCR2A = (1<<COM2B1) | 1<<WGM21;
+
+  //Clock div 64 prescaler
+  TCCR2B =  1<<CS21|1<<CS20|  1<<WGM23 | 1<<WGM22;
+
+  //Maximum of 10000 and low of zero
+  ICR2 = 10000 - 1;
+
+  //OFF
+  SetTimer2Value(0);
+
+  //TIMSK2 |= (1<<TOIE2); // set interrupts=enabled
+}
+
+
 void DiyBMSATTiny841::WaitForSerial0TXFlush() {
   Serial.flush();
 }
