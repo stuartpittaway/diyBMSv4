@@ -327,7 +327,7 @@ void loop() {
       //cell voltage reading without the bypass being enabled, and we can then
       //evaludate if we need to stay in bypass mode, we do this a few times
       //as the cell has a tendancy to float back up in voltage once load resistor is removed
-      bypassHasJustFinished=30;
+      bypassHasJustFinished=200;
     }
   }
 
