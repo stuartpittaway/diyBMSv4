@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L v4-rescue:ATtiny841-SSU-MCU_Microchip_ATtiny U4
+L v4-rescue:ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue U4
 U 1 1 5BC63D51
 P 1650 3670
 F 0 "U4" H 1120 3716 50  0000 R CNN
@@ -356,7 +356,7 @@ P 9190 4790
 F 0 "U1" H 9190 5115 50  0000 C CNN
 F 1 "HMHA2801" H 9190 5024 50  0000 C CNN
 F 2 "Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm" H 8990 4590 50  0001 L CIN
-F 3 "https://www.mouser.co.uk/datasheet/2/308/HMHA2801-1306522.pdf" H 9190 4790 50  0001 L CNN
+F 3 "https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504" H 9190 4790 50  0001 L CNN
 	1    9190 4790
 	1    0    0    -1  
 $EndComp

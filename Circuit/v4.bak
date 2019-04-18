@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:v4-cache
-EELAYER 26 0
+EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L MCU_Microchip_ATtiny:ATtiny841-SSU U4
+L v4-rescue:ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue U4
 U 1 1 5BC63D51
 P 1650 3670
 F 0 "U4" H 1120 3716 50  0000 R CNN
@@ -86,8 +86,6 @@ Wire Wire Line
 	1650 2610 950  2610
 Wire Wire Line
 	950  2610 950  2730
-Wire Wire Line
-	950  3030 950  4570
 Wire Wire Line
 	950  4590 1650 4590
 $Comp
@@ -186,8 +184,6 @@ Wire Wire Line
 	2970 6130 2490 6130
 Wire Wire Line
 	2120 6230 2250 6230
-Wire Wire Line
-	1670 1450 1750 1450
 $Comp
 L power:GND #PWR0105
 U 1 1 5D1F0262
@@ -199,8 +195,6 @@ F 3 "" H 1790 4590 50  0001 C CNN
 	1    1790 4590
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1670 1350 1720 1350
 Wire Wire Line
 	1770 1100 1770 1350
 $Comp
@@ -389,11 +383,7 @@ F 3 "~" H 8630 4690 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	9490 4690 9630 4690
-Wire Wire Line
 	9740 4690 9740 4730
-Wire Wire Line
-	9490 4890 9590 4890
 Wire Wire Line
 	9740 4890 9740 4830
 Wire Wire Line
@@ -431,7 +421,7 @@ L Device:R R8
 U 1 1 5BF29A02
 P 7100 2700
 F 0 "R8" H 7170 2746 50  0000 L CNN
-F 1 "2R2  1W" H 7170 2655 50  0000 L CNN
+F 1 "2R2 1W" H 7170 2655 50  0000 L CNN
 F 2 "Resistors_SMD:R_2512" V 7030 2700 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf" H 7100 2700 50  0001 C CNN
 	1    7100 2700
@@ -442,7 +432,7 @@ L Device:R R10
 U 1 1 5BF29A5C
 P 7450 2700
 F 0 "R10" H 7520 2746 50  0000 L CNN
-F 1 "2R2  1W" H 7520 2655 50  0000 L CNN
+F 1 "2R2 1W" H 7520 2655 50  0000 L CNN
 F 2 "Resistors_SMD:R_2512" V 7380 2700 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf" H 7450 2700 50  0001 C CNN
 	1    7450 2700
@@ -453,7 +443,7 @@ L Device:R R12
 U 1 1 5BF29ADC
 P 7800 2700
 F 0 "R12" H 7870 2746 50  0000 L CNN
-F 1 "2R2  1W" H 7870 2655 50  0000 L CNN
+F 1 "2R2 1W" H 7870 2655 50  0000 L CNN
 F 2 "Resistors_SMD:R_2512" V 7730 2700 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf" H 7800 2700 50  0001 C CNN
 	1    7800 2700
@@ -535,7 +525,7 @@ L Device:R R15
 U 1 1 5BF2E6E2
 P 7780 3560
 F 0 "R15" H 7850 3606 50  0000 L CNN
-F 1 "47K YAGEO RC0805FR-0747KL" H 6550 3430 50  0000 L CNN
+F 1 "47K" H 7850 3520 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 7710 3560 50  0001 C CNN
 F 3 "YAGEO RC0805FR-0747KL" H 7780 3560 50  0001 C CNN
 	1    7780 3560
@@ -600,12 +590,12 @@ Wire Wire Line
 	2790 3360 2790 3370
 Wire Wire Line
 	2790 3370 2250 3370
-Text GLabel 7360 3580 0    50   Input ~ 0
+Text GLabel 6780 3580 0    50   Input ~ 0
 DUMP_LOAD_ENABLE
 Wire Wire Line
-	7780 3410 7360 3410
+	7780 3410 7500 3410
 Wire Wire Line
-	7360 3410 7360 3580
+	7360 3410 7080 3580
 Connection ~ 7780 3410
 $Comp
 L Connector:Conn_01x02_Male J4
@@ -629,8 +619,6 @@ F 3 "" H 8320 5380 50  0001 C CNN
 	1    8320 5380
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	8690 5460 8600 5460
 Wire Wire Line
 	8320 5460 8320 5380
 $Comp
@@ -662,8 +650,6 @@ RXD0
 Wire Wire Line
 	7980 5560 8250 5560
 Connection ~ 8250 5560
-Wire Wire Line
-	8250 5560 8520 5560
 $Comp
 L Device:LED D3
 U 1 1 5BF65B89
@@ -747,79 +733,6 @@ Connection ~ 3050 3750
 Wire Wire Line
 	3050 3750 3050 3670
 $Comp
-L Connector:Conn_01x02_Male J6
-U 1 1 5BF7620E
-P 8890 5860
-F 0 "J6" H 8863 5740 50  0000 R CNN
-F 1 "Alt RX Conn" H 8863 5831 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 8890 5860 50  0001 C CNN
-F 3 "~" H 8890 5860 50  0001 C CNN
-	1    8890 5860
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	8690 5760 8600 5760
-Wire Wire Line
-	8600 5760 8600 5460
-Connection ~ 8600 5460
-Wire Wire Line
-	8600 5460 8320 5460
-Wire Wire Line
-	8520 5560 8520 5860
-Wire Wire Line
-	8520 5860 8690 5860
-Connection ~ 8520 5560
-Wire Wire Line
-	8520 5560 8690 5560
-$Comp
-L Connector:Conn_01x02_Male J7
-U 1 1 5BF806EA
-P 9940 5070
-F 0 "J7" H 9912 4950 50  0000 R CNN
-F 1 "Alt TX Conn" H 9912 5041 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 9940 5070 50  0001 C CNN
-F 3 "~" H 9940 5070 50  0001 C CNN
-	1    9940 5070
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	9740 4970 9630 4970
-Wire Wire Line
-	9630 4970 9630 4690
-Connection ~ 9630 4690
-Wire Wire Line
-	9630 4690 9740 4690
-Wire Wire Line
-	9590 4890 9590 5070
-Wire Wire Line
-	9590 5070 9740 5070
-Connection ~ 9590 4890
-Wire Wire Line
-	9590 4890 9740 4890
-$Comp
-L Connector:Conn_01x02_Male J5
-U 1 1 5BF86BF7
-P 1480 1740
-F 0 "J5" H 1586 1918 50  0000 C CNN
-F 1 "Alt Battery" H 1586 1827 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 1480 1740 50  0001 C CNN
-F 3 "~" H 1480 1740 50  0001 C CNN
-	1    1480 1740
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1680 1740 1720 1740
-Wire Wire Line
-	1720 1740 1720 1350
-Connection ~ 1720 1350
-Wire Wire Line
-	1720 1350 1770 1350
-Wire Wire Line
-	1750 1450 1750 1840
-Wire Wire Line
-	1750 1840 1680 1840
-Connection ~ 1750 1450
-$Comp
 L Connector:TestPoint TP2
 U 1 1 5BF9C005
 P 3940 4170
@@ -898,14 +811,14 @@ $EndComp
 Wire Wire Line
 	4280 6330 4280 6190
 $Comp
-L Connector:Conn_01x04_Male J8
+L Connector:Conn_01x05_Male J8
 U 1 1 5BF61617
-P 4870 5750
-F 0 "J8" H 4843 5630 50  0000 R CNN
-F 1 "Remote temp input 47K @ 25oC" H 4850 5990 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 4870 5750 50  0001 C CNN
-F 3 "~" H 4870 5750 50  0001 C CNN
-	1    4870 5750
+P 4870 5650
+F 0 "J8" H 4843 5530 50  0000 R CNN
+F 1 "Remote temp input 47K @ 25oC" H 4850 5890 50  0000 R CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm" H 4870 5650 50  0001 C CNN
+F 3 "~" H 4870 5650 50  0001 C CNN
+	1    4870 5650
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
@@ -959,8 +872,6 @@ Text Notes 8710 4380 0    50   ~ 0
 Optocoupler, Phototransistor Output,\n4-SSOP
 Wire Wire Line
 	2250 3070 3020 3070
-Wire Wire Line
-	1750 1450 2040 1450
 Connection ~ 2040 1450
 Connection ~ 1870 1100
 Wire Wire Line
@@ -974,19 +885,57 @@ Wire Wire Line
 Wire Wire Line
 	4670 5550 4560 5550
 $Comp
-L Connector:TestPoint TP1
-U 1 1 5C2982C3
-P 780 4570
-F 0 "TP1" H 700 4760 50  0000 L CNN
-F 1 "TestPoint" H 570 4520 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 980 4570 50  0001 C CNN
-F 3 "~" H 980 4570 50  0001 C CNN
-	1    780  4570
+L Device:R R14
+U 1 1 5CB1F559
+P 6930 3580
+F 0 "R14" H 7000 3626 50  0000 L CNN
+F 1 "510R" H 7000 3520 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 6860 3580 50  0001 C CNN
+F 3 "" H 6930 3580 50  0001 C CNN
+	1    6930 3580
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0117
+U 1 1 5CB35AE2
+P 4410 5280
+F 0 "#PWR0117" H 4410 5030 50  0001 C CNN
+F 1 "GND" H 4415 5107 50  0000 C CNN
+F 2 "" H 4410 5280 50  0001 C CNN
+F 3 "" H 4410 5280 50  0001 C CNN
+	1    4410 5280
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	780  4570 950  4570
-Connection ~ 950  4570
+	4670 5450 4410 5280
+$Comp
+L Device:C C3
+U 1 1 5CB3BB54
+P 7500 3560
+F 0 "C3" H 7360 3560 50  0000 R CNN
+F 1 "10uF 10V" H 7390 3460 50  0000 R CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 7538 3410 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX5R6BB106_C272880.pdf" H 7500 3560 50  0001 C CNN
+	1    7500 3560
+	1    0    0    -1  
+$EndComp
+Connection ~ 7500 3410
 Wire Wire Line
-	950  4570 950  4590
+	7500 3410 7360 3410
+Wire Wire Line
+	7500 3710 7780 3710
+Wire Wire Line
+	950  3030 950  4590
+Wire Wire Line
+	9490 4690 9740 4690
+Wire Wire Line
+	9490 4890 9740 4890
+Wire Wire Line
+	8320 5460 8690 5460
+Wire Wire Line
+	8250 5560 8690 5560
+Wire Wire Line
+	1670 1350 1770 1350
+Wire Wire Line
+	1670 1450 2040 1450
 $EndSCHEMATC

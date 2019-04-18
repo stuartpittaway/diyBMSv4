@@ -5,16 +5,16 @@
     {
       "Vendor":      "KiCad",
       "Application": "Pcbnew",
-      "Version":     "(5.0.0)"
+      "Version":     "(5.1.0)-1"
     },
-    "CreationDate":  "2019-03-26T19:26:32+00:00"
+    "CreationDate":  "2019-04-18T12:11:20+01:00"
   },
   "GeneralSpecs":
   {
     "ProjectId":
     {
       "Name": "v4",
-      "GUID": "76342E6B696361645F70636200000000",
+      "GUID": "76342e6b-6963-4616-945f-706362585858",
       "Revision": "rev?"
     },
     "Size":
@@ -40,47 +40,47 @@
   "FilesAttributes":
   [
     {
-      "Path":  "v4-F.Cu.gbr",
+      "Path":  "v4-F_Cu.gbr",
       "FileFunction":  "Copper,L1,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "v4-B.Cu.gbr",
+      "Path":  "v4-B_Cu.gbr",
       "FileFunction":  "Copper,L2,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "v4-F.Paste.gbr",
+      "Path":  "v4-F_Paste.gbr",
       "FileFunction":  "SolderPaste,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "v4-B.Paste.gbr",
+      "Path":  "v4-B_Paste.gbr",
       "FileFunction":  "SolderPaste,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "v4-F.SilkS.gbr",
+      "Path":  "v4-F_SilkS.gbr",
       "FileFunction":  "Legend,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "v4-B.SilkS.gbr",
+      "Path":  "v4-B_SilkS.gbr",
       "FileFunction":  "Legend,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "v4-F.Mask.gbr",
+      "Path":  "v4-F_Mask.gbr",
       "FileFunction":  "SolderMask,Top",
       "FilePolarity":  "Negative"
     },
     {
-      "Path":  "v4-B.Mask.gbr",
+      "Path":  "v4-B_Mask.gbr",
       "FileFunction":  "SolderMask,Bot",
       "FilePolarity":  "Negative"
     },
     {
-      "Path":  "v4-Edge.Cuts.gbr",
+      "Path":  "v4-Edge_Cuts.gbr",
       "FileFunction":  "Profile",
       "FilePolarity":  "Positive"
     }
