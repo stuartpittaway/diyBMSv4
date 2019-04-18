@@ -95,7 +95,7 @@ P 1470 1350
 F 0 "J1" H 1576 1528 50  0000 C CNN
 F 1 "Battery" H 1576 1437 50  0000 C CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 1470 1350 50  0001 C CNN
-F 3 "~" H 1470 1350 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 1470 1350 50  0001 C CNN
 	1    1470 1350
 	1    0    0    -1  
 $EndComp
@@ -604,7 +604,7 @@ P 8890 5560
 F 0 "J4" H 8863 5440 50  0000 R CNN
 F 1 "RX Connector" H 8863 5531 50  0000 R CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 8890 5560 50  0001 C CNN
-F 3 "~" H 8890 5560 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 8890 5560 50  0001 C CNN
 	1    8890 5560
 	-1   0    0    1   
 $EndComp
@@ -750,7 +750,7 @@ L Device:Thermistor R19
 U 1 1 5BF374BB
 P 2740 6590
 F 0 "R19" H 2810 6636 50  0000 L CNN
-F 1 "Thermistor Sunlord SDNT2012X473F4150FTF" H 2810 6530 50  0000 L CNN
+F 1 "SDNT2012X473F4150FTF" H 2810 6530 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2670 6590 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Sunlord-SDNT2012X473F4150FTF_C95969.pdf" H 2740 6590 50  0001 C CNN
 	1    2740 6590
