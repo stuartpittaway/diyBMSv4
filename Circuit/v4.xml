@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>18/04/2019 12:14:22</date>
+    <date>18/04/2019 12:16:18</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -102,7 +102,7 @@
     <comp ref="U1">
       <value>HMHA2801</value>
       <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
-      <datasheet>https://www.mouser.co.uk/datasheet/2/308/HMHA2801-1306522.pdf</datasheet>
+      <datasheet>https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504</datasheet>
       <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DCDE</tstamp>
