@@ -322,7 +322,7 @@ void loop() {
 
       PP.WeAreInBypass=false;
 
-      myPID.clear();
+      //myPID.clear();
       hardware.StopTimer2();
 
       //Just to be sure, switch everything off
