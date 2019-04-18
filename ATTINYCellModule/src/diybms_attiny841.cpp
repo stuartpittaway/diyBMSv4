@@ -32,65 +32,9 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 
   ATTiny841 data sheet
   http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf
-
 */
 
 #include "diybms_attiny841.h"
-
-
-/*
-void FadeRedLED() {
-  //Redled is on PA5 which maps to TOCC4
-
-  // TOCC[0:2] = OC1A, OC1B, OC2B (01, 01, 10)
-  TOCPMSA0 = 0;
-  //Enable OC2B for TOCC4
-  TOCPMSA1 = (1<<TOCC4S1);
-  // Timer/Counter Output Compare Pin Mux Channel Output Enable
-  TOCPMCOE = (1<<TOCC4OE);
-  //PA5 OUTPUT
-  DDRA |=  _BV(DDA5);
-
-  // Fast PWM, mode 14, non inverting, presc 1:8
-  //TCCR1A = (1<<COM1A1)|(1<<COM1B1) | 1<<WGM11;
-  //TCCR1B = 1<<WGM12 | 1<<CS11  |  1<<WGM13 | 1<<WGM12;
-  TCCR2A = (1<<COM2B1) | 1<<WGM21;
-  TCCR2B = 1<<WGM22 | 1<<CS21  |  1<<WGM23 | 1<<WGM22;
-
-  // Set TOP for 20ms period
-  //ICR1 = 30000 - 1;
-  ICR2 = 10000 - 1;
-
-  //OCR1A = 1200;
-  //OCR1B = 1500;
-  //OCR2B = 1800;
-
-
-  uint16_t value=0;
-
-  uint8_t direction=0;
-
-  while (1) {
-    if (direction==0) {
-    value+=64;
-
-    if (value>15000) {
-      direction=1;
-    }
-
-  } else {
-    value-=64;
-    if (value<100) {
-      direction=0;
-    }
-  }
-
-    OCR2B=value;
-
-    delay(10);
-   }
-}
-*/
 
 void DiyBMSATTiny841::SetTimer2Value(uint16_t value) {
   OCR2B=value;
@@ -143,6 +87,26 @@ void DiyBMSATTiny841::DisableSerial0TX() {
 
 void DiyBMSATTiny841::EnableSerial0TX(){
   UCSR0B |=(1<<TXEN0); // enable TX Serial0
+}
+
+void DiyBMSATTiny841::double_tap_red_led() {
+  RedLedOn();
+  delay(50);
+  RedLedOff();
+  delay(50);
+  RedLedOn();
+  delay(50);
+  RedLedOff();
+}
+
+void DiyBMSATTiny841::double_tap_green_led() {
+  GreenLedOn();
+  delay(50);
+  GreenLedOff();
+  delay(50);
+  GreenLedOn();
+  delay(50);
+  GreenLedOff();
 }
 
 
@@ -213,6 +177,7 @@ void DiyBMSATTiny841::RedLedOn() {
   PORTA |= _BV(PORTA5);
   #endif
 }
+
 void DiyBMSATTiny841::RedLedOff() {
   #ifdef DIYBMS_DEBUG
   //Do nothing

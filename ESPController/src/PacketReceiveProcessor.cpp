@@ -100,6 +100,11 @@ void PacketReceiveProcessor::ProcessReplyVoltage() {
   uint8_t b = ReplyFromBank();
 
   for (size_t i = 0; i < maximum_cell_modules; i++) {
+    // 3 top bits remaining
+    // X = In bypass
+    // Y = Bypass over temperature
+    // Z = Not used
+
     cmi[b][i].voltagemV = _packetbuffer.moduledata[i] & 0x1FFF;
     cmi[b][i].inBypass = (_packetbuffer.moduledata[i] & 0x8000) > 0;
     cmi[b][i].bypassOverTemp = (_packetbuffer.moduledata[i] & 0x4000) > 0;
@@ -113,10 +118,6 @@ void PacketReceiveProcessor::ProcessReplyVoltage() {
     }
   }
 
-  // 3 top bits remaining
-  // X = In bypass
-  // Y = Bypass over temperature
-  // Z = Not used
 }
 
 void PacketReceiveProcessor::ProcessReplySettings() {

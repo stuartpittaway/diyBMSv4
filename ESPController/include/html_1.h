@@ -263,7 +263,8 @@ function queryBMS() {
     for (var bankNumber = 0; bankNumber <4; bankNumber++) {
     //Need to cater for banks of cells
     $.each(jsondata.bank[bankNumber], function( index, value ) {
-      voltages.push((parseFloat(value.v)/1000.0));
+      var color=value.bypass ? "#B03A5B":"#1e90ff";
+      voltages.push( { value: (parseFloat(value.v)/1000.0), itemStyle:{color: color } } );
 
       voltagesmin.push((parseFloat(value.minv)/1000.0));
       voltagesmax.push((parseFloat(value.maxv)/1000.0));
@@ -271,7 +272,9 @@ function queryBMS() {
       bank.push(bankNumber);
       labels.push(index);
 
-      tempint.push(value.int);
+      color=value.bypasshot ? "#B03A5B":"#1e90ff";
+      tempint.push({ value: value.int, itemStyle:{color: color } });
+      
       tempext.push(value.ext==-40 ? 0:value.ext  );
 
       //TODO: This needs to be voltage per bank not total
@@ -316,10 +319,10 @@ function queryBMS() {
             var columns=$(rows[index]).find("td");
 
             //$(columns[0]).html(value);
-            $(columns[2]).html(voltages[index].toFixed(3));
+            $(columns[2]).html(voltages[index].value.toFixed(3));
             $(columns[3]).html(voltagesmin[index].toFixed(3));
             $(columns[4]).html(voltagesmax[index].toFixed(3));
-            $(columns[5]).html(tempint[index]);
+            $(columns[5]).html(tempint[index].value);
             $(columns[6]).html(tempext[index]);
         });
     }
@@ -388,7 +391,8 @@ function queryBMS() {
               ,{gridIndex: 1,name:'Temperature',type:'value',interval:10,position:'right'
               ,axisLabel:{ formatter: '{value} °C' }
               ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]
-            ,series: [{ name: 'Voltage', type: 'bar', data: [], label: labelOption }
+            ,series: [{ name: 'Voltage', type: 'bar', data: [], label: labelOption
+           }
                 ,{ name: 'Min V', type: 'line', data: [], label: labelOption4,symbolSize: 20, symbol:['circle'], itemStyle:{normal:{lineStyle:{color:'transparent',type:'dotted'}} } }
                 ,{ name: 'Max V', type: 'line', data: [], label: labelOption3,symbolSize: 20, symbol:['triangle'], itemStyle:{normal:{lineStyle:{color:'transparent',type:'dotted'}} } }
                 ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [], label: labelOption2 }

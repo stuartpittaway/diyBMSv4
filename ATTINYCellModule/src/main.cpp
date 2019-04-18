@@ -58,15 +58,20 @@ DiyBMSATTiny841 hardware;
 #include "packet_processor.h"
 PacketProcessor PP(&hardware,&myConfig);
 
+volatile bool wdt_triggered=false;
+
 void DefaultConfig() {
   myConfig.LoadResistance=4.40;
 
   //About 2.2100 seems about right
   myConfig.Calibration=2.21000;
+
   //2mV per ADC resolution
   myConfig.mVPerADC=2.0;  //2048.0/1024.0;
+
   //Stop running bypass if temperature over 70 degrees C
   myConfig.BypassOverTempShutdown=70;
+
   myConfig.mybank=0;
 
   //Start bypass at 4.1 volt
@@ -77,35 +82,10 @@ void DefaultConfig() {
   //4150 = B constant (25-50℃)
   myConfig.External_BCoefficient=4150;
 
-  // DIYBMS 4 uses the Sunlord SDNT2012X473F4150FTF
-  // https://datasheet.lcsc.com/szlcsc/Sunlord-SDNT2012X473F4150FTF_C95969.pdf
-  // Manufactor - http://www.sunlordinc.com/searchpn.aspx?se=&mid=32&page=12&nName=98&key=cn
-  // Ordering https://lcsc.com/product-detail/NTC-Thermistors_47K-1-B-4150_C95969.html
-
-  // Operating Temp. : -55℃~+125℃
-  // Translates as
-  // SDNT = NTC Thermistor
-  // 2012 = 2012 size (0805 metric 2.0mm×1.25mm)
-  // X = N/A
-  // 473 = 47,000 ohm zero power resistance (47k nominal)
-  // F = +/- 1% tolerance
-  // 4150 = B constant (25-50℃)
-  // F = 1% Tolerance of B Constant
-  // T = Tape & Reel
-  // F = N/A
-
   // Resistance @ 25℃ = 47k, B Constant 4150, 0.20mA max current
   //Using https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html
-
-  //myConfig.Internal.A=0.9676060300E-3;
-  //myConfig.Internal.B=2.127893588E-4;
-  //myConfig.Internal.C=0.7810451721E-7;
-  //myConfig.Internal.A=0.9676060300E-3;
-  //myConfig.Internal.B=2.127893588E-4;
-  //myConfig.Internal.C=0.7810451721E-7;
 }
 
-volatile bool wdt_triggered=false;
 
 ISR(WDT_vect){
   //This is the watchdog timer - something went wrong and no activity recieved in a while
@@ -113,25 +93,6 @@ ISR(WDT_vect){
   PP.IncrementWatchdogCounter();
 }
 
-void double_tap_red_led() {
-  hardware.RedLedOn();
-  delay(60);
-  hardware.RedLedOff();
-  delay(60);
-  hardware.RedLedOn();
-  delay(60);
-  hardware.RedLedOff();
-}
-
-void double_tap_green_led() {
-  hardware.GreenLedOn();
-  delay(60);
-  hardware.GreenLedOff();
-  delay(60);
-  hardware.GreenLedOn();
-  delay(60);
-  hardware.GreenLedOff();
-}
 
 ISR(ADC_vect)
 {
@@ -170,7 +131,6 @@ void BeginSetupProcedure()
   Settings::WriteConfigToEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
 
   //We leave the reference voltages enabled so they can be probed with a multimeter if needed at this point
-  //hardware.ReferenceVoltageOn();
 
   //Flash LED to indicate we are finished and wait for a power cycle
   while(1) {
@@ -181,7 +141,7 @@ void BeginSetupProcedure()
     Serial1.println(PP.ReadCellVoltageFromBuffer());
     #endif
 
-    double_tap_green_led();
+    hardware.double_tap_green_led();
     delay(2000);
   }
 }
@@ -191,17 +151,14 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
     if (len>0) {
 
       //A data packet has just arrived, process it and forward the results to the next module
-      if (!PP.onPacketReceived(receivebuffer,len)) {
-        //hardware.RedLedOn();
-        //delay(20);
-        //hardware.RedLedOff();
-      }
+      PP.onPacketReceived(receivebuffer,len);
+
+      hardware.EnableSerial0TX();
 
       //Wake up the connected cell module from sleep
       Serial.write((byte)0);
       delay(10);
 
-      hardware.EnableSerial0TX();
 
       //Send the packet (even if it was invalid so controller can count crc errors)
       myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
@@ -221,77 +178,6 @@ ISR (USART0_START_vect) {
   hardware.GreenLedOn();
 }
 
-
-/*
-uint16_t value=0;
-uint8_t direction=0;
-
-ISR(TIMER2_OVF_vect) {
-  if (direction==0) {
-  value+=100;
-
-  if (value==10000) {
-    direction=1;
-  }
-
-} else {
-  value-=100;
-  if (value==0) {
-    direction=0;
-  }
-}
-
-  OCR2B=value;
-}
-
-
-void FadeRedLED() {
-  DDRA |= _BV(DDA3) | _BV(DDA6)| _BV(DDA7);
-  DDRA |=  _BV(DDA5);
-  DDRB = 0;
-
-  for (size_t i = 0; i < 25; i++) {
-    PORTA |= _BV(PORTA5);
-    PORTA |= _BV(PORTA6);
-    delay(100);
-    PORTA &= (~_BV(PORTA5));
-    PORTA &= (~_BV(PORTA6));
-    delay(100);
-  }
-
-/*
-  while (1) {
-
-      PORTA |= _BV(PORTA3);
-      PORTA |= _BV(PORTA5);
-      delay(25);
-      PORTA &= (~_BV(PORTA5));
-      PORTA &= (~_BV(PORTA3));
-      delay(250);
-  }
-
-uint16_t counter=0;
-
-while (1) {
-
-    PORTA |= _BV(PORTA6);
-    //PORTA |= _BV(PORTA5);
-    delay(1000);
-    PORTA &= (~_BV(PORTA6));
-    //PORTA &= (~_BV(PORTA5));
-
-
-  if (counter==5) {
-    setTimer1();
-  }
-
-  counter++;
-  delay(1000);
-}
-
-
-}
-*/
 
 void setup() {
   //Must be first line of code
@@ -320,8 +206,8 @@ void setup() {
     BeginSetupProcedure();
   }
 
-  double_tap_green_led();
-  double_tap_red_led();
+  hardware.double_tap_green_led();
+  hardware.double_tap_red_led();
 
   //Set up data handler
   Serial.begin(4800, SERIAL_8N1);
@@ -346,37 +232,33 @@ double Setpoint, Input, Output;
 //Kd: Determines how aggressively the PID reacts to the change in error (Derivative) (double>=0)
 PID myPID(&Input, &Output, &Setpoint, 20, 6, 4,P_ON_E, DIRECT);
 
-bool bypassSleepOnNextLoop=false;
+uint8_t bypassHasJustFinished=0;
 
 void loop() {
   wdt_reset();
 
-
   if (PP.identifyModule>0) {
-    hardware.RedLedOn();
     hardware.GreenLedOn();
     PP.identifyModule--;
 
     if (PP.identifyModule==0) {
-      hardware.RedLedOff();
       hardware.GreenLedOff();
     }
   }
 
-  if (!PP.WeAreInBypass && bypassSleepOnNextLoop==false) {
-    //We don't sleep if we are in bypass mode
+  if (!PP.WeAreInBypass && bypassHasJustFinished==0) {
+    //We don't sleep if we are in bypass mode or just after completing bypass
     hardware.EnableStartFrameDetection();
 
     //Program stops here until woken by watchdog or pin change interrupt
     hardware.Sleep();
-    bypassSleepOnNextLoop=false;
   }
 
   //We are awake....
 
   if (wdt_triggered) {
     //Flash green LED twice after a watchdog wake up
-    double_tap_green_led();
+    hardware.double_tap_green_led();
   }
 
   //We always take a voltage and temperature reading on every loop cycle to check if we need to go into bypass
@@ -443,8 +325,9 @@ void loop() {
 
       //On the next iteration of loop, don't sleep so we are forced to take another
       //cell voltage reading without the bypass being enabled, and we can then
-      //evaludate if we need to stay in bypass mode
-      bypassSleepOnNextLoop=true;
+      //evaludate if we need to stay in bypass mode, we do this a few times
+      //as the cell has a tendancy to float back up in voltage once load resistor is removed
+      bypassHasJustFinished=30;
     }
   }
 
@@ -466,4 +349,6 @@ void loop() {
       myPacketSerial.update();
     }
   }
+
+  if (bypassHasJustFinished>0) { bypassHasJustFinished--; }
 }

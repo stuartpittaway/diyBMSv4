@@ -90,4 +90,5 @@ struct CellModuleConfig {
   uint16_t External_BCoefficient;
 } __attribute__((packed));
 
+
 #endif

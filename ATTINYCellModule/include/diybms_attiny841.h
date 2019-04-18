@@ -63,6 +63,10 @@ public:
    void StopTimer2();
    void StartTimer2();
    void SetTimer2Value(uint16_t value);
+
+   void double_tap_red_led();
+   void double_tap_green_led();
+
 };
 
 #endif

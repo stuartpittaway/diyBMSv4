@@ -39,11 +39,8 @@ bool PacketProcessor::BypassOverheatCheck() {
 }
 
 int8_t PacketProcessor::InternalTemperature() {
-
-return round(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
+  return round(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
 }
-
-
 
 bool PacketProcessor::BypassCheck() {
   if (CellVoltage() > _config->BypassThresholdmV  ) {
@@ -227,7 +224,6 @@ bool PacketProcessor::processPacket() {
 
       //TODO: Need to write into EEPROM....
 
-
       //Indicate we processed this packet
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
       return true;
@@ -239,11 +235,19 @@ bool PacketProcessor::processPacket() {
       //Maximum voltage 8191mV
       buffer.moduledata[mymoduleaddress] = CellVoltage() & 0x1FFF;
 
-      //TODO: SET THESE...
-      //3 top bits remaining
+      //3 top bits
       //X = In bypass
       //Y = Bypass over temperature
       //Z = Not used
+
+      if (BypassOverheatCheck()) {
+        buffer.moduledata[mymoduleaddress]=buffer.moduledata[mymoduleaddress] | 0x4000;
+      }
+
+      if (WeAreInBypass) {
+        buffer.moduledata[mymoduleaddress]=buffer.moduledata[mymoduleaddress] | 0x8000;
+      }
+
       return true;
     }
 
