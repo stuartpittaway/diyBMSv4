@@ -87,8 +87,6 @@ Wire Wire Line
 Wire Wire Line
 	950  2610 950  2730
 Wire Wire Line
-	950  3030 950  4570
-Wire Wire Line
 	950  4590 1650 4590
 $Comp
 L Connector:Conn_01x02_Male J1
@@ -186,8 +184,6 @@ Wire Wire Line
 	2970 6130 2490 6130
 Wire Wire Line
 	2120 6230 2250 6230
-Wire Wire Line
-	1670 1450 1750 1450
 $Comp
 L power:GND #PWR0105
 U 1 1 5D1F0262
@@ -199,8 +195,6 @@ F 3 "" H 1790 4590 50  0001 C CNN
 	1    1790 4590
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1670 1350 1720 1350
 Wire Wire Line
 	1770 1100 1770 1350
 $Comp
@@ -389,11 +383,7 @@ F 3 "~" H 8630 4690 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	9490 4690 9630 4690
-Wire Wire Line
 	9740 4690 9740 4730
-Wire Wire Line
-	9490 4890 9590 4890
 Wire Wire Line
 	9740 4890 9740 4830
 Wire Wire Line
@@ -431,7 +421,7 @@ L Device:R R8
 U 1 1 5BF29A02
 P 7100 2700
 F 0 "R8" H 7170 2746 50  0000 L CNN
-F 1 "2R2  1W" H 7170 2655 50  0000 L CNN
+F 1 "2R2 1W" H 7170 2655 50  0000 L CNN
 F 2 "Resistors_SMD:R_2512" V 7030 2700 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf" H 7100 2700 50  0001 C CNN
 	1    7100 2700
@@ -442,7 +432,7 @@ L Device:R R10
 U 1 1 5BF29A5C
 P 7450 2700
 F 0 "R10" H 7520 2746 50  0000 L CNN
-F 1 "2R2  1W" H 7520 2655 50  0000 L CNN
+F 1 "2R2 1W" H 7520 2655 50  0000 L CNN
 F 2 "Resistors_SMD:R_2512" V 7380 2700 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf" H 7450 2700 50  0001 C CNN
 	1    7450 2700
@@ -453,7 +443,7 @@ L Device:R R12
 U 1 1 5BF29ADC
 P 7800 2700
 F 0 "R12" H 7870 2746 50  0000 L CNN
-F 1 "2R2  1W" H 7870 2655 50  0000 L CNN
+F 1 "2R2 1W" H 7870 2655 50  0000 L CNN
 F 2 "Resistors_SMD:R_2512" V 7730 2700 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf" H 7800 2700 50  0001 C CNN
 	1    7800 2700
@@ -630,8 +620,6 @@ F 3 "" H 8320 5380 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8690 5460 8600 5460
-Wire Wire Line
 	8320 5460 8320 5380
 $Comp
 L power:GND #PWR0113
@@ -662,8 +650,6 @@ RXD0
 Wire Wire Line
 	7980 5560 8250 5560
 Connection ~ 8250 5560
-Wire Wire Line
-	8250 5560 8520 5560
 $Comp
 L Device:LED D3
 U 1 1 5BF65B89
@@ -746,79 +732,6 @@ Wire Wire Line
 Connection ~ 3050 3750
 Wire Wire Line
 	3050 3750 3050 3670
-$Comp
-L Connector:Conn_01x02_Male J6
-U 1 1 5BF7620E
-P 8890 5860
-F 0 "J6" H 8863 5740 50  0000 R CNN
-F 1 "Alt RX Conn" H 8863 5831 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 8890 5860 50  0001 C CNN
-F 3 "~" H 8890 5860 50  0001 C CNN
-	1    8890 5860
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	8690 5760 8600 5760
-Wire Wire Line
-	8600 5760 8600 5460
-Connection ~ 8600 5460
-Wire Wire Line
-	8600 5460 8320 5460
-Wire Wire Line
-	8520 5560 8520 5860
-Wire Wire Line
-	8520 5860 8690 5860
-Connection ~ 8520 5560
-Wire Wire Line
-	8520 5560 8690 5560
-$Comp
-L Connector:Conn_01x02_Male J7
-U 1 1 5BF806EA
-P 9940 5070
-F 0 "J7" H 9912 4950 50  0000 R CNN
-F 1 "Alt TX Conn" H 9912 5041 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 9940 5070 50  0001 C CNN
-F 3 "~" H 9940 5070 50  0001 C CNN
-	1    9940 5070
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	9740 4970 9630 4970
-Wire Wire Line
-	9630 4970 9630 4690
-Connection ~ 9630 4690
-Wire Wire Line
-	9630 4690 9740 4690
-Wire Wire Line
-	9590 4890 9590 5070
-Wire Wire Line
-	9590 5070 9740 5070
-Connection ~ 9590 4890
-Wire Wire Line
-	9590 4890 9740 4890
-$Comp
-L Connector:Conn_01x02_Male J5
-U 1 1 5BF86BF7
-P 1480 1740
-F 0 "J5" H 1586 1918 50  0000 C CNN
-F 1 "Alt Battery" H 1586 1827 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 1480 1740 50  0001 C CNN
-F 3 "~" H 1480 1740 50  0001 C CNN
-	1    1480 1740
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1680 1740 1720 1740
-Wire Wire Line
-	1720 1740 1720 1350
-Connection ~ 1720 1350
-Wire Wire Line
-	1720 1350 1770 1350
-Wire Wire Line
-	1750 1450 1750 1840
-Wire Wire Line
-	1750 1840 1680 1840
-Connection ~ 1750 1450
 $Comp
 L Connector:TestPoint TP2
 U 1 1 5BF9C005
@@ -959,8 +872,6 @@ Text Notes 8710 4380 0    50   ~ 0
 Optocoupler, Phototransistor Output,\n4-SSOP
 Wire Wire Line
 	2250 3070 3020 3070
-Wire Wire Line
-	1750 1450 2040 1450
 Connection ~ 2040 1450
 Connection ~ 1870 1100
 Wire Wire Line
@@ -973,22 +884,6 @@ Wire Wire Line
 	3050 3750 3790 3750
 Wire Wire Line
 	4670 5550 4560 5550
-$Comp
-L Connector:TestPoint TP1
-U 1 1 5C2982C3
-P 780 4570
-F 0 "TP1" H 700 4760 50  0000 L CNN
-F 1 "TestPoint" H 570 4520 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 980 4570 50  0001 C CNN
-F 3 "~" H 980 4570 50  0001 C CNN
-	1    780  4570
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	780  4570 950  4570
-Connection ~ 950  4570
-Wire Wire Line
-	950  4570 950  4590
 $Comp
 L Device:R R14
 U 1 1 5CB1F559
@@ -1003,16 +898,16 @@ $EndComp
 $Comp
 L power:GND #PWR0117
 U 1 1 5CB35AE2
-P 4090 5450
-F 0 "#PWR0117" H 4090 5200 50  0001 C CNN
-F 1 "GND" H 4095 5277 50  0000 C CNN
-F 2 "" H 4090 5450 50  0001 C CNN
-F 3 "" H 4090 5450 50  0001 C CNN
-	1    4090 5450
+P 4410 5280
+F 0 "#PWR0117" H 4410 5030 50  0001 C CNN
+F 1 "GND" H 4415 5107 50  0000 C CNN
+F 2 "" H 4410 5280 50  0001 C CNN
+F 3 "" H 4410 5280 50  0001 C CNN
+	1    4410 5280
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4670 5450 4090 5450
+	4670 5450 4410 5280
 $Comp
 L Device:C C3
 U 1 1 5CB3BB54
@@ -1029,4 +924,18 @@ Wire Wire Line
 	7500 3410 7360 3410
 Wire Wire Line
 	7500 3710 7780 3710
+Wire Wire Line
+	950  3030 950  4590
+Wire Wire Line
+	9490 4690 9740 4690
+Wire Wire Line
+	9490 4890 9740 4890
+Wire Wire Line
+	8320 5460 8690 5460
+Wire Wire Line
+	8250 5560 8690 5560
+Wire Wire Line
+	1670 1350 1770 1350
+Wire Wire Line
+	1670 1450 2040 1450
 $EndSCHEMATC
