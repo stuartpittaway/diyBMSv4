@@ -128,8 +128,8 @@ void DiyBMSATTiny841::ConfigurePorts()  {
   #endif
 
   //DDRB – Port B Data Direction Register
-  //All inputs
-  DDRB = 0;
+  //Spare pin is output
+  DDRB |=  _BV(DDB1);
 
   //Set pins to initial state
   DumpLoadOff();
@@ -177,6 +177,14 @@ void DiyBMSATTiny841::RedLedOn() {
   PORTA |= _BV(PORTA5);
   #endif
 }
+
+void DiyBMSATTiny841::SparePinOn() {
+  PORTB |= _BV(PORTB1);
+}
+void DiyBMSATTiny841::SparePinOff(){
+  PORTB &= (~_BV(PORTB1));
+}
+
 
 void DiyBMSATTiny841::RedLedOff() {
   #ifdef DIYBMS_DEBUG

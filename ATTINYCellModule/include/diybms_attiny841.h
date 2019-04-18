@@ -30,6 +30,11 @@ public:
    void DumpLoadOn();
    void DumpLoadOff();
 
+
+   void SparePinOn();
+   void SparePinOff();
+
+
    void ReferenceVoltageOn();
    void ReferenceVoltageOff();
 

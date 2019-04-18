@@ -25,6 +25,7 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 * No additional restrictions — You may not apply legal terms or technological measures
   that legally restrict others from doing anything the license permits.
 
+
 */
 
 //If you want to DEBUG connect another serial reading device to RED_LED (TXD1/MISO) this disables the RED LED pin
@@ -47,7 +48,7 @@ PacketSerial_<COBS, 0, 64> myPacketSerial;
 #include "defines.h"
 #include "settings.h"
 
-#include <PID_v1.h>
+#include <FastPID.h>
 
 //Default values which get overwritten by EEPROM on power up
 CellModuleConfig myConfig;
@@ -59,6 +60,8 @@ DiyBMSATTiny841 hardware;
 PacketProcessor PP(&hardware,&myConfig);
 
 volatile bool wdt_triggered=false;
+uint16_t bypassCountDown=0;
+uint8_t bypassHasJustFinished=0;
 
 void DefaultConfig() {
   myConfig.LoadResistance=4.40;
@@ -100,6 +103,7 @@ ISR(ADC_vect)
   PP.ADCReading(hardware.ReadADC());
 }
 
+/*
 void BeginSetupProcedure()
 {
   //Assume that we have just been programmed via ISP header so VCC is now at 3.3 volts (approx)
@@ -145,6 +149,7 @@ void BeginSetupProcedure()
     delay(2000);
   }
 }
+*/
 
 void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
 
@@ -179,6 +184,13 @@ ISR (USART0_START_vect) {
 }
 
 
+//Kp: Determines how aggressively the PID reacts to the current amount of error (Proportional)
+//Ki: Determines how aggressively the PID reacts to error over time (Integral)
+//Kd: Determines how aggressively the PID reacts to the change in error (Derivative)
+
+//3Hz rate - number of times we call this code in Loop
+FastPID myPID(150.0, 2.5,5, 3, 16, false);
+
 void setup() {
   //Must be first line of code
   wdt_disable();
@@ -203,7 +215,9 @@ void setup() {
   //Check if setup routine needs to be run
   if (!Settings::ReadConfigFromEEPROM((char*)&myConfig, sizeof(myConfig),EEPROM_CONFIG_ADDRESS)) {
     DefaultConfig();
-    BeginSetupProcedure();
+    //BeginSetupProcedure();
+    //Save settings
+    Settings::WriteConfigToEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
   }
 
   hardware.double_tap_green_led();
@@ -214,28 +228,23 @@ void setup() {
 
   myPacketSerial.setStream(&Serial);
   myPacketSerial.setPacketHandler(&onPacketReceived);
+
+  #ifdef DIYBMS_DEBUG
+  if (myPID.err()) {
+    Serial1.println("There is a configuration error!");
+    for (;;) {}
+  }
+  #endif
 }
 
-
-uint16_t bypassCountDown=0;
-
-//Define Variables we'll be connecting to
-double Setpoint, Input, Output;
-
-//Specify the links and initial tuning parameters
-//double Kp=2, Ki=5, Kd=1;
-//P_ON_M specifies that Proportional on Measurement be used
-//P_ON_E (Proportional on Error) is the default behavior
-
-//Kp: Determines how aggressively the PID reacts to the current amount of error (Proportional) (double >=0)
-//Ki: Determines how aggressively the PID reacts to error over time (Integral) (double>=0)
-//Kd: Determines how aggressively the PID reacts to the change in error (Derivative) (double>=0)
-PID myPID(&Input, &Output, &Setpoint, 20, 6, 4,P_ON_E, DIRECT);
-
-uint8_t bypassHasJustFinished=0;
+//bool hztiming=false;
 
 void loop() {
+  //This loop runs around 3 times per second when the module is in bypass
+
   wdt_reset();
+
+  //if (hztiming) {  hardware.SparePinOn();} else {  hardware.SparePinOff();}hztiming=!hztiming;
 
   if (PP.identifyModule>0) {
     hardware.GreenLedOn();
@@ -283,17 +292,13 @@ void loop() {
       if (!PP.WeAreInBypass) {
         //We have just entered the bypass code
 
-        //We want the PID to keep at this temperature
-        Setpoint=myConfig.BypassOverTempShutdown;
 
         //The TIMER2 can vary between 0 and 10,000
-        myPID.SetOutputLimits(0, 10000);
+        myPID.setOutputRange(0,10000);
 
         //Start timer2 with zero value
         hardware.StartTimer2();
 
-        //Run the PID
-        myPID.SetMode(AUTOMATIC);
         PP.WeAreInBypass=true;
 
         //This controls how many cycles of loop() we make before re-checking the situation
@@ -303,11 +308,12 @@ void loop() {
 
   if (bypassCountDown>0) {
     //Compare the real temperature against max setpoint
-    Input = PP.InternalTemperature();
-    if (myPID.Compute()) {
-        //Change Timer2 if needed
-        hardware.SetTimer2Value(Output);
-    }
+    //We want the PID to keep at this temperature
+    int setpoint = myConfig.BypassOverTempShutdown;
+    int feedback = PP.InternalTemperature();
+    uint16_t output = myPID.step(setpoint, feedback);
+
+    hardware.SetTimer2Value(output);
 
     bypassCountDown--;
 
@@ -316,7 +322,7 @@ void loop() {
 
       PP.WeAreInBypass=false;
 
-      myPID.SetMode(MANUAL);
+      myPID.clear();
       hardware.StopTimer2();
 
       //Just to be sure, switch everything off

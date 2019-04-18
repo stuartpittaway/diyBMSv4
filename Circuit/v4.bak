@@ -89,10 +89,10 @@ Wire Wire Line
 Wire Wire Line
 	950  4590 1650 4590
 $Comp
-L Connector:Conn_01x02_Male POWER1
+L Connector:Conn_01x02_Male POWER
 U 1 1 5D1EB9F6
 P 1470 1350
-F 0 "POWER1" H 1576 1528 50  0000 C CNN
+F 0 "POWER" H 1576 1528 50  0000 C CNN
 F 1 "Battery" H 1576 1437 50  0000 C CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 1470 1350 50  0001 C CNN
 F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 1470 1350 50  0001 C CNN
@@ -361,10 +361,10 @@ F 3 "https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x02_Male TX1
+L Connector:Conn_01x02_Male TX
 U 1 1 5BF1DEA4
 P 9940 4830
-F 0 "TX1" H 9913 4710 50  0000 R CNN
+F 0 "TX" H 9913 4710 50  0000 R CNN
 F 1 "TX Connector" H 9913 4801 50  0000 R CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 9940 4830 50  0001 C CNN
 F 3 "~" H 9940 4830 50  0001 C CNN
@@ -598,10 +598,10 @@ Wire Wire Line
 	7360 3410 7080 3580
 Connection ~ 7780 3410
 $Comp
-L Connector:Conn_01x02_Male RX1
+L Connector:Conn_01x02_Male RX
 U 1 1 5BF5891C
 P 8890 5560
-F 0 "RX1" H 8863 5440 50  0000 R CNN
+F 0 "RX" H 8863 5440 50  0000 R CNN
 F 1 "RX Connector" H 8863 5531 50  0000 R CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 8890 5560 50  0001 C CNN
 F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 8890 5560 50  0001 C CNN
@@ -811,10 +811,10 @@ $EndComp
 Wire Wire Line
 	4280 6330 4280 6190
 $Comp
-L Connector:Conn_01x05_Male SENSOR1
+L Connector:Conn_01x05_Male SENSOR
 U 1 1 5BF61617
 P 4870 5650
-F 0 "SENSOR1" H 4843 5530 50  0000 R CNN
+F 0 "SENSOR" H 4843 5530 50  0000 R CNN
 F 1 "Remote temp input 47K @ 25oC" H 4850 5890 50  0000 R CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm" H 4870 5650 50  0001 C CNN
 F 3 "~" H 4870 5650 50  0001 C CNN
