@@ -20,15 +20,13 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 
   PA3 = DUMP LOAD ENABLE / PIN 10 /  ARDUINO PIN 7/A3 / TOCC2
   PA4 = ADC4 PIN 9 ARDUINO PIN 6/A4 = ON BOARD TEMP sensor
-  PA5 = RED_LED / PIN 8 / ARDUINO PIN 5/A5  (SERIAL PORT 1 TXD1) // TOCC4
+  PA5 = SERIAL PORT 1 TXD1 - NOT USED
   PA6 = GREEN_LED / PIN 7 / ARDUINO PIN 4/A6
   PA7 = ADC7 = PIN 6 = ARDUINO PIN 3/A7 = 2.048V REFERENCE ENABLE
 
   PB2 = ADC8 PIN 5 ARDUINO PIN 2/A8 = VOLTAGE reading
   PB0 = ADC11 PIN 2 ARDUINO PIN 0/A11 = REMOTE TEMP sensor
   PB1 = ADC10 PIN 3 ARDUINO PIN 1/A10 = SPARE INPUT/OUTPUT
-
-  //TODO: We should have mapped PA5 to spare PIN on sensor header its TXD1 and mapped RED_LED to PB1 to assist debugging
 
   ATTiny841 data sheet
   http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf
@@ -48,17 +46,15 @@ void DiyBMSATTiny841::StopTimer2() {
 
 
 void DiyBMSATTiny841::StartTimer2() {
-  //Redled is on PA5 which maps to TOCC4
   //Dump resistor is on PA3 which maps to TOCC2
 
   //Before this is called, the DDR register has already been set
 
-  //Enable OC2B for TOCC2 & TOCC4
+  //Enable OC2B for TOCC2
   TOCPMSA0 = (1<<TOCC2S1);
-  TOCPMSA1 = (1<<TOCC4S1);
 
   // Timer/Counter Output Compare Pin Mux Channel Output Enable
-  TOCPMCOE = (1<<TOCC4OE) | (1<<TOCC2OE);
+  TOCPMCOE = (1<<TOCC2OE);
 
   // Fast PWM, mode 14, non inverting, presc 1:8
   //COM2b1= Clear OCnA/OCnB on Compare Match (Set output to low level)
@@ -89,16 +85,6 @@ void DiyBMSATTiny841::EnableSerial0TX(){
   UCSR0B |=(1<<TXEN0); // enable TX Serial0
 }
 
-void DiyBMSATTiny841::double_tap_red_led() {
-  RedLedOn();
-  delay(50);
-  RedLedOff();
-  delay(50);
-  RedLedOn();
-  delay(50);
-  RedLedOff();
-}
-
 void DiyBMSATTiny841::double_tap_green_led() {
   GreenLedOn();
   delay(50);
@@ -108,8 +94,6 @@ void DiyBMSATTiny841::double_tap_green_led() {
   delay(50);
   GreenLedOff();
 }
-
-
 
 void DiyBMSATTiny841::ConfigurePorts()  {
   //PUEA – Port A Pull-Up Enable Control Register (All disabled)
@@ -122,11 +106,6 @@ void DiyBMSATTiny841::ConfigurePorts()  {
   //When DDAn is set, the pin PAn is configured as an output. When DDAn is cleared, the pin is configured as an input
   DDRA |= _BV(DDA3) | _BV(DDA6)| _BV(DDA7);
 
-  #ifndef DIYBMS_DEBUG
-  //RED LED - output
-  DDRA |=  _BV(DDA5);
-  #endif
-
   //DDRB – Port B Data Direction Register
   //Spare pin is output
   DDRB |=  _BV(DDB1);
@@ -135,7 +114,6 @@ void DiyBMSATTiny841::ConfigurePorts()  {
   DumpLoadOff();
   ReferenceVoltageOff();
 
-  RedLedOff();
   GreenLedOff();
 }
 
@@ -170,28 +148,11 @@ void DiyBMSATTiny841::GreenLedOff() {
   PORTA &= (~_BV(PORTA6));
 }
 
-void DiyBMSATTiny841::RedLedOn() {
-  #ifdef DIYBMS_DEBUG
-  //Do nothing
-  #else
-  PORTA |= _BV(PORTA5);
-  #endif
-}
-
 void DiyBMSATTiny841::SparePinOn() {
   PORTB |= _BV(PORTB1);
 }
 void DiyBMSATTiny841::SparePinOff(){
   PORTB &= (~_BV(PORTB1));
-}
-
-
-void DiyBMSATTiny841::RedLedOff() {
-  #ifdef DIYBMS_DEBUG
-  //Do nothing
-  #else
-  PORTA &= (~_BV(PORTA5));
-  #endif
 }
 
 void DiyBMSATTiny841::FlushSerial0() {

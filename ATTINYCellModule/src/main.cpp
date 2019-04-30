@@ -28,7 +28,6 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 
 */
 
-//If you want to DEBUG connect another serial reading device to RED_LED (TXD1/MISO) this disables the RED LED pin
 //#define DIYBMS_DEBUG
 
 #include <Arduino.h>
@@ -221,7 +220,6 @@ void setup() {
   }
 
   hardware.double_tap_green_led();
-  hardware.double_tap_red_led();
 
   //Set up data handler
   Serial.begin(4800, SERIAL_8N1);
@@ -309,9 +307,9 @@ void loop() {
   if (bypassCountDown>0) {
     //Compare the real temperature against max setpoint
     //We want the PID to keep at this temperature
-    int setpoint = myConfig.BypassOverTempShutdown;
-    int feedback = PP.InternalTemperature();
-    uint16_t output = myPID.step(setpoint, feedback);
+    //int setpoint = ;
+    //int feedback =
+    uint16_t output = myPID.step(myConfig.BypassOverTempShutdown, PP.InternalTemperature());
 
     hardware.SetTimer2Value(output);
 
@@ -325,8 +323,7 @@ void loop() {
       //myPID.clear();
       hardware.StopTimer2();
 
-      //Just to be sure, switch everything off
-      hardware.RedLedOff();
+      //switch off
       hardware.DumpLoadOff();
 
       //On the next iteration of loop, don't sleep so we are forced to take another
