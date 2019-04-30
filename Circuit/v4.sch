@@ -455,7 +455,7 @@ Wire Wire Line
 	7700 1990 7750 1990
 Wire Wire Line
 	8050 1990 8100 1990
-Text Notes 6700 1560 0    50   ~ 0
+Text Notes 5990 1620 0    50   ~ 0
 Each row is 8R8 and 4W max (needs to carry 2W @ 4.2V), drops about 470mA.\n
 $Comp
 L Device:R R7
@@ -507,7 +507,7 @@ Wire Wire Line
 	7700 2290 7750 2290
 Wire Wire Line
 	8050 2290 8100 2290
-Text Notes 6710 1430 0    50   ~ 0
+Text Notes 5980 1780 0    50   ~ 0
 Ever Ohms Tech CR2512F2R2E04\nhttps://lcsc.com/product-detail/Chip-Resistor-Surface-Mount_Ever-Ohms-Tech-CR2512F2R2E04_C147074.html\n
 $Comp
 L Device:Q_NMOS_GSD Q1
@@ -653,27 +653,27 @@ Connection ~ 8590 5090
 $Comp
 L Device:LED D3
 U 1 1 5BF65B89
-P 4310 3130
-F 0 "D3" H 4450 3230 50  0000 C CNN
-F 1 "RED LED" H 4400 3030 50  0000 C CNN
-F 2 "LEDs:LED_0805_HandSoldering" H 4310 3130 50  0001 C CNN
-F 3 "~" H 4310 3130 50  0001 C CNN
-	1    4310 3130
+P 7980 1350
+F 0 "D3" H 8120 1450 50  0000 C CNN
+F 1 "RED LED" H 8070 1250 50  0000 C CNN
+F 2 "LEDs:LED_0805_HandSoldering" H 7980 1350 50  0001 C CNN
+F 3 "~" H 7980 1350 50  0001 C CNN
+	1    7980 1350
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:R R17
 U 1 1 5BF65CB1
-P 4690 3130
-F 0 "R17" V 4780 3180 50  0000 L CNN
-F 1 "2K2" V 4780 3010 50  0000 L CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 4620 3130 50  0001 C CNN
-F 3 "~" H 4690 3130 50  0001 C CNN
-	1    4690 3130
+P 8360 1350
+F 0 "R17" V 8450 1400 50  0000 L CNN
+F 1 "2K2" V 8450 1230 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 8290 1350 50  0001 C CNN
+F 3 "~" H 8360 1350 50  0001 C CNN
+	1    8360 1350
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	4460 3130 4540 3130
+	8130 1350 8210 1350
 $Comp
 L Device:LED D4
 U 1 1 5BF67C78
@@ -710,17 +710,11 @@ F 3 "" H 5130 3510 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4840 3130 4840 3370
-Wire Wire Line
 	4840 3370 5130 3370
 Wire Wire Line
 	5130 3370 5130 3510
-Connection ~ 4840 3370
 Wire Wire Line
-	3870 3570 3870 3130
-Wire Wire Line
-	3870 3130 4160 3130
-Connection ~ 3180 3570
+	7540 1350 7830 1350
 Wire Wire Line
 	3790 3750 3790 3630
 Wire Wire Line
@@ -879,8 +873,6 @@ Wire Wire Line
 Wire Wire Line
 	7310 6070 7600 6070
 Wire Wire Line
-	3180 3570 3870 3570
-Wire Wire Line
 	3050 3750 3790 3750
 Wire Wire Line
 	4670 5550 4560 5550
@@ -950,7 +942,7 @@ F 3 "~" H 7670 1050 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	8510 2160 8510 1050
+	8510 2160 8510 1350
 Wire Wire Line
 	8510 1050 7820 1050
 Connection ~ 8510 2160
@@ -967,8 +959,16 @@ F 3 "" H 7370 1050 50  0001 C CNN
 	1    7370 1050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7370 1050 7520 1050
 Text Notes 6640 760  0    50   ~ 0
 Either the SMD or larger power resistor is used - NOT BOTH!\n
+Connection ~ 8510 1350
+Wire Wire Line
+	8510 1350 8510 1050
+Wire Wire Line
+	7540 1350 7540 1050
+Wire Wire Line
+	7370 1050 7520 1050
+Connection ~ 7520 1050
+Wire Wire Line
+	7520 1050 7540 1050
 $EndSCHEMATC
