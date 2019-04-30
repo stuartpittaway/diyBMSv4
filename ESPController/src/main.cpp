@@ -36,8 +36,10 @@
 #include <ESP8266WiFi.h>
 #include <Hash.h>
 #include <ESPAsyncWebServer.h>
+#include <AsyncMqttClient.h>
 #include <PacketSerial.h>
 #include <cppQueue.h>
+#include <Ticker.h>
 
 #include "defines.h"
 
@@ -70,11 +72,18 @@ PacketSerial_<COBS, 0, 128> myPacketSerial;
 
 volatile bool waitingForReply=false;
 
-os_timer_t myTimer;
+WiFiEventHandler wifiConnectHandler;
+WiFiEventHandler wifiDisconnectHandler;
 
-os_timer_t myTransmitTimer;
+Ticker myTimer;
+Ticker myTransmitTimer;
+Ticker wifiReconnectTimer;
+Ticker mqttReconnectTimer;
+Ticker myTimerSendMqttPacket;
 
 uint16_t sequence=0;
+
+AsyncMqttClient mqttClient;
 
 void dumpPacketToDebug(packet *buffer) {
   Serial1.print(buffer->address,HEX);
@@ -117,7 +126,7 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
 }
 
 
-void timerTransmitCallback(void *pArg) {
+void timerTransmitCallback() {
 
   //Don't send another message until we have received reply from the last one
   //this slows the transmit process down a lot so potentially need to look at a better
@@ -173,7 +182,7 @@ void timerTransmitCallback(void *pArg) {
 }
 
 
-void timerEnqueueCallback(void *pArg) {
+void timerEnqueueCallback() {
   //this is called regularly on a timer, it determines what request to make to the modules (via the request queue)
   //packetType++;
 
@@ -184,6 +193,105 @@ void timerEnqueueCallback(void *pArg) {
     prg.sendCellTemperatureRequest();
     //packetType=0;
   //}
+}
+
+
+void connectToWifi() {
+  Serial.println("Connecting to Wi-Fi...");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(DIYBMSSoftAP::WifiSSID(), DIYBMSSoftAP::WifiPassword());
+}
+
+void connectToMqtt() {
+  Serial1.println("Connecting to MQTT...");
+  mqttClient.connect();
+}
+
+void onWifiConnect(const WiFiEventStationModeGotIP& event) {
+  Serial1.println("Connected to Wi-Fi.");
+  Serial1.print( WiFi.status() );
+  Serial1.print(F(". Connected IP:"));
+  Serial1.println(WiFi.localIP());
+
+  /*
+  TODO: CHECK ERROR CODES BETTER!
+  0 : WL_IDLE_STATUS when Wi-Fi is in process of changing between statuses
+  1 : WL_NO_SSID_AVAIL in case configured SSID cannot be reached
+  3 : WL_CONNECTED after successful connection is established
+  4 : WL_CONNECT_FAILED if password is incorrect
+  6 : WL_DISCONNECTED if module is not configured in station mode
+  */
+    if (!server_running)
+    {
+      DIYBMSServer::StartServer(&server);
+      server_running=true;
+    }
+
+
+  connectToMqtt();
+}
+
+void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
+  Serial1.println("Disconnected from Wi-Fi.");
+  mqttReconnectTimer.detach(); // ensure we don't reconnect to MQTT while reconnecting to Wi-Fi
+  myTimerSendMqttPacket.detach();
+  wifiReconnectTimer.once(2, connectToWifi);
+}
+
+void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
+  Serial1.println("Disconnected from MQTT.");
+
+  myTimerSendMqttPacket.detach();
+
+  if (WiFi.isConnected()) {
+    mqttReconnectTimer.once(2, connectToMqtt);
+  }
+}
+
+#define MQTT_HOST IPAddress(192, 168, 0, 26)
+#define MQTT_PORT 1883
+
+void sendMqttPacket() {
+  Serial1.println("Sending MQTT");
+  //publish(const char* topic, uint8_t qos, bool retain, const char* payload, size_t length, bool dup, uint16_t message_id) {
+
+  char buffer[50];
+  char value[50];
+
+  for (uint8_t bank = 0; bank < 4; bank++) {
+    for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
+
+      sprintf(buffer, "diybms/%d/%d/voltage", bank,i);
+      float v=(float)cmi[bank][i].voltagemV/1000.0;
+      dtostrf(v,7, 3, value);
+      mqttClient.publish(buffer, 0, true, value);
+
+      sprintf(buffer, "diybms/%d/%d/inttemp", bank,i);
+      sprintf(value, "%d", cmi[bank][i].internalTemp);
+      mqttClient.publish(buffer, 0, true, value);
+
+      sprintf(buffer, "diybms/%d/%d/exttemp", bank,i);
+      sprintf(value, "%d", cmi[bank][i].externalTemp);
+      mqttClient.publish(buffer, 0, true, value);
+
+      sprintf(buffer, "diybms/%d/%d/bypass", bank,i);
+      sprintf(value, "%d", cmi[bank][i].inBypass ? 1:0);
+      mqttClient.publish(buffer, 0, true, value);
+
+      //cell["v"] = cmi[bank][i].voltagemV;
+      //cell["bypass"] = cmi[bank][i].inBypass;
+      //cell["bypasshot"] = cmi[bank][i].bypassOverTemp;
+      //cell["int"] = cmi[bank][i].internalTemp;
+      //cell["ext"] = cmi[bank][i].externalTemp;
+    }
+  }
+
+
+}
+
+void onMqttConnect(bool sessionPresent) {
+  Serial1.println("Connected to MQTT.");
+  myTimerSendMqttPacket.attach(15, sendMqttPacket);
 }
 
 
@@ -225,12 +333,10 @@ void setup() {
   Serial1.setDebugOutput(true);
 
   //Ensure we service the cell modules every 5 seconds
-  os_timer_setfn(&myTimer, timerEnqueueCallback, NULL);
-  os_timer_arm(&myTimer, 5000, true);
+  myTimer.attach(5, timerEnqueueCallback);
 
   //We process the transmit queue every 0.5 seconds
-  os_timer_setfn(&myTransmitTimer, timerTransmitCallback, NULL);
-  os_timer_arm(&myTransmitTimer, 500, true);
+  myTransmitTimer.attach(0.5, timerTransmitCallback);
 
   //D0 is used to reset access point WIFI details on boot up
   pinMode(D0,INPUT_PULLUP);
@@ -248,10 +354,19 @@ void setup() {
       would try to act as both a client and an access-point and could cause
       network-issues with your other WiFi-devices on your WiFi-network. */
 
-      Serial1.println(F("Connecting to WIFI"));
+      wifiConnectHandler = WiFi.onStationModeGotIP(onWifiConnect);
+      wifiDisconnectHandler = WiFi.onStationModeDisconnected(onWifiDisconnect);
 
-      WiFi.mode(WIFI_STA);
-      WiFi.begin(DIYBMSSoftAP::WifiSSID(), DIYBMSSoftAP::WifiPassword());
+      mqttClient.onConnect(onMqttConnect);
+      mqttClient.onDisconnect(onMqttDisconnect);
+      //mqttClient.onSubscribe(onMqttSubscribe);
+      //mqttClient.onUnsubscribe(onMqttUnsubscribe);
+      //mqttClient.onMessage(onMqttMessage);
+      //mqttClient.onPublish(onMqttPublish);
+      mqttClient.setServer(MQTT_HOST, MQTT_PORT);
+      mqttClient.setCredentials("emonpi","emonpimqtt2016");
+
+      connectToWifi();
   }
 }
 
@@ -260,29 +375,6 @@ void loop() {
   // Call update to receive, decode and process incoming packets.
   if (Serial.available()) {
     myPacketSerial.update();
-  }
-
-/*
-TODO: CHECK ERROR CODES BETTER!
-0 : WL_IDLE_STATUS when Wi-Fi is in process of changing between statuses
-1 : WL_NO_SSID_AVAIL in case configured SSID cannot be reached
-3 : WL_CONNECTED after successful connection is established
-4 : WL_CONNECT_FAILED if password is incorrect
-6 : WL_DISCONNECTED if module is not configured in station mode
-*/
-  if (WiFi.status() == WL_CONNECTED && !server_running)
-  {
-    Serial1.print( WiFi.status() );
-    Serial1.print(F(". Connected IP:"));
-    Serial1.println(WiFi.localIP());
-
-    DIYBMSServer::StartServer(&server);
-    server_running=true;
-  }
-
-  if (server_running)
-  {
-    //Do something clever here
   }
 
 }
