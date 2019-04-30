@@ -33,9 +33,9 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
   stroke-width: 25px;
 }
 
-#settingsForm label {width:250px;display:inline-block;}
-#settingsForm input {width:100px;display:inline-block;padding-left:10px;padding-right:10px;margin-left:10px;}
-#settingsForm > div > div { padding-bottom:8px;}
+form label {width:220px;display:inline-block;text-align:right;}
+form input {width:175px;display:inline-block;padding-left:10px;padding-right:10px;margin-left:10px;}
+form > div > div { padding-bottom:8px;}
 
 @media screen and (max-width:500px){
   .header a,.header-right{float:none}
@@ -163,8 +163,8 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
                     <input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required="">
                 </div>
                 <input type="submit" value="Save settings"></input>
+              </div>
         </form>
-        </div>
     </div>
 
     <div id="globalConfig">
@@ -182,13 +182,37 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
             </div>
           </div>
           <input id="globalSettingsButton" type="submit" value="Save settings"></input>
+        </div>
       </form>
-    </div>
-
 </div>
 
 <div class="page" id="integrationPage">
 <h1>Integration</h1>
+
+<h2>MQTT</h2>
+<form id="mqttForm" method="POST" action="savemqtt.json">
+    <div class="settings">
+        <div>
+            <label for="mqttServer">Server</label>
+            <input type="input" name="mqttServer" id="mqttServer" value="broker.hivemq.com" required=""  maxlength="50">
+        </div>
+        <div>
+            <label for="mqttPort">Port</label>
+            <input type="number" min="1" max="65535" step="1" name="mqttPort" id="mqttPort" value="1883" required="">
+        </div>
+        <div>
+            <label for="mqttUsername">Username</label>
+            <input type="input" name="mqttUsername" id="mqttUsername" value="myusername" required="" maxlength="50">
+        </div>
+        <div>
+            <label for="mqttPassword">Password</label>
+            <input type="password" name="mqttPassword" id="mqttPassword" value="" required="" maxlength="50">
+        </div>
+        <input type="submit" value="Save MQTT settings"></input>
+    </div>
+</form>
+</div>
+
 </div>
 
 <script type="text/javascript">
@@ -274,7 +298,7 @@ function queryBMS() {
 
       color=value.bypasshot ? "#B03A5B":"#1e90ff";
       tempint.push({ value: value.int, itemStyle:{color: color } });
-      
+
       tempext.push(value.ext==-40 ? 0:value.ext  );
 
       //TODO: This needs to be voltage per bank not total

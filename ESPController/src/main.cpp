@@ -270,9 +270,11 @@ void sendMqttPacket() {
       sprintf(value, "%d", cmi[bank][i].internalTemp);
       mqttClient.publish(buffer, 0, true, value);
 
-      sprintf(buffer, "diybms/%d/%d/exttemp", bank,i);
-      sprintf(value, "%d", cmi[bank][i].externalTemp);
-      mqttClient.publish(buffer, 0, true, value);
+      if (cmi[bank][i].externalTemp!=-40) {
+        sprintf(buffer, "diybms/%d/%d/exttemp", bank,i);
+        sprintf(value, "%d", cmi[bank][i].externalTemp);
+        mqttClient.publish(buffer, 0, true, value);
+      }
 
       sprintf(buffer, "diybms/%d/%d/bypass", bank,i);
       sprintf(value, "%d", cmi[bank][i].inBypass ? 1:0);
