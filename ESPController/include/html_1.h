@@ -18,7 +18,7 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 .header a:hover{background-color:#ddd;color:#000}
 .header a.active{background-color:#1e90ff;color:#fff}
 .header-right{float:right}
-.logo { float:left; background-image: url("logo.gif");  width:191px;  height:48px;}
+.logo { float:left; background-image: url("logo.gif");width:191px;height:48px;}
 
 .info {width:100%;}
 .info .stat {display:block;width:10%;border:solid 2px gray;padding:2px;margin:2px;float:left;min-width:175px;}
@@ -33,9 +33,11 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
   stroke-width: 25px;
 }
 
-form label {width:220px;display:inline-block;text-align:right;}
-form input {width:175px;display:inline-block;padding-left:10px;padding-right:10px;margin-left:10px;}
 form > div > div { padding-bottom:8px;}
+form label {width:220px;display:inline-block;text-align:right;}
+form input {width:100px;display:inline-block;padding-left:10px;padding-right:10px;margin-left:10px;font-family:'Nova Mono',monospace;}
+form input[type='input'] {width:225px;}
+form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;color: white;background-color:#1e90ff;text-align:center;text-decoration:none;display:inline-block;font-size:14px;width:150pt;padding:10px;}
 
 @media screen and (max-width:500px){
   .header a,.header-right{float:none}
@@ -48,14 +50,10 @@ form > div > div { padding-bottom:8px;}
 }
 
 .error { color:#D8000C;background-color:#FFBABA; padding:10px;display:none; width:100%;}
-
 .success { color:#000000;background-color:#49BE3B; padding:10px;display:none; width:100%;}
-
-
 .page {clear:both; width:100%; display:none;}
 
 #settingsTable tbody td {min-width:100px;font-family: 'Nova Mono', monospace;text-align:right;}
-
 #settingsTable th {text-align:right;}
 #settingsTable .selected {background-color:#d3f9fa;}
 </style>
