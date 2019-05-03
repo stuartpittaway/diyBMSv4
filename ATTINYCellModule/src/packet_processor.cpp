@@ -26,31 +26,29 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 
 #include "packet_processor.h"
 
+// Increases the incoming packets address before sending to the next module
 void PacketProcessor::incrementPacketAddress() {
   buffer.address = (buffer.address & 0xF0) + ((buffer.address & 0x0F) + 1);
 }
 
+//Returns TRUE if the internal thermistor is hotter than the required setting
 bool PacketProcessor::BypassOverheatCheck() {
-  if (InternalTemperature() > _config->BypassOverTempShutdown ) {
-      return true;
-  }
-
-  return false;
+  return (InternalTemperature() > _config->BypassOverTempShutdown );
 }
 
+// Returns an integer byte indicating the internal thermistor temperature in degrees C
+// uses basic B Coefficient Steinhart calculaton to give rough approximation in temperature
 int8_t PacketProcessor::InternalTemperature() {
   return round(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
 }
 
+//Returns TRUE if the cell voltage is greater than the required setting
 bool PacketProcessor::BypassCheck() {
-  if (CellVoltage() > _config->BypassThresholdmV  ) {
-      //We need to start bypass
-      return true;
-  }
-
-  return false;
+  return (CellVoltage() > _config->BypassThresholdmV  );
 }
 
+//Determines if a received packet of instruction is for this module
+//based on broadcast flag, bank id and module address
 bool PacketProcessor::isPacketForMe() {
   //Modules can be grouped together in banks - only allow processing of packets in the correct bank
   if (((buffer.address & 0x30) >> 4) != _config->mybank) return false;
@@ -72,6 +70,7 @@ bool PacketProcessor::isPacketForMe() {
   return false;
 }
 
+//Records an ADC reading after the interrupt has finished
 void PacketProcessor::ADCReading(uint16_t value) {
   switch (adcmode) {
   case ADC_CELL_VOLTAGE:
@@ -93,19 +92,7 @@ void PacketProcessor::ADCReading(uint16_t value) {
   }
 }
 
-/*
-void PacketProcessor::UpdateRingBuffer(uint16_t value) {
-  //Pop off value from ring buffer
-  ringtotal -= ringbuffer[ringptr];
-  ringbuffer[ringptr] = value;
-  ringtotal += ringbuffer[ringptr];
-  ringptr++;
-  if (ringptr >= ringsize) {
-    ringptr = 0;
-  }
-}
-*/
-
+//Start an ADC reading via Interrupt
 void PacketProcessor::TakeAnAnalogueReading(uint8_t mode) {
   adcmode = mode;
 
@@ -133,17 +120,18 @@ void PacketProcessor::TakeAnAnalogueReading(uint8_t mode) {
   _hardware->BeginADCReading();
 }
 
+//Returns the memory address of the internal buffer
 byte* PacketProcessor::GetBufferPointer() {
   return (byte*)&buffer;
 }
 
+//Returns the byte size of the internal buffer
 int PacketProcessor::GetBufferSize() {
   return sizeof(buffer);
 }
 
+//Run when a new packet is received over serial
 bool PacketProcessor::onPacketReceived(const uint8_t* receivebuffer, size_t len) {
-  //if (len == 0) {    badpackets++;    return false;  }
-
   // Process your decoded incoming packet here.
   if (len == sizeof(buffer)) {
 
@@ -174,10 +162,6 @@ bool PacketProcessor::onPacketReceived(const uint8_t* receivebuffer, size_t len)
   return false;
 }
 
-//uint16_t PacketProcessor::ReadRawRingValue() {
-  //return ringtotal >> ringsize_bits;
-//}
-
 //Read cell voltage and return millivolt reading (16 bit unsigned)
 uint16_t PacketProcessor::CellVoltage() {
   //TODO: Get rid of the need for float variables?
@@ -186,15 +170,15 @@ uint16_t PacketProcessor::CellVoltage() {
   return (uint16_t) v;
 }
 
+//Returns the last RAW ADC value 0-1023
 uint16_t PacketProcessor::RawADCValue() {
   return raw_adc_voltage;
 }
 
+//This function reduces the scale of temperatures from float types to a single byte (unsigned)
+//We have an artifical floor at 40oC, anything below +40 is considered negative (below freezing)
+//Gives range of -40 to +216 degrees C
 uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
-  //This function reduces the scale of temperatures from float types to a single byte (unsigned)
-  //We have an artifical floor at 40oC, anything below +40 is considered negative (below freezing)
-  //Gives range of -40 to +216 degrees C
-
   TempInCelcius += 40;
 
   //Set the limits
@@ -204,16 +188,13 @@ uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
   return (uint8_t) TempInCelcius;
 }
 
+
+// Process the request in the received packet
 //command byte
 // RRRR CCCC
 // X    = 1 bit indicate if packet processed
 // R    = 3 bits reserved not used
 // C    = 4 bits command (16 possible commands)
-
-//commands
-// 0000 0000  = set bank
-// 0000 0001  = read voltage and status
-// 0000 0010  = identify module (flash leds)
 bool PacketProcessor::processPacket() {
   switch (buffer.command & 0x0F) {
 
@@ -264,14 +245,8 @@ bool PacketProcessor::processPacket() {
 
   case COMMAND::ReadTemperature:
     {
-      //Read temperature
-      _hardware->ReferenceVoltageOn();
-      //Allow reference voltage to stabalize
-      delay(5);
-
-      //Return both readings inside the uint16_t
+      //Read the last 2 temperature values recorded by the ADC (both internal and external)
       buffer.moduledata[mymoduleaddress] =TemperatureMeasurement();
-      _hardware->ReferenceVoltageOff();
       return true;
     }
 
@@ -354,24 +329,6 @@ bool PacketProcessor::processPacket() {
 }
 
 uint16_t PacketProcessor::TemperatureMeasurement() {
-  uint8_t value = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature));
-
-  uint8_t value2 = TemperatureToByte(Steinhart::ThermistorToCelcius(_config->External_BCoefficient, external_temperature));
-
-  return (value << 8) + value2;
+  return (TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature)) << 8) 
+    + TemperatureToByte(Steinhart::ThermistorToCelcius(_config->External_BCoefficient, external_temperature));
 }
-
-/*
-void PacketProcessor::PrefillRingBuffer() {
-  _hardware->ReferenceVoltageOn();
-
-  //Allow the 2.048V reference to stabalize
-  delay(100);
-
-  //Sample VCC lots of times so the buffer is full
-  for (int i = 0; i < ringsize*2; i++) {
-    TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
-  }
-  _hardware->ReferenceVoltageOff();
-}
-*/
