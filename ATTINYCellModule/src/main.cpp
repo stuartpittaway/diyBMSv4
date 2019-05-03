@@ -4,8 +4,6 @@
  )(_) )_)(_  \  /  ) _ < )    ( \__ \   \  /(_  _)
 (____/(____) (__) (____/(_/\/\_)(___/    \/   (_)
 
-
-
 DIYBMS V4.0
 CELL MODULE FOR ATTINY841
 
@@ -24,8 +22,6 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
   contributions under the same license as the original.
 * No additional restrictions — You may not apply legal terms or technological measures
   that legally restrict others from doing anything the license permits.
-
-
 */
 
 //#define DIYBMS_DEBUG
@@ -33,7 +29,7 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 #include <Arduino.h>
 
 #if !(F_CPU == 8000000)
-#error Processor speed should be 8Mhz internal
+#error Processor speed should be 8 Mhz internal
 #endif
 
 //An Arduino Library that facilitates packet-based serial communication using COBS or SLIP encoding.
@@ -41,154 +37,102 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 #include <PacketSerial.h>
 
 //96 byte buffer
-PacketSerial_<COBS, 0, 64> myPacketSerial;
+PacketSerial_ < COBS, 0, 64 > myPacketSerial;
 
 //Our project code includes
 #include "defines.h"
 #include "settings.h"
-
 #include <FastPID.h>
+
+#include "diybms_attiny841.h"
+#include "packet_processor.h"
 
 //Default values which get overwritten by EEPROM on power up
 CellModuleConfig myConfig;
 
-#include "diybms_attiny841.h"
+
 DiyBMSATTiny841 hardware;
 
-#include "packet_processor.h"
-PacketProcessor PP(&hardware,&myConfig);
 
-volatile bool wdt_triggered=false;
-uint16_t bypassCountDown=0;
-uint8_t bypassHasJustFinished=0;
+PacketProcessor PP( & hardware, & myConfig);
+
+volatile bool wdt_triggered = false;
+uint16_t bypassCountDown = 0;
+uint8_t bypassHasJustFinished = 0;
 
 void DefaultConfig() {
-  myConfig.LoadResistance=4.40;
+  myConfig.LoadResistance = 4.40;
 
   //About 2.2100 seems about right
-  myConfig.Calibration=2.21000;
+  myConfig.Calibration = 2.21000;
 
   //2mV per ADC resolution
-  myConfig.mVPerADC=2.0;  //2048.0/1024.0;
+  myConfig.mVPerADC = 2.0; //2048.0/1024.0;
 
   //Stop running bypass if temperature over 70 degrees C
-  myConfig.BypassOverTempShutdown=70;
+  myConfig.BypassOverTempShutdown = 70;
 
-  myConfig.mybank=0;
+  myConfig.mybank = 0;
 
   //Start bypass at 4.1 volt
-  myConfig.BypassThresholdmV=4100;
+  myConfig.BypassThresholdmV = 4100;
 
   //4150 = B constant (25-50℃)
-  myConfig.Internal_BCoefficient=4150;
+  myConfig.Internal_BCoefficient = 4150;
   //4150 = B constant (25-50℃)
-  myConfig.External_BCoefficient=4150;
+  myConfig.External_BCoefficient = 4150;
 
   // Resistance @ 25℃ = 47k, B Constant 4150, 0.20mA max current
   //Using https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html
 }
 
-
-ISR(WDT_vect){
+ISR(WDT_vect) {
   //This is the watchdog timer - something went wrong and no activity recieved in a while
-  wdt_triggered=true;
+  wdt_triggered = true;
   PP.IncrementWatchdogCounter();
 }
 
-
-ISR(ADC_vect)
-{
+ISR(ADC_vect) {
   // when ADC completed, take an interrupt and process result
   PP.ADCReading(hardware.ReadADC());
 }
 
-/*
-void BeginSetupProcedure()
-{
-  //Assume that we have just been programmed via ISP header so VCC is now at 3.3 volts (approx)
-  //Configure our ADC readings accordingly (will need fine tuning later on)
+void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
 
-  hardware.ReferenceVoltageOn();
+  if (len > 0) {
 
-  //Allow the 2.048V reference to stabalize
-  delay(100);
+    //A data packet has just arrived, process it and forward the results to the next module
+    PP.onPacketReceived(receivebuffer, len);
 
-  //Determine ADC value
-  for (size_t i = 0; i < 32; i++) {
-    PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
+    hardware.EnableSerial0TX();
+
+    //Wake up the connected cell module from sleep
+    Serial.write((byte) 0);
+    delay(10);
+
+    //Send the packet (even if it was invalid so controller can count crc errors)
+    myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
+
+    hardware.WaitForFlushSerial0();
+    hardware.DisableSerial0TX();
   }
 
-  uint16_t raw=PP.RawADCValue();
-
-  //3300 millivolt should be the voltage from our ISP programmer
-  //in reality it won't be this accurate but is a reasonable starting point
-  myConfig.Calibration = 3300.0 / ((float)raw * myConfig.mVPerADC);
-
-  #ifdef DIYBMS_DEBUG
-  Serial1.print(raw);
-  Serial1.print(F("=3.3V Calib="));
-  Serial1.println(myConfig.Calibration,6);
-  #endif
-
-  //Save settings
-  Settings::WriteConfigToEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
-
-  //We leave the reference voltages enabled so they can be probed with a multimeter if needed at this point
-
-  //Flash LED to indicate we are finished and wait for a power cycle
-  while(1) {
-    wdt_reset();
-
-    #ifdef DIYBMS_DEBUG
-    PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
-    Serial1.println(PP.ReadCellVoltageFromBuffer());
-    #endif
-
-    hardware.double_tap_green_led();
-    delay(2000);
-  }
-}
-*/
-
-void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
-
-    if (len>0) {
-
-      //A data packet has just arrived, process it and forward the results to the next module
-      PP.onPacketReceived(receivebuffer,len);
-
-      hardware.EnableSerial0TX();
-
-      //Wake up the connected cell module from sleep
-      Serial.write((byte)0);
-      delay(10);
-
-
-      //Send the packet (even if it was invalid so controller can count crc errors)
-      myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
-
-      hardware.WaitForSerial0TXFlush();
-      hardware.DisableSerial0TX();
-    }
-
-    hardware.GreenLedOff();
+  hardware.GreenLedOff();
 }
 
-
-ISR (USART0_START_vect) {
+ISR(USART0_START_vect) {
   //Needs to be here!
-  asm("NOP");
+  //asm("NOP");
 
   hardware.GreenLedOn();
 }
-
 
 //Kp: Determines how aggressively the PID reacts to the current amount of error (Proportional)
 //Ki: Determines how aggressively the PID reacts to error over time (Integral)
 //Kd: Determines how aggressively the PID reacts to the change in error (Derivative)
 
 //3Hz rate - number of times we call this code in Loop
-FastPID myPID(150.0, 2.5,5, 3, 16, false);
+FastPID myPID(150.0, 2.5, 5, 3, 16, false);
 
 void setup() {
   //Must be first line of code
@@ -204,19 +148,17 @@ void setup() {
   hardware.EnableSerial0();
 
   #ifdef DIYBMS_DEBUG
-  //UCSR1B |=(1<<TXEN1); // enable TX Serial1 for DEBUG output
-  Serial1.begin(38400,SERIAL_8N1);
+  Serial1.begin(38400, SERIAL_8N1);
   DEBUG_PRINT(F("\r\nDEBUG MODE"))
   #else
-  hardware.DisableSerial1();
+    hardware.DisableSerial1();
   #endif
 
   //Check if setup routine needs to be run
-  if (!Settings::ReadConfigFromEEPROM((char*)&myConfig, sizeof(myConfig),EEPROM_CONFIG_ADDRESS)) {
+  if (!Settings::ReadConfigFromEEPROM((char * ) & myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS)) {
     DefaultConfig();
-    //BeginSetupProcedure();
     //Save settings
-    Settings::WriteConfigToEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
+    Settings::WriteConfigToEEPROM((char * ) & myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
   }
 
   hardware.double_tap_green_led();
@@ -224,8 +166,8 @@ void setup() {
   //Set up data handler
   Serial.begin(4800, SERIAL_8N1);
 
-  myPacketSerial.setStream(&Serial);
-  myPacketSerial.setPacketHandler(&onPacketReceived);
+  myPacketSerial.setStream( & Serial);
+  myPacketSerial.setPacketHandler( & onPacketReceived);
 
   #ifdef DIYBMS_DEBUG
   if (myPID.err()) {
@@ -244,16 +186,16 @@ void loop() {
 
   //if (hztiming) {  hardware.SparePinOn();} else {  hardware.SparePinOff();}hztiming=!hztiming;
 
-  if (PP.identifyModule>0) {
+  if (PP.identifyModule > 0) {
     hardware.GreenLedOn();
     PP.identifyModule--;
 
-    if (PP.identifyModule==0) {
+    if (PP.identifyModule == 0) {
       hardware.GreenLedOff();
     }
   }
 
-  if (!PP.WeAreInBypass && bypassHasJustFinished==0) {
+  if (!PP.WeAreInBypass && bypassHasJustFinished == 0) {
     //We don't sleep if we are in bypass mode or just after completing bypass
     hardware.EnableStartFrameDetection();
 
@@ -285,26 +227,25 @@ void loop() {
   hardware.ReferenceVoltageOff();
 
   if (PP.BypassCheck()) {
-      //Our cell voltage is OVER the setpoint limit, start draining cell using load bypass resistor
+    //Our cell voltage is OVER the setpoint limit, start draining cell using load bypass resistor
 
-      if (!PP.WeAreInBypass) {
-        //We have just entered the bypass code
+    if (!PP.WeAreInBypass) {
+      //We have just entered the bypass code
 
+      //The TIMER2 can vary between 0 and 10,000
+      myPID.setOutputRange(0, 10000);
 
-        //The TIMER2 can vary between 0 and 10,000
-        myPID.setOutputRange(0,10000);
+      //Start timer2 with zero value
+      hardware.StartTimer2();
 
-        //Start timer2 with zero value
-        hardware.StartTimer2();
+      PP.WeAreInBypass = true;
 
-        PP.WeAreInBypass=true;
-
-        //This controls how many cycles of loop() we make before re-checking the situation
-        bypassCountDown=200;
-      }
+      //This controls how many cycles of loop() we make before re-checking the situation
+      bypassCountDown = 200;
+    }
   }
 
-  if (bypassCountDown>0) {
+  if (bypassCountDown > 0) {
     //Compare the real temperature against max setpoint
     //We want the PID to keep at this temperature
     //int setpoint = ;
@@ -315,10 +256,10 @@ void loop() {
 
     bypassCountDown--;
 
-    if (bypassCountDown==0) {
+    if (bypassCountDown == 0) {
       //Switch everything off for this cycle
 
-      PP.WeAreInBypass=false;
+      PP.WeAreInBypass = false;
 
       //myPID.clear();
       hardware.StopTimer2();
@@ -330,21 +271,20 @@ void loop() {
       //cell voltage reading without the bypass being enabled, and we can then
       //evaludate if we need to stay in bypass mode, we do this a few times
       //as the cell has a tendancy to float back up in voltage once load resistor is removed
-      bypassHasJustFinished=200;
+      bypassHasJustFinished = 200;
     }
   }
 
   if (wdt_triggered) {
     //We got here because the watchdog (after 8 seconds) went off - we didnt receive a packet of data
-    wdt_triggered=false;
-  } else
-  {
+    wdt_triggered = false;
+  } else {
     //Loop here processing any packets then go back to sleep
 
     //NOTE this loop size is dependant on the size of the packet buffer (34 bytes)
     //     too small a loop will prevent anything being processed as we go back to Sleep
     //     before packet is received correctly
-    for (size_t i = 0; i <15; i++) {
+    for (size_t i = 0; i < 15; i++) {
       //Allow data to be received in buffer
       delay(10);
 
@@ -353,5 +293,7 @@ void loop() {
     }
   }
 
-  if (bypassHasJustFinished>0) { bypassHasJustFinished--; }
+  if (bypassHasJustFinished > 0) {
+    bypassHasJustFinished--;
+  }
 }
