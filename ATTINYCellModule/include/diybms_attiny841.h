@@ -36,8 +36,12 @@ public:
    void ReferenceVoltageOff();
 
    void FlushSerial0();
+
    void DisableSerial0();
    void EnableSerial0();
+  
+   void DisableSerial0TX();
+   void EnableSerial0TX();
 
    void DisableSerial1();
    void EnableSerial1();
@@ -58,16 +62,11 @@ public:
    void SelectExternalTemperatureChannel();
    void EnableStartFrameDetection();
 
-   void DisableSerial0TX();
-   void EnableSerial0TX();
-   void WaitForSerial0TXFlush();
-
    void StopTimer2();
    void StartTimer2();
    void SetTimer2Value(uint16_t value);
 
    void double_tap_green_led();
-
 };
 
 #endif
