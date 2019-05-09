@@ -80,6 +80,7 @@ Ticker myTransmitTimer;
 Ticker wifiReconnectTimer;
 Ticker mqttReconnectTimer;
 Ticker myTimerSendMqttPacket;
+Ticker myTimerSendInfluxdbPacket;
 
 uint16_t sequence=0;
 
@@ -207,6 +208,65 @@ void connectToMqtt() {
   mqttClient.connect();
 }
 
+static AsyncClient * aClient = NULL;
+
+void setupInfluxClient() {
+
+  if(aClient)//client already exists
+  return;
+
+  aClient = new AsyncClient();
+  if(!aClient)//could not allocate client
+  return;
+
+  aClient->onError([](void * arg, AsyncClient * client, err_t  error){
+  Serial1.println("Connect Error");
+  aClient = NULL;
+  delete client;
+  }, NULL);
+
+  aClient->onConnect([](void * arg, AsyncClient * client){
+  Serial1.println("Connected");
+  aClient->onError(NULL, NULL);
+
+  client->onDisconnect([](void * arg, AsyncClient * c){
+  Serial1.println("Disconnected");
+  aClient = NULL;
+  delete c;
+  }, NULL);
+
+  client->onData([](void * arg, AsyncClient * c, void * data, size_t len){
+  Serial1.print("\r\nData: ");Serial1.println(len);
+  uint8_t * d = (uint8_t*)data;
+  for(size_t i=0; i<len;i++){ Serial1.write(d[i]);}
+  }, NULL);
+
+
+  //send the request
+  client->write("GET / HTTP/1.0\r\nHost: www.google.com\r\n\r\n");
+  }, NULL);
+
+}
+
+void SendInfluxdbPacket() {
+  Serial1.println("SendInfluxdbPacket");
+
+  setupInfluxClient();
+
+  if(!aClient->connect("www.google.com", 80)){
+    Serial.println("Connect Fail");
+    AsyncClient * client = aClient;
+    aClient = NULL;
+    delete client;
+  }
+
+  Serial1.println("SendInfluxdbPacket done");
+}
+
+void startTimerToInfluxdb() {
+  //myTimerSendInfluxdbPacket.attach(20, SendInfluxdbPacket);
+}
+
 void onWifiConnect(const WiFiEventStationModeGotIP& event) {
   Serial1.println("Connected to Wi-Fi.");
   Serial1.print( WiFi.status() );
@@ -227,15 +287,23 @@ void onWifiConnect(const WiFiEventStationModeGotIP& event) {
       server_running=true;
     }
 
-
   connectToMqtt();
+
+  startTimerToInfluxdb();
 }
 
 void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
   Serial1.println("Disconnected from Wi-Fi.");
-  mqttReconnectTimer.detach(); // ensure we don't reconnect to MQTT while reconnecting to Wi-Fi
+
+  // ensure we don't reconnect to MQTT while reconnecting to Wi-Fi
+  mqttReconnectTimer.detach();
   myTimerSendMqttPacket.detach();
+  myTimerSendInfluxdbPacket.detach();
+
   wifiReconnectTimer.once(2, connectToWifi);
+
+  //DIYBMSServer::StopServer(&server);
+  //server_running=false;
 }
 
 void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
@@ -260,7 +328,6 @@ void sendMqttPacket() {
 
   for (uint8_t bank = 0; bank < 4; bank++) {
     for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
-
       sprintf(buffer, "diybms/%d/%d/voltage", bank,i);
       float v=(float)cmi[bank][i].voltagemV/1000.0;
       dtostrf(v,7, 3, value);
@@ -279,17 +346,11 @@ void sendMqttPacket() {
       sprintf(buffer, "diybms/%d/%d/bypass", bank,i);
       sprintf(value, "%d", cmi[bank][i].inBypass ? 1:0);
       mqttClient.publish(buffer, 0, true, value);
-
-      //cell["v"] = cmi[bank][i].voltagemV;
-      //cell["bypass"] = cmi[bank][i].inBypass;
-      //cell["bypasshot"] = cmi[bank][i].bypassOverTemp;
-      //cell["int"] = cmi[bank][i].internalTemp;
-      //cell["ext"] = cmi[bank][i].externalTemp;
     }
   }
-
-
 }
+
+
 
 void onMqttConnect(bool sessionPresent) {
   Serial1.println("Connected to MQTT.");
@@ -340,11 +401,14 @@ void setup() {
   //We process the transmit queue every 0.5 seconds
   myTransmitTimer.attach(0.5, timerTransmitCallback);
 
-  //D0 is used to reset access point WIFI details on boot up
-  pinMode(D0,INPUT_PULLUP);
+  //D1 is used to reset access point WIFI details on boot up
+  pinMode(D1,INPUT_PULLUP);
 
   //This is normally pulled high
-  uint8_t clearAPSettings=digitalRead(D0);
+  uint8_t clearAPSettings=digitalRead(D1);
+
+  Serial1.print("Clear AP settings");
+  Serial1.println(clearAPSettings);
 
   //Also need to check here for a button being pressed to reconfigure ESP8266
   if (!DIYBMSSoftAP::LoadConfigFromEEPROM() || clearAPSettings==0) {
@@ -352,6 +416,7 @@ void setup() {
       //We are in initial power on mode (factory reset)
       DIYBMSSoftAP::SetupAccessPoint(&server);
   } else {
+      Serial1.println("Connecting to WIFI");
     /* Explicitly set the ESP8266 to be a WiFi-client, otherwise, it by default,
       would try to act as both a client and an access-point and could cause
       network-issues with your other WiFi-devices on your WiFi-network. */

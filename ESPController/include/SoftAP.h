@@ -28,7 +28,7 @@ class DIYBMSSoftAP {
   private:
       static AsyncWebServer * _myserver;
       static void handleNotFound(AsyncWebServerRequest *request);
-      static void sendHeaders();
+      
       static void handleRoot(AsyncWebServerRequest *request);
       static void handleSave(AsyncWebServerRequest *request);
 

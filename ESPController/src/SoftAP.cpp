@@ -18,11 +18,6 @@ void DIYBMSSoftAP::handleNotFound(AsyncWebServerRequest *request) {
     request->send(404, "text/plain", "Not found");
 }
 
-void DIYBMSSoftAP::sendHeaders()
-{
-  //_myserver->sendHeader("Connection", "close");
-  //_myserver->sendHeader("Cache-Control", "private");
-}
 
 String DIYBMSSoftAP::htmlHeader() {
   return String(F("<!DOCTYPE HTML>\r\n<html><head><style>.page {width:300px;margin:0 auto 0 auto;background-color:cornsilk;font-family:sans-serif;padding:22px;} label {min-width:120px;display:inline-block;padding: 22px 0 22px 0;}</style></head><body><div class=\"page\"><h1>DIY BMS</h1>"));
@@ -41,8 +36,6 @@ void DIYBMSSoftAP::handleRoot(AsyncWebServerRequest *request)
   s += DIYBMSSoftAP::networks;
   s += F("</select><label for=\"pass\">Password:</label><input type=\"password\" id=\"id\" name=\"pass\"><br/><input minlength=\"8\" maxlength=\"32\" type=\"submit\" value=\"Submit\"></form>");
   s += htmlFooter();
-
-  sendHeaders();
   request->send(200, "text/html", s);
 }
 
@@ -61,16 +54,21 @@ void DIYBMSSoftAP::handleSave(AsyncWebServerRequest *request) {
     Settings::WriteConfigToEEPROM((char*)&_config, sizeof(_config), EEPROM_WIFI_START_ADDRESS);
 
     s = htmlHeader() + F("<p>WIFI settings saved, will reboot now.</p>") + htmlFooter();
-    sendHeaders();
+
     request->send(200, "text/html", s);
 
-    delay(150);
 
-    ESP.restart();
+    Serial1.println("handleSave");
+    Serial1.println(_config.wifi_ssid);
+    Serial1.println(_config.wifi_passphrase);
+    //Delay 6 seconds
+    //for (size_t i = 0; i < 60; i++) {    delay(100);  }
+
+    //ESP.restart();
 
   } else {
     s = htmlHeader() + F("<p>WIFI settings too long.</p>") + htmlFooter();
-    sendHeaders();
+
     request->send(200, "text/html", s);
   }
 }
@@ -110,7 +108,5 @@ void DIYBMSSoftAP::SetupAccessPoint(AsyncWebServer  *webserver) {
   _myserver->on("/", HTTP_GET, handleRoot);
   _myserver->on("/save", HTTP_POST, handleSave);
   _myserver->onNotFound(handleNotFound);
-
   _myserver->begin();
-
 }
