@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name Module)(type KiCad)(uri ${KISYSMOD}/Module.pretty)(options "")(descr ""))
-)

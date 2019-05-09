@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name ESPLibrary)(type Legacy)(uri ${KIPRJMOD}/ESPLibrary.lib)(options "")(descr ""))
-)
