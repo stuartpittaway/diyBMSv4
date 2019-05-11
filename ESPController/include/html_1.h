@@ -218,6 +218,8 @@ var g1=null;
 var g2=null;
 var g3=null;
 
+var XSS_KEY="~XSS_KEY~";
+
 
 function identifyModule(button, bank, module) {
   //Populate settings div
@@ -420,7 +422,13 @@ function queryBMS() {
                 ,{xAxisIndex:1, yAxisIndex:1, name:'BypassTemperature',type:'bar', data: [], label: labelOption2 }
                 ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [], label: labelOption2 }
             ],
-            grid: [{containLabel:false,left:'5%',right:'5%',bottom:'32%'},{containLabel:false, left:'5%',right:'5%',top:'78%'}],
+            grid: [{containLabel:false,
+              left:'5%',
+              right:'5%',
+              bottom:'32%'},{containLabel:false,
+                left:'5%',
+                right:'5%',
+                top:'78%'}],
         };
 
         // use configuration item and data specified to show chart
@@ -445,7 +453,9 @@ function queryBMS() {
 
 function countdown() {
   queryBMS();
-  $("#refreshbar").width('100%').animate({ width: '-=100%' },{ duration:4000, complete: countdown, queue:false});
+  $("#refreshbar")
+    .width('100%')
+    .animate({ width: '-=100%' },{ duration:4000, complete: countdown, queue:false});
 }
 
 $(function() {

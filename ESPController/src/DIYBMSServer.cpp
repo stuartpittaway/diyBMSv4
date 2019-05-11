@@ -29,7 +29,7 @@ distribute your   contributions under the same license as the original.
 #include "DIYBMSServer.h"
 #include "ArduinoJson.h"
 #include "defines.h"
-
+#include "ESP8266TrueRandom.h"
 
 #include "html_1.h"
 #include "jquery.h"
@@ -37,8 +37,17 @@ distribute your   contributions under the same license as the original.
 #include "echarts_js.h"
 
 AsyncWebServer *DIYBMSServer::_myserver;
+String DIYBMSServer::UUIDString;
 
 
+void DIYBMSServer::generateUUID() {
+    Serial1.print("generateUUID=");
+    byte uuidNumber[16]; // UUIDs in binary form are 16 bytes long
+    ESP8266TrueRandom.uuid(uuidNumber);
+    UUIDString = ESP8266TrueRandom.uuidToString(uuidNumber);
+
+    Serial1.println(UUIDString);
+}
 
 void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
   if (request->hasParam("BypassOverTempShutdown", true) && request->hasParam("BypassThresholdmV", true)) {
@@ -155,6 +164,7 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
     } else {
       prg.sendIdentifyModuleRequest(b, m);
 
+      
       AsyncResponseStream *response =
           request->beginResponseStream("application/json");
 
@@ -254,13 +264,27 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
   request->send(response);
 }
 
+String DIYBMSServer::TemplateProcessor(const String& var)
+{
+  if(var == "XSS_KEY")
+    return DIYBMSServer::UUIDString;
+
+  return String();
+}
+
 void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
+
   _myserver = webserver;
+
+  String cookieValue="DIYBMS_XSS=";
+  cookieValue+=DIYBMSServer::UUIDString;
+  DefaultHeaders::Instance().addHeader("Set-Cookie", cookieValue);
 
   _myserver->on("/monitor.json", HTTP_GET, DIYBMSServer::monitor);
 
   _myserver->on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send_P(200, "text/html", FILE_INDEX_HTML);
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", FILE_INDEX_HTML, DIYBMSServer::TemplateProcessor);
+    request->send(response);
   });
 
   // Return GZIP'ed JQUERY code to browser

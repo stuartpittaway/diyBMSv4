@@ -32,6 +32,9 @@
    https://www.hackster.io/Aritro/getting-started-with-esp-nodemcu-using-arduinoide-aa7267
 */
 
+//See https://github.com/me-no-dev/ESPAsyncWebServer/issues/333
+#define TEMPLATE_PLACEHOLDER '~'
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <Hash.h>
@@ -48,6 +51,8 @@ AsyncWebServer server(80);
 bool server_running=false;
 
 uint8_t packetType=0;
+
+diybms_eeprom_settings mysettings;
 
 //This large array holds all the information about the modules
 //up to 4x16
@@ -123,17 +128,14 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
 
     Serial1.println();
   }
-
 }
 
 
 void timerTransmitCallback() {
-
   //Don't send another message until we have received reply from the last one
   //this slows the transmit process down a lot so potentially need to look at a better
-  //way to do this and also keep track of mising messages replies for error tracking
+  //way to do this and also keep track of missing messages replies for error tracking
   if (waitingForReply) {
-
     //Serial1.print('E');Serial1.print(receiveProc.commsError);
 
     //Increment the counter to watch for complete comms failures
@@ -177,8 +179,6 @@ void timerTransmitCallback() {
     Serial1.print(" # ");
 
     GREEN_LED_OFF;
-
-
   }
 }
 
@@ -203,6 +203,7 @@ void connectToWifi() {
   WiFi.begin(DIYBMSSoftAP::WifiSSID(), DIYBMSSoftAP::WifiPassword());
 }
 
+
 void connectToMqtt() {
   Serial1.println("Connecting to MQTT...");
   mqttClient.connect();
@@ -220,27 +221,29 @@ void setupInfluxClient() {
   return;
 
   aClient->onError([](void * arg, AsyncClient * client, err_t  error){
-  Serial1.println("Connect Error");
-  aClient = NULL;
-  delete client;
+    Serial1.println("Connect Error");
+    aClient = NULL;
+    delete client;
   }, NULL);
 
   aClient->onConnect([](void * arg, AsyncClient * client){
-  Serial1.println("Connected");
-  aClient->onError(NULL, NULL);
+    Serial1.println("Connected");
 
-  client->onDisconnect([](void * arg, AsyncClient * c){
-  Serial1.println("Disconnected");
-  aClient = NULL;
-  delete c;
+    //Send the packet here
+
+    aClient->onError(NULL, NULL);
+
+    client->onDisconnect([](void * arg, AsyncClient * c){
+    Serial1.println("Disconnected");
+    aClient = NULL;
+    delete c;
   }, NULL);
 
   client->onData([](void * arg, AsyncClient * c, void * data, size_t len){
-  Serial1.print("\r\nData: ");Serial1.println(len);
-  uint8_t * d = (uint8_t*)data;
-  for(size_t i=0; i<len;i++){ Serial1.write(d[i]);}
+    Serial1.print("\r\nData: ");Serial1.println(len);
+    uint8_t * d = (uint8_t*)data;
+    for(size_t i=0; i<len;i++){ Serial1.write(d[i]);}
   }, NULL);
-
 
   //send the request
   client->write("GET / HTTP/1.0\r\nHost: www.google.com\r\n\r\n");
@@ -263,9 +266,11 @@ void SendInfluxdbPacket() {
   Serial1.println("SendInfluxdbPacket done");
 }
 
+
 void startTimerToInfluxdb() {
-  //myTimerSendInfluxdbPacket.attach(20, SendInfluxdbPacket);
+  myTimerSendInfluxdbPacket.attach(20, SendInfluxdbPacket);
 }
+
 
 void onWifiConnect(const WiFiEventStationModeGotIP& event) {
   Serial1.println("Connected to Wi-Fi.");
@@ -281,16 +286,21 @@ void onWifiConnect(const WiFiEventStationModeGotIP& event) {
   4 : WL_CONNECT_FAILED if password is incorrect
   6 : WL_DISCONNECTED if module is not configured in station mode
   */
-    if (!server_running)
-    {
-      DIYBMSServer::StartServer(&server);
-      server_running=true;
-    }
+  if (!server_running)
+  {
+    DIYBMSServer::StartServer(&server);
+    server_running=true;
+  }
 
-  connectToMqtt();
+  if (mysettings.mqtt_enabled) {
+    connectToMqtt();
+  }
 
-  startTimerToInfluxdb();
+  if (mysettings.influxdb_enabled) {
+    startTimerToInfluxdb();
+  }
 }
+
 
 void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
   Serial1.println("Disconnected from Wi-Fi.");
@@ -350,19 +360,43 @@ void sendMqttPacket() {
   }
 }
 
-
-
 void onMqttConnect(bool sessionPresent) {
   Serial1.println("Connected to MQTT.");
   myTimerSendMqttPacket.attach(15, sendMqttPacket);
 }
 
+void LoadConfiguration() {
+
+  if (!Settings::ReadConfigFromEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS)) {
+    //EEPROM settings are invalid so default configuration
+
+    mysettings.mqtt_enabled=false;
+    mysettings.mqtt_port=1883;
+
+    strcpy(mysettings.mqtt_server,"broker.hivemq.com");
+    strcpy(mysettings.mqtt_username,"myusername");
+    strcpy(mysettings.mqtt_password,"");
+
+    mysettings.influxdb_enabled=false;
+    mysettings.influxdb_httpPort=8086;
+    strcpy(mysettings.influxdb_host,"myinfluxserver");
+    strcpy(mysettings.influxdb_database,"database");
+    strcpy(mysettings.influxdb_user,"user");
+    strcpy(mysettings.influxdb_password,"");
+  }
+
+}
 
 void setup() {
   //Serial is used for communication to modules, Serial1 is for debug output
-
   pinMode(GREEN_LED, OUTPUT);
   GREEN_LED_OFF;
+
+  //We generate a unique number which is used in all following JSON requests
+  //we use this as a simple method to avoid cross site scripting attacks
+  DIYBMSServer::generateUUID();
+
+  LoadConfiguration();
 
   numberOfModules[0]=0;
   numberOfModules[1]=0;
@@ -412,7 +446,7 @@ void setup() {
 
   //Also need to check here for a button being pressed to reconfigure ESP8266
   if (!DIYBMSSoftAP::LoadConfigFromEEPROM() || clearAPSettings==0) {
-      Serial1.println("SetupAccessPoint");
+      Serial1.println("Setup Access Point");
       //We are in initial power on mode (factory reset)
       DIYBMSSoftAP::SetupAccessPoint(&server);
   } else {

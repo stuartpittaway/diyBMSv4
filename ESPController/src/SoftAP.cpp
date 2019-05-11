@@ -53,7 +53,7 @@ void DIYBMSSoftAP::handleSave(AsyncWebServerRequest *request) {
 
     Settings::WriteConfigToEEPROM((char*)&_config, sizeof(_config), EEPROM_WIFI_START_ADDRESS);
 
-    s = htmlHeader() + F("<p>WIFI settings saved, will reboot now.</p>") + htmlFooter();
+    s = htmlHeader() + F("<p>WIFI settings saved, will reboot in 5 seconds.</p>") + htmlFooter();
 
     request->send(200, "text/html", s);
 
@@ -62,9 +62,9 @@ void DIYBMSSoftAP::handleSave(AsyncWebServerRequest *request) {
     Serial1.println(_config.wifi_ssid);
     Serial1.println(_config.wifi_passphrase);
     //Delay 6 seconds
-    //for (size_t i = 0; i < 60; i++) {    delay(100);  }
+    for (size_t i = 0; i < 60; i++) {    delay(100);  }
 
-    //ESP.restart();
+    ESP.restart();
 
   } else {
     s = htmlHeader() + F("<p>WIFI settings too long.</p>") + htmlFooter();
