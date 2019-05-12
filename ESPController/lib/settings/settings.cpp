@@ -11,7 +11,7 @@ void Settings::WriteConfigToEEPROM(char* settings, int size, uint16_t eepromStar
   }
 
   //Generate and save the checksum for the setting data block
-  uint16_t checksum = uCRC16Lib::calculate(settings, size);
+  uint16_t checksum = CRC16::CalculateArray((uint8_t*)settings, size);
   EEPROM.put(eepromStartAddress + size, checksum);
   EEPROM.end();
 }
@@ -26,7 +26,7 @@ bool Settings::ReadConfigFromEEPROM(char* settings, int size, uint16_t eepromSta
   }
 
   // Calculate the checksum
-  uint16_t checksum = uCRC16Lib::calculate(settings, size);
+  uint16_t checksum = CRC16::CalculateArray((uint8_t*)settings, size);
   uint16_t existingChecksum;
   EEPROM.get(eepromStartAddress + size, existingChecksum);
 

@@ -52,6 +52,7 @@ enum COMMAND: uint8_t
 
 //Maximum of 16 cell modules (dont change this!)
 #define maximum_cell_modules 16
+
 //NOTE THIS MUST BE EVEN IN SIZE (BYTES) ESP8266 IS 32 BIT AND WILL ALIGN AS SUCH!
 struct packet {
   uint8_t address;

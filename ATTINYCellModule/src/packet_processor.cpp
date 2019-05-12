@@ -139,7 +139,8 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
     memcpy(&buffer, receivebuffer, sizeof(buffer));
 
     //Calculate the CRC and compare to received
-    uint16_t validateCRC = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
+    //uint16_t validateCRC = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
+    uint16_t validateCRC = CRC16::CalculateArray((char*)&buffer, sizeof(buffer) - 2);
 
     if (validateCRC == buffer.crc) {
       //It's a good packet
@@ -150,7 +151,8 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
           buffer.command = buffer.command | B10000000;
 
           //Calculate new checksum over whole buffer
-          buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
+          buffer.crc =  CRC16::CalculateArray((char*)&buffer, sizeof(buffer) - 2);
+          //buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
         }
       }
       return true;

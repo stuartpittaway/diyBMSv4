@@ -24,9 +24,7 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontro
 
 #include <EEPROM.h>
 
-//Tiny and cross-device compatible CCITT CRC16 calculator library - uCRC16Lib
-//https://github.com/Naguissa/uCRC16Lib
-#include <uCRC16Lib.h>
+#include "crc16.h"
 
 #define EEPROM_storageSize 1024
 

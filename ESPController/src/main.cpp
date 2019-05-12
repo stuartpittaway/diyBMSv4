@@ -33,7 +33,7 @@
 */
 
 //See https://github.com/me-no-dev/ESPAsyncWebServer/issues/333
-//#define TEMPLATE_PLACEHOLDER '~'
+#define TEMPLATE_PLACEHOLDER '~'
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
@@ -59,6 +59,8 @@ diybms_eeprom_settings mysettings;
 CellModuleInfo cmi[4][maximum_cell_modules];
 //Size of array
 int numberOfModules[4];
+
+#include "crc16.h"
 
 #include "settings.h"
 #include "SoftAP.h"
@@ -164,7 +166,8 @@ void timerTransmitCallback() {
     sequence++;
 
     transmitBuffer.sequence=sequence;
-    transmitBuffer.crc = uCRC16Lib::calculate((char*)&transmitBuffer, sizeof(packet) - 2);
+    //transmitBuffer.crc = uCRC16Lib::calculate((char*)&transmitBuffer, sizeof(packet) - 2);
+    transmitBuffer.crc =CRC16::CalculateArray((uint8_t*)&transmitBuffer, sizeof(packet) - 2);
 
     myPacketSerial.send((byte*)&transmitBuffer, sizeof(transmitBuffer));
 

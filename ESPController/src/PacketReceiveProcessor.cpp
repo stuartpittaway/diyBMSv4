@@ -7,7 +7,7 @@ bool PacketReceiveProcessor::ProcessReply(const uint8_t* receivebuffer,
   memcpy(&_packetbuffer, receivebuffer, sizeof(_packetbuffer));
 
   // Calculate the CRC and compare to received
-  uint16_t validateCRC = uCRC16Lib::calculate((char*)&_packetbuffer, sizeof(_packetbuffer) - 2);
+  uint16_t validateCRC = CRC16::CalculateArray((uint8_t*)&_packetbuffer, sizeof(_packetbuffer) - 2);
 
   if (validateCRC == _packetbuffer.crc) {
     if (_packetbuffer.sequence == sequenceToExpect) {
