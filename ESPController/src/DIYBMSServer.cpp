@@ -41,12 +41,11 @@ String DIYBMSServer::UUIDString;
 
 
 void DIYBMSServer::generateUUID() {
-    Serial1.print("generateUUID=");
+    //Serial1.print("generateUUID=");
     byte uuidNumber[16]; // UUIDs in binary form are 16 bytes long
     ESP8266TrueRandom.uuid(uuidNumber);
     UUIDString = ESP8266TrueRandom.uuidToString(uuidNumber);
-
-    Serial1.println(UUIDString);
+    //Serial1.println(UUIDString);
 }
 
 void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
@@ -164,7 +163,7 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
     } else {
       prg.sendIdentifyModuleRequest(b, m);
 
-      
+
       AsyncResponseStream *response =
           request->beginResponseStream("application/json");
 
@@ -278,12 +277,14 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
 
   String cookieValue="DIYBMS_XSS=";
   cookieValue+=DIYBMSServer::UUIDString;
+  cookieValue+=String("; path=/; HttpOnly");
   DefaultHeaders::Instance().addHeader("Set-Cookie", cookieValue);
 
   _myserver->on("/monitor.json", HTTP_GET, DIYBMSServer::monitor);
 
   _myserver->on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", FILE_INDEX_HTML, DIYBMSServer::TemplateProcessor);
+    //, DIYBMSServer::TemplateProcessor
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", FILE_INDEX_HTML);
     request->send(response);
   });
 

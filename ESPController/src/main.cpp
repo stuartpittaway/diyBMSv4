@@ -198,7 +198,7 @@ void timerEnqueueCallback() {
 
 
 void connectToWifi() {
-  Serial.println("Connecting to Wi-Fi...");
+  Serial1.println("Connecting to Wi-Fi...");
   WiFi.mode(WIFI_STA);
   WiFi.begin(DIYBMSSoftAP::WifiSSID(), DIYBMSSoftAP::WifiPassword());
 }
@@ -257,7 +257,7 @@ void SendInfluxdbPacket() {
   setupInfluxClient();
 
   if(!aClient->connect("www.google.com", 80)){
-    Serial.println("Connect Fail");
+    Serial1.println("Connect Fail");
     AsyncClient * client = aClient;
     aClient = NULL;
     delete client;
@@ -438,14 +438,18 @@ void setup() {
   //D1 is used to reset access point WIFI details on boot up
   pinMode(D1,INPUT_PULLUP);
 
-  //This is normally pulled high
+  //This is normally pulled high, D1 is used to reset WIFI details
   uint8_t clearAPSettings=digitalRead(D1);
 
-  Serial1.print("Clear AP settings");
-  Serial1.println(clearAPSettings);
+  //Temporarly force WIFI settings
+  //wifi_eeprom_settings xxxx;
+  //strcpy(xxxx.wifi_ssid,"XXXXXXXXXXXXXXXXXXX");
+  //strcpy(xxxx.wifi_passphrase,"XXXXXXXXXXXXXXXXXXX");
+  //Settings::WriteConfigToEEPROM((char*)&xxxx, sizeof(xxxx), EEPROM_WIFI_START_ADDRESS);
 
-  //Also need to check here for a button being pressed to reconfigure ESP8266
   if (!DIYBMSSoftAP::LoadConfigFromEEPROM() || clearAPSettings==0) {
+      Serial1.print("Clear AP settings");
+      Serial1.println(clearAPSettings);
       Serial1.println("Setup Access Point");
       //We are in initial power on mode (factory reset)
       DIYBMSSoftAP::SetupAccessPoint(&server);
