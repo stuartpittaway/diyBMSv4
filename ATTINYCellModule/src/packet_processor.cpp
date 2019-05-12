@@ -33,25 +33,25 @@ void PacketProcessor::incrementPacketAddress() {
 
 //Returns TRUE if the internal thermistor is hotter than the required setting
 bool PacketProcessor::BypassOverheatCheck() {
-  return (InternalTemperature() > _config - > BypassOverTempShutdown);
+  return (InternalTemperature() > _config->  BypassOverTempShutdown);
 }
 
 // Returns an integer byte indicating the internal thermistor temperature in degrees C
 // uses basic B Coefficient Steinhart calculaton to give rough approximation in temperature
 int8_t PacketProcessor::InternalTemperature() {
-  return round(Steinhart::ThermistorToCelcius(_config - > Internal_BCoefficient, onboard_temperature));
+  return round(Steinhart::ThermistorToCelcius(_config->  Internal_BCoefficient, onboard_temperature));
 }
 
 //Returns TRUE if the cell voltage is greater than the required setting
 bool PacketProcessor::BypassCheck() {
-  return (CellVoltage() > _config - > BypassThresholdmV);
+  return (CellVoltage() > _config->  BypassThresholdmV);
 }
 
 //Determines if a received packet of instruction is for this module
 //based on broadcast flag, bank id and module address
 bool PacketProcessor::isPacketForMe() {
   //Modules can be grouped together in banks - only allow processing of packets in the correct bank
-  if (((buffer.address & 0x30) >> 4) != _config - > mybank) return false;
+  if (((buffer.address & 0x30) >> 4) != _config->  mybank) return false;
 
   //Broadcast for my bank?
   if ((buffer.address & 0x80) == 0x80) {
@@ -99,17 +99,17 @@ void PacketProcessor::TakeAnAnalogueReading(uint8_t mode) {
   switch (adcmode) {
   case ADC_CELL_VOLTAGE:
     {
-      _hardware - > SelectCellVoltageChannel();
+      _hardware-> SelectCellVoltageChannel();
       break;
     }
   case ADC_INTERNAL_TEMP:
     {
-      _hardware - > SelectInternalTemperatureChannel();
+      _hardware-> SelectInternalTemperatureChannel();
       break;
     }
   case ADC_EXTERNAL_TEMP:
     {
-      _hardware - > SelectExternalTemperatureChannel();
+      _hardware-> SelectExternalTemperatureChannel();
       break;
     }
   default:
@@ -117,7 +117,7 @@ void PacketProcessor::TakeAnAnalogueReading(uint8_t mode) {
     return;
   }
 
-  _hardware - > BeginADCReading();
+  _hardware-> BeginADCReading();
 }
 
 //Returns the memory address of the internal buffer
@@ -165,7 +165,7 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
 //Read cell voltage and return millivolt reading (16 bit unsigned)
 uint16_t PacketProcessor::CellVoltage() {
   //TODO: Get rid of the need for float variables?
-  float v = ((float) raw_adc_voltage * _config - > mVPerADC) * _config - > Calibration;
+  float v = ((float) raw_adc_voltage * _config->  mVPerADC) * _config->  Calibration;
 
   return (uint16_t) v;
 }
@@ -200,7 +200,7 @@ bool PacketProcessor::processPacket() {
   case COMMAND::SetBankIdentity:
     {
       //Set this modules bank address and store in EEPROM
-      _config - > mybank = buffer.moduledata[mymoduleaddress] & 0x30;
+      _config->  mybank = buffer.moduledata[mymoduleaddress] & 0x30;
 
       //TODO: Need to write into EEPROM....
 
@@ -261,22 +261,22 @@ bool PacketProcessor::processPacket() {
       //Report settings/configuration
 
       FLOATUNION_t myFloat;
-      myFloat.number = _config - > LoadResistance;
+      myFloat.number = _config->  LoadResistance;
       buffer.moduledata[0] = myFloat.word[0];
       buffer.moduledata[1] = myFloat.word[1];
 
-      myFloat.number = _config - > Calibration;
+      myFloat.number = _config->  Calibration;
       buffer.moduledata[2] = myFloat.word[0];
       buffer.moduledata[3] = myFloat.word[1];
 
-      myFloat.number = _config - > mVPerADC;
+      myFloat.number = _config->  mVPerADC;
       buffer.moduledata[4] = myFloat.word[0];
       buffer.moduledata[5] = myFloat.word[1];
 
-      buffer.moduledata[6] = _config - > BypassOverTempShutdown;
-      buffer.moduledata[7] = _config - > BypassThresholdmV;
-      buffer.moduledata[8] = _config - > Internal_BCoefficient;
-      buffer.moduledata[9] = _config - > External_BCoefficient;
+      buffer.moduledata[6] = _config->  BypassOverTempShutdown;
+      buffer.moduledata[7] = _config->  BypassThresholdmV;
+      buffer.moduledata[8] = _config->  Internal_BCoefficient;
+      buffer.moduledata[9] = _config->  External_BCoefficient;
 
       return true;
     }
@@ -288,35 +288,35 @@ bool PacketProcessor::processPacket() {
       myFloat.word[0] = buffer.moduledata[0];
       myFloat.word[1] = buffer.moduledata[1];
       if (myFloat.number < 0xFFFF) {
-        _config - > LoadResistance = myFloat.number;
+        _config->  LoadResistance = myFloat.number;
       }
 
       myFloat.word[0] = buffer.moduledata[2];
       myFloat.word[1] = buffer.moduledata[3];
 
       if (myFloat.number < 0xFFFF) {
-        _config - > Calibration = myFloat.number;
+        _config->  Calibration = myFloat.number;
       }
 
       myFloat.word[0] = buffer.moduledata[4];
       myFloat.word[1] = buffer.moduledata[5];
       if (myFloat.number < 0xFFFF) {
-        _config - > mVPerADC = myFloat.number;
+        _config->  mVPerADC = myFloat.number;
       }
 
       if (buffer.moduledata[6] != 0xFF) {
-        _config - > BypassOverTempShutdown = buffer.moduledata[6];
+        _config->  BypassOverTempShutdown = buffer.moduledata[6];
       }
 
       if (buffer.moduledata[7] != 0xFFFF) {
-        _config - > BypassThresholdmV = buffer.moduledata[7];
+        _config->  BypassThresholdmV = buffer.moduledata[7];
       }
       if (buffer.moduledata[8] != 0xFFFF) {
-        _config - > Internal_BCoefficient = buffer.moduledata[8];
+        _config->  Internal_BCoefficient = buffer.moduledata[8];
       }
 
       if (buffer.moduledata[9] != 0xFFFF) {
-        _config - > External_BCoefficient = buffer.moduledata[9];
+        _config->  External_BCoefficient = buffer.moduledata[9];
       }
 
       //Save settings
@@ -330,6 +330,6 @@ bool PacketProcessor::processPacket() {
 }
 
 uint16_t PacketProcessor::TemperatureMeasurement() {
-  return (TemperatureToByte(Steinhart::ThermistorToCelcius(_config - > Internal_BCoefficient, onboard_temperature)) << 8) +
-    TemperatureToByte(Steinhart::ThermistorToCelcius(_config - > External_BCoefficient, external_temperature));
+  return (TemperatureToByte(Steinhart::ThermistorToCelcius(_config->  Internal_BCoefficient, onboard_temperature)) << 8) +
+    TemperatureToByte(Steinhart::ThermistorToCelcius(_config->  External_BCoefficient, external_temperature));
 }

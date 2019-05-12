@@ -113,7 +113,7 @@ void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
     //Send the packet (even if it was invalid so controller can count crc errors)
     myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
 
-    hardware.WaitForFlushSerial0();
+    hardware.FlushSerial0();
     hardware.DisableSerial0TX();
   }
 
