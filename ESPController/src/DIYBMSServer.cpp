@@ -24,8 +24,8 @@ licensor endorses you or your use.
 distribute your   contributions under the same license as the original.
 * No additional restrictions — You may not apply legal terms or technological measures
   that legally restrict others from doing anything the license permits.
-
 */
+
 #include "DIYBMSServer.h"
 #include "ArduinoJson.h"
 #include "defines.h"
@@ -265,8 +265,12 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
 String DIYBMSServer::TemplateProcessor(const String& var)
 {
+  Serial1.println(var);
+
+
   if(var == "XSS_KEY")
     return DIYBMSServer::UUIDString;
+
 
   return String();
 }
@@ -283,15 +287,13 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/monitor.json", HTTP_GET, DIYBMSServer::monitor);
 
   _myserver->on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    //, DIYBMSServer::TemplateProcessor
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", FILE_INDEX_HTML);
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", FILE_INDEX_HTML,DIYBMSServer::TemplateProcessor);
     request->send(response);
   });
 
   // Return GZIP'ed JQUERY code to browser
   _myserver->on("/jquery.js", HTTP_GET, [](AsyncWebServerRequest *request) {
-    AsyncWebServerResponse *response = request->beginResponse_P(
-        200, "text/javascript", FILE_JQUERY, FILE_JQUERY_SIZE_BYTES);
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/javascript", FILE_JQUERY, FILE_JQUERY_SIZE_BYTES);
     response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });

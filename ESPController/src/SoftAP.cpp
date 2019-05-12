@@ -1,6 +1,5 @@
 #include "SoftAP.h"
 
-
 wifi_eeprom_settings DIYBMSSoftAP::_config;
 
 String DIYBMSSoftAP::networks;
@@ -61,7 +60,7 @@ void DIYBMSSoftAP::handleSave(AsyncWebServerRequest *request) {
     //Serial1.println("handleSave");
     //Serial1.println(_config.wifi_ssid);
     //Serial1.println(_config.wifi_passphrase);
-    
+
     //Delay 6 seconds
     for (size_t i = 0; i < 60; i++) {    delay(100);  }
 

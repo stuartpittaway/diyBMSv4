@@ -32,8 +32,6 @@
    https://www.hackster.io/Aritro/getting-started-with-esp-nodemcu-using-arduinoide-aa7267
 */
 
-//See https://github.com/me-no-dev/ESPAsyncWebServer/issues/333
-#define TEMPLATE_PLACEHOLDER '~'
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
@@ -444,8 +442,11 @@ void setup() {
   uint8_t clearAPSettings=digitalRead(D1);
 
 
-
-
+  //Temporarly force WIFI settings
+  //wifi_eeprom_settings xxxx;
+  //strcpy(xxxx.wifi_ssid,"XXXXXXXXXXXXXXXXX");
+  //strcpy(xxxx.wifi_passphrase,"XXXXXXXXXXXXXX");
+  //Settings::WriteConfigToEEPROM((char*)&xxxx, sizeof(xxxx), EEPROM_WIFI_START_ADDRESS);
 
 
   if (!DIYBMSSoftAP::LoadConfigFromEEPROM() || clearAPSettings==0) {

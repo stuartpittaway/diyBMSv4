@@ -19,20 +19,17 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 .header a.active{background-color:#1e90ff;color:#fff}
 .header-right{float:right}
 .logo { float:left; background-image: url("logo.gif");width:191px;height:48px;}
-
-.info {width:100%;}
-.info .stat {display:block;width:10%;border:solid 2px gray;padding:2px;margin:2px;float:left;min-width:175px;}
-
-.info .stat .x {display:block;width:100%;text-align:right;}
+.info {width:100%%;}
+.info .stat {display:block;width:10%%;border:solid 2px gray;padding:2px;margin:2px;float:left;min-width:175px;}
+.info .stat .x {display:block;width:100%%;text-align:right;}
 .info .stat .t {font-size:10pt;color:darkgray;}
 .info .stat .v {font-size:22pt;font-family: 'Nova Mono', monospace;font-weight:bold;color:#1e90ff;}
-#refreshbar { width:100%; padding:0; margin:0; height:4px; background-color:#d3f9fa;}
-.graphs {height:768px;width:100%; }
+#refreshbar { width:100%%; padding:0; margin:0; height:4px; background-color:#d3f9fa;}
+.graphs {height:768px;width:100%%; }
 .ct-series-a .ct-bar {
   stroke: purple;
   stroke-width: 25px;
 }
-
 form > div > div { padding-bottom:8px;}
 form label {width:220px;display:inline-block;text-align:right;}
 form input {width:100px;display:inline-block;padding-left:10px;padding-right:10px;margin-left:10px;font-family:'Nova Mono',monospace;}
@@ -49,9 +46,9 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
   .graphs {height:500px;}
 }
 
-.error { color:#D8000C;background-color:#FFBABA; padding:10px;display:none; width:100%;}
-.success { color:#000000;background-color:#49BE3B; padding:10px;display:none; width:100%;}
-.page {clear:both; width:100%; display:none;}
+.error { color:#D8000C;background-color:#FFBABA; padding:10px;display:none; width:100%%;}
+.success { color:#000000;background-color:#49BE3B; padding:10px;display:none; width:100%%;}
+.page {clear:both; width:100%%; display:none;}
 
 #settingsTable tbody td {min-width:100px;font-family: 'Nova Mono', monospace;text-align:right;}
 #settingsTable th {text-align:right;}
@@ -83,7 +80,7 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
 </div>
 
 <div class="page" id="homePage">
-<div class="graphs" style=""><div id="graph1" style="width:100%; height:100%;"></div></div>
+<div class="graphs" style=""><div id="graph1" style="width:100%%; height:100%%;"></div></div>
 </div>
 
 <div class="page" id="aboutPage">
@@ -217,9 +214,7 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
 var g1=null;
 var g2=null;
 var g3=null;
-
-var XSS_KEY="~XSS_KEY~";
-
+var XSS_KEY='%XSS_KEY%';
 
 function identifyModule(button, bank, module) {
   //Populate settings div
@@ -423,12 +418,12 @@ function queryBMS() {
                 ,{xAxisIndex:1, yAxisIndex:1, name:'CellTemperature',type:'bar',data: [], label: labelOption2 }
             ],
             grid: [{containLabel:false,
-              left:'5%',
-              right:'5%',
-              bottom:'32%'},{containLabel:false,
-                left:'5%',
-                right:'5%',
-                top:'78%'}],
+              left:'5%%',
+              right:'5%%',
+              bottom:'32%%'},{containLabel:false,
+                left:'5%%',
+                right:'5%%',
+                top:'78%%'}],
         };
 
         // use configuration item and data specified to show chart
@@ -453,9 +448,7 @@ function queryBMS() {
 
 function countdown() {
   queryBMS();
-  $("#refreshbar")
-    .width('100%')
-    .animate({ width: '-=100%' },{ duration:4000, complete: countdown, queue:false});
+  $("#refreshbar").width('100%%').animate({ width: '-=100%%' },{ duration:4000, complete: countdown, queue:false});
 }
 
 $(function() {
@@ -463,17 +456,10 @@ $(function() {
   countdown();
 
   $('#CalculateCalibration').click(function() {
-
     var currentReading=parseFloat($("#settingsTable > tbody > tr.selected > td:nth-child(3)").text());
     var currentCalib=parseFloat($("#Calib").val());
     var actualV=parseFloat($("#ActualVoltage").val());
-
-    console.log(currentReading,currentCalib,actualV);
-
     var result=(currentCalib/currentReading)*actualV;
-
-    console.log(result);
-
     $("#Calib").val(result.toFixed(4));
     return true;
   });
@@ -552,6 +538,5 @@ $(function() {
   $("#homePage").show();
 });
 </script>
-</body>
-</html>
+</body></html>
 )=====";

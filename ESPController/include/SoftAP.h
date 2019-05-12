@@ -1,6 +1,9 @@
 #ifndef SOFTAP_H_
 #define SOFTAP_H_
 
+
+
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <Hash.h>
@@ -28,7 +31,7 @@ class DIYBMSSoftAP {
   private:
       static AsyncWebServer * _myserver;
       static void handleNotFound(AsyncWebServerRequest *request);
-      
+
       static void handleRoot(AsyncWebServerRequest *request);
       static void handleSave(AsyncWebServerRequest *request);
 
