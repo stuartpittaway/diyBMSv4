@@ -33,7 +33,7 @@
 */
 
 //See https://github.com/me-no-dev/ESPAsyncWebServer/issues/333
-#define TEMPLATE_PLACEHOLDER '~'
+//#define TEMPLATE_PLACEHOLDER '~'
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
@@ -116,7 +116,6 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
   if (len==sizeof(packet)) {
     // Process decoded incoming packet
     Serial1.print("Recv:");
-
     dumpPacketToDebug((packet*)receivebuffer);
 
     if (!receiveProc.ProcessReply(receivebuffer,sequence)) {
@@ -441,11 +440,10 @@ void setup() {
   //This is normally pulled high, D1 is used to reset WIFI details
   uint8_t clearAPSettings=digitalRead(D1);
 
-  //Temporarly force WIFI settings
-  //wifi_eeprom_settings xxxx;
-  //strcpy(xxxx.wifi_ssid,"XXXXXXXXXXXXXXXXXXX");
-  //strcpy(xxxx.wifi_passphrase,"XXXXXXXXXXXXXXXXXXX");
-  //Settings::WriteConfigToEEPROM((char*)&xxxx, sizeof(xxxx), EEPROM_WIFI_START_ADDRESS);
+
+
+
+
 
   if (!DIYBMSSoftAP::LoadConfigFromEEPROM() || clearAPSettings==0) {
       Serial1.print("Clear AP settings");
@@ -455,9 +453,8 @@ void setup() {
       DIYBMSSoftAP::SetupAccessPoint(&server);
   } else {
       Serial1.println("Connecting to WIFI");
-    /* Explicitly set the ESP8266 to be a WiFi-client, otherwise, it by default,
-      would try to act as both a client and an access-point and could cause
-      network-issues with your other WiFi-devices on your WiFi-network. */
+    /* Explicitly set the ESP8266 to be a WiFi-client, otherwise by default,
+      would try to act as both a client and an access-point */
 
       wifiConnectHandler = WiFi.onStationModeGotIP(onWifiConnect);
       wifiDisconnectHandler = WiFi.onStationModeDisconnected(onWifiDisconnect);
@@ -481,5 +478,4 @@ void loop() {
   if (Serial.available()) {
     myPacketSerial.update();
   }
-
 }

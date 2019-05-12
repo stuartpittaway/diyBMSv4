@@ -136,10 +136,10 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
   if (len == sizeof(buffer)) {
 
     //Copy to our buffer (probably a better way to share memory than this)
-    memcpy( & buffer, receivebuffer, sizeof(buffer));
+    memcpy(&buffer, receivebuffer, sizeof(buffer));
 
     //Calculate the CRC and compare to received
-    uint16_t validateCRC = uCRC16Lib::calculate((char * ) & buffer, sizeof(buffer) - 2);
+    uint16_t validateCRC = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
 
     if (validateCRC == buffer.crc) {
       //It's a good packet
@@ -150,7 +150,7 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
           buffer.command = buffer.command | B10000000;
 
           //Calculate new checksum over whole buffer
-          buffer.crc = uCRC16Lib::calculate((char * ) & buffer, sizeof(buffer) - 2);
+          buffer.crc = uCRC16Lib::calculate((char*)&buffer, sizeof(buffer) - 2);
         }
       }
       return true;
@@ -165,7 +165,7 @@ bool PacketProcessor::onPacketReceived(const uint8_t * receivebuffer, size_t len
 //Read cell voltage and return millivolt reading (16 bit unsigned)
 uint16_t PacketProcessor::CellVoltage() {
   //TODO: Get rid of the need for float variables?
-  float v = ((float) raw_adc_voltage * _config->  mVPerADC) * _config->  Calibration;
+  float v = ((float) raw_adc_voltage * _config->mVPerADC) * _config->Calibration;
 
   return (uint16_t) v;
 }

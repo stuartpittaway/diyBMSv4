@@ -102,7 +102,10 @@ void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
   if (len > 0) {
 
     //A data packet has just arrived, process it and forward the results to the next module
-    PP.onPacketReceived(receivebuffer, len);
+    if (PP.onPacketReceived(receivebuffer, len)) {
+      //Only light green if packet is good
+      hardware.GreenLedOn();
+    }
 
     hardware.EnableSerial0TX();
 
@@ -124,7 +127,7 @@ ISR(USART0_START_vect) {
   //Needs to be here!
   //asm("NOP");
 
-  hardware.GreenLedOn();
+  //hardware.GreenLedOn();
 }
 
 //Kp: Determines how aggressively the PID reacts to the current amount of error (Proportional)
