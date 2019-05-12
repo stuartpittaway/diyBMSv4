@@ -184,12 +184,18 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
 <div class="page" id="integrationPage">
 <h1>Integration</h1>
 
+
 <h2>MQTT</h2>
+<p>For security, you will need to re-enter the password for the services you want to enable or modify, before you Save</p>
 <form id="mqttForm" method="POST" action="savemqtt.json">
     <div class="settings">
+    <div>
+        <label for="mqttEnabled">Enabled</label>
+        <input type="checkbox" name="mqttEnabled" id="mqttEnabled" value="" required="">
+    </div>
         <div>
             <label for="mqttServer">Server</label>
-            <input type="input" name="mqttServer" id="mqttServer" value="broker.hivemq.com" required=""  maxlength="50">
+            <input type="input" name="mqttServer" id="mqttServer" value="" required=""  maxlength="64">
         </div>
         <div>
             <label for="mqttPort">Port</label>
@@ -197,16 +203,50 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
         </div>
         <div>
             <label for="mqttUsername">Username</label>
-            <input type="input" name="mqttUsername" id="mqttUsername" value="myusername" required="" maxlength="50">
+            <input type="input" name="mqttUsername" id="mqttUsername" value="" required="" maxlength="32">
         </div>
         <div>
             <label for="mqttPassword">Password</label>
-            <input type="password" name="mqttPassword" id="mqttPassword" value="" required="" maxlength="50">
+            <input type="password" name="mqttPassword" id="mqttPassword" value="" required="" maxlength="32">
         </div>
         <input type="submit" value="Save MQTT settings"></input>
     </div>
 </form>
 </div>
+
+
+<h2>Influx Database</h2>
+<form id="influxForm" method="POST" action="saveinfluxdb.json">
+    <div class="settings">
+    <div>
+        <label for="influxEnabled">Enabled</label>
+        <input type="checkbox" name="influxEnabled" id="influxEnabled" value="" required="">
+    </div>
+        <div>
+            <label for="influxServer">Host server</label>
+            <input type="input" name="influxServer" id="influxServer" value="influx" required=""  maxlength="64">
+        </div>
+        <div>
+            <label for="influxPort">Port</label>
+            <input type="number" min="1" max="65535" step="1" name="influxPort" id="influxPort" value="1883" required="">
+        </div>
+        <div>
+            <label for="influxDatabase">Database name</label>
+            <input type="input" name="influxDatabase" id="influxDatabase" value="database" required=""  maxlength="64">
+        </div>
+        <div>
+            <label for="influxUsername">Username</label>
+            <input type="input" name="influxUsername" id="influxUsername" value="myusername" required="" maxlength="32">
+        </div>
+        <div>
+            <label for="influxPassword">Password</label>
+            <input type="password" name="influxPassword" id="influxPassword" value="" required="" maxlength="32">
+        </div>
+        <input type="submit" value="Save Influx DB settings"></input>
+    </div>
+</form>
+</div>
+
 
 </div>
 
@@ -498,6 +538,31 @@ $(function() {
     $(this).addClass("active");
     $(".page").hide();
     $("#integrationPage").show();
+
+    $("#mqttForm").hide();
+    $("#influxForm").hide();
+
+    $.getJSON( "integration.json",
+      function(data) {
+
+          $('#mqttEnabled').val(data.mqtt.enabled);
+          $('#mqttServer').val(data.mqtt.server);
+          $('#mqttPort').val(data.mqtt.port);
+          $('#mqttUsername').val(data.mqtt.username);
+          $('#mqttPassword').val("");
+
+          $('#influxEnabled').val(data.influxdb.enabled);
+          $('#influxServer').val(data.influxdb.server);
+          $('#influxPort').val(data.influxdb.port);
+          $('#influxDatabase').val(data.influxdb.database);
+          $('#influxUsername').val(data.influxdb.username);
+          $('#influxPassword').val("");
+
+          $("#mqttForm").show();
+          $("#influxForm").show();
+      }).fail(function() {}
+    );
+
     return true;
   });
 

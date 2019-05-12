@@ -182,6 +182,37 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
     request->send(500, "text/plain", "Missing parameters");
   }
 }
+
+
+void DIYBMSServer::integration(AsyncWebServerRequest *request) {
+  AsyncResponseStream *response =
+      request->beginResponseStream("application/json");
+
+  DynamicJsonDocument doc(2048);
+  JsonObject root = doc.to<JsonObject>();
+
+  JsonObject mqtt = root.createNestedObject("mqtt");
+  mqtt["enabled"] =mysettings.mqtt_enabled;
+  mqtt["port"] =mysettings.mqtt_port;
+  mqtt["server"] =mysettings.mqtt_server;
+  mqtt["username"] =mysettings.mqtt_username;
+  //We don't output the password in the json file as this could breach security
+  //mqtt["password"] =mysettings.mqtt_password;
+
+  JsonObject influxdb = root.createNestedObject("influxdb");
+  influxdb["enabled"] = mysettings.influxdb_enabled;
+  influxdb["port"] = mysettings.influxdb_httpPort;
+  influxdb["server"] = mysettings.influxdb_host;
+  influxdb["database"] = mysettings.influxdb_database;
+  influxdb["username"] = mysettings.influxdb_user;
+  //We don't output the password in the json file as this could breach security
+  //influxdb["password"] = mysettings.influxdb_password;
+
+  serializeJson(doc, *response);
+  request->send(response);
+}
+
+
 void DIYBMSServer::settings(AsyncWebServerRequest *request) {
   if (request->hasParam("m", false) && request->hasParam("b", false)) {
     AsyncWebParameter *module = request->getParam("m", false);
@@ -299,19 +330,18 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   });
 
   _myserver->on("/logo.gif", HTTP_GET, [](AsyncWebServerRequest *request) {
-    AsyncWebServerResponse *response = request->beginResponse_P(
-        200, "image/gif", FILE_LOGO, FILE_LOGO_SIZE_BYTES);
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "image/gif", FILE_LOGO, FILE_LOGO_SIZE_BYTES);
     request->send(response);
   });
 
   _myserver->on(
       "/echarts.simple.min.js", HTTP_GET, [](AsyncWebServerRequest *request) {
-        AsyncWebServerResponse *response = request->beginResponse_P(
-            200, "text/javascript", FILE_ECHARTS, FILE_ECHARTS_SIZE_BYTES);
+        AsyncWebServerResponse *response = request->beginResponse_P(200, "text/javascript", FILE_ECHARTS, FILE_ECHARTS_SIZE_BYTES);
         response->addHeader("Content-Encoding", "gzip");
         request->send(response);
       });
 
+  _myserver->on("/integration.json", HTTP_GET, DIYBMSServer::integration);
   _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
   _myserver->on("/identifyModule.json", HTTP_GET, DIYBMSServer::identifyModule);
   _myserver->on("/savesetting.json", HTTP_POST, DIYBMSServer::saveSetting);

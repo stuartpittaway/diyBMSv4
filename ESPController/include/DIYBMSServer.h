@@ -27,16 +27,15 @@ class DIYBMSServer {
       static void handleNotFound(AsyncWebServerRequest *request);
       static void monitor(AsyncWebServerRequest *request);
       static void settings(AsyncWebServerRequest *request);
+      static void integration(AsyncWebServerRequest *request);
       static void identifyModule(AsyncWebServerRequest *request);
       static void saveSetting(AsyncWebServerRequest *request);
       static void saveGlobalSetting(AsyncWebServerRequest *request);
       static String TemplateProcessor(const String& var);
-
 };
-
-
 
 extern PacketRequestGenerator prg;
 extern PacketReceiveProcessor receiveProc;
+extern diybms_eeprom_settings mysettings;
 
 #endif

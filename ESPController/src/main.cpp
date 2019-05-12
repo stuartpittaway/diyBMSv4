@@ -44,13 +44,14 @@
 
 #include "defines.h"
 
+diybms_eeprom_settings mysettings;
+
 AsyncWebServer server(80);
 
 bool server_running=false;
 
 uint8_t packetType=0;
 
-diybms_eeprom_settings mysettings;
 
 //This large array holds all the information about the modules
 //up to 4x16
