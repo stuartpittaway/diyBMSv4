@@ -1,0 +1,10 @@
+language: python
+python:
+    - "2.7"
+
+install:
+    - python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+
+script:
+    - platformio ci ATTINYCellModule/src --board=attiny841
+    - platformio ci ESPController/src --board=d1_mini_pro
