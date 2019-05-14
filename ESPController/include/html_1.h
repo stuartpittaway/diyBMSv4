@@ -5,59 +5,17 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name = "viewport" content = "width=device-width,initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
 <title>DIY BMS CONTROLLER v4</title>
-<!-- jquery-3.3.1.min.js -->
 <script src="jquery.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
 <script src="echarts.simple.min.js" integrity="" crossorigin="anonymous"></script>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;}
-.header{overflow:hidden;background-color:#d4f0fb;padding:20px 10px}
-.header a{float:left;color:#000;text-align:center;padding:12px;text-decoration:none;font-size:18px;line-height:25px;border-radius:4px}
-.header a.logo{font-size:25px;font-weight:700}
-.header a:hover{background-color:#ddd;color:#000}
-.header a.active{background-color:#1e90ff;color:#fff}
-.header-right{float:right}
-.logo { float:left; background-image: url("logo.gif");width:191px;height:48px;}
-.info {width:100%%;}
-.info .stat {display:block;width:10%%;border:solid 2px gray;padding:2px;margin:2px;float:left;min-width:175px;}
-.info .stat .x {display:block;width:100%%;text-align:right;}
-.info .stat .t {font-size:10pt;color:darkgray;}
-.info .stat .v {font-size:22pt;font-family: 'Nova Mono', monospace;font-weight:bold;color:#1e90ff;}
-#refreshbar { width:100%%; padding:0; margin:0; height:4px; background-color:#d3f9fa;}
-.graphs {height:768px;width:100%%; }
-.ct-series-a .ct-bar {
-  stroke: purple;
-  stroke-width: 25px;
-}
-form > div > div { padding-bottom:8px;}
-form label {width:220px;display:inline-block;text-align:right;}
-form input {width:100px;display:inline-block;padding-left:10px;padding-right:10px;margin-left:10px;font-family:'Nova Mono',monospace;}
-form input[type='input'] {width:225px;}
-form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;color: white;background-color:#1e90ff;text-align:center;text-decoration:none;display:inline-block;font-size:14px;width:150pt;padding:10px;}
-
-@media screen and (max-width:500px){
-  .header a,.header-right{float:none}
-  .header a{display:block;text-align:left}
-  .graphs {height:320px;}
-}
-
-@media screen and (max-width:640px){
-  .graphs {height:500px;}
-}
-
-.error { color:#D8000C;background-color:#FFBABA; padding:10px;display:none; width:100%%;}
-.success { color:#000000;background-color:#49BE3B; padding:10px;display:none; width:100%%;}
-.page {clear:both; width:100%%; display:none;}
-
-#settingsTable tbody td {min-width:100px;font-family: 'Nova Mono', monospace;text-align:right;}
-#settingsTable th {text-align:right;}
-#settingsTable .selected {background-color:#d3f9fa;}
-</style>
 </head>
 <body>
 <div class="header">
-  <div class="logo">&nbsp;</div>
+  <div class="logocontainer">
+  <img class="logo" src="logo.gif" width="191" height="48" alt="DIYBMS"/>
+  <div id="refreshbar"></div>
+  </div>
   <div class="header-right">
     <a id="home" class="active" href="#home">Home</a>
     <a id="settings" href="#settings">Settings</a>
@@ -65,7 +23,7 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
     <a id="about" href="#about">About</a>
   </div>
 </div>
-<div id='refreshbar'></div>
+
 <div id='commserr' class='error'>The controller is having difficulty communicating with the cell monitoring modules.</div>
 <div id='iperror' class='error'>Cannot communicate with the controller for status updates.</div>
 <div id='saveerror' class='error'>Failed to save settings.</div>
@@ -73,7 +31,7 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
 
 <div id="info" class="info">
 <div class="stat"><span class="x t">Voltage:</span><span class="x v" id="voltage"></span></div>
-<div class="stat"><span class="x t">Current:</span><span class="x v" id="current"></span></div>
+<!--<div class="stat"><span class="x t">Current:</span><span class="x v" id="current"></span></div>-->
 <div class="stat"><span class="x t">Packet Errors:</span><span class="x v" id="badpkt"></span></div>
 <div class="stat"><span class="x t">CRC Errors:</span><span class="x v" id="badcrc"></span></div>
 <div class="stat"><span class="x t">Ignored request errors:</span><span class="x v" id="ignored"></span></div>
@@ -103,21 +61,19 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
 
 <div class="page" id="settingsPage">
     <h1>Settings</h1>
-    <table id="settingsTable">
-        <thead>
-            <tr>
-                <th>Bank</th>
-                <th>Cell</th>
-                <th>Voltage</th>
-                <th>V. Min</th>
-                <th>V. Max</th>
-                <th>Temp Int °C</th>
-                <th>Temp Ext °C</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+
+    <div id="settingsTable">
+    <div class="th">
+    <span>Bank</span>
+    <span>Cell</span>
+    <span>Voltage</span>
+    <span class='hide'>V. Min</span>
+    <span class='hide'>V. Max</span>
+    <span class='hide'>Temp<br/>Int °C</span>
+    <span class='hide'>Temp<br/>Ext °C</span>
+    </div>
+        <div class="rows" id="settingsRows"></div>
+    </div>
 
     <div id="settingConfig">
         <h2>Settings for </h2>
@@ -183,10 +139,8 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
 
 <div class="page" id="integrationPage">
 <h1>Integration</h1>
-
-
+<p>For security, you will need to re-enter the password for the service(s) you want to enable or modify, before you save.</p>
 <h2>MQTT</h2>
-<p>For security, you will need to re-enter the password for the services you want to enable or modify, before you Save</p>
 <form id="mqttForm" method="POST" action="savemqtt.json">
     <div class="settings">
     <div>
@@ -212,7 +166,6 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border: none;c
         <input type="submit" value="Save MQTT settings"></input>
     </div>
 </form>
-</div>
 
 
 <h2>Influx Database</h2>
@@ -360,22 +313,29 @@ function queryBMS() {
 
 
     if($('#settingsPage').is(':visible')){
-        var tbody=$("#settingsTable tbody");
+        var tbody=$("#settingsRows");
 
-        if ($('#settingsTable tbody tr').length!=labels.length) {
+        if ($('#settingsRows div').length!=labels.length) {
             $("#settingConfig").hide();
+
             //Add rows if they dont exist (or incorrect amount)
-            $(tbody).find("tr").remove();
+            $(tbody).find("div").remove();
 
             $.each(labels, function( index, value ) {
-                $(tbody).append("<tr><td>"+bank[index]+"</td><td>"+value+"</td><td></td><td></td><td></td><td></td><td></td><td><button type='button' onclick='return identifyModule(this,"+bank[index]+","+value+");'>Identify</button></td><td><button type='button' onclick='return configureModule(this,"+bank[index]+","+value+");'>Configure</button></td></tr>")
+                $(tbody).append("<div><span>"
+                +bank[index]
+                +"</span><span>"
+                +value
+                +"</span><span></span><span class='hide'></span><span class='hide'></span><span class='hide'></span><span class='hide'></span><span><button type='button' onclick='return identifyModule(this,"
+                +bank[index]+","+value+");'>Identify</button></span><span><button type='button' onclick='return configureModule(this,"
+                +bank[index]+","+value+");'>Configure</button></span></div>")
             });
         }
 
-        var rows=$(tbody).find("tr");
+        var rows=$(tbody).find("div");
 
         $.each(labels, function( index, value ) {
-            var columns=$(rows[index]).find("td");
+            var columns=$(rows[index]).find("span");
 
             //$(columns[0]).html(value);
             $(columns[2]).html(voltages[index].value.toFixed(3));
@@ -496,7 +456,7 @@ $(function() {
   countdown();
 
   $('#CalculateCalibration').click(function() {
-    var currentReading=parseFloat($("#settingsTable > tbody > tr.selected > td:nth-child(3)").text());
+    var currentReading=parseFloat($("#settingsRows > div.selected > span:nth-child(3)").text());
     var currentCalib=parseFloat($("#Calib").val());
     var actualV=parseFloat($("#ActualVoltage").val());
     var result=(currentCalib/currentReading)*actualV;

@@ -32,6 +32,7 @@ distribute your   contributions under the same license as the original.
 #include "ESP8266TrueRandom.h"
 
 #include "html_1.h"
+#include "css_1.h"
 #include "jquery.h"
 #include "logo.h"
 #include "echarts_js.h"
@@ -319,6 +320,11 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
 
   _myserver->on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", FILE_INDEX_HTML,DIYBMSServer::TemplateProcessor);
+    request->send(response);
+  });
+
+  _myserver->on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/css", FILE_STYLE_CSS);
     request->send(response);
   });
 
