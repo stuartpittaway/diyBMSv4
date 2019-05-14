@@ -145,7 +145,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <div class="settings">
     <div>
         <label for="mqttEnabled">Enabled</label>
-        <input type="checkbox" name="mqttEnabled" id="mqttEnabled" value="" required="">
+        <input type="checkbox" name="mqttEnabled" id="mqttEnabled" value="">
     </div>
         <div>
             <label for="mqttServer">Server</label>
@@ -173,7 +173,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <div class="settings">
     <div>
         <label for="influxEnabled">Enabled</label>
-        <input type="checkbox" name="influxEnabled" id="influxEnabled" value="" required="">
+        <input type="checkbox" name="influxEnabled" id="influxEnabled" value="">
     </div>
         <div>
             <label for="influxServer">Host server</label>
@@ -543,7 +543,7 @@ $("#mqttForm").submit(function (e) {
          },
      });
  });
- 
+
  $("#influxForm").submit(function (e) {
       e.preventDefault();
 
@@ -579,6 +579,7 @@ $("#mqttForm").submit(function (e) {
        });
    });
 
+
    $("#globalSettingsForm").submit(function (e) {
         e.preventDefault();
 
@@ -595,6 +596,11 @@ $("#mqttForm").submit(function (e) {
         });
     });
 
+
+
+    $.ajaxSetup({
+        beforeSend:function (xhr, settings){settings.data += '&xss='+XSS_KEY;}
+    });
 
   $("#homePage").show();
 });
