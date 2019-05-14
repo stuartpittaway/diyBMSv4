@@ -49,6 +49,54 @@ void DIYBMSServer::generateUUID() {
     //Serial1.println(UUIDString);
 }
 
+void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
+  if (request->hasParam("influxEnabled", true)) {
+
+    //AsyncWebParameter *p1 = request->getParam("BypassOverTempShutdown", true);
+    //uint8_t BypassOverTempShutdown=p1->value().toInt();
+
+    //AsyncWebParameter *p2 = request->getParam("BypassThresholdmV", true);
+    //uint16_t BypassThresholdmV=p2->value().toInt();
+
+    //prg.sendSaveGlobalSetting(BypassThresholdmV,BypassOverTempShutdown);
+
+    AsyncResponseStream *response = request->beginResponseStream("application/json");
+    DynamicJsonDocument doc(2048);
+    JsonObject a = doc.to<JsonObject>().createNestedObject("success");
+    serializeJson(doc, *response);
+    request->send(response);
+
+  } else {
+    request->send(500, "text/plain", "Missing parameters");
+  }
+}
+
+
+void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
+  if (request->hasParam("mqttEnabled", true)) {
+
+    //AsyncWebParameter *p1 = request->getParam("BypassOverTempShutdown", true);
+    //uint8_t BypassOverTempShutdown=p1->value().toInt();
+
+    //AsyncWebParameter *p2 = request->getParam("BypassThresholdmV", true);
+    //uint16_t BypassThresholdmV=p2->value().toInt();
+
+    //prg.sendSaveGlobalSetting(BypassThresholdmV,BypassOverTempShutdown);
+
+    AsyncResponseStream *response = request->beginResponseStream("application/json");
+    DynamicJsonDocument doc(2048);
+    JsonObject a = doc.to<JsonObject>().createNestedObject("success");
+    serializeJson(doc, *response);
+    request->send(response);
+
+  } else {
+    request->send(500, "text/plain", "Missing parameters");
+  }
+}
+
+
+
+
 void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
   if (request->hasParam("BypassOverTempShutdown", true) && request->hasParam("BypassThresholdmV", true)) {
 
@@ -60,10 +108,9 @@ void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
 
     prg.sendSaveGlobalSetting(BypassThresholdmV,BypassOverTempShutdown);
 
+    //Just returns NULL
     AsyncResponseStream *response = request->beginResponseStream("application/json");
-
     DynamicJsonDocument doc(2048);
-
     serializeJson(doc, *response);
     request->send(response);
 
@@ -141,8 +188,8 @@ void DIYBMSServer::saveSetting(AsyncWebServerRequest *request) {
     prg.sendSaveSetting(b, m,BypassThresholdmV,BypassOverTempShutdown,LoadResistance,Calibration,mVPerADC,Internal_BCoefficient,External_BCoefficient);
 
     AsyncResponseStream *response = request->beginResponseStream("application/json");
-
     DynamicJsonDocument doc(2048);
+    JsonObject a = doc.to<JsonObject>().createNestedObject("success");
     serializeJson(doc, *response);
     request->send(response);
 }
@@ -350,8 +397,12 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/integration.json", HTTP_GET, DIYBMSServer::integration);
   _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
   _myserver->on("/identifyModule.json", HTTP_GET, DIYBMSServer::identifyModule);
+
+  //POST methods
   _myserver->on("/savesetting.json", HTTP_POST, DIYBMSServer::saveSetting);
   _myserver->on("/saveglobalsetting.json", HTTP_POST, DIYBMSServer::saveGlobalSetting);
+  _myserver->on("/savemqtt.json", HTTP_POST, DIYBMSServer::saveMQTTSetting);
+  _myserver->on("/saveinfluxdb.json", HTTP_POST, DIYBMSServer::saveInfluxDBSetting);
 
   _myserver->onNotFound(DIYBMSServer::handleNotFound);
   _myserver->begin();

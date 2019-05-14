@@ -526,6 +526,42 @@ $(function() {
     return true;
   });
 
+
+$("#mqttForm").submit(function (e) {
+     e.preventDefault();
+
+     $.ajax({
+         type: $(this).attr('method'),
+         url: $(this).attr('action'),
+         data: $(this).serialize(),
+         success: function (data) {
+             $('#settingConfig').hide();
+             $("#savesuccess").show().delay(2000).fadeOut(500);
+         },
+         error: function (data) {
+             $("#saveerror").show().delay(2000).fadeOut(500);
+         },
+     });
+ });
+ 
+ $("#influxForm").submit(function (e) {
+      e.preventDefault();
+
+      $.ajax({
+          type: $(this).attr('method'),
+          url: $(this).attr('action'),
+          data: $(this).serialize(),
+          success: function (data) {
+              $('#settingConfig').hide();
+              $("#savesuccess").show().delay(2000).fadeOut(500);
+          },
+          error: function (data) {
+              $("#saveerror").show().delay(2000).fadeOut(500);
+          },
+      });
+  });
+
+
   $("#settingsForm").submit(function (e) {
        e.preventDefault();
 

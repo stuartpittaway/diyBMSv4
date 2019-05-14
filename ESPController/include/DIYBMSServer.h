@@ -32,6 +32,8 @@ class DIYBMSServer {
       static void saveSetting(AsyncWebServerRequest *request);
       static void saveGlobalSetting(AsyncWebServerRequest *request);
       static String TemplateProcessor(const String& var);
+      static void saveMQTTSetting(AsyncWebServerRequest *request);
+      static void saveInfluxDBSetting(AsyncWebServerRequest *request);
 };
 
 extern PacketRequestGenerator prg;
