@@ -50,54 +50,109 @@ void DIYBMSServer::generateUUID() {
 }
 
 void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
   if (request->hasParam("influxEnabled", true)) {
-
-    //AsyncWebParameter *p1 = request->getParam("BypassOverTempShutdown", true);
-    //uint8_t BypassOverTempShutdown=p1->value().toInt();
-
-    //AsyncWebParameter *p2 = request->getParam("BypassThresholdmV", true);
-    //uint16_t BypassThresholdmV=p2->value().toInt();
-
-    //prg.sendSaveGlobalSetting(BypassThresholdmV,BypassOverTempShutdown);
-
-    AsyncResponseStream *response = request->beginResponseStream("application/json");
-    DynamicJsonDocument doc(2048);
-    JsonObject a = doc.to<JsonObject>().createNestedObject("success");
-    serializeJson(doc, *response);
-    request->send(response);
-
-  } else {
-    request->send(500, "text/plain", "Missing parameters");
+    AsyncWebParameter *p1 = request->getParam("influxEnabled", true);
+    mysettings.influxdb_enabled =p1->value().equals("true") ? true:false;
   }
+
+  if (request->hasParam("influxPort", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxPort", true);
+    mysettings.influxdb_httpPort =p1->value().toInt();
+  }
+
+  if (request->hasParam("influxServer", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxServer", true);
+    p1->value().toCharArray(mysettings.influxdb_host,sizeof(mysettings.influxdb_host));
+  }
+
+  if (request->hasParam("influxDatabase", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxDatabase", true);
+    p1->value().toCharArray(mysettings.influxdb_database,sizeof(mysettings.influxdb_database));
+  }
+
+  if (request->hasParam("influxUsername", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxUsername", true);
+    p1->value().toCharArray(mysettings.influxdb_user,sizeof(mysettings.influxdb_user));
+  }
+
+  if (request->hasParam("influxPassword", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxPassword", true);
+    p1->value().toCharArray(mysettings.influxdb_password,sizeof(mysettings.influxdb_password));
+  }
+
+  SendSuccess(request);
+
 }
 
+bool DIYBMSServer::validateXSS(AsyncWebServerRequest* request)
+{
+    if (request->hasHeader("Cookie")) {
+        AsyncWebHeader* cookie = request->getHeader("Cookie");
+        if (cookie->value().startsWith("DIYBMS_XSS=")) {
+            if (cookie->value().substring(11).equals(DIYBMSServer::UUIDString)) {
+                if (request->hasParam("xss", true)) {
+                    AsyncWebParameter* p1 = request->getParam("xss", true);
+
+                    if (p1->value().equals(DIYBMSServer::UUIDString) == true) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    request->send(500, "text/plain", "XSS invalid");
+    return false;
+}
+
+void DIYBMSServer::SendSuccess(AsyncWebServerRequest *request) {
+  AsyncResponseStream *response = request->beginResponseStream("application/json");
+  StaticJsonDocument<100> doc;
+  doc["success"] = true;
+  serializeJson(doc, *response);
+  request->send(response);
+}
 
 void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
-  if (request->hasParam("mqttEnabled", true)) {
+  if (!validateXSS(request)) return;
 
-    //AsyncWebParameter *p1 = request->getParam("BypassOverTempShutdown", true);
-    //uint8_t BypassOverTempShutdown=p1->value().toInt();
+    if (request->hasParam("mqttEnabled", true)) {
+      AsyncWebParameter *p1 = request->getParam("mqttEnabled", true);
+      mysettings.mqtt_enabled =p1->value().equals("true") ? true:false;
+    }
 
-    //AsyncWebParameter *p2 = request->getParam("BypassThresholdmV", true);
-    //uint16_t BypassThresholdmV=p2->value().toInt();
+    if (request->hasParam("mqttEnabled", true)) {
+      AsyncWebParameter *p1 = request->getParam("mqttPort", true);
+      mysettings.mqtt_port =p1->value().toInt();
+    }
 
-    //prg.sendSaveGlobalSetting(BypassThresholdmV,BypassOverTempShutdown);
 
-    AsyncResponseStream *response = request->beginResponseStream("application/json");
-    DynamicJsonDocument doc(2048);
-    JsonObject a = doc.to<JsonObject>().createNestedObject("success");
-    serializeJson(doc, *response);
-    request->send(response);
+    if (request->hasParam("mqttServer", true)) {
+      AsyncWebParameter *p1 = request->getParam("mqttServer", true);
+      p1->value().toCharArray(mysettings.mqtt_server,sizeof(mysettings.mqtt_server));
+    }
 
-  } else {
-    request->send(500, "text/plain", "Missing parameters");
-  }
+    if (request->hasParam("mqttUsername", true)) {
+      AsyncWebParameter *p1 = request->getParam("mqttUsername", true);
+      p1->value().toCharArray(mysettings.mqtt_username,sizeof(mysettings.mqtt_username));
+    }
+
+    if (request->hasParam("mqttPassword", true)) {
+      AsyncWebParameter *p1 = request->getParam("mqttPassword", true);
+      p1->value().toCharArray(mysettings.mqtt_password,sizeof(mysettings.mqtt_password));
+    }
+
+    SendSuccess(request);
 }
 
 
 
 
 void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
+
   if (request->hasParam("BypassOverTempShutdown", true) && request->hasParam("BypassThresholdmV", true)) {
 
     AsyncWebParameter *p1 = request->getParam("BypassOverTempShutdown", true);
@@ -109,10 +164,7 @@ void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
     prg.sendSaveGlobalSetting(BypassThresholdmV,BypassOverTempShutdown);
 
     //Just returns NULL
-    AsyncResponseStream *response = request->beginResponseStream("application/json");
-    DynamicJsonDocument doc(2048);
-    serializeJson(doc, *response);
-    request->send(response);
+    SendSuccess(request);
 
   } else {
     request->send(500, "text/plain", "Missing parameters");
@@ -125,6 +177,8 @@ void DIYBMSServer::handleNotFound(AsyncWebServerRequest *request) {
 }
 
 void DIYBMSServer::saveSetting(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
   if (request->hasParam("m", true) && request->hasParam("b", true)) {
 
     AsyncWebParameter *module = request->getParam("m", true);
@@ -187,11 +241,7 @@ void DIYBMSServer::saveSetting(AsyncWebServerRequest *request) {
 
     prg.sendSaveSetting(b, m,BypassThresholdmV,BypassOverTempShutdown,LoadResistance,Calibration,mVPerADC,Internal_BCoefficient,External_BCoefficient);
 
-    AsyncResponseStream *response = request->beginResponseStream("application/json");
-    DynamicJsonDocument doc(2048);
-    JsonObject a = doc.to<JsonObject>().createNestedObject("success");
-    serializeJson(doc, *response);
-    request->send(response);
+    SendSuccess(request);
 }
   } else {
     request->send(500, "text/plain", "Missing parameters");
@@ -212,18 +262,7 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
       prg.sendIdentifyModuleRequest(b, m);
 
 
-      AsyncResponseStream *response =
-          request->beginResponseStream("application/json");
-
-      DynamicJsonDocument doc(2048);
-      JsonObject root = doc.to<JsonObject>();
-      JsonObject a = root.createNestedObject("identifyModule");
-
-      a["bank"] = b;
-      a["module"] = m;
-
-      serializeJson(doc, *response);
-      request->send(response);
+      SendSuccess(request);
     }
 
   } else {

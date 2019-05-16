@@ -78,16 +78,16 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <div id="settingConfig">
         <h2>Settings for </h2>
         <div id='waitforsettings'>Configuration data has been requested from cell module. Please wait 5 seconds and click button again.</div>
-        <form id="settingsForm" method="POST" action="savesetting.json">
+        <form id="settingsForm" method="POST" action="savesetting.json" autocomplete="off">
             <div class="settings">
                 <input name="b" id="b" type="hidden" value="0">
                 <input name="m" id="m" type="hidden" value="0">
                 <div>
-                    <label for="BypassOverTempShutdown">Bypass Over Temp Shutdown</label>
+                    <label for="BypassOverTempShutdown">Bypass over temperature</label>
                     <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required="">
                 </div>
                 <div>
-                    <label for="BypassThresholdmV">Bypass Threshold mV</label>
+                    <label for="BypassThresholdmV">Bypass threshold mV</label>
                     <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required="">
                 </div>
                 <div>
@@ -120,15 +120,15 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 
     <div id="globalConfig">
     <h2>Global Settings</h2>
-    <p>Configure all modules using these parameters</p>
-    <form id="globalSettingsForm" method="POST" action="saveglobalsetting.json">
+    <p>Configure all connected modules (in selected bank) to use following parameters:</p>
+    <form id="globalSettingsForm" method="POST" action="saveglobalsetting.json" autocomplete="off">
         <div class="settings">
             <div>
-                <label for="g1">Bypass Over Temp Shutdown</label>
+                <label for="g1">Bypass over temperature</label>
                 <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="g1" value="70" required="">
             </div>
             <div>
-                <label for="g2">Bypass Threshold mV</label>
+                <label for="g2">Bypass threshold mV</label>
                 <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="g2" value="4100" required="">
             </div>
           </div>
@@ -141,7 +141,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <h1>Integration</h1>
 <p>For security, you will need to re-enter the password for the service(s) you want to enable or modify, before you save.</p>
 <h2>MQTT</h2>
-<form id="mqttForm" method="POST" action="savemqtt.json">
+<form id="mqttForm" method="POST" action="savemqtt.json" autocomplete="off">
     <div class="settings">
     <div>
         <label for="mqttEnabled">Enabled</label>
@@ -169,7 +169,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 
 
 <h2>Influx Database</h2>
-<form id="influxForm" method="POST" action="saveinfluxdb.json">
+<form id="influxForm" method="POST" action="saveinfluxdb.json"  autocomplete="off">
     <div class="settings">
     <div>
         <label for="influxEnabled">Enabled</label>
@@ -505,9 +505,9 @@ $(function() {
     $.getJSON( "integration.json",
       function(data) {
 
-          $('#mqttEnabled').val(data.mqtt.enabled);
-          $('#mqttServer').val(data.mqtt.server);
-          $('#mqttPort').val(data.mqtt.port);
+          $("#mqttEnabled").val(data.mqtt.enabled);
+          $("#mqttServer").val(data.mqtt.server);
+          $("#mqttPort").val(data.mqtt.port);
           $('#mqttUsername').val(data.mqtt.username);
           $('#mqttPassword').val("");
 
@@ -596,6 +596,21 @@ $("#mqttForm").submit(function (e) {
         });
     });
 
+    $("#mqttEnabled").change(function() {
+        if($(this).is(":checked")) {
+          $("#mqttForm").removeAttr("novalidate");
+        } else {
+          $("#mqttForm").attr("novalidate","");
+        }
+    });
+
+    $("#influxEnabled").change(function() {
+        if($(this).is(":checked")) {
+          $("#influxForm").removeAttr("novalidate");
+        } else {
+          $("#influxForm").attr("novalidate","");
+        }
+    });
 
 
     $.ajaxSetup({
