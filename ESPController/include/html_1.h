@@ -145,7 +145,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <div class="settings">
     <div>
         <label for="mqttEnabled">Enabled</label>
-        <input type="checkbox" name="mqttEnabled" id="mqttEnabled" value="">
+        <input type="checkbox" name="mqttEnabled" id="mqttEnabled">
     </div>
         <div>
             <label for="mqttServer">Server</label>
@@ -173,7 +173,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <div class="settings">
     <div>
         <label for="influxEnabled">Enabled</label>
-        <input type="checkbox" name="influxEnabled" id="influxEnabled" value="">
+        <input type="checkbox" name="influxEnabled" id="influxEnabled">
     </div>
         <div>
             <label for="influxServer">Host server</label>
@@ -505,18 +505,18 @@ $(function() {
     $.getJSON( "integration.json",
       function(data) {
 
-          $("#mqttEnabled").val(data.mqtt.enabled);
+          $("#mqttEnabled").prop("checked", data.mqtt.enabled );
           $("#mqttServer").val(data.mqtt.server);
           $("#mqttPort").val(data.mqtt.port);
-          $('#mqttUsername').val(data.mqtt.username);
-          $('#mqttPassword').val("");
+          $("#mqttUsername").val(data.mqtt.username);
+          $("#mqttPassword").val("");
 
-          $('#influxEnabled').val(data.influxdb.enabled);
-          $('#influxServer').val(data.influxdb.server);
-          $('#influxPort').val(data.influxdb.port);
-          $('#influxDatabase').val(data.influxdb.database);
-          $('#influxUsername').val(data.influxdb.username);
-          $('#influxPassword').val("");
+          $("#influxEnabled").prop("checked", data.influxdb.enabled );
+          $("#influxServer").val(data.influxdb.server);
+          $("#influxPort").val(data.influxdb.port);
+          $("#influxDatabase").val(data.influxdb.database);
+          $("#influxUsername").val(data.influxdb.username);
+          $("#influxPassword").val("");
 
           $("#mqttForm").show();
           $("#influxForm").show();

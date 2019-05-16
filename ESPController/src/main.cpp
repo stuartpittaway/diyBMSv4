@@ -327,8 +327,6 @@ void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
   }
 }
 
-#define MQTT_HOST IPAddress(192, 168, 0, 26)
-#define MQTT_PORT 1883
 
 void sendMqttPacket() {
   Serial1.println("Sending MQTT");
@@ -368,15 +366,18 @@ void onMqttConnect(bool sessionPresent) {
 
 void LoadConfiguration() {
 
-  if (!Settings::ReadConfigFromEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS)) {
-    //EEPROM settings are invalid so default configuration
+  if (Settings::ReadConfigFromEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS)) return;
 
+    Serial1.println("Apply default config");
+
+    //EEPROM settings are invalid so default configuration
     mysettings.mqtt_enabled=false;
     mysettings.mqtt_port=1883;
 
-    strcpy(mysettings.mqtt_server,"broker.hivemq.com");
-    strcpy(mysettings.mqtt_username,"myusername");
-    strcpy(mysettings.mqtt_password,"");
+    //Default to EMONPI default MQTT settings
+    strcpy(mysettings.mqtt_server,"192.168.0.26");
+    strcpy(mysettings.mqtt_username,"emonpi");
+    strcpy(mysettings.mqtt_password,"emonpimqtt2016");
 
     mysettings.influxdb_enabled=false;
     mysettings.influxdb_httpPort=8086;
@@ -384,8 +385,6 @@ void LoadConfiguration() {
     strcpy(mysettings.influxdb_database,"database");
     strcpy(mysettings.influxdb_user,"user");
     strcpy(mysettings.influxdb_password,"");
-  }
-
 }
 
 void setup() {
@@ -396,8 +395,6 @@ void setup() {
   //We generate a unique number which is used in all following JSON requests
   //we use this as a simple method to avoid cross site scripting attacks
   DIYBMSServer::generateUUID();
-
-  LoadConfiguration();
 
   numberOfModules[0]=0;
   numberOfModules[1]=0;
@@ -430,6 +427,8 @@ void setup() {
   Serial1.begin(115200, SERIAL_8N1);
   Serial1.setDebugOutput(true);
 
+  LoadConfiguration();
+
   //Ensure we service the cell modules every 5 seconds
   myTimer.attach(5, timerEnqueueCallback);
 
@@ -442,13 +441,11 @@ void setup() {
   //This is normally pulled high, D1 is used to reset WIFI details
   uint8_t clearAPSettings=digitalRead(D1);
 
-
   //Temporarly force WIFI settings
   //wifi_eeprom_settings xxxx;
   //strcpy(xxxx.wifi_ssid,"XXXXXXXXXXXXXXXXX");
   //strcpy(xxxx.wifi_passphrase,"XXXXXXXXXXXXXX");
   //Settings::WriteConfigToEEPROM((char*)&xxxx, sizeof(xxxx), EEPROM_WIFI_START_ADDRESS);
-
 
   if (!DIYBMSSoftAP::LoadConfigFromEEPROM() || clearAPSettings==0) {
       Serial1.print("Clear AP settings");
@@ -470,8 +467,13 @@ void setup() {
       //mqttClient.onUnsubscribe(onMqttUnsubscribe);
       //mqttClient.onMessage(onMqttMessage);
       //mqttClient.onPublish(onMqttPublish);
-      mqttClient.setServer(MQTT_HOST, MQTT_PORT);
-      mqttClient.setCredentials("emonpi","emonpimqtt2016");
+      //#define MQTT_HOST IPAddress(192, 168, 0, 26)
+
+      if (mysettings.mqtt_enabled) {
+        Serial1.println("MQTT Enabled");
+        mqttClient.setServer(mysettings.mqtt_server, mysettings.mqtt_port);
+        mqttClient.setCredentials(mysettings.mqtt_username,mysettings.mqtt_password);
+      }
 
       connectToWifi();
   }

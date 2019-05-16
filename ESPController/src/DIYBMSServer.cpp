@@ -31,6 +31,8 @@ distribute your   contributions under the same license as the original.
 #include "defines.h"
 #include "ESP8266TrueRandom.h"
 
+#include "settings.h"
+
 #include "html_1.h"
 #include "css_1.h"
 #include "jquery.h"
@@ -54,7 +56,7 @@ void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
 
   if (request->hasParam("influxEnabled", true)) {
     AsyncWebParameter *p1 = request->getParam("influxEnabled", true);
-    mysettings.influxdb_enabled =p1->value().equals("true") ? true:false;
+    mysettings.influxdb_enabled =p1->value().equals("on") ? true:false;
   }
 
   if (request->hasParam("influxPort", true)) {
@@ -82,8 +84,9 @@ void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
     p1->value().toCharArray(mysettings.influxdb_password,sizeof(mysettings.influxdb_password));
   }
 
-  SendSuccess(request);
+  Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
 
+  SendSuccess(request);
 }
 
 bool DIYBMSServer::validateXSS(AsyncWebServerRequest* request)
@@ -119,7 +122,7 @@ void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
 
     if (request->hasParam("mqttEnabled", true)) {
       AsyncWebParameter *p1 = request->getParam("mqttEnabled", true);
-      mysettings.mqtt_enabled =p1->value().equals("true") ? true:false;
+      mysettings.mqtt_enabled =p1->value().equals("on") ? true:false;
     }
 
     if (request->hasParam("mqttEnabled", true)) {
@@ -142,6 +145,8 @@ void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
       AsyncWebParameter *p1 = request->getParam("mqttPassword", true);
       p1->value().toCharArray(mysettings.mqtt_password,sizeof(mysettings.mqtt_password));
     }
+
+    Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
 
     SendSuccess(request);
 }
@@ -383,7 +388,7 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
 String DIYBMSServer::TemplateProcessor(const String& var)
 {
-  Serial1.println(var);
+  //Serial1.println(var);
 
 
   if(var == "XSS_KEY")

@@ -6,7 +6,7 @@
 #define GREEN_LED_ON digitalWrite(GREEN_LED,HIGH)
 #define GREEN_LED_OFF digitalWrite(GREEN_LED,LOW)
 
-#define EEPROM_SETTINGS_START_ADDRESS 2048
+#define EEPROM_SETTINGS_START_ADDRESS 256
 
 struct diybms_eeprom_settings {
   //NOTE this array is subject to buffer overflow vulnerabilities!

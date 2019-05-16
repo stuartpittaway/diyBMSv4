@@ -10,6 +10,7 @@
 
 #include <EEPROM.h>
 
+#include "settings.h"
 #include "ArduinoJson.h"
 #include "PacketRequestGenerator.h"
 #include "PacketReceiveProcessor.h"
