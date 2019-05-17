@@ -27,11 +27,11 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border:none;co
 .success { color:#000000;background-color:#49BE3B; padding:10px;display:none; width:100%;}
 .page {clear:both; width:100%; display:none;margin:5px;}
 
-#settingsTable span {display:inline-block;}
-#settingsTable .rows span {min-width:90px;font-family: 'Nova Mono', monospace;text-align:right;}
-#settingsTable .rows button {margin-left:20px;}
-#settingsTable .th span {text-align:right;min-width:90px}
-#settingsTable .selected {background-color:#d3f9fa;}
+#modulesTable span {display:inline-block;}
+#modulesTable .rows span {min-width:90px;font-family: 'Nova Mono', monospace;text-align:right;}
+#modulesTable .rows button {margin-left:20px;}
+#modulesTable .th span {text-align:right;min-width:90px}
+#modulesTable .selected {background-color:#d3f9fa;}
 
 @media screen and (max-width:640px){
   .header a {float:none;padding:6px;font-size:14px;line-height:20px;}
@@ -41,11 +41,11 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border:none;co
   form label {width:160px;}
   form input[type='input'] {width:175px;}
 
-  #settingsTable .hide {display:none;}
-  #settingsTable .rows span {min-width:65px;}
-  #settingsTable .rows button {margin-left:2px;}
-  #settingsTable .th span {min-width:65px}
-  
+  #modulesTable .hide {display:none;}
+  #modulesTable .rows span {min-width:65px;}
+  #modulesTable .rows button {margin-left:2px;}
+  #modulesTable .th span {min-width:65px}
+
   .logo{width:75px;height:20px;}
   .logocontainer {width:80px;height:28px;}
 }

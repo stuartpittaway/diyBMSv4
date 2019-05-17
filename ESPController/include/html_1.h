@@ -18,8 +18,9 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
   </div>
   <div class="header-right">
     <a id="home" class="active" href="#home">Home</a>
-    <a id="settings" href="#settings">Settings</a>
+    <a id="modules" href="#modules">Modules</a>
     <a id="integration" href="#integration">Integration</a>
+    <a id="settings" href="#settings">Settings</a>
     <a id="about" href="#about">About</a>
   </div>
 </div>
@@ -60,9 +61,32 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 </div>
 
 <div class="page" id="settingsPage">
-    <h1>Settings</h1>
+    <h1>Controller Settings</h1>
+    <h2>Banks</h2>
+    <p>DIYBMS supports up to 16 modules in a single bank. Up to 4 seperate banks can be configured.  Only enable a bank if you need this functionality as it slows down processing on the controller.</p>
+    <p>Combination type: Use Parallel when you have multiple banks up to 16S, or Serial if you want a single bank with up to 64S.</p>
 
-    <div id="settingsTable">
+    <form id="banksForm" method="POST" action="savebankconfig.json" autocomplete="off">
+      <div class="settings">
+        <div>
+            <label for="totalBanks">Total number of banks</label>
+            <select name="totalBanks" id="totalBanks"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        </div>
+        <div>
+            <label for="combitype">Bank combination type</label>
+            <select name="combitype" id="combitype"><option>Parallel</option><option>Serial</option></select>
+        </div>
+        <input type="submit" value="Save bank settings"></input>
+      </div>
+    </form>
+
+</div>
+
+
+<div class="page" id="modulesPage">
+    <h1>Modules</h1>
+
+    <div id="modulesTable">
     <div class="th">
     <span>Bank</span>
     <span>Cell</span>
@@ -72,11 +96,11 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <span class='hide'>Temp<br/>Int °C</span>
     <span class='hide'>Temp<br/>Ext °C</span>
     </div>
-        <div class="rows" id="settingsRows"></div>
+        <div class="rows" id="modulesRows"></div>
     </div>
 
     <div id="settingConfig">
-        <h2>Settings for </h2>
+        <h2>Settings for module </h2>
         <div id='waitforsettings'>Configuration data has been requested from cell module. Please wait 5 seconds and click button again.</div>
         <form id="settingsForm" method="POST" action="savesetting.json" autocomplete="off">
             <div class="settings">
@@ -225,10 +249,10 @@ function configureModule(button, bank, module) {
   $(button).parent().parent().addClass("selected");
 
   //Populate settings div
-  $("#settingConfig h2").html("Settings for bank:"+bank+" module:"+module);
+  $("#settingConfig h2").html("Settings for module bank:"+bank+" module:"+module);
   $("#settingConfig").show();
 
-  $.getJSON( "settings.json",
+  $.getJSON( "modules.json",
   {
        b: bank,
        m: module
@@ -313,10 +337,10 @@ function queryBMS() {
     $("#iperror").hide();
 
 
-    if($('#settingsPage').is(':visible')){
-        var tbody=$("#settingsRows");
+    if($('#modulesPage').is(':visible')){
+        var tbody=$("#modulesRows");
 
-        if ($('#settingsRows div').length!=labels.length) {
+        if ($('#modulesRows div').length!=labels.length) {
             $("#settingConfig").hide();
 
             //Add rows if they dont exist (or incorrect amount)
@@ -457,7 +481,7 @@ $(function() {
   countdown();
 
   $('#CalculateCalibration').click(function() {
-    var currentReading=parseFloat($("#settingsRows > div.selected > span:nth-child(3)").text());
+    var currentReading=parseFloat($("#modulesRows > div.selected > span:nth-child(3)").text());
     var currentCalib=parseFloat($("#Calib").val());
     var actualV=parseFloat($("#ActualVoltage").val());
     var result=(currentCalib/currentReading)*actualV;
@@ -481,18 +505,42 @@ $(function() {
     return true;
   });
 
+  $("#modules").click(function() {
+    $(".header-right a").removeClass("active");
+    $(this).addClass("active");
+    $(".page").hide();
+
+    //Remove existing table
+    $("#modulesTable tbody").find("tr").remove();
+    $("#settingConfig").hide();
+    $("#modulesPage").show();
+    return true;
+  });
+
   $("#settings").click(function() {
     $(".header-right a").removeClass("active");
     $(this).addClass("active");
     $(".page").hide();
 
-
-    //Remove existing table
-    $("#settingsTable tbody").find("tr").remove();
-    $("#settingConfig").hide();
+    $("#banksForm").hide();
     $("#settingsPage").show();
+
+    $.getJSON( "settings.json",
+      function(data) {
+          $("#totalBanks").val(data.settings.totalnumberofbanks);
+          if (data.settings.combinationparallel) {
+          $("#combitype").val("Parallel");
+        } else {
+          $("#combitype").val("Serial");
+        }
+
+          $("#banksForm").show();
+      }).fail(function() {}
+    );
+
     return true;
   });
+
 
   $("#integration").click(function() {
     $(".header-right a").removeClass("active");
@@ -573,6 +621,24 @@ $("#mqttForm").submit(function (e) {
            success: function (data) {
                $('#settingConfig').hide();
                $("#savesuccess").show().delay(2000).fadeOut(500);
+           },
+           error: function (data) {
+               $("#saveerror").show().delay(2000).fadeOut(500);
+           },
+       });
+   });
+
+
+
+  $("#banksForm").submit(function (e) {
+       e.preventDefault();
+
+       $.ajax({
+           type: $(this).attr('method'),
+           url: $(this).attr('action'),
+           data: $(this).serialize(),
+           success: function (data) {
+             $("#savesuccess").show().delay(2000).fadeOut(500);
            },
            error: function (data) {
                $("#saveerror").show().delay(2000).fadeOut(500);

@@ -27,7 +27,7 @@ class DIYBMSServer {
 
       static void handleNotFound(AsyncWebServerRequest *request);
       static void monitor(AsyncWebServerRequest *request);
-      static void settings(AsyncWebServerRequest *request);
+      static void modules(AsyncWebServerRequest *request);
       static void integration(AsyncWebServerRequest *request);
       static void identifyModule(AsyncWebServerRequest *request);
       static void saveSetting(AsyncWebServerRequest *request);
@@ -37,6 +37,8 @@ class DIYBMSServer {
       static void saveInfluxDBSetting(AsyncWebServerRequest *request);
       static bool validateXSS(AsyncWebServerRequest *request);
       static void SendSuccess(AsyncWebServerRequest *request);
+      static void settings(AsyncWebServerRequest *request);
+      static void saveBankConfiguration(AsyncWebServerRequest *request);
 };
 
 extern PacketRequestGenerator prg;

@@ -121,6 +121,28 @@ void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
   SendSuccess(request);
 }
 
+
+void DIYBMSServer::saveBankConfiguration(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
+  if (request->hasParam("totalBanks", true)) {
+    AsyncWebParameter *p1 = request->getParam("totalBanks", true);
+    mysettings.totalNumberOfBanks =p1->value().toInt();
+  }
+
+  if (request->hasParam("combitype", true)) {
+    AsyncWebParameter *p1 = request->getParam("combitype", true);
+    mysettings.combinationParallel =p1->value().equals("Parallel") ? true:false;
+  }
+
+  Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
+
+  //ConfigHasChanged = REBOOT_COUNT_DOWN;
+  SendSuccess(request);
+
+}
+
+
 void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
 
@@ -157,6 +179,7 @@ void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
     ConfigHasChanged = REBOOT_COUNT_DOWN;
     SendSuccess(request);
 }
+
 
 
 
@@ -282,6 +305,21 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
   }
 }
 
+void DIYBMSServer::settings(AsyncWebServerRequest *request) {
+  AsyncResponseStream *response =
+      request->beginResponseStream("application/json");
+
+  DynamicJsonDocument doc(2048);
+  JsonObject root = doc.to<JsonObject>();
+
+  JsonObject mqtt = root.createNestedObject("settings");
+  mqtt["totalnumberofbanks"] =mysettings.totalNumberOfBanks;
+  mqtt["combinationparallel"] =mysettings.combinationParallel;
+
+  serializeJson(doc, *response);
+  request->send(response);
+}
+
 
 void DIYBMSServer::integration(AsyncWebServerRequest *request) {
   AsyncResponseStream *response =
@@ -312,7 +350,7 @@ void DIYBMSServer::integration(AsyncWebServerRequest *request) {
 }
 
 
-void DIYBMSServer::settings(AsyncWebServerRequest *request) {
+void DIYBMSServer::modules(AsyncWebServerRequest *request) {
   if (request->hasParam("m", false) && request->hasParam("b", false)) {
     AsyncWebParameter *module = request->getParam("m", false);
     AsyncWebParameter *bank = request->getParam("b", false);
@@ -446,14 +484,17 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
       });
 
   _myserver->on("/integration.json", HTTP_GET, DIYBMSServer::integration);
-  _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
+  _myserver->on("/modules.json", HTTP_GET, DIYBMSServer::modules);
   _myserver->on("/identifyModule.json", HTTP_GET, DIYBMSServer::identifyModule);
+  _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
 
   //POST methods
   _myserver->on("/savesetting.json", HTTP_POST, DIYBMSServer::saveSetting);
   _myserver->on("/saveglobalsetting.json", HTTP_POST, DIYBMSServer::saveGlobalSetting);
   _myserver->on("/savemqtt.json", HTTP_POST, DIYBMSServer::saveMQTTSetting);
   _myserver->on("/saveinfluxdb.json", HTTP_POST, DIYBMSServer::saveInfluxDBSetting);
+  _myserver->on("/savebankconfig.json", HTTP_POST, DIYBMSServer::saveBankConfiguration);
+
 
   _myserver->onNotFound(DIYBMSServer::handleNotFound);
   _myserver->begin();

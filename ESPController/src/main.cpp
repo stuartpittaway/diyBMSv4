@@ -250,15 +250,51 @@ void setupInfluxClient()
         }, NULL);
 
         //send the request
-        //  char influxdb_database[32 + 1];
-          //char influxdb_user[32 + 1];
-          //char influxdb_password[32 + 1];
-          String x="GET / HTTP/1.0\r\nHost: "+String(mysettings.influxdb_host)+"\r\n\r\n";
 
-          Serial1.println(x.c_str());
 
-        client->write(x.c_str());
+        //Construct URL for the influxdb
+        //See API at https://docs.influxdata.com/influxdb/v1.7/tools/api/#write-http-endpoint
 
+        String poststring;
+
+        for (uint8_t bank = 0; bank < 4; bank++) {
+          for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
+
+            //Data in LINE PROTOCOL format https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/
+            poststring = poststring
+                + "cells,"
+                +"cell=" + String(bank+1)+"_"+String(i+1)
+                + " v=" + String((float)cmi[bank][i].voltagemV/1000.0)
+                + ",inttemp=" + String(cmi[bank][i].internalTemp)+"i"
+                + ",bypass=" + (cmi[bank][i].inBypass ? String("true"):String("false"));
+
+                if (cmi[bank][i].externalTemp!=-40) {
+                  //Ensure its valid
+                  poststring = poststring + ",exttemp=" + String(cmi[bank][i].internalTemp)+"i";
+                }
+                poststring = poststring + "\n";
+          }
+        }
+
+        //TODO: Need to URLEncode these values
+        //+ String(mysettings.influxdb_host) + ":" + String(mysettings.influxdb_httpPort)
+        String url = "/write?db=" + String(mysettings.influxdb_database)
+            +"&u=" + String(mysettings.influxdb_user)
+            +"&p=" + String(mysettings.influxdb_password);
+
+        String header="POST "+url+" HTTP/1.1\r\n"
+        +"Host: "+String(mysettings.influxdb_host)+"\r\n"
+        +"Connection: close\r\n"
+        +"Content-Length: "+poststring.length()+"\r\n"
+        +"Content-Type: text/plain\r\n"
+
+        +"\r\n";
+
+        Serial1.println(header.c_str());
+        Serial1.println(poststring.c_str());
+
+        client->write(header.c_str());
+        client->write(poststring.c_str());
 
     }, NULL);
 }
@@ -282,7 +318,6 @@ void SendInfluxdbPacket() {
 void startTimerToInfluxdb() {
   myTimerSendInfluxdbPacket.attach(30, SendInfluxdbPacket);
 }
-
 
 void onWifiConnect(const WiFiEventStationModeGotIP& event) {
   Serial1.println("Connected to Wi-Fi.");
@@ -340,12 +375,9 @@ void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
 
 
 void sendMqttPacket() {
-
   if (!mysettings.mqtt_enabled) return;
 
-
   Serial1.println("Sending MQTT");
-  //publish(const char* topic, uint8_t qos, bool retain, const char* payload, size_t length, bool dup, uint16_t message_id) {
 
   char buffer[50];
   char value[50];
@@ -385,6 +417,9 @@ void LoadConfiguration() {
 
     Serial1.println("Apply default config");
 
+    mysettings.totalNumberOfBanks=1;
+    mysettings.combinationParallel=true;
+
     //EEPROM settings are invalid so default configuration
     mysettings.mqtt_enabled=false;
     mysettings.mqtt_port=1883;
@@ -396,6 +431,7 @@ void LoadConfiguration() {
 
     mysettings.influxdb_enabled=false;
     mysettings.influxdb_httpPort=8086;
+
     strcpy(mysettings.influxdb_host,"myinfluxserver");
     strcpy(mysettings.influxdb_database,"database");
     strcpy(mysettings.influxdb_user,"user");
