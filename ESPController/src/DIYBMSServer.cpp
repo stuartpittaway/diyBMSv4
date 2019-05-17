@@ -42,6 +42,7 @@ distribute your   contributions under the same license as the original.
 AsyncWebServer *DIYBMSServer::_myserver;
 String DIYBMSServer::UUIDString;
 
+#define REBOOT_COUNT_DOWN 2000
 
 void DIYBMSServer::generateUUID() {
     //Serial1.print("generateUUID=");
@@ -49,44 +50,6 @@ void DIYBMSServer::generateUUID() {
     ESP8266TrueRandom.uuid(uuidNumber);
     UUIDString = ESP8266TrueRandom.uuidToString(uuidNumber);
     //Serial1.println(UUIDString);
-}
-
-void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
-  if (!validateXSS(request)) return;
-
-  if (request->hasParam("influxEnabled", true)) {
-    AsyncWebParameter *p1 = request->getParam("influxEnabled", true);
-    mysettings.influxdb_enabled =p1->value().equals("on") ? true:false;
-  }
-
-  if (request->hasParam("influxPort", true)) {
-    AsyncWebParameter *p1 = request->getParam("influxPort", true);
-    mysettings.influxdb_httpPort =p1->value().toInt();
-  }
-
-  if (request->hasParam("influxServer", true)) {
-    AsyncWebParameter *p1 = request->getParam("influxServer", true);
-    p1->value().toCharArray(mysettings.influxdb_host,sizeof(mysettings.influxdb_host));
-  }
-
-  if (request->hasParam("influxDatabase", true)) {
-    AsyncWebParameter *p1 = request->getParam("influxDatabase", true);
-    p1->value().toCharArray(mysettings.influxdb_database,sizeof(mysettings.influxdb_database));
-  }
-
-  if (request->hasParam("influxUsername", true)) {
-    AsyncWebParameter *p1 = request->getParam("influxUsername", true);
-    p1->value().toCharArray(mysettings.influxdb_user,sizeof(mysettings.influxdb_user));
-  }
-
-  if (request->hasParam("influxPassword", true)) {
-    AsyncWebParameter *p1 = request->getParam("influxPassword", true);
-    p1->value().toCharArray(mysettings.influxdb_password,sizeof(mysettings.influxdb_password));
-  }
-
-  Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
-
-  SendSuccess(request);
 }
 
 bool DIYBMSServer::validateXSS(AsyncWebServerRequest* request)
@@ -117,12 +80,55 @@ void DIYBMSServer::SendSuccess(AsyncWebServerRequest *request) {
   request->send(response);
 }
 
+void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
+  if (request->hasParam("influxEnabled", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxEnabled", true);
+    mysettings.influxdb_enabled =p1->value().equals("on") ? true:false;
+  } else {
+    mysettings.influxdb_enabled=false;
+  }
+
+  if (request->hasParam("influxPort", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxPort", true);
+    mysettings.influxdb_httpPort =p1->value().toInt();
+  }
+
+  if (request->hasParam("influxServer", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxServer", true);
+    p1->value().toCharArray(mysettings.influxdb_host,sizeof(mysettings.influxdb_host));
+  }
+
+  if (request->hasParam("influxDatabase", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxDatabase", true);
+    p1->value().toCharArray(mysettings.influxdb_database,sizeof(mysettings.influxdb_database));
+  }
+
+  if (request->hasParam("influxUsername", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxUsername", true);
+    p1->value().toCharArray(mysettings.influxdb_user,sizeof(mysettings.influxdb_user));
+  }
+
+  if (request->hasParam("influxPassword", true)) {
+    AsyncWebParameter *p1 = request->getParam("influxPassword", true);
+    p1->value().toCharArray(mysettings.influxdb_password,sizeof(mysettings.influxdb_password));
+  }
+
+  Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
+
+  ConfigHasChanged = REBOOT_COUNT_DOWN;
+  SendSuccess(request);
+}
+
 void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
 
     if (request->hasParam("mqttEnabled", true)) {
       AsyncWebParameter *p1 = request->getParam("mqttEnabled", true);
       mysettings.mqtt_enabled =p1->value().equals("on") ? true:false;
+    } else {
+      mysettings.mqtt_enabled =false;
     }
 
     if (request->hasParam("mqttEnabled", true)) {
@@ -148,6 +154,7 @@ void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
 
     Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
 
+    ConfigHasChanged = REBOOT_COUNT_DOWN;
     SendSuccess(request);
 }
 

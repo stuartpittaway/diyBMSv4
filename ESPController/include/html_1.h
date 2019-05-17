@@ -140,6 +140,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <div class="page" id="integrationPage">
 <h1>Integration</h1>
 <p>For security, you will need to re-enter the password for the service(s) you want to enable or modify, before you save.</p>
+<p>After changes are made, the controller will automatically reboot.  You will need to refresh the web page to continue.</p>
 <h2>MQTT</h2>
 <form id="mqttForm" method="POST" action="savemqtt.json" autocomplete="off">
     <div class="settings">

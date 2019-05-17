@@ -42,5 +42,5 @@ class DIYBMSServer {
 extern PacketRequestGenerator prg;
 extern PacketReceiveProcessor receiveProc;
 extern diybms_eeprom_settings mysettings;
-
+extern uint16_t ConfigHasChanged;
 #endif

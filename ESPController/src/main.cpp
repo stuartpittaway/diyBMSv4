@@ -44,6 +44,7 @@
 
 #include "defines.h"
 
+uint16_t ConfigHasChanged=0;
 diybms_eeprom_settings mysettings;
 
 AsyncWebServer server(80);
@@ -212,64 +213,74 @@ void connectToMqtt() {
 
 static AsyncClient * aClient = NULL;
 
-void setupInfluxClient() {
+void setupInfluxClient()
+{
 
-  if(aClient)//client already exists
-  return;
+    if (aClient) //client already exists
+        return;
 
-  aClient = new AsyncClient();
-  if(!aClient)//could not allocate client
-  return;
+    aClient = new AsyncClient();
+    if (!aClient) //could not allocate client
+        return;
 
-  aClient->onError([](void * arg, AsyncClient * client, err_t  error){
-    Serial1.println("Connect Error");
-    aClient = NULL;
-    delete client;
-  }, NULL);
+    aClient->onError([](void* arg, AsyncClient* client, err_t error) {
+        Serial1.println("Connect Error");
+        aClient = NULL;
+        delete client;
+    }, NULL);
 
-  aClient->onConnect([](void * arg, AsyncClient * client){
-    Serial1.println("Connected");
+    aClient->onConnect([](void* arg, AsyncClient* client) {
+        Serial1.println("Connected");
 
-    //Send the packet here
+        //Send the packet here
 
-    aClient->onError(NULL, NULL);
+        aClient->onError(NULL, NULL);
 
-    client->onDisconnect([](void * arg, AsyncClient * c){
-    Serial1.println("Disconnected");
-    aClient = NULL;
-    delete c;
-  }, NULL);
+        client->onDisconnect([](void* arg, AsyncClient* c) {
+            Serial1.println("Disconnected");
+            aClient = NULL;
+            delete c;
+        }, NULL);
 
-  client->onData([](void * arg, AsyncClient * c, void * data, size_t len){
-    Serial1.print("\r\nData: ");Serial1.println(len);
-    uint8_t * d = (uint8_t*)data;
-    for(size_t i=0; i<len;i++){ Serial1.write(d[i]);}
-  }, NULL);
+        client->onData([](void* arg, AsyncClient* c, void* data, size_t len) {
+            //Data received
+            Serial1.print("\r\nData: ");Serial1.println(len);
+            //uint8_t* d = (uint8_t*)data;
+            //for (size_t i = 0; i < len; i++) {Serial1.write(d[i]);}
+        }, NULL);
 
-  //send the request
-  client->write("GET / HTTP/1.0\r\nHost: www.google.com\r\n\r\n");
-  }, NULL);
+        //send the request
+        //  char influxdb_database[32 + 1];
+          //char influxdb_user[32 + 1];
+          //char influxdb_password[32 + 1];
+          String x="GET / HTTP/1.0\r\nHost: "+String(mysettings.influxdb_host)+"\r\n\r\n";
 
+          Serial1.println(x.c_str());
+
+        client->write(x.c_str());
+
+
+    }, NULL);
 }
 
 void SendInfluxdbPacket() {
+  if (!mysettings.influxdb_enabled) return;
+
   Serial1.println("SendInfluxdbPacket");
 
   setupInfluxClient();
 
-  if(!aClient->connect("www.google.com", 80)){
-    Serial1.println("Connect Fail");
+  if(!aClient->connect(mysettings.influxdb_host, mysettings.influxdb_httpPort )){
+    Serial1.println("Influxdb connect fail");
     AsyncClient * client = aClient;
     aClient = NULL;
     delete client;
   }
-
-  Serial1.println("SendInfluxdbPacket done");
 }
 
 
 void startTimerToInfluxdb() {
-  myTimerSendInfluxdbPacket.attach(20, SendInfluxdbPacket);
+  myTimerSendInfluxdbPacket.attach(30, SendInfluxdbPacket);
 }
 
 
@@ -329,6 +340,10 @@ void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
 
 
 void sendMqttPacket() {
+
+  if (!mysettings.mqtt_enabled) return;
+
+
   Serial1.println("Sending MQTT");
   //publish(const char* topic, uint8_t qos, bool retain, const char* payload, size_t length, bool dup, uint16_t message_id) {
 
@@ -361,7 +376,7 @@ void sendMqttPacket() {
 
 void onMqttConnect(bool sessionPresent) {
   Serial1.println("Connected to MQTT.");
-  myTimerSendMqttPacket.attach(15, sendMqttPacket);
+  myTimerSendMqttPacket.attach(30, sendMqttPacket);
 }
 
 void LoadConfiguration() {
@@ -463,11 +478,6 @@ void setup() {
 
       mqttClient.onConnect(onMqttConnect);
       mqttClient.onDisconnect(onMqttDisconnect);
-      //mqttClient.onSubscribe(onMqttSubscribe);
-      //mqttClient.onUnsubscribe(onMqttUnsubscribe);
-      //mqttClient.onMessage(onMqttMessage);
-      //mqttClient.onPublish(onMqttPublish);
-      //#define MQTT_HOST IPAddress(192, 168, 0, 26)
 
       if (mysettings.mqtt_enabled) {
         Serial1.println("MQTT Enabled");
@@ -484,5 +494,21 @@ void loop() {
   // Call update to receive, decode and process incoming packets.
   if (Serial.available()) {
     myPacketSerial.update();
+  }
+
+  if (ConfigHasChanged>0) {
+      //Auto reboot if needed (after changing MQTT or INFLUX settings)
+      //Ideally we wouldn't need to reboot if the code could sort itself out!
+      ConfigHasChanged--;
+      if (ConfigHasChanged==0) {
+        Serial1.println("RESTART AFTER CONFIG CHANGE");
+        //Stop networking
+        if (mqttClient.connected()) {
+          mqttClient.disconnect(true);
+        }
+        WiFi.disconnect();
+        ESP.restart();
+      }
+      delay(1);
   }
 }
