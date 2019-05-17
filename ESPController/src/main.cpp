@@ -187,15 +187,13 @@ void timerTransmitCallback() {
 
 void timerEnqueueCallback() {
   //this is called regularly on a timer, it determines what request to make to the modules (via the request queue)
-  //packetType++;
 
-  prg.sendCellVoltageRequest();
+  for (uint8_t b = 0; b < mysettings.totalNumberOfBanks; b++)
+  {
+    prg.sendCellVoltageRequest(b);
+    prg.sendCellTemperatureRequest(b);
+  }
 
-  //if (packetType==3) {
-    //Every few packets also get the temperature
-    prg.sendCellTemperatureRequest();
-    //packetType=0;
-  //}
 }
 
 

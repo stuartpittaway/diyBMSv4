@@ -51,7 +51,7 @@ bool PacketProcessor::BypassCheck() {
 //based on broadcast flag, bank id and module address
 bool PacketProcessor::isPacketForMe() {
   //Modules can be grouped together in banks - only allow processing of packets in the correct bank
-  if (((buffer.address & 0x30) >> 4) != _config->  mybank) return false;
+  if (((buffer.address & 0x30) >> 4) != _config->mybank) return false;
 
   //Broadcast for my bank?
   if ((buffer.address & 0x80) == 0x80) {

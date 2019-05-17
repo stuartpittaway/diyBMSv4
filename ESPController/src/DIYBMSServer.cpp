@@ -403,6 +403,9 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   JsonObject root = doc.to<JsonObject>();
 
+  root["parallel"] = mysettings.combinationParallel;
+  root["banks"] = mysettings.totalNumberOfBanks;
+
   JsonObject monitor = root.createNestedObject("monitor");
 
   // Set error flag if we have attempted to send 2 without a reply
@@ -414,8 +417,9 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   JsonArray bankArray = root.createNestedArray("bank");
 
-  for (uint8_t bank = 0; bank < 4; bank++) {
+  for (uint8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++) {
     JsonArray data = bankArray.createNestedArray();
+    
     for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
       JsonObject cell = data.createNestedObject();
       cell["v"] = cmi[bank][i].voltagemV;

@@ -31,8 +31,8 @@ class PacketRequestGenerator {
 
      void sendSaveGlobalSetting(uint16_t BypassThresholdmV,uint8_t BypassOverTempShutdown);
 
-     void sendCellVoltageRequest();
-     void sendCellTemperatureRequest();
+     void sendCellVoltageRequest(uint8_t b);
+     void sendCellTemperatureRequest(uint8_t b);
 
   private:
     Queue* _requestq;

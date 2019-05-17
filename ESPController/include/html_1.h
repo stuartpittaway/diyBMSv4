@@ -63,9 +63,8 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <div class="page" id="settingsPage">
     <h1>Controller Settings</h1>
     <h2>Banks</h2>
-    <p>DIYBMS supports up to 16 modules in a single bank. Up to 4 seperate banks can be configured.  Only enable a bank if you need this functionality as it slows down processing on the controller.</p>
+    <p>DIYBMS supports up to 16 modules in a single bank. Up to 4 seperate banks can be configured.  Only enable a bank if you need this advanced functionality as it slows down processing and can cause errors.</p>
     <p>Combination type: Use Parallel when you have multiple banks up to 16S, or Serial if you want a single bank with up to 64S.</p>
-
     <form id="banksForm" method="POST" action="savebankconfig.json" autocomplete="off">
       <div class="settings">
         <div>
@@ -79,9 +78,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
         <input type="submit" value="Save bank settings"></input>
       </div>
     </form>
-
 </div>
-
 
 <div class="page" id="modulesPage">
     <h1>Modules</h1>
