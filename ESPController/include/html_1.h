@@ -31,11 +31,21 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <div id='savesuccess' class='success'>Settings saved</div>
 
 <div id="info" class="info">
-<div class="stat"><span class="x t">Voltage:</span><span class="x v" id="voltage"></span></div>
-<!--<div class="stat"><span class="x t">Current:</span><span class="x v" id="current"></span></div>-->
-<div class="stat"><span class="x t">Packet Errors:</span><span class="x v" id="badpkt"></span></div>
-<div class="stat"><span class="x t">CRC Errors:</span><span class="x v" id="badcrc"></span></div>
-<div class="stat"><span class="x t">Ignored request errors:</span><span class="x v" id="ignored"></span></div>
+<div id="voltage1" class="stat"><span class="x t">Voltage 1:</span><span class="x v"></span></div>
+<div id="voltage2" class="stat"><span class="x t">Voltage 2:</span><span class="x v"></span></div>
+<div id="voltage3" class="stat"><span class="x t">Voltage 3:</span><span class="x v"></span></div>
+<div id="voltage4" class="stat"><span class="x t">Voltage 4:</span><span class="x v"></span></div>
+
+<div id="range1" class="stat"><span class="x t">Range 1:</span><span class="x v"></span></div>
+<div id="range2" class="stat"><span class="x t">Range 2:</span><span class="x v"></span></div>
+<div id="range3" class="stat"><span class="x t">Range 3:</span><span class="x v"></span></div>
+<div id="range4" class="stat"><span class="x t">Range 4:</span><span class="x v"></span></div>
+
+
+<div id="current" class="stat"><span class="x t">Current:</span><span class="x v"></span></div>
+<div id="badpkt" class="stat"><span class="x t">Packet Errors:</span><span class="x v"></span></div>
+<div id="badcrc" class="stat"><span class="x t">CRC Errors:</span><span class="x v"></span></div>
+<div id="ignored" class="stat"><span class="x t">Ignored request errors:</span><span class="x v"></span></div>
 </div>
 
 <div class="page" id="homePage">
@@ -284,46 +294,77 @@ function configureModule(button, bank, module) {
 
 function queryBMS() {
   $.getJSON( "monitor.json", function( jsondata ) {
+    var labels = [];
+    var bank = [];
+    var voltages = [];
+    var voltagesmin = [];
+    var voltagesmax = [];
+    var tempint = [];
+    var tempext = [];
 
-    var voltage=0.0;
-    var labels=[];
-    var bank=[];
-    var voltages=[];
-    var voltagesmin=[];
-    var voltagesmax=[];
-    var tempint=[];
-    var tempext=[];
+    var voltage = [0.0, 0.0, 0.0, 0.0];
+    //Not currently supported
+    var current = [0.0, 0.0, 0.0, 0.0];
 
-    for (var bankNumber = 0; bankNumber <4; bankNumber++) {
-    //Need to cater for banks of cells
-    $.each(jsondata.bank[bankNumber], function( index, value ) {
-      var color=value.bypass ? "#B03A5B":"#1e90ff";
-      voltages.push( { value: (parseFloat(value.v)/1000.0), itemStyle:{color: color } } );
+    var bankmin = [5000,5000,5000,5000];
+    var bankmax = [0.0,0.0,0.0,0.0];
 
-      voltagesmin.push((parseFloat(value.minv)/1000.0));
-      voltagesmax.push((parseFloat(value.maxv)/1000.0));
+    for (var bankNumber = 0; bankNumber < jsondata.banks; bankNumber++) {
+        //Need to cater for banks of cells
+        $.each(jsondata.bank[bankNumber], function(index, value) {
+            var color = value.bypass ? "#B03A5B" : "#1e90ff";
 
-      bank.push(bankNumber);
-      labels.push(index);
+            var v = (parseFloat(value.v) / 1000.0);
 
-      color=value.bypasshot ? "#B03A5B":"#1e90ff";
-      tempint.push({ value: value.int, itemStyle:{color: color } });
+            voltages.push({ value: v, itemStyle: { color: color } });
 
-      tempext.push(value.ext==-40 ? 0:value.ext  );
+            voltagesmin.push((parseFloat(value.minv) / 1000.0));
+            voltagesmax.push((parseFloat(value.maxv) / 1000.0));
 
-      //TODO: This needs to be voltage per bank not total
-      voltage+=(parseFloat(value.v)/1000.0);
-    });
-  }
+            //TODO: This looks incorrect needs to take into account bank/cell configs
+            bank.push(bankNumber);
 
+            if (jsondata.banks == 1) {
+                labels.push("" + index);
+            } else {
+                labels.push(bankNumber + "/" + index);
+            }
 
-    $("#badcrc").html(jsondata.monitor.badcrc);
-    $("#badpkt").html(jsondata.monitor.badpkt);
-    $("#ignored").html(jsondata.monitor.ignored);
+            color = value.bypasshot ? "#B03A5B" : "#1e90ff";
+            tempint.push({ value: value.int, itemStyle: { color: color } });
 
-    $("#voltage").html(voltage.toFixed(2));
+            tempext.push(value.ext == -40 ? 0 : value.ext);
 
-    $("#current").html("");
+            var bIndex=jsondata.parallel ? bankNumber:0;
+            voltage[bIndex] += v;
+            if (value.v<bankmin[bIndex]) {bankmin[bIndex]=value.v;}
+            if (value.v>bankmax[bIndex]) {bankmax[bIndex]=value.v;}
+        });
+    }
+
+    //Ignore and hide any errors which are zero
+    if (jsondata.monitor.badcrc==0) { $("#badcrc").hide(); } else { $("#badcrc .v").html(jsondata.monitor.badcrc);$("#badcrc").show();}
+    if (jsondata.monitor.badpkt==0) { $("#badpkt").hide(); } else { $("#badpkt .v").html(jsondata.monitor.badpkt);$("#badpkt").show();}
+    if (jsondata.monitor.ignored==0) { $("#ignored").hide(); } else { $("#ignored .v").html(jsondata.monitor.ignored);$("#ignored").show();}
+
+    for (var bankNumber = 0; bankNumber < 4; bankNumber++) {
+      if (bankNumber<jsondata.banks) {
+        $("#voltage"+(bankNumber+1)+" .v").html(voltage[bankNumber].toFixed(2)+"V");
+        $("#voltage"+(bankNumber+1)).show();
+
+        var range=bankmax[bankNumber]-bankmin[bankNumber];
+        $("#range"+(bankNumber+1)+" .v").html(range+"mV");
+        $("#range"+(bankNumber+1)).show();
+
+      } else {
+        $("#voltage"+(bankNumber+1)).hide();
+        $("#range"+(bankNumber+1)).hide();
+      }
+    }
+
+    //Not currently supported
+    $("#current").hide();
+    $("#current .v").html(current[0].toFixed(2));
 
     if (jsondata.monitor.commserr==true) {
       $("#commserr").show();
@@ -332,7 +373,6 @@ function queryBMS() {
     }
 
     $("#iperror").hide();
-
 
     if($('#modulesPage').is(':visible')){
         var tbody=$("#modulesRows");
@@ -428,7 +468,7 @@ function queryBMS() {
             legend: { data:['Voltage'] },
             xAxis: [{gridIndex: 0,type:'category' },{  gridIndex: 1,type:'category' }],
             yAxis: [
-              {gridIndex: 0,name:'Volts',type:'value',min:2.5,max:5.0,interval:0.25,position:'left', axisLabel: { formatter: '{value}V' }}
+              {gridIndex: 0,name:'Volts',type:'value',min:2.5,max:4.5,interval:0.25,position:'left', axisLabel: { formatter: '{value}V' }}
               ,{gridIndex: 1,name:'Temperature',type:'value',interval:10,position:'right'
               ,axisLabel:{ formatter: '{value} °C' }
               ,axisLine:{show:false, lineStyle:{type:'dotted'} } } ]

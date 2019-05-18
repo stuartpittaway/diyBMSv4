@@ -9,8 +9,8 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;}
 .header-right{float:right}
 
 .logocontainer{float:left;width:191px;height:52px;}
-.info {width:100%;}
-.info .stat {display:block;width:10%;border:solid 2px gray;padding:2px;margin:2px;float:left;min-width:175px;}
+.info {width:100%;padding:4px;}
+.info .stat {display:block;border:solid 2px gray;padding:2px;margin:2px;float:left;min-width:145px;}
 .info .stat .x {display:block;width:100%;text-align:right;}
 .info .stat .t {font-size:10pt;color:darkgray;}
 .info .stat .v {font-size:22pt;font-family: 'Nova Mono', monospace;font-weight:bold;color:#1e90ff;}
