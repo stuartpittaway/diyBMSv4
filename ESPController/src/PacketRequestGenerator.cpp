@@ -8,9 +8,24 @@ void PacketRequestGenerator::clearSettingsForAllModules() {
     cmi[2][i].settingsCached = false;
     cmi[3][i].settingsCached = false;
   }
-
-
 }
+
+
+void PacketRequestGenerator::sendMoveToBank(uint8_t b,uint8_t m,uint8_t movetobank) {
+  clearSettingsForAllModules();
+
+  setPacketAddress(false,b,m);
+
+  //Command - SetBankIdentity
+  _packetbuffer.command = COMMAND::SetBankIdentity;
+
+  clearmoduledata();
+
+  _packetbuffer.moduledata[m]=movetobank & 0x03;
+
+  pushPacketToQueue();
+}
+
 void PacketRequestGenerator::sendSaveGlobalSetting(uint16_t BypassThresholdmV,uint8_t BypassOverTempShutdown)
 {
   //Set all modules to bypass and temperature shutdown to save values

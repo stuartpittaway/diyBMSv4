@@ -31,15 +31,15 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 <div id='savesuccess' class='success'>Settings saved</div>
 
 <div id="info" class="info">
-<div id="voltage1" class="stat"><span class="x t">Voltage 1:</span><span class="x v"></span></div>
-<div id="voltage2" class="stat"><span class="x t">Voltage 2:</span><span class="x v"></span></div>
-<div id="voltage3" class="stat"><span class="x t">Voltage 3:</span><span class="x v"></span></div>
-<div id="voltage4" class="stat"><span class="x t">Voltage 4:</span><span class="x v"></span></div>
+<div id="voltage1" class="stat"><span class="x t">Voltage 0:</span><span class="x v"></span></div>
+<div id="voltage2" class="stat"><span class="x t">Voltage 1:</span><span class="x v"></span></div>
+<div id="voltage3" class="stat"><span class="x t">Voltage 2:</span><span class="x v"></span></div>
+<div id="voltage4" class="stat"><span class="x t">Voltage 3:</span><span class="x v"></span></div>
 
-<div id="range1" class="stat"><span class="x t">Range 1:</span><span class="x v"></span></div>
-<div id="range2" class="stat"><span class="x t">Range 2:</span><span class="x v"></span></div>
-<div id="range3" class="stat"><span class="x t">Range 3:</span><span class="x v"></span></div>
-<div id="range4" class="stat"><span class="x t">Range 4:</span><span class="x v"></span></div>
+<div id="range1" class="stat"><span class="x t">Range 0:</span><span class="x v"></span></div>
+<div id="range2" class="stat"><span class="x t">Range 1:</span><span class="x v"></span></div>
+<div id="range3" class="stat"><span class="x t">Range 2:</span><span class="x v"></span></div>
+<div id="range4" class="stat"><span class="x t">Range 3:</span><span class="x v"></span></div>
 
 
 <div id="current" class="stat"><span class="x t">Current:</span><span class="x v"></span></div>
@@ -143,6 +143,10 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
                 <div>
                     <label for="mVPerADC">mV per ADC reading</label>
                     <input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required="">
+                </div>
+                <div>
+                    <label for="movetobank">Move to bank</label>
+                    <select id="movetobank" name="movetobank"><option>0</option><option>1</option><option>2</option><option>3</option></select>
                 </div>
                 <input type="submit" value="Save settings"></input>
               </div>
@@ -267,7 +271,7 @@ function configureModule(button, bank, module) {
     function(data) {
 
       var div=$("#settingConfig .settings");
-      $('#b').val( data.settings.bank);
+      $('#b').val(data.settings.bank);
       $('#m').val(data.settings.module);
 
       if (data.settings.Cached==true){
@@ -278,6 +282,8 @@ function configureModule(button, bank, module) {
         $('#IntBCoef').val(data.settings.IntBCoef);
         $('#LoadRes').val(data.settings.LoadRes.toFixed(2));
         $('#mVPerADC').val(data.settings.mVPerADC.toFixed(2));
+        $('#movetobank').val(data.settings.bank);
+
         $('#settingsForm').show();
         $('#waitforsettings').hide();
       } else {
@@ -295,6 +301,7 @@ function configureModule(button, bank, module) {
 function queryBMS() {
   $.getJSON( "monitor.json", function( jsondata ) {
     var labels = [];
+    var cells = [];
     var bank = [];
     var voltages = [];
     var voltagesmin = [];
@@ -323,12 +330,10 @@ function queryBMS() {
 
             //TODO: This looks incorrect needs to take into account bank/cell configs
             bank.push(bankNumber);
+            cells.push(index);
 
-            if (jsondata.banks == 1) {
-                labels.push("" + index);
-            } else {
-                labels.push(bankNumber + "/" + index);
-            }
+
+            labels.push(bankNumber + "/" + index);
 
             color = value.bypasshot ? "#B03A5B" : "#1e90ff";
             tempint.push({ value: value.int, itemStyle: { color: color } });
@@ -348,18 +353,18 @@ function queryBMS() {
     if (jsondata.monitor.ignored==0) { $("#ignored").hide(); } else { $("#ignored .v").html(jsondata.monitor.ignored);$("#ignored").show();}
 
     for (var bankNumber = 0; bankNumber < 4; bankNumber++) {
-      if (bankNumber<jsondata.banks) {
+      if (voltage[bankNumber]>0) {
         $("#voltage"+(bankNumber+1)+" .v").html(voltage[bankNumber].toFixed(2)+"V");
-        $("#voltage"+(bankNumber+1)).show();
-
         var range=bankmax[bankNumber]-bankmin[bankNumber];
         $("#range"+(bankNumber+1)+" .v").html(range+"mV");
-        $("#range"+(bankNumber+1)).show();
 
+        $("#voltage"+(bankNumber+1)).show();
+        $("#range"+(bankNumber+1)).show();
       } else {
         $("#voltage"+(bankNumber+1)).hide();
         $("#range"+(bankNumber+1)).hide();
       }
+
     }
 
     //Not currently supported
@@ -377,13 +382,13 @@ function queryBMS() {
     if($('#modulesPage').is(':visible')){
         var tbody=$("#modulesRows");
 
-        if ($('#modulesRows div').length!=labels.length) {
+        if ($('#modulesRows div').length!=cells.length) {
             $("#settingConfig").hide();
 
             //Add rows if they dont exist (or incorrect amount)
             $(tbody).find("div").remove();
 
-            $.each(labels, function( index, value ) {
+            $.each(cells, function( index, value ) {
                 $(tbody).append("<div><span>"
                 +bank[index]
                 +"</span><span>"
@@ -396,7 +401,7 @@ function queryBMS() {
 
         var rows=$(tbody).find("div");
 
-        $.each(labels, function( index, value ) {
+        $.each(cells, function( index, value ) {
             var columns=$(rows[index]).find("span");
 
             //$(columns[0]).html(value);
@@ -548,7 +553,8 @@ $(function() {
     $(".page").hide();
 
     //Remove existing table
-    $("#modulesTable tbody").find("tr").remove();
+    $("#modulesRows").find("div").remove();
+
     $("#settingConfig").hide();
     $("#modulesPage").show();
     return true;
@@ -577,7 +583,6 @@ $(function() {
 
     return true;
   });
-
 
   $("#integration").click(function() {
     $(".header-right a").removeClass("active");
@@ -658,6 +663,11 @@ $("#mqttForm").submit(function (e) {
            success: function (data) {
                $('#settingConfig').hide();
                $("#savesuccess").show().delay(2000).fadeOut(500);
+
+               if ($("#b").val() !== $("#movetobank").val()) {
+                 //Remove existing table as we have moved banks
+                 $("#modulesRows").find("div").remove();
+               }
            },
            error: function (data) {
                $("#saveerror").show().delay(2000).fadeOut(500);
@@ -715,7 +725,6 @@ $("#mqttForm").submit(function (e) {
           $("#influxForm").attr("novalidate","");
         }
     });
-
 
     $.ajaxSetup({
         beforeSend:function (xhr, settings){settings.data += '&xss='+XSS_KEY;}

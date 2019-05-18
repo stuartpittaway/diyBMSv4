@@ -39,6 +39,7 @@ class DIYBMSServer {
       static void SendSuccess(AsyncWebServerRequest *request);
       static void settings(AsyncWebServerRequest *request);
       static void saveBankConfiguration(AsyncWebServerRequest *request);
+      static void clearModuleValues(uint8_t bank, uint8_t module);
 };
 
 extern PacketRequestGenerator prg;

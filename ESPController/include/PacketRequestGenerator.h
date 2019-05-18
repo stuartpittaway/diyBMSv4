@@ -33,6 +33,7 @@ class PacketRequestGenerator {
 
      void sendCellVoltageRequest(uint8_t b);
      void sendCellTemperatureRequest(uint8_t b);
+     void sendMoveToBank(uint8_t b,uint8_t m,uint8_t movetobank);
 
   private:
     Queue* _requestq;

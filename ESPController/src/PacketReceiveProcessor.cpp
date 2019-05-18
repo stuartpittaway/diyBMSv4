@@ -38,6 +38,9 @@ bool PacketReceiveProcessor::ProcessReply(const uint8_t* receivebuffer,
       } else {
         //Error count for a request that was not processed by any module
         totalNotProcessedErrors++;
+        //Invalidate the whole bank if a module didn't process the request - something is a miss
+        //or we have just configured a module to another bank
+        numberOfModules[ReplyFromBank()]=0;
       }
     } else {
       // Increase the error count of out of sequence packets
@@ -94,7 +97,6 @@ void PacketReceiveProcessor::ProcessReplyTemperature() {
 
 void PacketReceiveProcessor::ProcessReplyVoltage() {
   // Called when a decoded packet has arrived in _packetbuffer for command 1
-
   ProcessReplyAddressByte();
 
   uint8_t b = ReplyFromBank();
@@ -117,7 +119,6 @@ void PacketReceiveProcessor::ProcessReplyVoltage() {
       cmi[b][i].voltagemVMin = cmi[b][i].voltagemV;
     }
   }
-
 }
 
 void PacketReceiveProcessor::ProcessReplySettings() {

@@ -181,9 +181,6 @@ void DIYBMSServer::saveMQTTSetting(AsyncWebServerRequest *request) {
 }
 
 
-
-
-
 void DIYBMSServer::saveGlobalSetting(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
 
@@ -276,11 +273,38 @@ void DIYBMSServer::saveSetting(AsyncWebServerRequest *request) {
 
     prg.sendSaveSetting(b, m,BypassThresholdmV,BypassOverTempShutdown,LoadResistance,Calibration,mVPerADC,Internal_BCoefficient,External_BCoefficient);
 
+
+    if (request->hasParam("movetobank", true)) {
+      AsyncWebParameter *p1 = request->getParam("movetobank", true);
+      int movetobank=p1->value().toInt();
+
+      if (b!=movetobank) {
+        //Requested to move this module to another bank
+        prg.sendMoveToBank(b,m,movetobank);
+
+        clearModuleValues(b,m);
+        //Take 1 off and add 1 on...
+        numberOfModules[b]--;
+        numberOfModules[movetobank]++;
+      }
+
+    }
+
     SendSuccess(request);
 }
   } else {
     request->send(500, "text/plain", "Missing parameters");
   }
+}
+
+void DIYBMSServer::clearModuleValues(uint8_t bank, uint8_t module) {
+  cmi[bank][module].voltagemV=0;
+  cmi[bank][module].voltagemVMin=6000;
+  cmi[bank][module].voltagemVMax=0;
+  cmi[bank][module].inBypass=false;
+  cmi[bank][module].bypassOverTemp=false;
+  cmi[bank][module].internalTemp=-40;
+  cmi[bank][module].externalTemp=-40;
 }
 
 void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
@@ -295,8 +319,6 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
       request->send(500, "text/plain", "Wrong parameters");
     } else {
       prg.sendIdentifyModuleRequest(b, m);
-
-
       SendSuccess(request);
     }
 
@@ -395,6 +417,9 @@ void DIYBMSServer::modules(AsyncWebServerRequest *request) {
   }
 }
 
+
+
+
 void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
   AsyncResponseStream *response =
       request->beginResponseStream("application/json");
@@ -419,7 +444,7 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   for (uint8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++) {
     JsonArray data = bankArray.createNestedArray();
-    
+
     for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
       JsonObject cell = data.createNestedObject();
       cell["v"] = cmi[bank][i].voltagemV;
