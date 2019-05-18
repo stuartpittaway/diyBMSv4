@@ -1,246 +1,234 @@
 const char FILE_INDEX_HTML[] PROGMEM = R"=====(
-  <!DOCTYPE html>
-  <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+<title>DIY BMS CONTROLLER v4</title>
+<script src="jquery.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+<script src="echarts.simple.min.js" integrity="" crossorigin="anonymous"></script>
+</head>
 
-  <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1.0">
-      <link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
-      <link href="style.css" rel="stylesheet">
-      <title>DIY BMS CONTROLLER v4</title>
-      <script src="jquery.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-      <script src="echarts.simple.min.js" integrity="" crossorigin="anonymous"></script>
-  </head>
+<body>
+<div class="header">
+    <div class="logocontainer">
+        <img class="logo" src="logo.gif" width="191" height="48" alt="DIYBMS" />
+        <div id="refreshbar"></div>
+    </div>
+    <div class="header-right">
+        <a id="home" class="active" href="#home">Home</a>
+        <a id="modules" href="#modules">Modules</a>
+        <a id="integration" href="#integration">Integration</a>
+        <a id="settings" href="#settings">Settings</a>
+        <a id="about" href="#about">About</a>
+    </div>
+</div>
+<div id='commserr' class='error'>The controller is having difficulty communicating with the cell monitoring modules.</div>
+<div id='iperror' class='error'>Cannot communicate with the controller for status updates.</div>
+<div id='saveerror' class='error'>Failed to save settings.</div>
+<div id='savesuccess' class='success'>Settings saved</div>
+<div id="info" class="info">
+    <div id="voltage1" class="stat"><span class="x t">Voltage 0:</span><span class="x v"></span></div>
+    <div id="voltage2" class="stat"><span class="x t">Voltage 1:</span><span class="x v"></span></div>
+    <div id="voltage3" class="stat"><span class="x t">Voltage 2:</span><span class="x v"></span></div>
+    <div id="voltage4" class="stat"><span class="x t">Voltage 3:</span><span class="x v"></span></div>
+    <div id="range1" class="stat"><span class="x t">Range 0:</span><span class="x v"></span></div>
+    <div id="range2" class="stat"><span class="x t">Range 1:</span><span class="x v"></span></div>
+    <div id="range3" class="stat"><span class="x t">Range 2:</span><span class="x v"></span></div>
+    <div id="range4" class="stat"><span class="x t">Range 3:</span><span class="x v"></span></div>
+    <div id="current" class="stat"><span class="x t">Current:</span><span class="x v"></span></div>
+    <div id="badpkt" class="stat"><span class="x t">Packet Errors:</span><span class="x v"></span></div>
+    <div id="badcrc" class="stat"><span class="x t">CRC Errors:</span><span class="x v"></span></div>
+    <div id="ignored" class="stat"><span class="x t">Ignored request errors:</span><span class="x v"></span></div>
+</div>
+<div class="page" id="homePage">
+    <div class="graphs" style="">
+        <div id="graph1" style="width:100%%; height:100%%;"></div>
+    </div>
+</div>
+<div class="page" id="aboutPage">
+    <h1>About</h1>
+    <h2>Source Code</h2>
+    <a href="https://github.com/stuartpittaway/diyBMSv4" target="_blank">https://github.com/stuartpittaway/diyBMSv4</a>
+    <h2>Videos</h2>
+    <a href="https://www.youtube.com/stuartpittaway" target="_blank">YouTube videos on installation and configuration</a>
+    <h2>WARNING</h2>
+    <p>This is a DIY product/solution so don’t use this for safety critical systems or in any situation where there could be a risk to life.</p>
+    <p>There is no warranty, it may not work as expected or at all.</p>
+    <p>The use of this project is done so entirely at your own risk.  It may involve electrical voltages which could kill - if in doubt, seek help.</p>
+    <p>The use of this project may not be compliant with local laws or regulations - if in doubt, seek help.</p>
+    <h2>License</h2>
+    <p>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 2.0 UK: England & Wales License.</p>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/uk/" target="_blank">https://creativecommons.org/licenses/by-nc-sa/2.0/uk/</a>
+</div>
+<div class="page" id="modulesPage">
+    <h1>Modules</h1>
 
-  <body>
-      <div class="header">
-          <div class="logocontainer">
-              <img class="logo" src="logo.gif" width="191" height="48" alt="DIYBMS" />
-              <div id="refreshbar"></div>
-          </div>
-          <div class="header-right">
-              <a id="home" class="active" href="#home">Home</a>
-              <a id="modules" href="#modules">Modules</a>
-              <a id="integration" href="#integration">Integration</a>
-              <a id="settings" href="#settings">Settings</a>
-              <a id="about" href="#about">About</a>
-          </div>
-      </div>
+    <div id="modulesTable">
+        <div class="th">
+            <span>Bank</span>
+            <span>Cell</span>
+            <span>Voltage</span>
+            <span class='hide'>V. Min</span>
+            <span class='hide'>V. Max</span>
+            <span class='hide'>Temp<br/>Int °C</span>
+            <span class='hide'>Temp<br/>Ext °C</span>
+        </div>
+        <div class="rows" id="modulesRows"></div>
+    </div>
 
-      <div id='commserr' class='error'>The controller is having difficulty communicating with the cell monitoring modules.</div>
-      <div id='iperror' class='error'>Cannot communicate with the controller for status updates.</div>
-      <div id='saveerror' class='error'>Failed to save settings.</div>
-      <div id='savesuccess' class='success'>Settings saved</div>
+    <div id="settingConfig">
+        <h2>Settings for module </h2>
+        <div id='waitforsettings'>Configuration data has been requested from cell module. Please wait 5 seconds and click button again.</div>
+        <form id="settingsForm" method="POST" action="savesetting.json" autocomplete="off">
+            <div class="settings">
+                <input name="b" id="b" type="hidden" value="0">
+                <input name="m" id="m" type="hidden" value="0">
+                <div>
+                    <label for="BypassOverTempShutdown">Bypass over temperature</label>
+                    <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required="">
+                </div>
+                <div>
+                    <label for="BypassThresholdmV">Bypass threshold mV</label>
+                    <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required="">
+                </div>
+                <div>
+                    <label for="Calib">Calibration multiplier</label>
+                    <input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required="">
+                    <label for="ActualVoltage">Calculator - Actual measured voltage</label>
+                    <input id="ActualVoltage" name="ActualVoltage" type="number" min="0" max="5" step="0.001" value="4.2">
+                    <button type="button" id="CalculateCalibration">Calculate</button>
+                </div>
+                <div>
+                    <label for="ExtBCoef">External temperature BCoef</label>
+                    <input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required="">
+                </div>
+                <div>
+                    <label for="IntBCoef">Internal temperature BCoef</label>
+                    <input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required="">
+                </div>
+                <div>
+                    <label for="LoadRes">Load resistance</label>
+                    <input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required="">
+                </div>
+                <div>
+                    <label for="mVPerADC">mV per ADC reading</label>
+                    <input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required="">
+                </div>
+                <div>
+                    <label for="movetobank">Move to bank</label>
+                    <select id="movetobank" name="movetobank"><option>0</option><option>1</option><option>2</option><option>3</option></select>
+                </div>
+                <input type="submit" value="Save settings"/>
+            </div>
+        </form>
+    </div>
 
-      <div id="info" class="info">
-          <div id="voltage1" class="stat"><span class="x t">Voltage 0:</span><span class="x v"></span></div>
-          <div id="voltage2" class="stat"><span class="x t">Voltage 1:</span><span class="x v"></span></div>
-          <div id="voltage3" class="stat"><span class="x t">Voltage 2:</span><span class="x v"></span></div>
-          <div id="voltage4" class="stat"><span class="x t">Voltage 3:</span><span class="x v"></span></div>
+    <div id="globalConfig">
+        <h2>Global Settings</h2>
+        <p>Configure all connected modules (in selected bank) to use following parameters:</p>
+        <form id="globalSettingsForm" method="POST" action="saveglobalsetting.json" autocomplete="off">
+            <div class="settings">
+                <div>
+                    <label for="g1">Bypass over temperature</label>
+                    <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="g1" value="70" required="">
+                </div>
+                <div>
+                    <label for="g2">Bypass threshold mV</label>
+                    <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="g2" value="4100" required="">
+                </div>
+            </div>
+            <input id="globalSettingsButton" type="submit" value="Save settings"/>
+        </form>
+    </div>
+</div>
 
-          <div id="range1" class="stat"><span class="x t">Range 0:</span><span class="x v"></span></div>
-          <div id="range2" class="stat"><span class="x t">Range 1:</span><span class="x v"></span></div>
-          <div id="range3" class="stat"><span class="x t">Range 2:</span><span class="x v"></span></div>
-          <div id="range4" class="stat"><span class="x t">Range 3:</span><span class="x v"></span></div>
-
-
-          <div id="current" class="stat"><span class="x t">Current:</span><span class="x v"></span></div>
-          <div id="badpkt" class="stat"><span class="x t">Packet Errors:</span><span class="x v"></span></div>
-          <div id="badcrc" class="stat"><span class="x t">CRC Errors:</span><span class="x v"></span></div>
-          <div id="ignored" class="stat"><span class="x t">Ignored request errors:</span><span class="x v"></span></div>
-      </div>
-
-      <div class="page" id="homePage">
-          <div class="graphs" style="">
-              <div id="graph1" style="width:100%%; height:100%%;"></div>
-          </div>
-      </div>
-
-      <div class="page" id="aboutPage">
-          <h1>About</h1>
-
-          <h2>Source Code</h2>
-          <a href="https://github.com/stuartpittaway/diyBMSv4" target="_blank">https://github.com/stuartpittaway/diyBMSv4</a>
-
-          <h2>WARNING</h2>
-          <p>This is a DIY product/solution so don’t use this for safety critical systems or in any situation where there could be a risk to life.</p>
-          <p>There is no warranty, it may not work as expected or at all.</p>
-          <p>The use of this project is done so entirely at your own risk. It may involve electrical voltages which could kill - if in doubt, seek help.</p>
-          <p>The use of this project may not be compliant with local laws or regulations - if in doubt, seek help.</p>
-
-          <h2>License</h2>
-          <p>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 2.0 UK: England & Wales License.</p>
-          <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/uk/" target="_blank">https://creativecommons.org/licenses/by-nc-sa/2.0/uk/</a>
-
-      </div>
-
-
-      <div class="page" id="modulesPage">
-          <h1>Modules</h1>
-
-          <div id="modulesTable">
-              <div class="th">
-                  <span>Bank</span>
-                  <span>Cell</span>
-                  <span>Voltage</span>
-                  <span class='hide'>V. Min</span>
-                  <span class='hide'>V. Max</span>
-                  <span class='hide'>Temp<br/>Int °C</span>
-                  <span class='hide'>Temp<br/>Ext °C</span>
-              </div>
-              <div class="rows" id="modulesRows"></div>
-          </div>
-
-          <div id="settingConfig">
-              <h2>Settings for module </h2>
-              <div id='waitforsettings'>Configuration data has been requested from cell module. Please wait 5 seconds and click button again.</div>
-              <form id="settingsForm" method="POST" action="savesetting.json" autocomplete="off">
-                  <div class="settings">
-                      <input name="b" id="b" type="hidden" value="0">
-                      <input name="m" id="m" type="hidden" value="0">
-                      <div>
-                          <label for="BypassOverTempShutdown">Bypass over temperature</label>
-                          <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="BypassOverTempShutdown" value="70" required="">
-                      </div>
-                      <div>
-                          <label for="BypassThresholdmV">Bypass threshold mV</label>
-                          <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="BypassThresholdmV" value="4100" required="">
-                      </div>
-                      <div>
-                          <label for="Calib">Calibration multiplier</label>
-                          <input id="Calib" name="Calib" type="number" min="0" max="5" step="0.0001" value="2.275862" required="">
-                          <label for="ActualVoltage">Calculator - Actual measured voltage</label>
-                          <input id="ActualVoltage" name="ActualVoltage" type="number" min="0" max="5" step="0.001" value="4.2">
-                          <button type="button" id="CalculateCalibration">Calculate</button>
-                      </div>
-                      <div>
-                          <label for="ExtBCoef">External temperature BCoef</label>
-                          <input type="number" min="0" max="9999" step="1" id="ExtBCoef" name="ExtBCoef" value="4150" required="">
-                      </div>
-                      <div>
-                          <label for="IntBCoef">Internal temperature BCoef</label>
-                          <input type="number" min="0" max="9999" step="1" id="IntBCoef" name="IntBCoef" value="4150" required="">
-                      </div>
-                      <div>
-                          <label for="LoadRes">Load resistance</label>
-                          <input id="LoadRes" name="LoadRes" type="number" min="0" max="1000" step="0.01" value="4.4" required="">
-                      </div>
-                      <div>
-                          <label for="mVPerADC">mV per ADC reading</label>
-                          <input id="mVPerADC" name="mVPerADC" type="number" step="0.01" min="1" max="10" value="2" required="">
-                      </div>
-                      <div>
-                          <label for="movetobank">Move to bank</label>
-                          <select id="movetobank" name="movetobank"><option>0</option><option>1</option><option>2</option><option>3</option></select>
-                      </div>
-                      <input type="submit" value="Save settings"/>
-                  </div>
-              </form>
-          </div>
-
-          <div id="globalConfig">
-              <h2>Global Settings</h2>
-              <p>Configure all connected modules (in selected bank) to use following parameters:</p>
-              <form id="globalSettingsForm" method="POST" action="saveglobalsetting.json" autocomplete="off">
-                  <div class="settings">
-                      <div>
-                          <label for="g1">Bypass over temperature</label>
-                          <input type="number" min="20" max="90" step="1" name="BypassOverTempShutdown" id="g1" value="70" required="">
-                      </div>
-                      <div>
-                          <label for="g2">Bypass threshold mV</label>
-                          <input type="number" min="2500" max="4500" step="10" name="BypassThresholdmV" id="g2" value="4100" required="">
-                      </div>
-                  </div>
-                  <input id="globalSettingsButton" type="submit" value="Save settings"/>
-              </form>
-          </div>
-      </div>
-
-      <div class="page" id="integrationPage">
-          <h1>Integration</h1>
-          <p>For security, you will need to re-enter the password for the service(s) you want to enable or modify, before you save.</p>
-          <p>After changes are made, the controller will automatically reboot. You will need to refresh the web page to continue.</p>
-          <h2>MQTT</h2>
-          <form id="mqttForm" method="POST" action="savemqtt.json" autocomplete="off">
-              <div class="settings">
-                  <div>
-                      <label for="mqttEnabled">Enabled</label>
-                      <input type="checkbox" name="mqttEnabled" id="mqttEnabled">
-                  </div>
-                  <div>
-                      <label for="mqttServer">Server</label>
-                      <input type="input" name="mqttServer" id="mqttServer" value="" required="" maxlength="64">
-                  </div>
-                  <div>
-                      <label for="mqttPort">Port</label>
-                      <input type="number" min="1" max="65535" step="1" name="mqttPort" id="mqttPort" value="1883" required="">
-                  </div>
-                  <div>
-                      <label for="mqttUsername">Username</label>
-                      <input type="input" name="mqttUsername" id="mqttUsername" value="" required="" maxlength="32">
-                  </div>
-                  <div>
-                      <label for="mqttPassword">Password</label>
-                      <input type="password" name="mqttPassword" id="mqttPassword" value="" required="" maxlength="32">
-                  </div>
-                  <input type="submit" value="Save MQTT settings"/>
-              </div>
-          </form>
+<div class="page" id="integrationPage">
+    <h1>Integration</h1>
+    <p>For security, you will need to re-enter the password for the service(s) you want to enable or modify, before you save.</p>
+    <p>After changes are made, the controller will automatically reboot. You will need to refresh the web page to continue.</p>
+    <h2>MQTT</h2>
+    <form id="mqttForm" method="POST" action="savemqtt.json" autocomplete="off">
+        <div class="settings">
+            <div>
+                <label for="mqttEnabled">Enabled</label>
+                <input type="checkbox" name="mqttEnabled" id="mqttEnabled">
+            </div>
+            <div>
+                <label for="mqttServer">Server</label>
+                <input type="input" name="mqttServer" id="mqttServer" value="" required="" maxlength="64">
+            </div>
+            <div>
+                <label for="mqttPort">Port</label>
+                <input type="number" min="1" max="65535" step="1" name="mqttPort" id="mqttPort" value="1883" required="">
+            </div>
+            <div>
+                <label for="mqttUsername">Username</label>
+                <input type="input" name="mqttUsername" id="mqttUsername" value="" required="" maxlength="32">
+            </div>
+            <div>
+                <label for="mqttPassword">Password</label>
+                <input type="password" name="mqttPassword" id="mqttPassword" value="" required="" maxlength="32">
+            </div>
+            <input type="submit" value="Save MQTT settings"/>
+        </div>
+    </form>
 
 
-          <h2>Influx Database</h2>
-          <form id="influxForm" method="POST" action="saveinfluxdb.json" autocomplete="off">
-              <div class="settings">
-                  <div>
-                      <label for="influxEnabled">Enabled</label>
-                      <input type="checkbox" name="influxEnabled" id="influxEnabled">
-                  </div>
-                  <div>
-                      <label for="influxServer">Host server</label>
-                      <input type="input" name="influxServer" id="influxServer" value="influx" required="" maxlength="64">
-                  </div>
-                  <div>
-                      <label for="influxPort">Port</label>
-                      <input type="number" min="1" max="65535" step="1" name="influxPort" id="influxPort" value="1883" required="">
-                  </div>
-                  <div>
-                      <label for="influxDatabase">Database name</label>
-                      <input type="input" name="influxDatabase" id="influxDatabase" value="database" required="" maxlength="64">
-                  </div>
-                  <div>
-                      <label for="influxUsername">Username</label>
-                      <input type="input" name="influxUsername" id="influxUsername" value="myusername" required="" maxlength="32">
-                  </div>
-                  <div>
-                      <label for="influxPassword">Password</label>
-                      <input type="password" name="influxPassword" id="influxPassword" value="" required="" maxlength="32">
-                  </div>
-                  <input type="submit" value="Save Influx DB settings"/>
-              </div>
-          </form>
-      </div>
+    <h2>Influx Database</h2>
+    <form id="influxForm" method="POST" action="saveinfluxdb.json" autocomplete="off">
+        <div class="settings">
+            <div>
+                <label for="influxEnabled">Enabled</label>
+                <input type="checkbox" name="influxEnabled" id="influxEnabled">
+            </div>
+            <div>
+                <label for="influxServer">Host server</label>
+                <input type="input" name="influxServer" id="influxServer" value="influx" required="" maxlength="64">
+            </div>
+            <div>
+                <label for="influxPort">Port</label>
+                <input type="number" min="1" max="65535" step="1" name="influxPort" id="influxPort" value="1883" required="">
+            </div>
+            <div>
+                <label for="influxDatabase">Database name</label>
+                <input type="input" name="influxDatabase" id="influxDatabase" value="database" required="" maxlength="64">
+            </div>
+            <div>
+                <label for="influxUsername">Username</label>
+                <input type="input" name="influxUsername" id="influxUsername" value="myusername" required="" maxlength="32">
+            </div>
+            <div>
+                <label for="influxPassword">Password</label>
+                <input type="password" name="influxPassword" id="influxPassword" value="" required="" maxlength="32">
+            </div>
+            <input type="submit" value="Save Influx DB settings"/>
+        </div>
+    </form>
+</div>
 
 
-      <div class="page" id="settingsPage">
-          <h1>Controller Settings</h1>
-          <h2>Banks</h2>
-          <p>DIYBMS supports up to 16 modules in a single bank. Up to 4 seperate banks can be configured. Only enable a bank if you need this advanced functionality as it slows down processing and can cause errors.</p>
-          <p>Combination type: Use Parallel when you have multiple banks up to 16S, or Serial if you want a single bank with up to 64S.</p>
-          <form id="banksForm" method="POST" action="savebankconfig.json" autocomplete="off">
-              <div class="settings">
-                  <div>
-                      <label for="totalBanks">Total number of banks</label>
-                      <select name="totalBanks" id="totalBanks"><option>1</option><option>2</option><option>3</option><option>4</option></select>
-                  </div>
-                  <div>
-                      <label for="combitype">Bank combination type</label>
-                      <select name="combitype" id="combitype"><option>Parallel</option><option>Serial</option></select>
-                  </div>
-                  <input type="submit" value="Save bank settings"/>
-              </div>
-          </form>
-      </div>
+<div class="page" id="settingsPage">
+    <h1>Controller Settings</h1>
+    <h2>Banks</h2>
+    <p>DIYBMS supports up to 16 modules in a single bank. Up to 4 seperate banks can be configured. Only enable a bank if you need this advanced functionality as it slows down processing and can cause errors.</p>
+    <p>Combination type: Use Parallel when you have multiple banks up to 16S, or Serial if you want a single bank with up to 64S.</p>
+    <form id="banksForm" method="POST" action="savebankconfig.json" autocomplete="off">
+        <div class="settings">
+            <div>
+                <label for="totalBanks">Total number of banks</label>
+                <select name="totalBanks" id="totalBanks"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+            </div>
+            <div>
+                <label for="combitype">Bank combination type</label>
+                <select name="combitype" id="combitype"><option>Parallel</option><option>Serial</option></select>
+            </div>
+            <input type="submit" value="Save bank settings"/>
+        </div>
+    </form>
+</div>
 
 <script type="text/javascript">
 var g1=null;
