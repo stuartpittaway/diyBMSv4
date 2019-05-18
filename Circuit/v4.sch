@@ -727,19 +727,6 @@ Connection ~ 3050 3750
 Wire Wire Line
 	3050 3750 3050 3670
 $Comp
-L Connector:TestPoint TP2
-U 1 1 5BF9C005
-P 3940 4170
-F 0 "TP2" H 3860 4360 50  0000 L CNN
-F 1 "TestPoint" H 3730 4120 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 4140 4170 50  0001 C CNN
-F 3 "~" H 4140 4170 50  0001 C CNN
-	1    3940 4170
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3940 4170 4280 4170
-$Comp
 L Device:Thermistor R19
 U 1 1 5BF374BB
 P 2740 6590
@@ -859,9 +846,6 @@ Text GLabel 3070 2580 1    50   Input ~ 0
 2_VOLT
 Text GLabel 4560 5550 0    50   Input ~ 0
 ENABLE
-Connection ~ 3940 4170
-Wire Wire Line
-	2250 4170 3940 4170
 Text Notes 8150 3920 0    50   ~ 0
 Optocoupler, Phototransistor Output,\n4-SSOP
 Wire Wire Line
@@ -1019,4 +1003,8 @@ Wire Wire Line
 Wire Wire Line
 	3180 3190 3180 3570
 Connection ~ 3180 3570
+Wire Wire Line
+	2250 4170 4280 4170
+Text Notes 4560 2810 0    50   ~ 0
+Blue LED and Resistor are OPTIONAL!
 $EndSCHEMATC
