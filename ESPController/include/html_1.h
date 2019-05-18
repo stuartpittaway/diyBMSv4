@@ -228,6 +228,13 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
             <input type="submit" value="Save bank settings"/>
         </div>
     </form>
+    <h2>Reset Error Counts</h2>
+    <form id="resetCountersForm" method="POST" action="resetcounters.json" autocomplete="off">
+        <div class="settings">
+            <input name="resetCounters" id="resetCounters" type="hidden" value="0">
+            <input type="submit" value="Reset error counters"/>
+        </div>
+    </form>
 </div>
 
 <script type="text/javascript">
@@ -683,6 +690,22 @@ $("#mqttForm").submit(function (e) {
            },
        });
    });
+
+   $("#resetCountersForm").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (data) {
+
+            },
+            error: function (data) {
+                $("#saveerror").show().delay(2000).fadeOut(500);
+            },
+        });
+    });
 
 
    $("#globalSettingsForm").submit(function (e) {

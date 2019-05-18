@@ -80,6 +80,16 @@ void DIYBMSServer::SendSuccess(AsyncWebServerRequest *request) {
   request->send(response);
 }
 
+void DIYBMSServer::resetCounters(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
+  receiveProc.totalMissedPacketCount=0;
+  receiveProc.totalCRCErrors=0;
+  receiveProc.totalNotProcessedErrors=0;
+  SendSuccess(request);
+}
+
+
 void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
 
@@ -524,6 +534,7 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/saveinfluxdb.json", HTTP_POST, DIYBMSServer::saveInfluxDBSetting);
   _myserver->on("/savebankconfig.json", HTTP_POST, DIYBMSServer::saveBankConfiguration);
 
+  _myserver->on("/resetcounters.json", HTTP_POST, DIYBMSServer::resetCounters);
 
   _myserver->onNotFound(DIYBMSServer::handleNotFound);
   _myserver->begin();
