@@ -158,10 +158,10 @@ void setup() {
   #endif
 
   //Check if setup routine needs to be run
-  if (!Settings::ReadConfigFromEEPROM((char * ) & myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS)) {
+  if (!Settings::ReadConfigFromEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS)) {
     DefaultConfig();
     //Save settings
-    Settings::WriteConfigToEEPROM((char * ) & myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
+    Settings::WriteConfigToEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
   }
 
   hardware.double_tap_green_led();
@@ -169,8 +169,8 @@ void setup() {
   //Set up data handler
   Serial.begin(4800, SERIAL_8N1);
 
-  myPacketSerial.setStream( & Serial);
-  myPacketSerial.setPacketHandler( & onPacketReceived);
+  myPacketSerial.setStream(&Serial);
+  myPacketSerial.setPacketHandler(&onPacketReceived);
 
   #ifdef DIYBMS_DEBUG
   if (myPID.err()) {

@@ -1,7 +1,7 @@
 #ifndef DIYBMS_DEFINES_H_
 #define DIYBMS_DEFINES_H_
 
-#define GREEN_LED D6
+#define GREEN_LED D0
 
 #define GREEN_LED_ON digitalWrite(GREEN_LED,HIGH)
 #define GREEN_LED_OFF digitalWrite(GREEN_LED,LOW)

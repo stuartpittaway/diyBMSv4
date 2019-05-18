@@ -207,8 +207,6 @@ bool PacketProcessor::processPacket() {
       //Save settings
       Settings::WriteConfigToEEPROM((char*)_config, sizeof(CellModuleConfig), EEPROM_CONFIG_ADDRESS);
 
-      //TODO: Need to write into EEPROM....
-
       //Indicate we processed this packet
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
       return true;

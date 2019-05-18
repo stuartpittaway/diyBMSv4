@@ -22,11 +22,15 @@
 
 /*
    PINS
-   D6 = GREEN_LED
+   D0 = GREEN_LED
+   D1 = i2c SDA
+   D2 = i2c SCL
+   D3 = switch to ground (reset WIFI configuration on power up)
+   D4 = GPIO2 = TXD1 = TRANSMIT DEBUG SERIAL (and blue led on esp8266)
+   D5 = GPIO14 = Interrupt in from PCF8574
    D7 = GPIO13 = RECEIVE SERIAL
    D8 = GPIO15 = TRANSMIT SERIAL
 
-   D4 = GPIO2 = TXD1 = TRANSMIT DEBUG SERIAL (and blue led on esp8266)
 
    DIAGRAM
    https://www.hackster.io/Aritro/getting-started-with-esp-nodemcu-using-arduinoide-aa7267
@@ -42,6 +46,9 @@
 #include <cppQueue.h>
 #include <Ticker.h>
 
+#include <pcf8574_esp.h>
+#include <Wire.h>
+
 #include "defines.h"
 
 uint16_t ConfigHasChanged=0;
@@ -53,6 +60,13 @@ bool server_running=false;
 
 uint8_t packetType=0;
 
+PCF857x pcf8574(0x20, &Wire);
+
+volatile bool PCFInterruptFlag = false;
+
+void ICACHE_RAM_ATTR PCFInterrupt() {
+  PCFInterruptFlag = true;
+}
 
 //This large array holds all the information about the modules
 //up to 4x16
@@ -439,6 +453,11 @@ void LoadConfiguration() {
 void setup() {
   //Serial is used for communication to modules, Serial1 is for debug output
   pinMode(GREEN_LED, OUTPUT);
+  //D3 is used to reset access point WIFI details on boot up
+  pinMode(D3,INPUT_PULLUP);
+  //D5 is interrupt pin from PCF8574
+  pinMode(D5,INPUT_PULLUP);
+
   GREEN_LED_OFF;
 
   //We generate a unique number which is used in all following JSON requests
@@ -464,6 +483,7 @@ void setup() {
   }
 
   Serial.begin(4800, SERIAL_8N1);           // Serial for comms to modules
+
   //Use alternative GPIO pins of D7/D8
   //D7 = GPIO13 = RECEIVE SERIAL
   //D8 = GPIO15 = TRANSMIT SERIAL
@@ -478,17 +498,22 @@ void setup() {
 
   LoadConfiguration();
 
+  //SDA / SCL
+  Wire.begin(4, 5);
+  Wire.setClock(100000L);
+  pcf8574.begin();
+  // Most ready-made PCF8574-modules seem to lack an internal pullup-resistor, so you have to use the ESP8266-internal one.
+  pcf8574.resetInterruptPin();
+  attachInterrupt(digitalPinToInterrupt(D5), PCFInterrupt, FALLING);
+
   //Ensure we service the cell modules every 5 seconds
   myTimer.attach(5, timerEnqueueCallback);
 
   //We process the transmit queue every 0.5 seconds
   myTransmitTimer.attach(0.5, timerTransmitCallback);
 
-  //D1 is used to reset access point WIFI details on boot up
-  pinMode(D1,INPUT_PULLUP);
-
-  //This is normally pulled high, D1 is used to reset WIFI details
-  uint8_t clearAPSettings=digitalRead(D1);
+  //This is normally pulled high, D3 is used to reset WIFI details
+  uint8_t clearAPSettings=digitalRead(D3);
 
   //Temporarly force WIFI settings
   //wifi_eeprom_settings xxxx;
