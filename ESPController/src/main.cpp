@@ -60,7 +60,8 @@ bool server_running=false;
 
 uint8_t packetType=0;
 
-PCF857x pcf8574(0x20, &Wire);
+//PCF8574P has an i2c address of 0x38 instead of the normal 0x20
+PCF857x pcf8574(0x38, &Wire);
 
 volatile bool PCFInterruptFlag = false;
 
@@ -499,10 +500,13 @@ void setup() {
   LoadConfiguration();
 
   //SDA / SCL
-  Wire.begin(4, 5);
+  //I'm sure this should be 4,5 !
+  Wire.begin(5,4);
   Wire.setClock(100000L);
+
   pcf8574.begin();
-  // Most ready-made PCF8574-modules seem to lack an internal pullup-resistor, so you have to use the ESP8266-internal one.
+
+  //internal pullup-resistor on the interrupt line via ESP8266
   pcf8574.resetInterruptPin();
   attachInterrupt(digitalPinToInterrupt(D5), PCFInterrupt, FALLING);
 
@@ -550,10 +554,20 @@ void setup() {
 
 
 void loop() {
+  //pcf8574.write(1, LOW);
+
   // Call update to receive, decode and process incoming packets.
   if (Serial.available()) {
     myPacketSerial.update();
   }
+
+  // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
+  // It wouldn't generate an interrupt if you were to connect a button to it that pulls it HIGH when you press the button.
+  // Any pin you wish to use as input must be written HIGH and be pulled LOW to generate an interrupt.
+
+  //pcf8574.write8(0);
+  //pcf8574.lastError();
+  pcf8574.write(1, 0);
 
   if (ConfigHasChanged>0) {
       //Auto reboot if needed (after changing MQTT or INFLUX settings)
