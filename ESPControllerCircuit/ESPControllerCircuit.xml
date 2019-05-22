@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>E:\source\diyBMSv4\ESPControllerCircuit\ESPControllerCircuit.sch</source>
+    <date>22/05/2019 21:36:23</date>
+    <tool>Eeschema (5.1.0)-1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>ESPControllerCircuit.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>WeMos_mini</value>
+      <footprint>ESPControllerCircuit:wemos-d1-mini-with-pin-header</footprint>
+      <libsource lib="MyLibrary" part="WeMos_mini" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD4757A</tstamp>
+    </comp>
+    <comp ref="WIFI_RST1">
+      <value>WIFI RST</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD48DA7</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>COMMS</value>
+      <footprint>LEDs:LED_D5.0mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD4CF59</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>470R</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD4DABA</tstamp>
+    </comp>
+    <comp ref="DEBUG1">
+      <value>Conn_01x02_Female</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Female" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD51ABF</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>HMHA2801</value>
+      <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
+      <datasheet>https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504</datasheet>
+      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD55A2D</tstamp>
+    </comp>
+    <comp ref="RX1">
+      <value>Conn_01x02_Male</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD589E5</tstamp>
+    </comp>
+    <comp ref="TX1">
+      <value>Conn_01x02_Male</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD595C3</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>4K7</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD5BA4A</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>220R</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE037A1</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>4K7</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE1118E</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>4K7</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE113C9</tstamp>
+    </comp>
+    <comp ref="JRELAY1">
+      <value>Conn_01x06_Male</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="Conn_01x06_Male" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE6037F</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>PCF8574AT/3</value>
+      <footprint>SMD_Packages:SO-16-W</footprint>
+      <datasheet>http://www.nxp.com/documents/data_sheet/PCF8574_PCF8574A.pdf</datasheet>
+      <libsource lib="Interface_Expansion" part="PCF8574" description="8 Bit Port/Expander to I2C Bus, DIP/SOIC-16"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE02B8B</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="Conn_01x02_Female">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_Female</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x02_Male">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_Male</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x06_Male">
+      <description>Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x06_Male</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Interface_Expansion" part="PCF8574">
+      <aliases>
+        <alias>PCF8574A</alias>
+      </aliases>
+      <description>8 Bit Port/Expander to I2C Bus, DIP/SOIC-16</description>
+      <docs>http://www.nxp.com/documents/data_sheet/PCF8574_PCF8574A.pdf</docs>
+      <footprints>
+        <fp>DIP*</fp>
+        <fp>PDIP*</fp>
+        <fp>SO*</fp>
+        <fp>SOIC*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">PCF8574</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A0" type="input"/>
+        <pin num="2" name="A1" type="input"/>
+        <pin num="3" name="A2" type="input"/>
+        <pin num="4" name="P0" type="BiDi"/>
+        <pin num="5" name="P1" type="BiDi"/>
+        <pin num="6" name="P2" type="BiDi"/>
+        <pin num="7" name="P3" type="BiDi"/>
+        <pin num="8" name="VSS" type="power_in"/>
+        <pin num="9" name="P4" type="BiDi"/>
+        <pin num="10" name="P5" type="BiDi"/>
+        <pin num="11" name="P6" type="BiDi"/>
+        <pin num="12" name="P7" type="BiDi"/>
+        <pin num="13" name="~INT~" type="openCol"/>
+        <pin num="14" name="SCL" type="input"/>
+        <pin num="15" name="SDA" type="BiDi"/>
+        <pin num="16" name="VDD" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Isolator" part="PC817">
+      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP4</description>
+      <docs>http://www.soselectronic.cz/a_info/resource/d/pc817.pdf</docs>
+      <footprints>
+        <fp>DIP*W7.62mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">PC817</field>
+        <field name="Footprint">Package_DIP:DIP-4_W7.62mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="MyLibrary" part="WeMos_mini">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">WeMos_mini</field>
+      </fields>
+      <pins>
+        <pin num="1" name="5V" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="D4" type="BiDi"/>
+        <pin num="4" name="D3" type="BiDi"/>
+        <pin num="5" name="D2" type="BiDi"/>
+        <pin num="6" name="D1" type="BiDi"/>
+        <pin num="7" name="Rx" type="BiDi"/>
+        <pin num="8" name="Tx" type="BiDi"/>
+        <pin num="9" name="Rst" type="BiDi"/>
+        <pin num="10" name="A0" type="BiDi"/>
+        <pin num="11" name="D0" type="BiDi"/>
+        <pin num="12" name="D5" type="BiDi"/>
+        <pin num="13" name="D6" type="BiDi"/>
+        <pin num="14" name="D7" type="BiDi"/>
+        <pin num="15" name="D8" type="BiDi"/>
+        <pin num="16" name="3.3V" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="Switch" part="SW_Push">
+      <description>Push button switch, generic, two pins</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_Push</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+    </library>
+    <library logical="Interface_Expansion">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Interface_Expansion.lib</uri>
+    </library>
+    <library logical="Isolator">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Isolator.lib</uri>
+    </library>
+    <library logical="MyLibrary">
+      <uri>E:\source\diyBMSv4\ESPControllerCircuit/MyLibrary.lib</uri>
+    </library>
+    <library logical="Switch">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Switch.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(U1-Pad4)">
+      <node ref="U1" pin="4"/>
+      <node ref="WIFI_RST1" pin="2"/>
+    </net>
+    <net code="2" name="SCL">
+      <node ref="R5" pin="2"/>
+      <node ref="U1" pin="5"/>
+      <node ref="U3" pin="14"/>
+    </net>
+    <net code="3" name="PCFINT">
+      <node ref="U1" pin="12"/>
+      <node ref="U3" pin="13"/>
+    </net>
+    <net code="4" name="GND">
+      <node ref="U1" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="U3" pin="3"/>
+      <node ref="R2" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="U3" pin="2"/>
+      <node ref="U3" pin="1"/>
+      <node ref="DEBUG1" pin="2"/>
+      <node ref="JRELAY1" pin="1"/>
+      <node ref="U3" pin="8"/>
+      <node ref="WIFI_RST1" pin="1"/>
+    </net>
+    <net code="5" name="+3V3">
+      <node ref="U3" pin="16"/>
+      <node ref="RX1" pin="2"/>
+      <node ref="U1" pin="16"/>
+      <node ref="R4" pin="1"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="6" name="SDA">
+      <node ref="U1" pin="6"/>
+      <node ref="U3" pin="15"/>
+      <node ref="R4" pin="2"/>
+    </net>
+    <net code="7" name="Net-(JRELAY1-Pad2)">
+      <node ref="JRELAY1" pin="2"/>
+      <node ref="U3" pin="4"/>
+    </net>
+    <net code="8" name="Net-(JRELAY1-Pad3)">
+      <node ref="U3" pin="5"/>
+      <node ref="JRELAY1" pin="3"/>
+    </net>
+    <net code="9" name="Net-(JRELAY1-Pad5)">
+      <node ref="JRELAY1" pin="5"/>
+      <node ref="U3" pin="7"/>
+    </net>
+    <net code="10" name="Net-(U3-Pad9)">
+      <node ref="U3" pin="9"/>
+    </net>
+    <net code="11" name="Net-(JRELAY1-Pad4)">
+      <node ref="U3" pin="6"/>
+      <node ref="JRELAY1" pin="4"/>
+    </net>
+    <net code="12" name="Net-(U3-Pad10)">
+      <node ref="U3" pin="10"/>
+    </net>
+    <net code="13" name="Net-(U3-Pad11)">
+      <node ref="U3" pin="11"/>
+    </net>
+    <net code="14" name="Net-(U3-Pad12)">
+      <node ref="U3" pin="12"/>
+    </net>
+    <net code="15" name="+5V">
+      <node ref="U1" pin="1"/>
+      <node ref="JRELAY1" pin="6"/>
+    </net>
+    <net code="16" name="Net-(D1-Pad2)">
+      <node ref="R1" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="17" name="Net-(R1-Pad2)">
+      <node ref="U1" pin="11"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="18" name="Net-(DEBUG1-Pad1)">
+      <node ref="DEBUG1" pin="1"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="19" name="Net-(U1-Pad7)">
+      <node ref="U1" pin="7"/>
+    </net>
+    <net code="20" name="Net-(U1-Pad8)">
+      <node ref="U1" pin="8"/>
+    </net>
+    <net code="21" name="Net-(U1-Pad9)">
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="22" name="Net-(U1-Pad10)">
+      <node ref="U1" pin="10"/>
+    </net>
+    <net code="23" name="Net-(U1-Pad13)">
+      <node ref="U1" pin="13"/>
+    </net>
+    <net code="24" name="Net-(TX1-Pad1)">
+      <node ref="U2" pin="3"/>
+      <node ref="TX1" pin="1"/>
+    </net>
+    <net code="25" name="Net-(R3-Pad1)">
+      <node ref="U2" pin="1"/>
+      <node ref="R3" pin="1"/>
+    </net>
+    <net code="26" name="Net-(R3-Pad2)">
+      <node ref="U1" pin="15"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="27" name="Net-(R2-Pad2)">
+      <node ref="R2" pin="2"/>
+      <node ref="RX1" pin="1"/>
+      <node ref="U1" pin="14"/>
+    </net>
+    <net code="28" name="Net-(TX1-Pad2)">
+      <node ref="TX1" pin="2"/>
+      <node ref="U2" pin="4"/>
+    </net>
+  </nets>
+</export>
