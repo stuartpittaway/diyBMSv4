@@ -458,4 +458,15 @@ Wire Wire Line
 	3600 3800 3600 3660
 Wire Wire Line
 	3600 3660 3670 3660
+$Comp
+L Connector:Conn_01x02_Male ADC?
+U 1 1 5CEC7A76
+P 3960 7290
+F 0 "ADC?" H 3770 7170 50  0000 L CNN
+F 1 "ADC" H 3250 7230 50  0000 L CNN
+F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 3960 7290 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 3960 7290 50  0001 C CNN
+	1    3960 7290
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
