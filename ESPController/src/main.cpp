@@ -97,6 +97,8 @@ volatile bool waitingForReply=false;
 WiFiEventHandler wifiConnectHandler;
 WiFiEventHandler wifiDisconnectHandler;
 
+Ticker myTimerRelay;
+
 Ticker myTimer;
 Ticker myTransmitTimer;
 Ticker wifiReconnectTimer;
@@ -199,6 +201,20 @@ void timerTransmitCallback() {
   }
 }
 
+uint8_t relayState=0;
+void timerRelay1Callback() {
+
+  // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
+  // It wouldn't generate an interrupt if you were to connect a button to it that pulls it HIGH when you press the button.
+  // Any pin you wish to use as input must be written HIGH and be pulled LOW to generate an interrupt.
+
+  pcf8574.write(relayState, HIGH);
+  relayState++;
+  if (relayState==4) { relayState=0;}
+  pcf8574.write(relayState, LOW);
+
+
+}
 
 void timerEnqueueCallback() {
   //this is called regularly on a timer, it determines what request to make to the modules (via the request queue)
@@ -506,6 +522,12 @@ void setup() {
 
   pcf8574.begin();
 
+  //Make PINs 4-7 INPUTs - the interrupt fires when triggered
+  pcf8574.write(4, HIGH);
+  pcf8574.write(5, HIGH);
+  pcf8574.write(6, HIGH);
+  pcf8574.write(7, HIGH);
+
   //internal pullup-resistor on the interrupt line via ESP8266
   pcf8574.resetInterruptPin();
   attachInterrupt(digitalPinToInterrupt(D5), PCFInterrupt, FALLING);
@@ -513,7 +535,9 @@ void setup() {
   //Ensure we service the cell modules every 5 seconds
   myTimer.attach(5, timerEnqueueCallback);
 
-  //We process the transmit queue every 0.5 seconds
+  myTimerRelay.attach(1, timerRelay1Callback);
+
+  //We process the transmit queue every 0.5 seconds (this needs to be lower delay than the queue fills)
   myTransmitTimer.attach(0.5, timerTransmitCallback);
 
   //This is normally pulled high, D3 is used to reset WIFI details
@@ -561,13 +585,6 @@ void loop() {
     myPacketSerial.update();
   }
 
-  // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
-  // It wouldn't generate an interrupt if you were to connect a button to it that pulls it HIGH when you press the button.
-  // Any pin you wish to use as input must be written HIGH and be pulled LOW to generate an interrupt.
-
-  //pcf8574.write8(0);
-  //pcf8574.lastError();
-  pcf8574.write(1, 0);
 
   if (ConfigHasChanged>0) {
       //Auto reboot if needed (after changing MQTT or INFLUX settings)
@@ -583,5 +600,12 @@ void loop() {
         ESP.restart();
       }
       delay(1);
+  }
+
+  if (PCFInterruptFlag) {
+    //Value is ZERO when PIN is grounded
+    Serial1.print("PCFInterruptFlag=");
+    Serial1.println(pcf8574.read8() & B11110000);
+    PCFInterruptFlag=false;
   }
 }

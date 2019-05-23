@@ -163,7 +163,7 @@ L Connector:Conn_01x02_Male RX1
 U 1 1 5CD589E5
 P 4530 5640
 F 0 "RX1" H 4340 5520 50  0000 L CNN
-F 1 "Conn_01x02_Male" H 3820 5580 50  0000 L CNN
+F 1 "Receive" H 4220 5640 50  0000 L CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4530 5640 50  0001 C CNN
 F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4530 5640 50  0001 C CNN
 	1    4530 5640
@@ -174,7 +174,7 @@ L Connector:Conn_01x02_Male TX1
 U 1 1 5CD595C3
 P 4650 5170
 F 0 "TX1" H 4622 5052 50  0000 R CNN
-F 1 "Conn_01x02_Male" H 4622 5143 50  0000 R CNN
+F 1 "Transmit" H 4622 5143 50  0000 R CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4650 5170 50  0001 C CNN
 F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4650 5170 50  0001 C CNN
 	1    4650 5170
@@ -435,11 +435,11 @@ Wire Wire Line
 Wire Wire Line
 	2670 4680 3670 4680
 Wire Wire Line
-	3670 3960 3390 3960
+	3670 3960 3550 3960
 Wire Wire Line
-	3390 3960 3390 3500
+	3550 3960 3550 3500
 Wire Wire Line
-	3390 3500 3170 3500
+	3550 3500 3170 3500
 Wire Wire Line
 	3170 3600 3570 3600
 Wire Wire Line
@@ -459,14 +459,203 @@ Wire Wire Line
 Wire Wire Line
 	3600 3660 3670 3660
 $Comp
-L Connector:Conn_01x02_Male ADC?
-U 1 1 5CEC7A76
-P 3960 7290
-F 0 "ADC?" H 3770 7170 50  0000 L CNN
-F 1 "ADC" H 3250 7230 50  0000 L CNN
-F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 3960 7290 50  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 3960 7290 50  0001 C CNN
-	1    3960 7290
+L Connector:Conn_01x03_Male C_SEN1
+U 1 1 5CE723DE
+P 5450 6950
+F 0 "C_SEN1" H 5422 6832 50  0000 R CNN
+F 1 "Current Sensor" H 5422 6923 50  0000 R CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5450 6950 50  0001 C CNN
+F 3 "~" H 5450 6950 50  0001 C CNN
+	1    5450 6950
 	-1   0    0    1   
 $EndComp
+Text Notes 5150 7370 0    50   ~ 0
+Sensor like\nhttps://www.dfrobot.com/product-580.html\n(work in progress)
+$Comp
+L power:GND #PWR0106
+U 1 1 5CE73E07
+P 4900 6940
+F 0 "#PWR0106" H 4900 6690 50  0001 C CNN
+F 1 "GND" H 4905 6767 50  0000 C CNN
+F 2 "" H 4900 6940 50  0001 C CNN
+F 3 "" H 4900 6940 50  0001 C CNN
+	1    4900 6940
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0107
+U 1 1 5CE764AB
+P 5060 6780
+F 0 "#PWR0107" H 5060 6630 50  0001 C CNN
+F 1 "+3.3V" H 5075 6953 50  0000 C CNN
+F 2 "" H 5060 6780 50  0001 C CNN
+F 3 "" H 5060 6780 50  0001 C CNN
+	1    5060 6780
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3340 6730 3140 6730
+Wire Wire Line
+	5250 6950 5010 6950
+Wire Wire Line
+	5010 6950 5010 6940
+Wire Wire Line
+	5010 6940 4900 6940
+Wire Wire Line
+	5250 7150 5250 7050
+Wire Wire Line
+	3340 6730 3340 7150
+Wire Wire Line
+	3340 7150 5250 7150
+Wire Wire Line
+	5250 6850 5060 6850
+Wire Wire Line
+	5060 6850 5060 6780
+$Comp
+L Connector:Conn_01x02_Male J1
+U 1 1 5CEAA4FE
+P 4210 4350
+F 0 "J1" H 4182 4232 50  0000 R CNN
+F 1 "Input" H 4182 4323 50  0000 R CNN
+F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4210 4350 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4210 4350 50  0001 C CNN
+	1    4210 4350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J2
+U 1 1 5CEAAE9A
+P 4210 4570
+F 0 "J2" H 4182 4452 50  0000 R CNN
+F 1 "Input" H 4182 4543 50  0000 R CNN
+F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4210 4570 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4210 4570 50  0001 C CNN
+	1    4210 4570
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3170 3900 3450 3900
+Wire Wire Line
+	3450 3900 3450 4250
+Wire Wire Line
+	3450 4250 4010 4250
+Wire Wire Line
+	4010 4470 3380 4470
+Wire Wire Line
+	3380 4470 3380 4000
+Wire Wire Line
+	3380 4000 3170 4000
+Wire Wire Line
+	3670 4680 3930 4680
+Wire Wire Line
+	4010 4680 4010 4570
+Connection ~ 3670 4680
+Wire Wire Line
+	3930 4680 3930 4350
+Wire Wire Line
+	3930 4350 4010 4350
+Connection ~ 3930 4680
+Wire Wire Line
+	3930 4680 4010 4680
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 5CEB6FE6
+P 4800 4350
+F 0 "J3" H 4772 4232 50  0000 R CNN
+F 1 "Input" H 4772 4323 50  0000 R CNN
+F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4800 4350 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4800 4350 50  0001 C CNN
+	1    4800 4350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J4
+U 1 1 5CEB74DB
+P 4800 4550
+F 0 "J4" H 4772 4432 50  0000 R CNN
+F 1 "Input" H 4772 4523 50  0000 R CNN
+F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4800 4550 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4800 4550 50  0001 C CNN
+	1    4800 4550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3170 4100 4600 4100
+Wire Wire Line
+	4600 4100 4600 4250
+Wire Wire Line
+	4600 4450 4480 4450
+Wire Wire Line
+	4480 4450 4480 4160
+Wire Wire Line
+	4480 4160 3170 4160
+Wire Wire Line
+	3170 4160 3170 4200
+Wire Wire Line
+	4010 4680 4530 4680
+Wire Wire Line
+	4600 4680 4600 4550
+Connection ~ 4010 4680
+Wire Wire Line
+	4600 4350 4530 4350
+Wire Wire Line
+	4530 4350 4530 4680
+Connection ~ 4530 4680
+Wire Wire Line
+	4530 4680 4600 4680
+Text Notes 5150 4430 0    50   ~ 0
+J1-J4 switch inputs (not optoisolated!)
+$Comp
+L Connector:Conn_01x03_Male J5
+U 1 1 5CEE1C26
+P 5120 6310
+F 0 "J5" H 5092 6192 50  0000 R CNN
+F 1 "Optional" H 5092 6283 50  0000 R CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5120 6310 50  0001 C CNN
+F 3 "~" H 5120 6310 50  0001 C CNN
+	1    5120 6310
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3140 6430 3420 6430
+Wire Wire Line
+	3420 6430 3420 6290
+Wire Wire Line
+	3420 6290 4670 6290
+Wire Wire Line
+	4670 6290 4670 6410
+Wire Wire Line
+	4670 6410 4920 6410
+$Comp
+L power:GND #PWR05
+U 1 1 5CEE7CB3
+P 4620 6050
+F 0 "#PWR05" H 4620 5800 50  0001 C CNN
+F 1 "GND" H 4625 5877 50  0000 C CNN
+F 2 "" H 4620 6050 50  0001 C CNN
+F 3 "" H 4620 6050 50  0001 C CNN
+	1    4620 6050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR06
+U 1 1 5CEE831F
+P 4900 6050
+F 0 "#PWR06" H 4900 5900 50  0001 C CNN
+F 1 "+3.3V" H 4915 6223 50  0000 C CNN
+F 2 "" H 4900 6050 50  0001 C CNN
+F 3 "" H 4900 6050 50  0001 C CNN
+	1    4900 6050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 6050 4900 6210
+Wire Wire Line
+	4900 6210 4920 6210
+Wire Wire Line
+	4920 6310 4750 6310
+Wire Wire Line
+	4750 6310 4750 6050
+Wire Wire Line
+	4750 6050 4620 6050
 $EndSCHEMATC
