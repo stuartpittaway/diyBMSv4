@@ -241,35 +241,51 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <div class="settings">
 
     <div>
-      <label for="rule1value">Rule 1 - Individual cell over voltage</label>
-      <input type="number" min="2500" max="4500" step="10" name="rule1value" id="rule1value" value="4100" required="">
+      <label for="rule1value">Rule 1 - Communications error</label>
       <select id="rule1relay1" name="rule1relay1"><option>On</option><option>Off</option><option>X</option></select>
       <select id="rule1relay2" name="rule1relay2"><option>On</option><option>Off</option><option>X</option></select>
       <select id="rule1relay3" name="rule1relay3"><option>On</option><option>Off</option><option>X</option></select>
     </div>
 
-    </div>
     <div>
-    <label for="rule2value">Rule 2 - Individual cell over temperature (external probe)</label>
-    <input type="number" min="10" max="90" step="1" name="rule2value" id="rule2value" value="45" required="">
-    <select id="rule2relay1" name="rule2relay1"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule2relay2" name="rule2relay2"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule2relay3" name="rule2relay3"><option>On</option><option>Off</option><option>X</option></select>
+      <label for="rule2value">Rule 2 - Individual cell over voltage</label>
+      <input type="number" min="2500" max="4500" step="10" name="rule1value" id="rule1value" value="4100" required="">
+      <select id="rule2relay1" name="rule2relay1"><option>On</option><option>Off</option><option>X</option></select>
+      <select id="rule2relay2" name="rule2relay2"><option>On</option><option>Off</option><option>X</option></select>
+      <select id="rule2relay3" name="rule2relay3"><option>On</option><option>Off</option><option>X</option></select>
     </div>
+
     <div>
-    <label for="rule3value">Rule 3 - Pack over voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule3value" id="rule3value" value="16000" required="">
+    <label for="rule3value">Rule 3 - Individual cell over temperature (external probe)</label>
+    <input type="number" min="10" max="90" step="1" name="rule3value" id="rule3value" value="45" required="">
     <select id="rule3relay1" name="rule3relay1"><option>On</option><option>Off</option><option>X</option></select>
     <select id="rule3relay2" name="rule3relay2"><option>On</option><option>Off</option><option>X</option></select>
     <select id="rule3relay3" name="rule3relay3"><option>On</option><option>Off</option><option>X</option></select>
     </div>
+
     <div>
-    <label for="rule4value">Rule 4 - Pack under voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule4value" id="rule4value" value="12000" required="">
+    <label for="rule4value">Rule 4 - Pack over voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule4value" id="rule4value" value="16000" required="">
     <select id="rule4relay1" name="rule4relay1"><option>On</option><option>Off</option><option>X</option></select>
     <select id="rule4relay2" name="rule4relay2"><option>On</option><option>Off</option><option>X</option></select>
     <select id="rule4relay3" name="rule4relay3"><option>On</option><option>Off</option><option>X</option></select>
     </div>
+
+    <div>
+    <label for="rule5value">Rule 5 - Pack under voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule5value" id="rule5value" value="12000" required="">
+    <select id="rule5relay1" name="rule5relay1"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule5relay2" name="rule5relay2"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule5relay3" name="rule5relay3"><option>On</option><option>Off</option><option>X</option></select>
+    </div>
+
+    <div>
+    <label for="defaultrelay1">Relay default</label>
+    <select id="defaultrelay1" name="defaultrelay1"><option>On</option><option>Off</option></select>
+    <select id="defaultrelay2" name="defaultrelay2"><option>On</option><option>Off</option></select>
+    <select id="defaultrelay3" name="defaultrelay3"><option>On</option><option>Off</option></select>
+    </div>
+
     <input type="submit" value="Save rules"/>
     </form>
 

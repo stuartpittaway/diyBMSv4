@@ -211,12 +211,17 @@ void timerProcessRules() {
   packvoltage[2]=0;
   packvoltage[3]=0;
 
-  bool rule[4];
+  bool rule[RELAY_RULES];
 
-  rule[0]=false;
-  rule[1]=false;
-  rule[2]=false;
-  rule[3]=false;
+  for (int8_t r = 0; r < RELAY_RULES; r++)
+  {
+    rule[r]=false;
+  }
+
+  //If we have a communications error
+  if (receiveProc.commsError > 2) {
+    rule[0]=true;
+  }
 
   //Loop through cells
   for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
@@ -225,14 +230,14 @@ void timerProcessRules() {
 
       packvoltage[bank]+=cmi[bank][i].voltagemV;
 
-      if (cmi[bank][i].voltagemV > mysettings.rulevalue[0]) {
+      if (cmi[bank][i].voltagemV > mysettings.rulevalue[1]) {
           //Rule 1 - Individual cell over voltage
-          rule[0]=true;
+          rule[1]=true;
       }
 
-      if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[1])) {
+      if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[2])) {
           //Rule 2 - Individual cell over temperature (external probe)
-          rule[1]=true;
+          rule[2]=true;
       }
     }
   }
@@ -247,14 +252,14 @@ void timerProcessRules() {
 
   for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
   {
-    if (packvoltage[bank] > mysettings.rulevalue[2]) {
+    if (packvoltage[bank] > mysettings.rulevalue[3]) {
       //Rule 3 - Pack over voltage (mV)
-      rule[2]=true;
+      rule[3]=true;
     }
 
-    if (packvoltage[bank] < mysettings.rulevalue[3]) {
+    if (packvoltage[bank] < mysettings.rulevalue[4]) {
       //Rule 4 - Pack under voltage (mV)
-      rule[3]=true;
+      rule[4]=true;
     }
   }
 
@@ -263,21 +268,23 @@ void timerProcessRules() {
   // Any pin you wish to use as input must be written HIGH and be pulled LOW to generate an interrupt.
 
   Serial1.print("Rules:");
-  Serial1.print(rule[0]);
-  Serial1.print(" ");
-  Serial1.print(rule[1]);
-  Serial1.print(" ");
-  Serial1.print(rule[2]);
-  Serial1.print(" ");
-  Serial1.print(rule[3]);
+  for (int8_t r = 0; r < RELAY_RULES; r++)
+  {
+    Serial1.print(rule[r]);
+    Serial1.print(" ");
+  }
   Serial1.print("=");
 
-  //Start with everything off
-  //Need to make this configurable!
-  uint8_t relay[3]={HIGH,HIGH,HIGH};
+  uint8_t relay[3];
+
+  //Set defaults based on configuration
+  for (int8_t y = 0; y<3; y++)
+  {
+    relay[y]=  mysettings.rulerelaydefault[y]==RELAY_ON ? LOW:HIGH;
+  }
 
   //Test the rules (in reverse order)
-  for (int8_t n = 3; n>=0; n--)
+  for (int8_t n = RELAY_RULES-1; n>=0; n--)
   {
     if (rule[n]==true) {
 

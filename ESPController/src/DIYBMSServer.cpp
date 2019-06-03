@@ -156,6 +156,13 @@ void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
     mysettings.rulevalue[3] =p1->value().toInt();
   }
 
+  if (request->hasParam("rule5value", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule5value", true);
+    mysettings.rulevalue[4] =p1->value().toInt();
+  }
+
+
+
   //TODO: Tidy this up into a loop of some sort!
   //Rule 1
   if (request->hasParam("rule1relay1", true)) {
@@ -211,6 +218,36 @@ void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
   if (request->hasParam("rule4relay3", true)) {
     AsyncWebParameter *p1 = request->getParam("rule4relay3", true);
     mysettings.rulerelaystate[3][2] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+
+
+  //Rule 5
+  if (request->hasParam("rule5relay1", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule5relay1", true);
+    mysettings.rulerelaystate[4][0] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule5relay2", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule5relay2", true);
+    mysettings.rulerelaystate[4][1] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule5relay3", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule5relay3", true);
+    mysettings.rulerelaystate[4][2] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+
+
+  //Rule default
+  if (request->hasParam("defaultrelay1", true)) {
+    AsyncWebParameter *p1 = request->getParam("defaultrelay1", true);
+    mysettings.rulerelaydefault[0] = p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("defaultrelay2", true)) {
+    AsyncWebParameter *p1 = request->getParam("defaultrelay2", true);
+    mysettings.rulerelaydefault[1] =p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("defaultrelay3", true)) {
+    AsyncWebParameter *p1 = request->getParam("defaultrelay3", true);
+    mysettings.rulerelaydefault[2] = p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
   }
 
 
@@ -434,30 +471,28 @@ void DIYBMSServer::rules(AsyncWebServerRequest *request) {
   DynamicJsonDocument doc(2048);
   JsonObject root = doc.to<JsonObject>();
 
+  //TODO: Add in defaults!
+
   JsonArray bankArray = root.createNestedArray("rules");
 
-  for (uint8_t r = 0; r < 4; r++) {
+  for (uint8_t r = 0; r < RELAY_RULES; r++) {
     JsonObject rule1 = bankArray.createNestedObject();
     rule1["value"] =mysettings.rulevalue[r];
 
     JsonArray data = rule1.createNestedArray("relays");
 
     for (uint8_t relay = 0; relay < 3; relay++) {
-
       switch(mysettings.rulerelaystate[r][relay]) {
-
         case RELAY_OFF: data.add(false);break;
         case RELAY_ON: data.add(true);break;
         default: data.add((char*)0);break;
       }
-
     }
   }
 
   serializeJson(doc, *response);
   request->send(response);
 }
-
 
 void DIYBMSServer::settings(AsyncWebServerRequest *request) {
   AsyncResponseStream *response =
