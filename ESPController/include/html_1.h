@@ -242,6 +242,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 
     <div>
       <label for="rule1value">Rule 1 - Communications error</label>
+      <input type="number" min="0" max="999999" step="1" name="rule1value" id="rule1value" value="0" required="" readonly="">
       <select id="rule1relay1" name="rule1relay1"><option>On</option><option>Off</option><option>X</option></select>
       <select id="rule1relay2" name="rule1relay2"><option>On</option><option>Off</option><option>X</option></select>
       <select id="rule1relay3" name="rule1relay3"><option>On</option><option>Off</option><option>X</option></select>
@@ -249,7 +250,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 
     <div>
       <label for="rule2value">Rule 2 - Individual cell over voltage</label>
-      <input type="number" min="2500" max="4500" step="10" name="rule1value" id="rule1value" value="4100" required="">
+      <input type="number" min="2500" max="4500" step="10" name="rule2value" id="rule2value" value="4100" required="">
       <select id="rule2relay1" name="rule2relay1"><option>On</option><option>Off</option><option>X</option></select>
       <select id="rule2relay2" name="rule2relay2"><option>On</option><option>Off</option><option>X</option></select>
       <select id="rule2relay3" name="rule2relay3"><option>On</option><option>Off</option><option>X</option></select>
@@ -280,7 +281,8 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     </div>
 
     <div>
-    <label for="defaultrelay1">Relay default</label>
+    <label for="defaultvalue">Relay default</label>
+    <input type="number" min="0" max="999999" step="1" name="defaultvalue" id="defaultvalue" value="0" required="" readonly="">
     <select id="defaultrelay1" name="defaultrelay1"><option>On</option><option>Off</option></select>
     <select id="defaultrelay2" name="defaultrelay2"><option>On</option><option>Off</option></select>
     <select id="defaultrelay3" name="defaultrelay3"><option>On</option><option>Off</option></select>
