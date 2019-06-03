@@ -132,6 +132,95 @@ void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
 }
 
 
+
+void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
+  if (request->hasParam("rule1value", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule1value", true);
+    mysettings.rulevalue[0] =p1->value().toInt();
+  }
+
+  if (request->hasParam("rule2value", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule2value", true);
+    mysettings.rulevalue[1] =p1->value().toInt();
+  }
+
+  if (request->hasParam("rule3value", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule3value", true);
+    mysettings.rulevalue[2] =p1->value().toInt();
+  }
+
+  if (request->hasParam("rule4value", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule4value", true);
+    mysettings.rulevalue[3] =p1->value().toInt();
+  }
+
+  //TODO: Tidy this up into a loop of some sort!
+  //Rule 1
+  if (request->hasParam("rule1relay1", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule1relay1", true);
+    mysettings.rulerelaystate[0][0] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule1relay2", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule1relay2", true);
+    mysettings.rulerelaystate[0][1] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule1relay3", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule1relay3", true);
+    mysettings.rulerelaystate[0][2] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+
+  //Rule 2
+  if (request->hasParam("rule2relay1", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule2relay1", true);
+    mysettings.rulerelaystate[1][0] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule2relay2", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule2relay2", true);
+    mysettings.rulerelaystate[1][1] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule2relay3", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule2relay3", true);
+    mysettings.rulerelaystate[1][2] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+
+  //Rule 3
+  if (request->hasParam("rule3relay1", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule3relay1", true);
+    mysettings.rulerelaystate[2][0] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule3relay2", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule3relay2", true);
+    mysettings.rulerelaystate[2][1] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule3relay3", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule3relay3", true);
+    mysettings.rulerelaystate[2][2] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+
+  //Rule 4
+  if (request->hasParam("rule4relay1", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule4relay1", true);
+    mysettings.rulerelaystate[3][0] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule4relay2", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule4relay2", true);
+    mysettings.rulerelaystate[3][1] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+  if (request->hasParam("rule4relay3", true)) {
+    AsyncWebParameter *p1 = request->getParam("rule4relay3", true);
+    mysettings.rulerelaystate[3][2] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
+  }
+
+
+  Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
+
+  SendSuccess(request);
+}
+
+
+
 void DIYBMSServer::saveBankConfiguration(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
 
@@ -337,6 +426,39 @@ void DIYBMSServer::identifyModule(AsyncWebServerRequest *request) {
   }
 }
 
+
+void DIYBMSServer::rules(AsyncWebServerRequest *request) {
+  AsyncResponseStream *response =
+      request->beginResponseStream("application/json");
+
+  DynamicJsonDocument doc(2048);
+  JsonObject root = doc.to<JsonObject>();
+
+  JsonArray bankArray = root.createNestedArray("rules");
+
+  for (uint8_t r = 0; r < 4; r++) {
+    JsonObject rule1 = bankArray.createNestedObject();
+    rule1["value"] =mysettings.rulevalue[r];
+
+    JsonArray data = rule1.createNestedArray("relays");
+
+    for (uint8_t relay = 0; relay < 3; relay++) {
+
+      switch(mysettings.rulerelaystate[r][relay]) {
+
+        case RELAY_OFF: data.add(false);break;
+        case RELAY_ON: data.add(true);break;
+        default: data.add((char*)0);break;
+      }
+
+    }
+  }
+
+  serializeJson(doc, *response);
+  request->send(response);
+}
+
+
 void DIYBMSServer::settings(AsyncWebServerRequest *request) {
   AsyncResponseStream *response =
       request->beginResponseStream("application/json");
@@ -526,6 +648,7 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/modules.json", HTTP_GET, DIYBMSServer::modules);
   _myserver->on("/identifyModule.json", HTTP_GET, DIYBMSServer::identifyModule);
   _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
+  _myserver->on("/rules.json", HTTP_GET, DIYBMSServer::rules);
 
   //POST methods
   _myserver->on("/savesetting.json", HTTP_POST, DIYBMSServer::saveSetting);
@@ -533,6 +656,7 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/savemqtt.json", HTTP_POST, DIYBMSServer::saveMQTTSetting);
   _myserver->on("/saveinfluxdb.json", HTTP_POST, DIYBMSServer::saveInfluxDBSetting);
   _myserver->on("/savebankconfig.json", HTTP_POST, DIYBMSServer::saveBankConfiguration);
+  _myserver->on("/saverules.json", HTTP_POST, DIYBMSServer::saveRuleConfiguration);
 
   _myserver->on("/resetcounters.json", HTTP_POST, DIYBMSServer::resetCounters);
 

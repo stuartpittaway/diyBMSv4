@@ -27,6 +27,9 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border:none;co
 .success { color:#000000;background-color:#49BE3B; padding:10px;display:none; width:100%;}
 .page {clear:both; width:100%; display:none;margin:5px;}
 
+h2 { margin:0; }
+.page .region {max-width:600px;float:left;padding:10px;margin-right:10px;width:45%;}
+
 #modulesTable span {display:inline-block;}
 #modulesTable .rows span {min-width:90px;font-family: 'Nova Mono', monospace;text-align:right;}
 #modulesTable .rows button {margin-left:20px;}
@@ -34,6 +37,7 @@ form input[type='submit'] {font-family:Arial,Helvetica,sans-serif;border:none;co
 #modulesTable .selected {background-color:#d3f9fa;}
 
 @media screen and (max-width:640px){
+  .page .region {width:100%;}
   .header a {float:none;padding:6px;font-size:14px;line-height:20px;}
   .graphs {height:480px;width:95%;}
   .info .stat .v { font-size:12pt;}

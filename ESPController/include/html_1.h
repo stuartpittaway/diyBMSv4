@@ -149,6 +149,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <h1>Integration</h1>
     <p>For security, you will need to re-enter the password for the service(s) you want to enable or modify, before you save.</p>
     <p>After changes are made, the controller will automatically reboot. You will need to refresh the web page to continue.</p>
+<div class="region">
     <h2>MQTT</h2>
     <form id="mqttForm" method="POST" action="savemqtt.json" autocomplete="off">
         <div class="settings">
@@ -175,8 +176,9 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
             <input type="submit" value="Save MQTT settings"/>
         </div>
     </form>
+    </div>
 
-
+<div class="region">
     <h2>Influx Database</h2>
     <form id="influxForm" method="POST" action="saveinfluxdb.json" autocomplete="off">
         <div class="settings">
@@ -208,10 +210,12 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
         </div>
     </form>
 </div>
+</div>
 
 
 <div class="page" id="settingsPage">
     <h1>Controller Settings</h1>
+    <div class="region">
     <h2>Banks</h2>
     <p>DIYBMS supports up to 16 modules in a single bank. Up to 4 seperate banks can be configured. Only enable a bank if you need this advanced functionality as it slows down processing and can cause errors.</p>
     <p>Combination type: Use Parallel when you have multiple banks up to 16S, or Serial if you want a single bank with up to 64S.</p>
@@ -228,6 +232,49 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
             <input type="submit" value="Save bank settings"/>
         </div>
     </form>
+    </div>
+    <div class="region">
+    <h2>Rules</h2>
+    <p>DIYBMS supports relay modules to safely disconnect chargers, contactors or consumers.  The rules below allow you to configure the relays for your situation.</p>
+    <p>Rules are processed in REVERSE order.  Control the relays using the options. A value of "X" means don't care/leave at previous setting.<p>
+    <form id="rulesForm" method="POST" action="saverules.json" autocomplete="off">
+    <div class="settings">
+
+    <div>
+      <label for="rule1value">Rule 1 - Individual cell over voltage</label>
+      <input type="number" min="2500" max="4500" step="10" name="rule1value" id="rule1value" value="4100" required="">
+      <select id="rule1relay1" name="rule1relay1"><option>On</option><option>Off</option><option>X</option></select>
+      <select id="rule1relay2" name="rule1relay2"><option>On</option><option>Off</option><option>X</option></select>
+      <select id="rule1relay3" name="rule1relay3"><option>On</option><option>Off</option><option>X</option></select>
+    </div>
+
+    </div>
+    <div>
+    <label for="rule2value">Rule 2 - Individual cell over temperature (external probe)</label>
+    <input type="number" min="10" max="90" step="1" name="rule2value" id="rule2value" value="45" required="">
+    <select id="rule2relay1" name="rule2relay1"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule2relay2" name="rule2relay2"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule2relay3" name="rule2relay3"><option>On</option><option>Off</option><option>X</option></select>
+    </div>
+    <div>
+    <label for="rule3value">Rule 3 - Pack over voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule3value" id="rule3value" value="16000" required="">
+    <select id="rule3relay1" name="rule3relay1"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule3relay2" name="rule3relay2"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule3relay3" name="rule3relay3"><option>On</option><option>Off</option><option>X</option></select>
+    </div>
+    <div>
+    <label for="rule4value">Rule 4 - Pack under voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule4value" id="rule4value" value="12000" required="">
+    <select id="rule4relay1" name="rule4relay1"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule4relay2" name="rule4relay2"><option>On</option><option>Off</option><option>X</option></select>
+    <select id="rule4relay3" name="rule4relay3"><option>On</option><option>Off</option><option>X</option></select>
+    </div>
+    <input type="submit" value="Save rules"/>
+    </form>
+
+    </div>
+    <div class="region">
     <h2>Reset Error Counts</h2>
     <form id="resetCountersForm" method="POST" action="resetcounters.json" autocomplete="off">
         <div class="settings">
@@ -235,6 +282,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
             <input type="submit" value="Reset error counters"/>
         </div>
     </form>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -564,6 +612,7 @@ $(function() {
     $(".page").hide();
 
     $("#banksForm").hide();
+    $("#rulesForm").hide();
     $("#settingsPage").show();
 
     $.getJSON( "settings.json",
@@ -574,8 +623,32 @@ $(function() {
         } else {
           $("#combitype").val("Serial");
         }
-
           $("#banksForm").show();
+      }).fail(function() {}
+    );
+
+    $.getJSON( "rules.json",
+      function(data) {
+          //Rules have loaded
+
+          var i=1;
+
+          $.each(data.rules, function(index, value) {
+              $("#rule"+(index+1)+"value").val(value.value);
+
+              $.each(value.relays, function(index2, value2) {
+                var relay_value="X";
+                if (value2===true) {relay_value="On";}
+                if (value2===false){relay_value="Off";}
+
+                $("#rule"+(index+1)+"relay"+(index2+1)).val(relay_value);
+
+              });
+          });
+
+
+
+          $("#rulesForm").show();
       }).fail(function() {}
     );
 
@@ -673,6 +746,21 @@ $("#mqttForm").submit(function (e) {
        });
    });
 
+   $("#rulesForm").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (data) {
+              $("#savesuccess").show().delay(2000).fadeOut(500);
+            },
+            error: function (data) {
+                $("#saveerror").show().delay(2000).fadeOut(500);
+            },
+        });
+    });
 
 
   $("#banksForm").submit(function (e) {
@@ -699,7 +787,7 @@ $("#mqttForm").submit(function (e) {
             url: $(this).attr('action'),
             data: $(this).serialize(),
             success: function (data) {
-
+                $("#savesuccess").show().delay(2000).fadeOut(500);
             },
             error: function (data) {
                 $("#saveerror").show().delay(2000).fadeOut(500);

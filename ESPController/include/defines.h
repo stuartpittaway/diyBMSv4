@@ -8,10 +8,19 @@
 
 #define EEPROM_SETTINGS_START_ADDRESS 256
 
+#define RELAY_ON 0xFF
+#define RELAY_OFF 0x99
+#define RELAY_X 0x00
+
 struct diybms_eeprom_settings {
 
   int8_t totalNumberOfBanks;
   bool combinationParallel;
+
+  uint16_t rulevalue[4];
+
+  //Use a bit pattern to indicate the relay states
+  uint8_t rulerelaystate[4][3];
 
   //NOTE this array is subject to buffer overflow vulnerabilities!
   bool mqtt_enabled;

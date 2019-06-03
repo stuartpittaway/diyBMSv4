@@ -465,6 +465,17 @@ void LoadConfiguration() {
     strcpy(mysettings.influxdb_database,"database");
     strcpy(mysettings.influxdb_user,"user");
     strcpy(mysettings.influxdb_password,"");
+
+    mysettings.rulevalue[0]=4150;
+    mysettings.rulevalue[1]=55;
+    mysettings.rulevalue[2]=16000;
+    mysettings.rulevalue[3]=12000;
+
+    for (size_t i = 0; i < 4; i++) {
+      mysettings.rulerelaystate[i][0]=RELAY_X;
+      mysettings.rulerelaystate[i][1]=RELAY_X;
+      mysettings.rulerelaystate[i][2]=RELAY_X;
+    }
 }
 
 void setup() {

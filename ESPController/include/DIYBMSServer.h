@@ -30,6 +30,7 @@ class DIYBMSServer {
       static void modules(AsyncWebServerRequest *request);
       static void integration(AsyncWebServerRequest *request);
       static void identifyModule(AsyncWebServerRequest *request);
+      static void rules(AsyncWebServerRequest *request);
       static void saveSetting(AsyncWebServerRequest *request);
       static void saveGlobalSetting(AsyncWebServerRequest *request);
       static String TemplateProcessor(const String& var);
@@ -41,6 +42,7 @@ class DIYBMSServer {
       static void saveBankConfiguration(AsyncWebServerRequest *request);
       static void clearModuleValues(uint8_t bank, uint8_t module);
       static void resetCounters(AsyncWebServerRequest *request);
+      static void saveRuleConfiguration(AsyncWebServerRequest *request);
 
 };
 
