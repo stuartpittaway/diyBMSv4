@@ -73,7 +73,7 @@ void ICACHE_RAM_ATTR PCFInterrupt() {
 //up to 4x16
 CellModuleInfo cmi[4][maximum_cell_modules];
 //Size of array
-int numberOfModules[4];
+uint8_t numberOfModules[4];
 
 #include "crc16.h"
 
@@ -201,24 +201,116 @@ void timerTransmitCallback() {
   }
 }
 
-uint8_t relayState=0;
-void timerRelay1Callback() {
+
+void timerProcessRules() {
+
+  uint32_t packvoltage[4];
+
+  packvoltage[0]=0;
+  packvoltage[1]=0;
+  packvoltage[2]=0;
+  packvoltage[3]=0;
+
+  bool rule[4];
+
+  rule[0]=false;
+  rule[1]=false;
+  rule[2]=false;
+  rule[3]=false;
+
+  //Loop through cells
+  for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
+  {
+    for (int8_t i = 0; i < numberOfModules[bank]; i++) {
+
+      packvoltage[bank]+=cmi[bank][i].voltagemV;
+
+      if (cmi[bank][i].voltagemV > mysettings.rulevalue[0]) {
+          //Rule 1 - Individual cell over voltage
+          rule[0]=true;
+      }
+
+      if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[1])) {
+          //Rule 2 - Individual cell over temperature (external probe)
+          rule[1]=true;
+      }
+    }
+  }
+
+  //Combine the voltages if we need to
+  if (mysettings.combinationParallel==false) {
+    packvoltage[0]+=packvoltage[1]+packvoltage[2]+packvoltage[3];
+    packvoltage[1]=0;
+    packvoltage[2]=0;
+    packvoltage[3]=0;
+  }
+
+  for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
+  {
+    if (packvoltage[bank] > mysettings.rulevalue[2]) {
+      //Rule 3 - Pack over voltage (mV)
+      rule[2]=true;
+    }
+
+    if (packvoltage[bank] < mysettings.rulevalue[3]) {
+      //Rule 4 - Pack under voltage (mV)
+      rule[3]=true;
+    }
+  }
 
   // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
   // It wouldn't generate an interrupt if you were to connect a button to it that pulls it HIGH when you press the button.
   // Any pin you wish to use as input must be written HIGH and be pulled LOW to generate an interrupt.
 
-  pcf8574.write(relayState, HIGH);
-  relayState++;
-  if (relayState==4) { relayState=0;}
-  pcf8574.write(relayState, LOW);
+  Serial1.print("Rules:");
+  Serial1.print(rule[0]);
+  Serial1.print(" ");
+  Serial1.print(rule[1]);
+  Serial1.print(" ");
+  Serial1.print(rule[2]);
+  Serial1.print(" ");
+  Serial1.print(rule[3]);
+  Serial1.print("=");
 
+  //Start with everything off
+  //Need to make this configurable!
+  uint8_t relay[3]={HIGH,HIGH,HIGH};
 
+  //Test the rules (in reverse order)
+  for (int8_t n = 3; n>=0; n--)
+  {
+    if (rule[n]==true) {
+
+      for (int8_t y = 0; y<3; y++)
+      {
+        //Dont change relay if its set to ignore/X
+        if (mysettings.rulerelaystate[n][y]!=RELAY_X) {
+            //Logic is inverted on the PCF chip
+            if (mysettings.rulerelaystate[n][y]==RELAY_ON) {
+              relay[y]=LOW;
+            } else {
+              relay[y]=HIGH;
+            }
+        }
+      }
+      }
+  }
+
+  for (int8_t n = 0; n<3; n++)
+  {
+    //Would be better here to use the WRITE8 to lower i2c traffic
+    pcf8574.write(n, relay[n]);
+
+    Serial1.print(' ');
+    Serial1.print(relay[n]);
+  }
+  Serial1.println("");
+
+  //pcf8574.write8(relayState);
 }
 
 void timerEnqueueCallback() {
   //this is called regularly on a timer, it determines what request to make to the modules (via the request queue)
-
   for (uint8_t b = 0; b < mysettings.totalNumberOfBanks; b++)
   {
     prg.sendCellVoltageRequest(b);
@@ -287,7 +379,7 @@ void setupInfluxClient()
         String poststring;
 
         for (uint8_t bank = 0; bank < 4; bank++) {
-          for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
+          for (uint8_t i = 0; i < numberOfModules[bank]; i++) {
 
             //Data in LINE PROTOCOL format https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/
             poststring = poststring
@@ -299,7 +391,7 @@ void setupInfluxClient()
 
                 if (cmi[bank][i].externalTemp!=-40) {
                   //Ensure its valid
-                  poststring = poststring + ",exttemp=" + String(cmi[bank][i].internalTemp)+"i";
+                  poststring = poststring + ",exttemp=" + String(cmi[bank][i].externalTemp)+"i";
                 }
                 poststring = poststring + "\n";
           }
@@ -412,7 +504,7 @@ void sendMqttPacket() {
   char value[50];
 
   for (uint8_t bank = 0; bank < 4; bank++) {
-    for (uint16_t i = 0; i < numberOfModules[bank]; i++) {
+    for (uint8_t i = 0; i < numberOfModules[bank]; i++) {
       sprintf(buffer, "diybms/%d/%d/voltage", bank,i);
       float v=(float)cmi[bank][i].voltagemV/1000.0;
       dtostrf(v,7, 3, value);
@@ -539,6 +631,9 @@ void setup() {
   pcf8574.write(6, HIGH);
   pcf8574.write(7, HIGH);
 
+  //We don't use the 4th relay at the moment
+  pcf8574.write(3, HIGH);
+
   //internal pullup-resistor on the interrupt line via ESP8266
   pcf8574.resetInterruptPin();
   attachInterrupt(digitalPinToInterrupt(D5), PCFInterrupt, FALLING);
@@ -546,7 +641,7 @@ void setup() {
   //Ensure we service the cell modules every 5 seconds
   myTimer.attach(5, timerEnqueueCallback);
 
-  myTimerRelay.attach(1, timerRelay1Callback);
+  myTimerRelay.attach(10, timerProcessRules);
 
   //We process the transmit queue every 0.5 seconds (this needs to be lower delay than the queue fills)
   myTransmitTimer.attach(0.5, timerTransmitCallback);

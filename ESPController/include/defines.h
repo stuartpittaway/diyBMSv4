@@ -14,7 +14,7 @@
 
 struct diybms_eeprom_settings {
 
-  int8_t totalNumberOfBanks;
+  uint8_t totalNumberOfBanks;
   bool combinationParallel;
 
   uint16_t rulevalue[4];
@@ -107,7 +107,7 @@ struct CellModuleInfo {
 
 //This holds all the cell information in a large array 2D array (4x16)
 extern CellModuleInfo cmi[4][maximum_cell_modules];
-extern int numberOfModules[4];
+extern uint8_t numberOfModules[4];
 
 
 #endif
