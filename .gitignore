@@ -54,3 +54,4 @@ dkms.conf
 *.kicad_pcb-bak
 *.bak
 ESPControllerCircuit/fp-info-cache
+ESPControllerCircuit/fp-info-cache
