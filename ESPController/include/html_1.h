@@ -649,8 +649,16 @@ $(function() {
       function(data) {
           //Rules have loaded
 
-          var i=1;
+          //Default relay settings
+          $.each(data.relaydefault, function(index2, value2) {
+            var relay_value="X";
+            if (value2===true) {relay_value="On";}
+            if (value2===false){relay_value="Off";}
+            $("#defaultrelay"+(index2+1)).val(relay_value);
+          });
 
+          //Loop through each rule updating the page
+          var i=1;
           $.each(data.rules, function(index, value) {
               $("#rule"+(index+1)+"value").val(value.value);
 

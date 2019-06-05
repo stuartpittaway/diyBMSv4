@@ -13,6 +13,8 @@
 #define RELAY_X 0x00
 
 #define RELAY_RULES 5
+//Number of relays on board (4)
+#define RELAY_TOTAL 4
 
 struct diybms_eeprom_settings {
 
@@ -22,9 +24,9 @@ struct diybms_eeprom_settings {
   uint16_t rulevalue[RELAY_RULES];
 
   //Use a bit pattern to indicate the relay states
-  uint8_t rulerelaystate[RELAY_RULES][3];
+  uint8_t rulerelaystate[RELAY_RULES][RELAY_TOTAL];
   //Default starting state
-  uint8_t rulerelaydefault[3];
+  uint8_t rulerelaydefault[RELAY_TOTAL];
 
   //NOTE this array is subject to buffer overflow vulnerabilities!
   bool mqtt_enabled;

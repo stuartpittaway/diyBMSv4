@@ -565,16 +565,22 @@ void LoadConfiguration() {
     strcpy(mysettings.influxdb_user,"user");
     strcpy(mysettings.influxdb_password,"");
 
+    for (size_t x = 0; x < RELAY_TOTAL; x++) {
+      mysettings.rulerelaydefault[x]=RELAY_OFF;
+    }
+
     mysettings.rulevalue[0]=0;
     mysettings.rulevalue[1]=4150;
     mysettings.rulevalue[2]=55;
     mysettings.rulevalue[3]=16000;
     mysettings.rulevalue[4]=12000;
 
-    for (size_t i = 0; i < 4; i++) {
-      mysettings.rulerelaystate[i][0]=RELAY_X;
-      mysettings.rulerelaystate[i][1]=RELAY_X;
-      mysettings.rulerelaystate[i][2]=RELAY_X;
+    for (size_t i = 0; i < RELAY_RULES; i++) {
+      for (size_t x = 0; x < RELAY_TOTAL; x++) {
+        mysettings.rulerelaystate[i][x]=RELAY_X;
+        mysettings.rulerelaystate[i][x]=RELAY_X;
+        mysettings.rulerelaystate[i][x]=RELAY_X;
+      }
     }
 }
 
