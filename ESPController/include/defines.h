@@ -12,9 +12,14 @@
 #define RELAY_OFF 0x99
 #define RELAY_X 0x00
 
-#define RELAY_RULES 5
+#define RELAY_RULES 7
 //Number of relays on board (4)
 #define RELAY_TOTAL 4
+
+
+#define SHOW_TIME_PERIOD 5000
+#define NTP_TIMEOUT 1500
+
 
 struct diybms_eeprom_settings {
 

@@ -215,6 +215,67 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
 
 <div class="page" id="settingsPage">
     <h1>Controller Settings</h1>
+
+    <div class="region">
+    <h2>Rules</h2>
+    <p>DIYBMS supports relay modules to safely disconnect chargers, contactors or consumers.  The rules below allow you to configure the relays for your situation.</p>
+    <p>Rules are processed in REVERSE order.  Control the relays using the options. A value of "X" means don't care/leave at previous setting.<p>
+    <p>'Minutes after' rules allow timed operation, this rule is active when the number of minutes past midnight has been reached,
+    for instance 495 is 08:15am.  Use the combination of both rules to switch on and off.  This only works if connected to internet for time updates. Minutes since midnight now is: <span id='timenow'></span></p>
+    <form id="rulesForm" method="POST" action="saverules.json" autocomplete="off">
+    <div class="settings">
+
+    <div class="rule">
+      <label for="rule1value">1. Communications error</label>
+      <input type="number" min="0" max="999999" step="1" name="rule1value" id="rule1value" value="0" required="" readonly="">
+    </div>
+
+    <div class="rule">
+      <label for="rule2value">2. Individual cell over voltage</label>
+      <input type="number" min="2500" max="4500" step="10" name="rule2value" id="rule2value" value="4100" required="">
+    </div>
+
+    <div class="rule">
+    <label for="rule3value">3. Individual cell over temperature (external probe)</label>
+    <input type="number" min="10" max="90" step="1" name="rule3value" id="rule3value" value="45" required="">
+    </div>
+
+    <div class="rule">
+    <label for="rule4value">4. Pack over voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule4value" id="rule4value" value="16000" required="">
+    </div>
+
+    <div class="rule">
+    <label for="rule5value">5. Pack under voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule5value" id="rule5value" value="12000" required="">
+    </div>
+
+    <div class="rule">
+    <label for="rule6value">6. Minutes after 2</label>
+    <input type="number" min="0" max="1440" step="1" name="rule6value" id="rule6value" value="0" required="">
+    </div>
+
+    <div class="rule">
+    <label for="rule7value">7. Minutes after 1</label>
+    <input type="number" min="0" max="1440" step="1" name="rule7value" id="rule7value" value="0" required="">
+    </div>
+
+    <div>
+    <label for="defaultvalue">Relay default</label>
+    <input type="number" min="0" max="999999" step="1" name="defaultvalue" id="defaultvalue" value="0" required="" readonly="">
+    <select id="defaultrelay1" name="defaultrelay1"><option>On</option><option>Off</option></select>
+    <select id="defaultrelay2" name="defaultrelay2"><option>On</option><option>Off</option></select>
+    <select id="defaultrelay3" name="defaultrelay3"><option>On</option><option>Off</option></select>
+    <select id="defaultrelay4" name="defaultrelay4"><option>On</option><option>Off</option></select>
+    </div>
+
+    </div>
+    <input type="submit" value="Save rules"/>
+    </form>
+
+    </div>
+
+
     <div class="region">
     <h2>Banks</h2>
     <p>DIYBMS supports up to 16 modules in a single bank. Up to 4 seperate banks can be configured. Only enable a bank if you need this advanced functionality as it slows down processing and can cause errors.</p>
@@ -233,65 +294,8 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
         </div>
     </form>
     </div>
-    <div class="region">
-    <h2>Rules</h2>
-    <p>DIYBMS supports relay modules to safely disconnect chargers, contactors or consumers.  The rules below allow you to configure the relays for your situation.</p>
-    <p>Rules are processed in REVERSE order.  Control the relays using the options. A value of "X" means don't care/leave at previous setting.<p>
-    <form id="rulesForm" method="POST" action="saverules.json" autocomplete="off">
-    <div class="settings">
 
-    <div>
-      <label for="rule1value">Rule 1 - Communications error</label>
-      <input type="number" min="0" max="999999" step="1" name="rule1value" id="rule1value" value="0" required="" readonly="">
-      <select id="rule1relay1" name="rule1relay1"><option>On</option><option>Off</option><option>X</option></select>
-      <select id="rule1relay2" name="rule1relay2"><option>On</option><option>Off</option><option>X</option></select>
-      <select id="rule1relay3" name="rule1relay3"><option>On</option><option>Off</option><option>X</option></select>
-    </div>
 
-    <div>
-      <label for="rule2value">Rule 2 - Individual cell over voltage</label>
-      <input type="number" min="2500" max="4500" step="10" name="rule2value" id="rule2value" value="4100" required="">
-      <select id="rule2relay1" name="rule2relay1"><option>On</option><option>Off</option><option>X</option></select>
-      <select id="rule2relay2" name="rule2relay2"><option>On</option><option>Off</option><option>X</option></select>
-      <select id="rule2relay3" name="rule2relay3"><option>On</option><option>Off</option><option>X</option></select>
-    </div>
-
-    <div>
-    <label for="rule3value">Rule 3 - Individual cell over temperature (external probe)</label>
-    <input type="number" min="10" max="90" step="1" name="rule3value" id="rule3value" value="45" required="">
-    <select id="rule3relay1" name="rule3relay1"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule3relay2" name="rule3relay2"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule3relay3" name="rule3relay3"><option>On</option><option>Off</option><option>X</option></select>
-    </div>
-
-    <div>
-    <label for="rule4value">Rule 4 - Pack over voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule4value" id="rule4value" value="16000" required="">
-    <select id="rule4relay1" name="rule4relay1"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule4relay2" name="rule4relay2"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule4relay3" name="rule4relay3"><option>On</option><option>Off</option><option>X</option></select>
-    </div>
-
-    <div>
-    <label for="rule5value">Rule 5 - Pack under voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule5value" id="rule5value" value="12000" required="">
-    <select id="rule5relay1" name="rule5relay1"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule5relay2" name="rule5relay2"><option>On</option><option>Off</option><option>X</option></select>
-    <select id="rule5relay3" name="rule5relay3"><option>On</option><option>Off</option><option>X</option></select>
-    </div>
-
-    <div>
-    <label for="defaultvalue">Relay default</label>
-    <input type="number" min="0" max="999999" step="1" name="defaultvalue" id="defaultvalue" value="0" required="" readonly="">
-    <select id="defaultrelay1" name="defaultrelay1"><option>On</option><option>Off</option></select>
-    <select id="defaultrelay2" name="defaultrelay2"><option>On</option><option>Off</option></select>
-    <select id="defaultrelay3" name="defaultrelay3"><option>On</option><option>Off</option></select>
-    </div>
-
-    <input type="submit" value="Save rules"/>
-    </form>
-
-    </div>
     <div class="region">
     <h2>Reset Error Counts</h2>
     <form id="resetCountersForm" method="POST" action="resetcounters.json" autocomplete="off">
@@ -586,6 +590,16 @@ $(function() {
   //On page ready
   countdown();
 
+  //Populate all the setting rules with relay select lists
+  $.each($(".settings .rule")  , function(index, value) {
+    $.each([ 1,2,3,4 ], function( index1, relay ) {
+      $(value).append( '<select id="rule'+(index+1)+'relay'+relay+'" name="rule'+(index+1)+'relay'+relay+'"><option>On</option><option>Off</option><option>X</option></select>' );
+    });
+  }
+  );
+
+
+
   $('#CalculateCalibration').click(function() {
     var currentReading=parseFloat($("#modulesRows > div.selected > span:nth-child(3)").text());
     var currentCalib=parseFloat($("#Calib").val());
@@ -657,10 +671,19 @@ $(function() {
             $("#defaultrelay"+(index2+1)).val(relay_value);
           });
 
+          $("#timenow").html(data.timenow);
           //Loop through each rule updating the page
           var i=1;
+          var allrules=$(".settings .rule");
           $.each(data.rules, function(index, value) {
               $("#rule"+(index+1)+"value").val(value.value);
+
+              //Highlight rules which are active
+              if (value.triggered) {
+                $(allrules[index]).addClass("triggered")
+              } else {
+                $(allrules[index]).removeClass("triggered")
+              }
 
               $.each(value.relays, function(index2, value2) {
                 var relay_value="X";

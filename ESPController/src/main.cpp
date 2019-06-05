@@ -19,7 +19,15 @@
 
   "c:\Program Files (x86)\PuTTY\putty.exe" -serial COM4 -sercfg 115200,8,n,1,N
 */
+/*
+*** NOTE IF YOU GET ISSUES WHEN COMPILING IN PLATFORM.IO ***
 
+ERROR: "ESP Async WebServer\src\WebHandlers.cpp:67:64: error: 'strftime' was not declared in this scope"
+
+Delete the file <project folder>\diyBMSv4\ESPController\.pio\libdeps\nodemcuv2\Time\Time.h
+
+The time.h file in this library conflicts with the time.h file in the ESP core platform code
+*/
 /*
    PINS
    D0 = GREEN_LED
@@ -45,11 +53,26 @@
 #include <PacketSerial.h>
 #include <cppQueue.h>
 #include <Ticker.h>
-
 #include <pcf8574_esp.h>
 #include <Wire.h>
 
+//Debug flags for ntpclientlib
+#define DBG_PORT Serial1
+#define DEBUG_NTPCLIENT
+
+#include <TimeLib.h>
+#include <NtpClientLib.h>
+
 #include "defines.h"
+
+//TODO: Move these into settings/configuration
+int8_t timeZone = 0;
+int8_t minutesTimeZone = 0;
+bool daylight=false;
+String ntpServer = "time.google.com";
+
+
+
 
 uint16_t ConfigHasChanged=0;
 diybms_eeprom_settings mysettings;
@@ -57,6 +80,9 @@ diybms_eeprom_settings mysettings;
 AsyncWebServer server(80);
 
 bool server_running=false;
+bool wifiFirstConnected = false;
+boolean NTPsyncEventTriggered = false; // True if a time even has been triggered
+NTPSyncEvent_t ntpEvent; // Last triggered event
 
 uint8_t packetType=0;
 
@@ -124,6 +150,29 @@ void dumpPacketToDebug(packet *buffer) {
   }
   Serial1.print(" =");
   Serial1.print(buffer->crc,HEX);
+}
+
+uint16_t minutesSinceMidnight() {
+  return (hour() * 60) + minute();
+}
+
+void processSyncEvent (NTPSyncEvent_t ntpEvent) {
+    if (ntpEvent < 0) {
+        Serial1.printf ("Time Sync error: %d\n", ntpEvent);
+        if (ntpEvent == noResponse)
+            Serial1.println ("NTP server not reachable");
+        else if (ntpEvent == invalidAddress)
+            Serial1.println ("Invalid NTP server address");
+        else if (ntpEvent == errorSending)
+            Serial1.println ("Error sending request");
+        else if (ntpEvent == responseError)
+            Serial1.println ("NTP response error");
+    } else {
+        if (ntpEvent == timeSyncd) {
+            Serial1.print ("Got NTP time: ");
+            Serial1.println (NTP.getTimeDateString (NTP.getLastNTPSync()));
+        }
+    }
 }
 
 
@@ -202,6 +251,8 @@ void timerTransmitCallback() {
 }
 
 
+bool rule_outcome[RELAY_RULES];
+
 void timerProcessRules() {
 
   uint32_t packvoltage[4];
@@ -211,17 +262,20 @@ void timerProcessRules() {
   packvoltage[2]=0;
   packvoltage[3]=0;
 
-  bool rule[RELAY_RULES];
 
   for (int8_t r = 0; r < RELAY_RULES; r++)
   {
-    rule[r]=false;
+    rule_outcome[r]=false;
   }
+
 
   //If we have a communications error
   if (receiveProc.commsError > 2) {
-    rule[0]=true;
+    rule_outcome[0]=true;
   }
+
+
+
 
   //Loop through cells
   for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
@@ -232,12 +286,12 @@ void timerProcessRules() {
 
       if (cmi[bank][i].voltagemV > mysettings.rulevalue[1]) {
           //Rule 1 - Individual cell over voltage
-          rule[1]=true;
+          rule_outcome[1]=true;
       }
 
       if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[2])) {
           //Rule 2 - Individual cell over temperature (external probe)
-          rule[2]=true;
+          rule_outcome[2]=true;
       }
     }
   }
@@ -254,13 +308,21 @@ void timerProcessRules() {
   {
     if (packvoltage[bank] > mysettings.rulevalue[3]) {
       //Rule 3 - Pack over voltage (mV)
-      rule[3]=true;
+      rule_outcome[3]=true;
     }
 
     if (packvoltage[bank] < mysettings.rulevalue[4]) {
       //Rule 4 - Pack under voltage (mV)
-      rule[4]=true;
+      rule_outcome[4]=true;
     }
+  }
+
+  //Time based rules
+  if (minutesSinceMidnight() >= mysettings.rulevalue[5]) {
+    rule_outcome[5]=true;
+  }
+  if (minutesSinceMidnight() >= mysettings.rulevalue[6]) {
+    rule_outcome[6]=true;
   }
 
   // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
@@ -270,15 +332,15 @@ void timerProcessRules() {
   Serial1.print("Rules:");
   for (int8_t r = 0; r < RELAY_RULES; r++)
   {
-    Serial1.print(rule[r]);
+    Serial1.print(rule_outcome[r]);
     Serial1.print(" ");
   }
   Serial1.print("=");
 
-  uint8_t relay[3];
+  uint8_t relay[RELAY_TOTAL];
 
   //Set defaults based on configuration
-  for (int8_t y = 0; y<3; y++)
+  for (int8_t y = 0; y<RELAY_TOTAL; y++)
   {
     relay[y]=  mysettings.rulerelaydefault[y]==RELAY_ON ? LOW:HIGH;
   }
@@ -286,9 +348,9 @@ void timerProcessRules() {
   //Test the rules (in reverse order)
   for (int8_t n = RELAY_RULES-1; n>=0; n--)
   {
-    if (rule[n]==true) {
+    if (rule_outcome[n]==true) {
 
-      for (int8_t y = 0; y<3; y++)
+      for (int8_t y = 0; y<RELAY_TOTAL; y++)
       {
         //Dont change relay if its set to ignore/X
         if (mysettings.rulerelaystate[n][y]!=RELAY_X) {
@@ -303,11 +365,11 @@ void timerProcessRules() {
       }
   }
 
-  for (int8_t n = 0; n<3; n++)
+  //Perhaps we should publish the relay settings over MQTT and INFLUX/website?
+  for (int8_t n = 0; n<RELAY_TOTAL; n++)
   {
     //Would be better here to use the WRITE8 to lower i2c traffic
     pcf8574.write(n, relay[n]);
-
     Serial1.print(' ');
     Serial1.print(relay[n]);
   }
@@ -448,6 +510,9 @@ void startTimerToInfluxdb() {
 }
 
 void onWifiConnect(const WiFiEventStationModeGotIP& event) {
+
+  wifiFirstConnected = true;
+
   Serial1.println("Connected to Wi-Fi.");
   Serial1.print( WiFi.status() );
   Serial1.print(F(". Connected IP:"));
@@ -574,6 +639,8 @@ void LoadConfiguration() {
     mysettings.rulevalue[2]=55;
     mysettings.rulevalue[3]=16000;
     mysettings.rulevalue[4]=12000;
+    mysettings.rulevalue[5]=0;
+    mysettings.rulevalue[6]=0;
 
     for (size_t i = 0; i < RELAY_RULES; i++) {
       for (size_t x = 0; x < RELAY_TOTAL; x++) {
@@ -655,6 +722,7 @@ void setup() {
   //Ensure we service the cell modules every 5 seconds
   myTimer.attach(5, timerEnqueueCallback);
 
+  //Process rules every 10 seconds (this prevents the relays from clattering on and off)
   myTimerRelay.attach(10, timerProcessRules);
 
   //We process the transmit queue every 0.5 seconds (this needs to be lower delay than the queue fills)
@@ -676,7 +744,15 @@ void setup() {
       //We are in initial power on mode (factory reset)
       DIYBMSSoftAP::SetupAccessPoint(&server);
   } else {
+
+    //Config NTP
+      NTP.onNTPSyncEvent ([](NTPSyncEvent_t event) {
+         ntpEvent = event;
+         NTPsyncEventTriggered = true;
+     });
+
       Serial1.println("Connecting to WIFI");
+
     /* Explicitly set the ESP8266 to be a WiFi-client, otherwise by default,
       would try to act as both a client and an access-point */
 
@@ -696,9 +772,9 @@ void setup() {
   }
 }
 
-
 void loop() {
-  //pcf8574.write(1, LOW);
+
+  //static int last = 0;
 
   // Call update to receive, decode and process incoming packets.
   if (Serial.available()) {
@@ -728,4 +804,33 @@ void loop() {
     Serial1.println(pcf8574.read8() & B11110000);
     PCFInterruptFlag=false;
   }
+
+  if (wifiFirstConnected) {
+      Serial1.println("Requesting NTP");
+      wifiFirstConnected = false;
+      //Update time every 10 minutes
+      NTP.setInterval (600);
+      NTP.setNTPTimeout (NTP_TIMEOUT);
+      // String ntpServerName, int8_t timeZone, bool daylight, int8_t minutes, AsyncUDP* udp_conn
+      NTP.begin (ntpServer, timeZone, daylight, minutesTimeZone);
+  }
+
+  if (NTPsyncEventTriggered) {
+      processSyncEvent (ntpEvent);
+      NTPsyncEventTriggered = false;
+  }
+
+
+  //if ((millis () - last) > 5000) {
+       //Serial1.println(now());
+       //last = millis ();
+       //Serial1.println(minutesSinceMidnight());
+       //Serial1.print (NTP.getTimeDateString ()); Serial.print (" ");
+       //Serial1.print (NTP.isSummerTime () ? "Summer Time. " : "Winter Time. ");
+       //Serial1.print ("Uptime: ");
+       //Serial1.print (NTP.getUptimeString ()); Serial.print (" since ");
+       //Serial1.println (NTP.getTimeDateString (NTP.getFirstSync ()).c_str ());
+   //}
+
+
 }

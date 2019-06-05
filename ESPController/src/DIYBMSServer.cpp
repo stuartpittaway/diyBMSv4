@@ -30,7 +30,7 @@ distribute your   contributions under the same license as the original.
 #include "ArduinoJson.h"
 #include "defines.h"
 #include "ESP8266TrueRandom.h"
-
+#include <TimeLib.h>
 #include "settings.h"
 
 #include "html_1.h"
@@ -402,7 +402,7 @@ void DIYBMSServer::rules(AsyncWebServerRequest *request) {
   DynamicJsonDocument doc(2048);
   JsonObject root = doc.to<JsonObject>();
 
-  //TODO: Add in defaults!
+  root["timenow"]=(hour() * 60) + minute();
 
   JsonArray defaultArray = root.createNestedArray("relaydefault");
   for (uint8_t relay = 0; relay < RELAY_TOTAL; relay++) {
@@ -419,6 +419,8 @@ void DIYBMSServer::rules(AsyncWebServerRequest *request) {
   for (uint8_t r = 0; r < RELAY_RULES; r++) {
     JsonObject rule1 = bankArray.createNestedObject();
     rule1["value"] =mysettings.rulevalue[r];
+
+    rule1["triggered"] =rule_outcome[r];
 
     JsonArray data = rule1.createNestedArray("relays");
 

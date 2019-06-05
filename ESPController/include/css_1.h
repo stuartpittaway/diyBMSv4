@@ -36,6 +36,8 @@ h2 { margin:0; }
 #modulesTable .th span {text-align:right;min-width:90px}
 #modulesTable .selected {background-color:#d3f9fa;}
 
+.triggered {background-color:#FFBABA;}
+
 @media screen and (max-width:640px){
   .page .region {width:98%;}
   .header a {float:none;padding:6px;font-size:14px;line-height:20px;}
