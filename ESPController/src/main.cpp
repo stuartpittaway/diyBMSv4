@@ -704,16 +704,19 @@ void setup() {
   Wire.begin(5,4);
   Wire.setClock(100000L);
 
+  //Make PINs 4-7 INPUTs - the interrupt fires when triggered
   pcf8574.begin();
 
-  //Make PINs 4-7 INPUTs - the interrupt fires when triggered
   pcf8574.write(4, HIGH);
   pcf8574.write(5, HIGH);
   pcf8574.write(6, HIGH);
   pcf8574.write(7, HIGH);
 
-  //We don't use the 4th relay at the moment
-  pcf8574.write(3, HIGH);
+  //Set relay defaults
+  for (int8_t y = 0; y<RELAY_TOTAL; y++)
+  {
+       pcf8574.write(y,mysettings.rulerelaydefault[y]==RELAY_ON ? LOW:HIGH);
+  }
 
   //internal pullup-resistor on the interrupt line via ESP8266
   pcf8574.resetInterruptPin();
@@ -819,18 +822,4 @@ void loop() {
       processSyncEvent (ntpEvent);
       NTPsyncEventTriggered = false;
   }
-
-
-  //if ((millis () - last) > 5000) {
-       //Serial1.println(now());
-       //last = millis ();
-       //Serial1.println(minutesSinceMidnight());
-       //Serial1.print (NTP.getTimeDateString ()); Serial.print (" ");
-       //Serial1.print (NTP.isSummerTime () ? "Summer Time. " : "Winter Time. ");
-       //Serial1.print ("Uptime: ");
-       //Serial1.print (NTP.getUptimeString ()); Serial.print (" since ");
-       //Serial1.println (NTP.getTimeDateString (NTP.getFirstSync ()).c_str ());
-   //}
-
-
 }
