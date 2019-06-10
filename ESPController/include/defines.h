@@ -22,9 +22,8 @@
 
 
 struct diybms_eeprom_settings {
-
-  uint8_t totalNumberOfBanks;
   bool combinationParallel;
+  uint8_t totalNumberOfBanks;
 
   uint16_t rulevalue[RELAY_RULES];
 
@@ -32,6 +31,12 @@ struct diybms_eeprom_settings {
   uint8_t rulerelaystate[RELAY_RULES][RELAY_TOTAL];
   //Default starting state
   uint8_t rulerelaydefault[RELAY_TOTAL];
+
+  int8_t timeZone;// = 0;
+  int8_t minutesTimeZone;// = 0;
+  bool daylight;//=false;
+  char ntpServer[64+1];// = "time.google.com";
+
 
   //NOTE this array is subject to buffer overflow vulnerabilities!
   bool mqtt_enabled;

@@ -221,7 +221,9 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <p>DIYBMS supports relay modules to safely disconnect chargers, contactors or consumers.  The rules below allow you to configure the relays for your situation.</p>
     <p>Rules are processed in REVERSE order.  Control the relays using the options. A value of "X" means don't care/leave at previous setting.<p>
     <p>'Minutes after' rules allow timed operation, this rule is active when the number of minutes past midnight has been reached,
-    for instance 495 is 08:15am.  Use the combination of both rules to switch on and off.  This only works if connected to internet for time updates. Minutes since midnight now is: <span id='timenow'></span></p>
+    for instance 495 is 08:15am.  Use the combination of both rules to switch on and off.  This only works if connected to internet for time updates.</p>
+    <p>Minutes since midnight now is: <span id='minutesnow'></span></p>
+    <div class="error" id='PCF8574'>PCF8574 is NOT fitted, relay control not possible!</div>
     <form id="rulesForm" method="POST" action="saverules.json" autocomplete="off">
     <div class="settings">
 
@@ -291,6 +293,33 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
                 <select name="combitype" id="combitype"><option>Parallel</option><option>Serial</option></select>
             </div>
             <input type="submit" value="Save bank settings"/>
+        </div>
+    </form>
+    </div>
+
+    <div class="region">
+    <h2>Network Time Protocol</h2>
+    <p>Time is set via NTP, if your controller is not connected to the Internet.  Time based rules will be incorrect.  This does not automatically correct for daylight saving.</p>
+    <p>Time now is <span id="timenow"></span></p>
+    <form id="ntpForm" method="POST" action="saventp.json" autocomplete="off">
+        <div class="settings">
+          <div>
+              <label for="NTPServer">NTP Server</label>
+              <input type="input" name="NTPServer" id="NTPServer" value="" required="" maxlength="64">
+          </div>
+          <div>
+              <label for="NTPZoneHour">Timezone (hour)</label>
+              <input type="number" min="-23" max="23" step="1" name="NTPZoneHour" id="NTPZoneHour" value="0" required="">
+          </div>
+          <div>
+              <label for="NTPZoneMin">Timezone (minute)</label>
+              <input type="number" min="0" max="59" step="1" name="NTPZoneMin" id="NTPZoneMin" value="0" required="">
+          </div>
+          <div>
+              <label for="NTPDST">Daylight Saving Enabled</label>
+              <input type="checkbox" name="NTPDST" id="NTPDST">
+          </div>
+          <input type="submit" value="Save NTP settings"/>
         </div>
     </form>
     </div>
@@ -649,7 +678,17 @@ $(function() {
 
     $.getJSON( "settings.json",
       function(data) {
+
+          $("#NTPServer").val(data.settings.NTPServerName);
+          $("#NTPZoneHour").val(data.settings.TimeZone);
+          $("#NTPZoneMin").val(data.settings.MinutesTimeZone);
+          $("#NTPDST").prop("checked", data.settings.DST);
+
+          var d = new Date(1000*data.settings.now);
+          $("#timenow").html(d.toJSON());
+
           $("#totalBanks").val(data.settings.totalnumberofbanks);
+
           if (data.settings.combinationparallel) {
           $("#combitype").val("Parallel");
         } else {
@@ -671,7 +710,12 @@ $(function() {
             $("#defaultrelay"+(index2+1)).val(relay_value);
           });
 
-          $("#timenow").html(data.timenow);
+          $("#minutesnow").html(data.timenow);
+
+          if (data.PCF8574) {
+            $("#PCF8574").hide();
+          } else { $("#PCF8574").show();}
+
           //Loop through each rule updating the page
           var i=1;
           var allrules=$(".settings .rule");
@@ -694,8 +738,6 @@ $(function() {
 
               });
           });
-
-
 
           $("#rulesForm").show();
       }).fail(function() {}
@@ -738,7 +780,7 @@ $(function() {
   });
 
 
-$("#mqttForm").submit(function (e) {
+$("form").unbind('submit').submit(function (e) {
      e.preventDefault();
 
      $.ajax({
@@ -746,7 +788,6 @@ $("#mqttForm").submit(function (e) {
          url: $(this).attr('action'),
          data: $(this).serialize(),
          success: function (data) {
-             $('#settingConfig').hide();
              $("#savesuccess").show().delay(2000).fadeOut(500);
          },
          error: function (data) {
@@ -755,25 +796,8 @@ $("#mqttForm").submit(function (e) {
      });
  });
 
- $("#influxForm").submit(function (e) {
-      e.preventDefault();
 
-      $.ajax({
-          type: $(this).attr('method'),
-          url: $(this).attr('action'),
-          data: $(this).serialize(),
-          success: function (data) {
-              $('#settingConfig').hide();
-              $("#savesuccess").show().delay(2000).fadeOut(500);
-          },
-          error: function (data) {
-              $("#saveerror").show().delay(2000).fadeOut(500);
-          },
-      });
-  });
-
-
-  $("#settingsForm").submit(function (e) {
+  $("#settingsForm").unbind('submit').submit(function (e) {
        e.preventDefault();
 
        $.ajax({
@@ -794,72 +818,6 @@ $("#mqttForm").submit(function (e) {
            },
        });
    });
-
-   $("#rulesForm").submit(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function (data) {
-              $("#savesuccess").show().delay(2000).fadeOut(500);
-            },
-            error: function (data) {
-                $("#saveerror").show().delay(2000).fadeOut(500);
-            },
-        });
-    });
-
-
-  $("#banksForm").submit(function (e) {
-       e.preventDefault();
-
-       $.ajax({
-           type: $(this).attr('method'),
-           url: $(this).attr('action'),
-           data: $(this).serialize(),
-           success: function (data) {
-             $("#savesuccess").show().delay(2000).fadeOut(500);
-           },
-           error: function (data) {
-               $("#saveerror").show().delay(2000).fadeOut(500);
-           },
-       });
-   });
-
-   $("#resetCountersForm").submit(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function (data) {
-                $("#savesuccess").show().delay(2000).fadeOut(500);
-            },
-            error: function (data) {
-                $("#saveerror").show().delay(2000).fadeOut(500);
-            },
-        });
-    });
-
-
-   $("#globalSettingsForm").submit(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function (data) {
-              $("#savesuccess").show().delay(2000).fadeOut(500);
-            },
-            error: function (data) {
-                $("#saveerror").show().delay(2000).fadeOut(500);
-            },
-        });
-    });
 
     $("#mqttEnabled").change(function() {
         if($(this).is(":checked")) {

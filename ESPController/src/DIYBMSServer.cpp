@@ -188,6 +188,36 @@ void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
 }
 
 
+void DIYBMSServer::saveNTP(AsyncWebServerRequest *request) {
+  if (!validateXSS(request)) return;
+
+  if (request->hasParam("NTPServer", true)) {
+    AsyncWebParameter *p1 = request->getParam("NTPServer", true);
+    p1->value().toCharArray(mysettings.ntpServer,sizeof(mysettings.ntpServer));
+  }
+
+  if (request->hasParam("NTPZoneHour", true)) {
+    AsyncWebParameter *p1 = request->getParam("NTPZoneHour", true);
+    mysettings.timeZone  =p1->value().toInt();
+  }
+
+  if (request->hasParam("NTPZoneMin", true)) {
+    AsyncWebParameter *p1 = request->getParam("NTPZoneMin", true);
+    mysettings.minutesTimeZone =p1->value().toInt();
+  }
+
+  mysettings.daylight=false;
+  if (request->hasParam("NTPDST", true)) {
+    AsyncWebParameter *p1 = request->getParam("NTPDST", true);
+    mysettings.daylight =p1->value().equals("on") ? true:false;
+  }
+
+  Settings::WriteConfigToEEPROM((char*)&mysettings, sizeof(mysettings), EEPROM_SETTINGS_START_ADDRESS);
+
+  ConfigHasChanged = REBOOT_COUNT_DOWN;
+  SendSuccess(request);
+}
+
 
 void DIYBMSServer::saveBankConfiguration(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
@@ -404,6 +434,8 @@ void DIYBMSServer::rules(AsyncWebServerRequest *request) {
 
   root["timenow"]=(hour() * 60) + minute();
 
+  root["PCF8574"]=PCF8574Enabled;
+
   JsonArray defaultArray = root.createNestedArray("relaydefault");
   for (uint8_t relay = 0; relay < RELAY_TOTAL; relay++) {
     switch(mysettings.rulerelaydefault[relay]) {
@@ -447,6 +479,13 @@ void DIYBMSServer::settings(AsyncWebServerRequest *request) {
   JsonObject mqtt = root.createNestedObject("settings");
   mqtt["totalnumberofbanks"] =mysettings.totalNumberOfBanks;
   mqtt["combinationparallel"] =mysettings.combinationParallel;
+
+  mqtt["NTPServerName"] =mysettings.ntpServer;
+  mqtt["TimeZone"] =mysettings.timeZone;
+  mqtt["MinutesTimeZone"] =mysettings.minutesTimeZone;
+  mqtt["DST"] =mysettings.daylight;
+
+  mqtt["now"] = now();
 
   serializeJson(doc, *response);
   request->send(response);
@@ -622,19 +661,21 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
         request->send(response);
       });
 
+//Read endpoints
   _myserver->on("/integration.json", HTTP_GET, DIYBMSServer::integration);
   _myserver->on("/modules.json", HTTP_GET, DIYBMSServer::modules);
   _myserver->on("/identifyModule.json", HTTP_GET, DIYBMSServer::identifyModule);
   _myserver->on("/settings.json", HTTP_GET, DIYBMSServer::settings);
   _myserver->on("/rules.json", HTTP_GET, DIYBMSServer::rules);
 
-  //POST methods
+  //POST method endpoints
   _myserver->on("/savesetting.json", HTTP_POST, DIYBMSServer::saveSetting);
   _myserver->on("/saveglobalsetting.json", HTTP_POST, DIYBMSServer::saveGlobalSetting);
   _myserver->on("/savemqtt.json", HTTP_POST, DIYBMSServer::saveMQTTSetting);
   _myserver->on("/saveinfluxdb.json", HTTP_POST, DIYBMSServer::saveInfluxDBSetting);
   _myserver->on("/savebankconfig.json", HTTP_POST, DIYBMSServer::saveBankConfiguration);
   _myserver->on("/saverules.json", HTTP_POST, DIYBMSServer::saveRuleConfiguration);
+  _myserver->on("/saventp.json", HTTP_POST, DIYBMSServer::saveNTP);
 
   _myserver->on("/resetcounters.json", HTTP_POST, DIYBMSServer::resetCounters);
 

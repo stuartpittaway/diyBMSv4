@@ -65,14 +65,8 @@ The time.h file in this library conflicts with the time.h file in the ESP core p
 
 #include "defines.h"
 
-//TODO: Move these into settings/configuration
-int8_t timeZone = 0;
-int8_t minutesTimeZone = 0;
-bool daylight=false;
-String ntpServer = "time.google.com";
 
-
-
+bool PCF8574Enabled;
 
 uint16_t ConfigHasChanged=0;
 diybms_eeprom_settings mysettings;
@@ -262,7 +256,6 @@ void timerProcessRules() {
   packvoltage[2]=0;
   packvoltage[3]=0;
 
-
   for (int8_t r = 0; r < RELAY_RULES; r++)
   {
     rule_outcome[r]=false;
@@ -365,15 +358,19 @@ void timerProcessRules() {
       }
   }
 
-  //Perhaps we should publish the relay settings over MQTT and INFLUX/website?
-  for (int8_t n = 0; n<RELAY_TOTAL; n++)
-  {
-    //Would be better here to use the WRITE8 to lower i2c traffic
-    pcf8574.write(n, relay[n]);
-    Serial1.print(' ');
-    Serial1.print(relay[n]);
+  if (PCF8574Enabled) {
+    //Perhaps we should publish the relay settings over MQTT and INFLUX/website?
+    for (int8_t n = 0; n<RELAY_TOTAL; n++)
+    {
+      //Would be better here to use the WRITE8 to lower i2c traffic
+      pcf8574.write(n, relay[n]);
+      Serial1.print(' ');
+      Serial1.print(relay[n]);
+    }
+    Serial1.println("");
+  } else {
+    Serial1.println("N/F");
   }
-  Serial1.println("");
 
   //pcf8574.write8(relayState);
 }
@@ -630,6 +627,11 @@ void LoadConfiguration() {
     strcpy(mysettings.influxdb_user,"user");
     strcpy(mysettings.influxdb_password,"");
 
+    mysettings.timeZone= 0;
+    mysettings.minutesTimeZone= 0;
+    mysettings.daylight=false;
+    strcpy(mysettings.ntpServer,"time.google.com");
+
     for (size_t x = 0; x < RELAY_TOTAL; x++) {
       mysettings.rulerelaydefault[x]=RELAY_OFF;
     }
@@ -707,15 +709,26 @@ void setup() {
   //Make PINs 4-7 INPUTs - the interrupt fires when triggered
   pcf8574.begin();
 
-  pcf8574.write(4, HIGH);
-  pcf8574.write(5, HIGH);
-  pcf8574.write(6, HIGH);
-  pcf8574.write(7, HIGH);
+  //We test to see if the i2c expander is actually fitted
+  pcf8574.read8();
 
-  //Set relay defaults
-  for (int8_t y = 0; y<RELAY_TOTAL; y++)
-  {
-       pcf8574.write(y,mysettings.rulerelaydefault[y]==RELAY_ON ? LOW:HIGH);
+  if (pcf8574.lastError()==0) {
+    Serial1.println("Found pcf8574");
+    pcf8574.write(4, HIGH);
+    pcf8574.write(5, HIGH);
+    pcf8574.write(6, HIGH);
+    pcf8574.write(7, HIGH);
+
+    //Set relay defaults
+    for (int8_t y = 0; y<RELAY_TOTAL; y++)
+    {
+         pcf8574.write(y,mysettings.rulerelaydefault[y]==RELAY_ON ? LOW:HIGH);
+    }
+    PCF8574Enabled=true;
+  } else {
+    //Not fitted
+    Serial1.println("pcf8574 not fitted");
+    PCF8574Enabled=false;
   }
 
   //internal pullup-resistor on the interrupt line via ESP8266
@@ -809,13 +822,14 @@ void loop() {
   }
 
   if (wifiFirstConnected) {
-      Serial1.println("Requesting NTP");
+      Serial1.print("Requesting NTP from ");
+      Serial1.println(mysettings.ntpServer);
       wifiFirstConnected = false;
       //Update time every 10 minutes
       NTP.setInterval (600);
       NTP.setNTPTimeout (NTP_TIMEOUT);
       // String ntpServerName, int8_t timeZone, bool daylight, int8_t minutes, AsyncUDP* udp_conn
-      NTP.begin (ntpServer, timeZone, daylight, minutesTimeZone);
+      NTP.begin (mysettings.ntpServer, mysettings.timeZone, mysettings.daylight, mysettings.minutesTimeZone);
   }
 
   if (NTPsyncEventTriggered) {

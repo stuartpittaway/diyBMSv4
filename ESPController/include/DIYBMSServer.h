@@ -31,24 +31,27 @@ class DIYBMSServer {
       static void integration(AsyncWebServerRequest *request);
       static void identifyModule(AsyncWebServerRequest *request);
       static void rules(AsyncWebServerRequest *request);
-      static void saveSetting(AsyncWebServerRequest *request);
-      static void saveGlobalSetting(AsyncWebServerRequest *request);
       static String TemplateProcessor(const String& var);
-      static void saveMQTTSetting(AsyncWebServerRequest *request);
-      static void saveInfluxDBSetting(AsyncWebServerRequest *request);
       static bool validateXSS(AsyncWebServerRequest *request);
       static void SendSuccess(AsyncWebServerRequest *request);
       static void settings(AsyncWebServerRequest *request);
-      static void saveBankConfiguration(AsyncWebServerRequest *request);
       static void clearModuleValues(uint8_t bank, uint8_t module);
       static void resetCounters(AsyncWebServerRequest *request);
-      static void saveRuleConfiguration(AsyncWebServerRequest *request);
 
+      static void saveSetting(AsyncWebServerRequest *request);
+      static void saveInfluxDBSetting(AsyncWebServerRequest *request);
+      static void saveMQTTSetting(AsyncWebServerRequest *request);
+      static void saveGlobalSetting(AsyncWebServerRequest *request);
+      static void saveBankConfiguration(AsyncWebServerRequest *request);
+      static void saveRuleConfiguration(AsyncWebServerRequest *request);
+      static void saveNTP(AsyncWebServerRequest *request);
 };
 
+//TODO: Mixing of classes, static and extern is not great
 extern PacketRequestGenerator prg;
 extern PacketReceiveProcessor receiveProc;
 extern diybms_eeprom_settings mysettings;
 extern uint16_t ConfigHasChanged;
 extern bool rule_outcome[RELAY_RULES];
+extern bool PCF8574Enabled;
 #endif
