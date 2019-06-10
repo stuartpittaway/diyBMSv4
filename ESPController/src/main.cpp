@@ -641,8 +641,8 @@ void LoadConfiguration() {
     mysettings.rulevalue[2]=55;
     mysettings.rulevalue[3]=16000;
     mysettings.rulevalue[4]=12000;
-    mysettings.rulevalue[5]=0;
-    mysettings.rulevalue[6]=0;
+    mysettings.rulevalue[5]=60*9; //9am
+    mysettings.rulevalue[6]=60*17;  //5pm
 
     for (size_t i = 0; i < RELAY_RULES; i++) {
       for (size_t x = 0; x < RELAY_TOTAL; x++) {
