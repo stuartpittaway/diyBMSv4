@@ -30,7 +30,7 @@
     (46 B.CrtYd user)
     (47 F.CrtYd user)
     (48 B.Fab user hide)
-    (49 F.Fab user hide)
+    (49 F.Fab user)
   )
 
   (setup
@@ -1317,7 +1317,7 @@
     (effects (font (size 2 2) (thickness 0.25)))
   )
   (dimension 75 (width 0.12) (layer Dwgs.User) (tstamp 5CFA7FFE)
-    (gr_text "75.000 mm" (at 110 138.02) (layer Dwgs.User) (tstamp 5CFA8484)
+    (gr_text "75.000 mm" (at 110 138.02) (layer Dwgs.User) (tstamp 5CFA7FFE)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (feature1 (pts (xy 147.5 132) (xy 147.5 137.336421)))
@@ -1329,7 +1329,7 @@
     (arrow2b (pts (xy 72.5 136.75) (xy 73.626504 136.163579)))
   )
   (dimension 30 (width 0.15) (layer Dwgs.User) (tstamp 5CFA8AE1)
-    (gr_text "30.000 mm" (at 152.05 117 90) (layer Dwgs.User) (tstamp 5CFA8AE2)
+    (gr_text "30.000 mm" (at 152.05 117 90) (layer Dwgs.User) (tstamp 5CFA8AE1)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (feature1 (pts (xy 147.5 102) (xy 151.336421 102)))
