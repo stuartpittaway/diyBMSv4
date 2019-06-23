@@ -420,9 +420,9 @@ L Interface_Expansion:PCF8574 U3
 U 1 1 5CE02B8B
 P 2670 3900
 F 0 "U3" H 2670 4781 50  0000 C CNN
-F 1 "PCF8574AT/3" H 2690 4880 50  0000 C CNN
+F 1 "PCF8574T/3,518" H 2690 4880 50  0000 C CNN
 F 2 "SMD_Packages:SO-16-W" H 2670 3900 50  0001 C CNN
-F 3 "http://www.nxp.com/documents/data_sheet/PCF8574_PCF8574A.pdf" H 2670 3900 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/I-O-Expansion_NXP_PCF8574T-3-518_PCF8574T-3-518_C7605.html" H 2670 3900 50  0001 C CNN
 	1    2670 3900
 	1    0    0    -1  
 $EndComp
