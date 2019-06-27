@@ -89,7 +89,7 @@ ATTINY841 provides:
 # How as v4 improved over v3?
 
 * Code is better!
-* Controller provides outputs for integration with other systems to avoid issues
+* Controller provides outputs for integration with relay boards and switch gear
 * Cell modules use different ATTINY chip which provides more pins and lower power usage
 * Removal of 3.3v regulator and ADUM chips lowers current usage significantly
-* v3 module uses 10-12mA current constantly and v4 uses 0.5mA
+* v3 module uses 10-12mA current constantly and v4 uses <1mA
