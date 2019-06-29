@@ -3,9 +3,7 @@
 "Tool:","Eeschema (5.1.0)-1"
 "Generator:","C:\Program Files\KiCad\bin\scripting\plugins/bom_csv_grouped_by_value.py"
 "Component Count:","38"
-
 "Individual Components:"
-
 "Item","Qty","Reference(s)","Value","LibPart","Footprint","Datasheet"
 "","","C1","100nF","Device:C","Capacitors_SMD:C_0805_HandSoldering","~"
 "","","C2","2.2uF","Device:CP","Capacitors_SMD:C_0805_HandSoldering","~"
@@ -45,11 +43,7 @@
 "","","TX1","TX Connector","Connector:Conn_01x02_Male","Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled","~"
 "","","U1","HMHA2801","Isolator:PC817","Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm","https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504"
 "","","U4","ATtiny841-SSU","v4-rescue:ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue","Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm","http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf"
-
-
-
 "Collated Components:"
-
 "Item","Qty","Reference(s)","Value","LibPart","Footprint","Datasheet"
 "1","1","C1","100nF","Device:C","Capacitors_SMD:C_0805_HandSoldering","~"
 "2","1","C2","2.2uF","Device:CP","Capacitors_SMD:C_0805_HandSoldering","~"
