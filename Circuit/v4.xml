@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>23/06/2019 16:58:48</date>
+    <date>01/07/2019 21:15:38</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -30,7 +30,7 @@
     <comp ref="C1">
       <value>100nF</value>
       <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_100nF-104-10-50V_C49678.html</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1EAD64</tstamp>
@@ -38,7 +38,7 @@
     <comp ref="POWER1">
       <value>Battery</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
-      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1EB9F6</tstamp>
@@ -46,7 +46,7 @@
     <comp ref="R1">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-0710KL</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1EC483</tstamp>
@@ -54,7 +54,7 @@
     <comp ref="J2">
       <value>AVR-ISP-6</value>
       <footprint>Pin_Headers:Pin_Header_Straight_2x03_Pitch2.54mm</footprint>
-      <datasheet> ~</datasheet>
+      <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html</datasheet>
       <libsource lib="Connector" part="AVR-ISP-6" description="Atmel 6-pin ISP connector"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1ECDB4</tstamp>
@@ -70,7 +70,7 @@
     <comp ref="R2">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-071KL</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1FB25D</tstamp>
@@ -78,15 +78,15 @@
     <comp ref="C2">
       <value>2.2uF</value>
       <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Device" part="CP" description="Polarized capacitor"/>
+      <datasheet>https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_2-2uF-225-10-16V_C113841.html</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1FC233</tstamp>
     </comp>
     <comp ref="R3">
       <value>475K  E96 series (tolerance 1%)</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-07475KL</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D200A38</tstamp>
@@ -94,7 +94,7 @@
     <comp ref="R4">
       <value>402K E96 series (tolerance 1%)</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>0805W8F4023T5E</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D200BDC</tstamp>
@@ -102,7 +102,7 @@
     <comp ref="U1">
       <value>HMHA2801</value>
       <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
-      <datasheet>https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/ON-Semicon-ON-HMHA2801_C232857.pdf</datasheet>
       <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DCDE</tstamp>
@@ -110,7 +110,7 @@
     <comp ref="TX1">
       <value>TX Connector</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DEA4</tstamp>
@@ -118,7 +118,7 @@
     <comp ref="R5">
       <value>510R</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-07510RL</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1E307</tstamp>
@@ -190,7 +190,7 @@
     <comp ref="Q1">
       <value>IRLML6244TRPBF</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <datasheet>https://lcsc.com/product-detail/MOSFET_Infineon-Technologies_IRLML6244TRPBF_Infineon-Technologies-IRLML6244TRPBF_C143946.html?promote=YjJhMTIxR3ZTWUlpbjVEZnUrY3Qvc09VOEYyOE14SkI2K0RRMVFoN2VDVURwMmNhNjVtZUR0Q0wyT2RYeHhqKzNieU5DVVdqZnBXTUFjSjU5ektWWlh3LzRDNXdTUGhOcWZHVEhWcnhuWjd5M1g0QzArUk1JMHppaGQ2QXgrZG9xc043STQvNw==</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Infineon-Technologies-IRLML6244TRPBF_C143946.pdf</datasheet>
       <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF2E627</tstamp>
@@ -198,7 +198,7 @@
     <comp ref="R15">
       <value>47K</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>YAGEO RC0805FR-0747KL</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF2E6E2</tstamp>
@@ -206,7 +206,7 @@
     <comp ref="RX1">
       <value>RX Connector</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
-      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF5891C</tstamp>
@@ -214,7 +214,7 @@
     <comp ref="R16">
       <value>4K7</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-074K7L</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF5A518</tstamp>
@@ -222,7 +222,7 @@
     <comp ref="D3">
       <value>RED LED</value>
       <footprint>LEDs:LED_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_BL-HUF35A-AV-TRB-Iv-80mcd-Typ-atIF-20mA_C94741.html</datasheet>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF65B89</tstamp>
@@ -230,7 +230,7 @@
     <comp ref="R17">
       <value>2K2</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-072K2L</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF65CB1</tstamp>
@@ -238,7 +238,7 @@
     <comp ref="D4">
       <value>Green</value>
       <footprint>LEDs:LED_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_Emerald-SMDLED-Iv-220-270mcd-atIF-5mA_C84260.html</datasheet>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF67C78</tstamp>
@@ -246,7 +246,7 @@
     <comp ref="R18">
       <value>2K2</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-072K2L</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF67C7F</tstamp>
@@ -262,7 +262,7 @@
     <comp ref="R20">
       <value>47K</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF374C1</tstamp>
@@ -270,7 +270,7 @@
     <comp ref="R21">
       <value>47K</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF5CD4B</tstamp>
@@ -278,7 +278,7 @@
     <comp ref="SENSOR1">
       <value>Remote temp input 47K @ 25oC</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Shenzhen-Cankemeng-Headers-Pins-1-5P-2-54mm-Straight-line_C124379.html</datasheet>
       <libsource lib="Connector" part="Conn_01x05_Male" description="Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF61617</tstamp>
@@ -286,6 +286,7 @@
     <comp ref="R14">
       <value>510R</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-07510RL</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CB1F559</tstamp>
@@ -299,9 +300,9 @@
       <tstamp>5CB3BB54</tstamp>
     </comp>
     <comp ref="R22">
-      <value>4R4</value>
+      <value>10R</value>
       <footprint>Resistors_THT:R_Axial_Power_L25.0mm_W9.0mm_P27.94mm</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://lcsc.com/product-detail/Others_Chian-Chia-Elec-CR-M5W-10RJ_C334310.html</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CB93D51</tstamp>
@@ -309,7 +310,7 @@
     <comp ref="D2">
       <value>Blue</value>
       <footprint>LEDs:LED_0805</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_SMDLED-blue_C189307.html</datasheet>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CCBC109</tstamp>
@@ -317,7 +318,7 @@
     <comp ref="R23">
       <value>2K2</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>RC0805FR-072K2L</datasheet>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CCBC10F</tstamp>
@@ -386,21 +387,6 @@
       <fields>
         <field name="Reference">C</field>
         <field name="Value">C</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Device" part="CP">
-      <description>Polarized capacitor</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>CP_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">CP</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>

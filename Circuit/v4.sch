@@ -78,7 +78,7 @@ P 950 2880
 F 0 "C1" H 836 2926 50  0000 R CNN
 F 1 "100nF" H 836 2835 50  0000 R CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 988 2730 50  0001 C CNN
-F 3 "~" H 950 2880 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_100nF-104-10-50V_C49678.html" H 950 2880 50  0001 C CNN
 	1    950  2880
 	1    0    0    -1  
 $EndComp
@@ -95,7 +95,7 @@ P 6740 5970
 F 0 "POWER1" H 6846 6148 50  0000 C CNN
 F 1 "Battery" H 6846 6057 50  0000 C CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 6740 5970 50  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 6740 5970 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 6740 5970 50  0001 C CNN
 	1    6740 5970
 	1    0    0    -1  
 $EndComp
@@ -112,7 +112,7 @@ P 2560 4410
 F 0 "R1" V 2353 4410 50  0000 C CNN
 F 1 "10K" V 2444 4410 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2490 4410 50  0001 C CNN
-F 3 "~" H 2560 4410 50  0001 C CNN
+F 3 "RC0805FR-0710KL" H 2560 4410 50  0001 C CNN
 	1    2560 4410
 	0    1    1    0   
 $EndComp
@@ -136,7 +136,7 @@ P 1720 6130
 F 0 "J2" H 1440 6226 50  0000 R CNN
 F 1 "AVR-ISP-6" H 1440 6135 50  0000 R CNN
 F 2 "Pin_Headers:Pin_Header_Straight_2x03_Pitch2.54mm" V 1470 6180 50  0001 C CNN
-F 3 " ~" H 445 5580 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html" H 445 5580 50  0001 C CNN
 	1    1720 6130
 	1    0    0    -1  
 $EndComp
@@ -237,7 +237,7 @@ P 3360 2310
 F 0 "R2" H 3430 2356 50  0000 L CNN
 F 1 "1K" H 3430 2265 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 3290 2310 50  0001 C CNN
-F 3 "~" H 3360 2310 50  0001 C CNN
+F 3 "RC0805FR-071KL" H 3360 2310 50  0001 C CNN
 	1    3360 2310
 	1    0    0    -1  
 $EndComp
@@ -251,13 +251,13 @@ Connection ~ 3360 2580
 Wire Wire Line
 	3360 2580 3360 2460
 $Comp
-L Device:CP C2
+L Device:C C2
 U 1 1 5D1FC233
 P 4140 2730
 F 0 "C2" H 4258 2776 50  0000 L CNN
 F 1 "2.2uF" H 4258 2685 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4178 2580 50  0001 C CNN
-F 3 "~" H 4140 2730 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_2-2uF-225-10-16V_C113841.html" H 4140 2730 50  0001 C CNN
 	1    4140 2730
 	1    0    0    -1  
 $EndComp
@@ -290,7 +290,7 @@ P 4280 3980
 F 0 "R3" H 4350 4026 50  0000 L CNN
 F 1 "475K  E96 series (tolerance 1%)" H 4350 3935 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 4210 3980 50  0001 C CNN
-F 3 "~" H 4280 3980 50  0001 C CNN
+F 3 "RC0805FR-07475KL" H 4280 3980 50  0001 C CNN
 	1    4280 3980
 	1    0    0    -1  
 $EndComp
@@ -301,7 +301,7 @@ P 4280 4370
 F 0 "R4" H 4350 4416 50  0000 L CNN
 F 1 "402K E96 series (tolerance 1%)" H 4350 4325 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 4210 4370 50  0001 C CNN
-F 3 "~" H 4280 4370 50  0001 C CNN
+F 3 "0805W8F4023T5E" H 4280 4370 50  0001 C CNN
 	1    4280 4370
 	1    0    0    -1  
 $EndComp
@@ -356,7 +356,7 @@ P 8630 4330
 F 0 "U1" H 8630 4655 50  0000 C CNN
 F 1 "HMHA2801" H 8630 4564 50  0000 C CNN
 F 2 "Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm" H 8430 4130 50  0001 L CIN
-F 3 "https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504" H 8630 4330 50  0001 L CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/ON-Semicon-ON-HMHA2801_C232857.pdf" H 8630 4330 50  0001 L CNN
 	1    8630 4330
 	1    0    0    -1  
 $EndComp
@@ -367,7 +367,7 @@ P 9380 4370
 F 0 "TX1" H 9353 4250 50  0000 R CNN
 F 1 "TX Connector" H 9353 4341 50  0000 R CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 9380 4370 50  0001 C CNN
-F 3 "~" H 9380 4370 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 9380 4370 50  0001 C CNN
 	1    9380 4370
 	-1   0    0    1   
 $EndComp
@@ -378,7 +378,7 @@ P 8070 4230
 F 0 "R5" V 7863 4230 50  0000 C CNN
 F 1 "510R" V 7954 4230 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 8000 4230 50  0001 C CNN
-F 3 "~" H 8070 4230 50  0001 C CNN
+F 3 "RC0805FR-07510RL" H 8070 4230 50  0001 C CNN
 	1    8070 4230
 	0    1    1    0   
 $EndComp
@@ -516,7 +516,7 @@ P 8780 2900
 F 0 "Q1" V 9030 2900 50  0000 C CNN
 F 1 "IRLML6244TRPBF" V 9121 2900 50  0000 C CNN
 F 2 "TO_SOT_Packages_SMD:SOT-23" H 8980 3000 50  0001 C CNN
-F 3 "https://lcsc.com/product-detail/MOSFET_Infineon-Technologies_IRLML6244TRPBF_Infineon-Technologies-IRLML6244TRPBF_C143946.html?promote=YjJhMTIxR3ZTWUlpbjVEZnUrY3Qvc09VOEYyOE14SkI2K0RRMVFoN2VDVURwMmNhNjVtZUR0Q0wyT2RYeHhqKzNieU5DVVdqZnBXTUFjSjU5ektWWlh3LzRDNXdTUGhOcWZHVEhWcnhuWjd5M1g0QzArUk1JMHppaGQ2QXgrZG9xc043STQvNw==" H 8780 2900 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/Infineon-Technologies-IRLML6244TRPBF_C143946.pdf" H 8780 2900 50  0001 C CNN
 	1    8780 2900
 	0    1    1    0   
 $EndComp
@@ -527,7 +527,7 @@ P 8230 2850
 F 0 "R15" H 8300 2896 50  0000 L CNN
 F 1 "47K" H 8300 2810 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 8160 2850 50  0001 C CNN
-F 3 "YAGEO RC0805FR-0747KL" H 8230 2850 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf" H 8230 2850 50  0001 C CNN
 	1    8230 2850
 	1    0    0    -1  
 $EndComp
@@ -604,7 +604,7 @@ P 9230 5090
 F 0 "RX1" H 9203 4970 50  0000 R CNN
 F 1 "RX Connector" H 9203 5061 50  0000 R CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 9230 5090 50  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 9230 5090 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 9230 5090 50  0001 C CNN
 	1    9230 5090
 	-1   0    0    1   
 $EndComp
@@ -639,7 +639,7 @@ P 8590 5240
 F 0 "R16" V 8383 5240 50  0000 C CNN
 F 1 "4K7" V 8474 5240 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 8520 5240 50  0001 C CNN
-F 3 "~" H 8590 5240 50  0001 C CNN
+F 3 "RC0805FR-074K7L" H 8590 5240 50  0001 C CNN
 	1    8590 5240
 	-1   0    0    1   
 $EndComp
@@ -657,7 +657,7 @@ P 7980 1350
 F 0 "D3" H 8120 1450 50  0000 C CNN
 F 1 "RED LED" H 8070 1250 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 7980 1350 50  0001 C CNN
-F 3 "~" H 7980 1350 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_BL-HUF35A-AV-TRB-Iv-80mcd-Typ-atIF-20mA_C94741.html" H 7980 1350 50  0001 C CNN
 	1    7980 1350
 	-1   0    0    1   
 $EndComp
@@ -668,7 +668,7 @@ P 8360 1350
 F 0 "R17" V 8450 1400 50  0000 L CNN
 F 1 "2K2" V 8450 1230 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 8290 1350 50  0001 C CNN
-F 3 "~" H 8360 1350 50  0001 C CNN
+F 3 "RC0805FR-072K2L" H 8360 1350 50  0001 C CNN
 	1    8360 1350
 	0    1    1    0   
 $EndComp
@@ -681,7 +681,7 @@ P 4310 3370
 F 0 "D4" H 4450 3470 50  0000 C CNN
 F 1 "Green" H 4340 3540 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 4310 3370 50  0001 C CNN
-F 3 "~" H 4310 3370 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_Emerald-SMDLED-Iv-220-270mcd-atIF-5mA_C84260.html" H 4310 3370 50  0001 C CNN
 	1    4310 3370
 	-1   0    0    1   
 $EndComp
@@ -692,7 +692,7 @@ P 4690 3370
 F 0 "R18" V 4780 3420 50  0000 L CNN
 F 1 "2K2" V 4780 3250 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 4620 3370 50  0001 C CNN
-F 3 "~" H 4690 3370 50  0001 C CNN
+F 3 "RC0805FR-072K2L" H 4690 3370 50  0001 C CNN
 	1    4690 3370
 	0    1    1    0   
 $EndComp
@@ -744,7 +744,7 @@ P 2740 6980
 F 0 "R20" H 2810 7026 50  0000 L CNN
 F 1 "47K" H 2810 6935 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2670 6980 50  0001 C CNN
-F 3 "~" H 2740 6980 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf" H 2740 6980 50  0001 C CNN
 	1    2740 6980
 	1    0    0    -1  
 $EndComp
@@ -772,7 +772,7 @@ P 4280 6040
 F 0 "R21" H 4350 6086 50  0000 L CNN
 F 1 "47K" H 4350 5995 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 4210 6040 50  0001 C CNN
-F 3 "~" H 4280 6040 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf" H 4280 6040 50  0001 C CNN
 	1    4280 6040
 	1    0    0    -1  
 $EndComp
@@ -798,7 +798,7 @@ P 4870 5650
 F 0 "SENSOR1" H 4843 5530 50  0000 R CNN
 F 1 "Remote temp input 47K @ 25oC" H 4850 5890 50  0000 R CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm" H 4870 5650 50  0001 C CNN
-F 3 "~" H 4870 5650 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Pin-Header-Female-Header_Shenzhen-Cankemeng-Headers-Pins-1-5P-2-54mm-Straight-line_C124379.html" H 4870 5650 50  0001 C CNN
 	1    4870 5650
 	-1   0    0    1   
 $EndComp
@@ -867,7 +867,7 @@ P 7380 2870
 F 0 "R14" H 7450 2916 50  0000 L CNN
 F 1 "510R" H 7450 2810 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 7310 2870 50  0001 C CNN
-F 3 "" H 7380 2870 50  0001 C CNN
+F 3 "RC0805FR-07510RL" H 7380 2870 50  0001 C CNN
 	1    7380 2870
 	0    1    1    0   
 $EndComp
@@ -919,9 +919,9 @@ L Device:R R22
 U 1 1 5CB93D51
 P 7670 1050
 F 0 "R22" V 7463 1050 50  0000 C CNN
-F 1 "4R4" V 7554 1050 50  0000 C CNN
+F 1 "10R" V 7554 1050 50  0000 C CNN
 F 2 "Resistors_THT:R_Axial_Power_L25.0mm_W9.0mm_P27.94mm" V 7600 1050 50  0001 C CNN
-F 3 "~" H 7670 1050 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Others_Chian-Chia-Elec-CR-M5W-10RJ_C334310.html" H 7670 1050 50  0001 C CNN
 	1    7670 1050
 	0    1    1    0   
 $EndComp
@@ -944,7 +944,7 @@ F 3 "" H 7370 1050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Notes 6640 760  0    50   ~ 0
-Either the SMD or larger power resistor is used - NOT BOTH!\n
+Either the SMD or larger power resistor is used - NOT BOTH !\nNote you must pick a resistor with correct power rating!
 Connection ~ 8510 1350
 Wire Wire Line
 	8510 1350 8510 1050
@@ -962,7 +962,7 @@ P 4750 2930
 F 0 "D2" H 4890 3030 50  0000 C CNN
 F 1 "Blue" H 4780 3100 50  0000 C CNN
 F 2 "LEDs:LED_0805" H 4750 2930 50  0001 C CNN
-F 3 "~" H 4750 2930 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_SMDLED-blue_C189307.html" H 4750 2930 50  0001 C CNN
 	1    4750 2930
 	-1   0    0    1   
 $EndComp
@@ -973,7 +973,7 @@ P 5130 2930
 F 0 "R23" V 5220 2980 50  0000 L CNN
 F 1 "2K2" V 5220 2810 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805" V 5060 2930 50  0001 C CNN
-F 3 "~" H 5130 2930 50  0001 C CNN
+F 3 "RC0805FR-072K2L" H 5130 2930 50  0001 C CNN
 	1    5130 2930
 	0    1    1    0   
 $EndComp
