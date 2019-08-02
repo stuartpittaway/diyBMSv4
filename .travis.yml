@@ -9,7 +9,9 @@ cache:
         - "~/.platformio"
 
 env:
-    - PLATFORMIO_CI_SRC=ESPController/src/main.cpp ESPController/include ESPController/lib/crc16 ESPController/lib/settings ESPController/lib/ticker
+    - PLATFORMIO_CI_SRC=ESPController/src/main.cpp 
+    - PLATFORMIO_INCLUDE_DIR=ESPController/include
+#    ESPController/lib/crc16 ESPController/lib/settings ESPController/lib/ticker
 
 install:
     - pip install -U platformio
