@@ -16,4 +16,4 @@ install:
     - platformio update
 
 script:
-    - platformio ci --board=d1_mini_pro --project-conf=stuartpittaway/diyBMSv4/ESPController/platform.io
+    - platformio ci --project-conf=./ESPController/platformio.ini
