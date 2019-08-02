@@ -13,7 +13,6 @@ env:
     - PLATFORMIO_CI_SRC=ESPController/src/lib/crc16
     - PLATFORMIO_CI_SRC=ESPController/src/lib/settings
     - PLATFORMIO_CI_SRC=ESPController/src/lib/ticker
-    - PLATFORMIO_CI_SRC=ESPController/src/test
     - PLATFORMIO_CI_SRC=ESPController/src/main.cpp
 
 install:
