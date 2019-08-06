@@ -8,8 +8,8 @@ cache:
     directories:
         - "~/.platformio"
 
-env:
-    - PLATFORMIO_CI_SRC=ESPController/src/main.cpp:./ESPController/include:./ESPController/lib/crc16:./ESPController/lib/settings:./ESPController/lib/ticker
+#env:
+#    - PLATFORMIO_CI_SRC=ESPController/src/main.cpp:./ESPController/include:./ESPController/lib/crc16:./ESPController/lib/settings:./ESPController/lib/ticker
 #    ESPController/lib/crc16 ESPController/lib/settings ESPController/lib/ticker
 
 install:
@@ -17,4 +17,5 @@ install:
     - platformio update
 
 script:
-    - platformio ci --project-conf=./ESPController/platformio.ini
+#    - platformio ci --project-conf=./ESPController/platformio.ini
+    - platformio run --project-conf=./ESPController/platformio.ini
