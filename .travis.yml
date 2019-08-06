@@ -9,7 +9,7 @@ cache:
         - "~/.platformio"
 
 env:
-    - PLATFORMIO_CI_SRC=ESPController/src/main.cpp:ESPController/include
+    - PLATFORMIO_CI_SRC=ESPController/src/main.cpp
 #    ESPController/lib/crc16 ESPController/lib/settings ESPController/lib/ticker
 
 install:
@@ -17,4 +17,4 @@ install:
     - platformio update
 
 script:
-    - platformio ci --project-conf=./ESPController/platformio.ini --project-option="build_flags = -I./ESPController/include"
+    - platformio ci --project-conf=./ESPController/platformio.ini --project-option="build_flags = -I./ESPController/include -I./ESPController/lib/crc16 -I./ESPController/lib/settings  -I./ESPController/lib/ticker"
