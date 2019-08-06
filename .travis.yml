@@ -17,5 +17,5 @@ install:
     - platformio update
 
 script:
-#    - platformio ci --project-conf=./ESPController/platformio.ini
+    - platformio run --project-dir=./ATTINYCellModule  --project-conf=./ATTINYCellModule/platformio.ini
     - platformio run --project-dir=./ESPController  --project-conf=./ESPController/platformio.ini
