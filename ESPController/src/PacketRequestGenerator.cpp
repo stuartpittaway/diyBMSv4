@@ -86,6 +86,20 @@ void PacketRequestGenerator::sendSaveSetting(uint8_t b,uint8_t m,uint16_t Bypass
   pushPacketToQueue();
 }
 
+
+void PacketRequestGenerator::sendReadBadPacketCounter(uint8_t b) {
+  //Read bad packet count (broadcast) to bank
+  setPacketAddress(true,b,0);
+
+  _packetbuffer.command = COMMAND::ReadBadPacketCounter;
+
+  //AVR MCUs are little endian (least significant byte first in memory)
+  clearmoduledata();
+
+  pushPacketToQueue();
+}
+
+
 void PacketRequestGenerator::sendCellVoltageRequest(uint8_t b) {
   //Read voltage (broadcast) to bank
   setPacketAddress(true,b,0);

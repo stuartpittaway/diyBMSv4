@@ -381,6 +381,8 @@ void timerEnqueueCallback() {
   {
     prg.sendCellVoltageRequest(b);
     prg.sendCellTemperatureRequest(b);
+
+    prg.sendReadBadPacketCounter(b);
   }
 
 }

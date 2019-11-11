@@ -19,13 +19,14 @@ bool PacketReceiveProcessor::ProcessReply(const uint8_t* receivebuffer,
           case COMMAND::ReadVoltageAndStatus:
             ProcessReplyVoltage();
             break;
+          case COMMAND::ReadBadPacketCounter:
+            ProcessReplyBadPacketCount();
+          break;
           case COMMAND::Identify:
             break;  // Ignore reply
           case COMMAND::ReadTemperature:
             ProcessReplyTemperature();
-            break;
-          case COMMAND::ReadBadPacketCounter:
-            break;
+            break;        
           case COMMAND::ReadSettings:
             ProcessReplySettings();
             break;
@@ -81,6 +82,15 @@ void PacketReceiveProcessor::ProcessReplyAddressByte() {
         cmi[ReplyFromBank()][i].voltagemVMax = 0;
       }
     }
+  }
+}
+
+
+void PacketReceiveProcessor::ProcessReplyBadPacketCount() {
+  // Called when a decoded packet has arrived in buffer for command
+  ProcessReplyAddressByte();
+  for (size_t i = 0; i < maximum_cell_modules; i++) {
+    cmi[ReplyFromBank()][i].badPacketCount = _packetbuffer.moduledata[i];
   }
 }
 

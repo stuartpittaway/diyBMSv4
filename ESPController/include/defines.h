@@ -108,6 +108,8 @@ struct CellModuleInfo {
   uint8_t BypassOverTempShutdown;
   uint16_t BypassThresholdmV;
 
+  uint16_t badPacketCount;
+
   // Resistance of bypass load
   float LoadResistance;
   //Voltage Calibration

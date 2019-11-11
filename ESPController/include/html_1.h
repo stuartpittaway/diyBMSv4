@@ -75,6 +75,7 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
             <span class='hide'>V. Max</span>
             <span class='hide'>Temp<br/>Int °C</span>
             <span class='hide'>Temp<br/>Ext °C</span>
+            <span class='hide'>Bad packet<br/>count</span>
         </div>
         <div class="rows" id="modulesRows"></div>
     </div>
@@ -406,6 +407,8 @@ function queryBMS() {
     var tempint = [];
     var tempext = [];
 
+    var badpktcount = [];
+
     var voltage = [0.0, 0.0, 0.0, 0.0];
     //Not currently supported
     var current = [0.0, 0.0, 0.0, 0.0];
@@ -429,6 +432,7 @@ function queryBMS() {
             bank.push(bankNumber);
             cells.push(index);
 
+            badpktcount.push(value.badpkt);
 
             labels.push(bankNumber + "/" + index);
 
@@ -488,11 +492,10 @@ function queryBMS() {
             $.each(cells, function( index, value ) {
                 $(tbody).append("<div><span>"
                 +bank[index]
-                +"</span><span>"
-                +value
-                +"</span><span></span><span class='hide'></span><span class='hide'></span><span class='hide'></span><span class='hide'></span><span><button type='button' onclick='return identifyModule(this,"
-                +bank[index]+","+value+");'>Identify</button></span><span><button type='button' onclick='return configureModule(this,"
-                +bank[index]+","+value+");'>Configure</button></span></div>")
+                +"</span><span>"+value+"</span><span></span><span class='hide'></span><span class='hide'></span>"
+                +"<span class='hide'></span><span class='hide'></span><span class='hide'></span>"
+                +"<span><button type='button' onclick='return identifyModule(this,"+bank[index]+","+value+");'>Identify</button></span>"
+                +"<span><button type='button' onclick='return configureModule(this,"+bank[index]+","+value+");'>Configure</button></span></div>")
             });
         }
 
@@ -507,6 +510,7 @@ function queryBMS() {
             $(columns[4]).html(voltagesmax[index].toFixed(3));
             $(columns[5]).html(tempint[index].value);
             $(columns[6]).html(tempext[index]);
+            $(columns[7]).html(badpktcount[index]);
         });
     }
 

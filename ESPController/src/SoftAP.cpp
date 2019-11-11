@@ -56,7 +56,6 @@ void DIYBMSSoftAP::handleSave(AsyncWebServerRequest *request) {
 
     request->send(200, "text/html", s);
 
-
     //Serial1.println("handleSave");
     //Serial1.println(_config.wifi_ssid);
     //Serial1.println(_config.wifi_passphrase);

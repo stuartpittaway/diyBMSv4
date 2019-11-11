@@ -603,6 +603,8 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
       cell["bypasshot"] = cmi[bank][i].bypassOverTemp;
       cell["int"] = cmi[bank][i].internalTemp;
       cell["ext"] = cmi[bank][i].externalTemp;
+
+      cell["badpkt"] = cmi[bank][i].badPacketCount;
     }
   }
   serializeJson(doc, *response);

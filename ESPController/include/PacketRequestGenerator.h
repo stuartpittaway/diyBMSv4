@@ -30,6 +30,7 @@ class PacketRequestGenerator {
      void sendSaveSetting(uint8_t b,uint8_t m,uint16_t BypassThresholdmV,uint8_t BypassOverTempShutdown,float LoadResistance,float Calibration,float mVPerADC,uint16_t Internal_BCoefficient,uint16_t External_BCoefficient);
 
      void sendSaveGlobalSetting(uint16_t BypassThresholdmV,uint8_t BypassOverTempShutdown);
+     void sendReadBadPacketCounter(uint8_t b);
 
      void sendCellVoltageRequest(uint8_t b);
      void sendCellTemperatureRequest(uint8_t b);

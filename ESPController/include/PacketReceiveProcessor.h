@@ -27,6 +27,7 @@ class PacketReceiveProcessor {
     void ProcessReplyVoltage();
     void ProcessReplyTemperature();
     void ProcessReplyAddressByte();
+    void ProcessReplyBadPacketCount();
 };
 
 
