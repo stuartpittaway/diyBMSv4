@@ -111,7 +111,7 @@ void DiyBMSATTiny841::ConfigurePorts() {
 
   //DDRA – Port A Data Direction Register
   //When DDAn is set, the pin PAn is configured as an output. When DDAn is cleared, the pin is configured as an input
-  DDRA |= _BV(DDA3) | _BV(DDA6) | _BV(DDA7);
+  DDRA |= _BV(DDA3) | _BV(DDA6) | _BV(DDA7) | _BV(DDA5);
 
   //DDRB – Port B Data Direction Register
   //Spare pin is output
@@ -121,6 +121,7 @@ void DiyBMSATTiny841::ConfigurePorts() {
   DumpLoadOff();
   ReferenceVoltageOff();
 
+  BlueLedOff();
   GreenLedOff();
 }
 
@@ -158,6 +159,14 @@ void DiyBMSATTiny841::SparePinOn() {
 
 void DiyBMSATTiny841::SparePinOff() {
   PORTB &= (~_BV(PORTB1));
+}
+
+void DiyBMSATTiny841::BlueLedOn() {
+  PORTA |= _BV(PORTA5);
+}
+
+void DiyBMSATTiny841::BlueLedOff() {
+  PORTA &= (~_BV(PORTA5));
 }
 
 void DiyBMSATTiny841::FlushSerial0() {
@@ -235,12 +244,19 @@ void DiyBMSATTiny841::SetWatchdog8sec() {
 }
 
 uint16_t DiyBMSATTiny841::ReadADC() {
+
+  BlueLedOff();
+
+
   // must read ADCL first
   uint8_t low = ADCL;
   return (ADCH << 8) | low;
 }
 
 void DiyBMSATTiny841::BeginADCReading() {
+
+  BlueLedOn();
+
   //ADMUXB – ADC Multiplexer Selection Register
   //Select external AREF pin (internal reference turned off)
   ADMUXB = _BV(REFS2);

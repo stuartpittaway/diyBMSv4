@@ -31,6 +31,8 @@ public:
    void SparePinOn();
    void SparePinOff();
 
+   void BlueLedOn();
+   void BlueLedOff();
 
    void ReferenceVoltageOn();
    void ReferenceVoltageOff();
@@ -39,7 +41,7 @@ public:
 
    void DisableSerial0();
    void EnableSerial0();
-  
+
    void DisableSerial0TX();
    void EnableSerial0TX();
 

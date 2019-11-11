@@ -202,8 +202,11 @@ void loop() {
     //We don't sleep if we are in bypass mode or just after completing bypass
     hardware.EnableStartFrameDetection();
 
+    //hardware.BlueLedOn();
     //Program stops here until woken by watchdog or pin change interrupt
     hardware.Sleep();
+
+    //hardware.BlueLedOff();
   }
 
   //We are awake....
