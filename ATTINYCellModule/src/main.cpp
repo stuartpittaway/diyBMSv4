@@ -111,13 +111,17 @@ void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
 
     //Wake up the connected cell module from sleep
     Serial.write((byte) 0);
-    delay(10);
+    //Let connected module wake up
+    delay(6);
 
     //Send the packet (even if it was invalid so controller can count crc errors)
     myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
 
+
+    //DEBUG: Are there any known issues with Serial Flush causing a CPU to hang?
     hardware.FlushSerial0();
     hardware.DisableSerial0TX();
+    //hardware.BlueLedOff();
   }
 
   hardware.GreenLedOff();
@@ -125,9 +129,8 @@ void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
 
 ISR(USART0_START_vect) {
   //Needs to be here!
-  //asm("NOP");
-
-  //hardware.GreenLedOn();
+  asm("NOP");
+  //hardware.BlueLedOn();
 }
 
 //Kp: Determines how aggressively the PID reacts to the current amount of error (Proportional)
@@ -202,11 +205,8 @@ void loop() {
     //We don't sleep if we are in bypass mode or just after completing bypass
     hardware.EnableStartFrameDetection();
 
-    //hardware.BlueLedOn();
     //Program stops here until woken by watchdog or pin change interrupt
     hardware.Sleep();
-
-    //hardware.BlueLedOff();
   }
 
   //We are awake....
