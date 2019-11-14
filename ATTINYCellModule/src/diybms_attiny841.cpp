@@ -117,6 +117,9 @@ void DiyBMSATTiny841::ConfigurePorts() {
   //Spare pin is output
   DDRB |= _BV(DDB1);
 
+  //Set the extra high sink capability of pin PA7 is enabled.
+  PHDE |= _BV(PHDEA1);
+
   //Set pins to initial state
   DumpLoadOff();
   ReferenceVoltageOff();
