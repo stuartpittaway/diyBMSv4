@@ -282,9 +282,14 @@ void timerProcessRules() {
           rule_outcome[2]=true;
       }
 
-      if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[3])) {
-          //Rule 3 - Individual cell over temperature (external probe)
+      if (cmi[bank][i].voltagemV < mysettings.rulevalue[3]) {
+          //Rule 3 - Individual cell under voltage (mV)
           rule_outcome[3]=true;
+      }
+
+      if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[4])) {
+          //Rule 4 - Individual cell over temperature (external probe)
+          rule_outcome[4]=true;
       }
     }
   }
@@ -299,23 +304,23 @@ void timerProcessRules() {
 
   for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
   {
-    if (packvoltage[bank] > mysettings.rulevalue[4]) {
-      //Rule 4 - Pack over voltage (mV)
-      rule_outcome[4]=true;
+    if (packvoltage[bank] > mysettings.rulevalue[5]) {
+      //Rule 5 - Pack over voltage (mV)
+      rule_outcome[5]=true;
     }
 
-    if (packvoltage[bank] < mysettings.rulevalue[5]) {
-      //Rule 5 - Pack under voltage (mV)
-      rule_outcome[5]=true;
+    if (packvoltage[bank] < mysettings.rulevalue[6]) {
+      //Rule 6 - Pack under voltage (mV)
+      rule_outcome[6]=true;
     }
   }
 
   //Time based rules
-  if (minutesSinceMidnight() >= mysettings.rulevalue[6]) {
-    rule_outcome[6]=true;
-  }
   if (minutesSinceMidnight() >= mysettings.rulevalue[7]) {
     rule_outcome[7]=true;
+  }
+  if (minutesSinceMidnight() >= mysettings.rulevalue[8]) {
+    rule_outcome[8]=true;
   }
 
   // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
@@ -645,22 +650,25 @@ void LoadConfiguration() {
       mysettings.rulerelaydefault[x]=RELAY_OFF;
     }
 
+    int index=0;
     //1. Emergency stop
-    mysettings.rulevalue[0]=0;
+    mysettings.rulevalue[index++]=0;
     //2. Communications error
-    mysettings.rulevalue[1]=0;
+    mysettings.rulevalue[index++]=0;
     //3. Individual cell over voltage
-    mysettings.rulevalue[2]=4150;
-    //4. Individual cell over temperature (external probe)
-    mysettings.rulevalue[3]=55;
-    //5. Pack over voltage (mV)
-    mysettings.rulevalue[4]=16000;
-    //6. Pack under voltage (mV)
-    mysettings.rulevalue[5]=12000;
-    //7. Minutes after 2
-    mysettings.rulevalue[6]=60*9; //9am
-    //8. Minutes after 1
-    mysettings.rulevalue[7]=60*17;  //5pm
+    mysettings.rulevalue[index++]=4150;
+    //4. Individual cell under voltage
+    mysettings.rulevalue[index++]=3000;
+    //5. Individual cell over temperature (external probe)
+    mysettings.rulevalue[index++]=55;
+    //6. Pack over voltage (mV)
+    mysettings.rulevalue[index++]=16000;
+    //7. Pack under voltage (mV)
+    mysettings.rulevalue[index++]=12000;
+    //8. Minutes after 2
+    mysettings.rulevalue[index++]=60*9; //9am
+    //9. Minutes after 1
+    mysettings.rulevalue[index++]=60*17;  //5pm
 
     //Set all relays to don't care
     for (size_t i = 0; i < RELAY_RULES; i++) {

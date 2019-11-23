@@ -240,33 +240,38 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     </div>
 
     <div class="rule">
-      <label for="rule3value">3. Individual cell over voltage</label>
+      <label for="rule3value">3. Individual cell over voltage (mV)</label>
       <input type="number" min="2500" max="4500" step="10" name="rule3value" id="rule3value" value="4100" required="">
     </div>
 
     <div class="rule">
-    <label for="rule4value">4. Individual cell over temperature (external probe)</label>
-    <input type="number" min="10" max="90" step="1" name="rule4value" id="rule4value" value="45" required="">
+      <label for="rule4value">4. Individual cell under voltage (mV)</label>
+      <input type="number" min="2500" max="4500" step="10" name="rule4value" id="rule4value" value="3000" required="">
     </div>
 
     <div class="rule">
-    <label for="rule5value">5. Pack over voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule5value" id="rule5value" value="16000" required="">
+    <label for="rule5value">5. Individual cell over temperature (external probe) °C</label>
+    <input type="number" min="10" max="90" step="1" name="rule5value" id="rule5value" value="45" required="">
     </div>
 
     <div class="rule">
-    <label for="rule6value">6. Pack under voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule6value" id="rule6value" value="12000" required="">
+    <label for="rule6value">6. Pack over voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule6value" id="rule6value" value="16000" required="">
     </div>
 
     <div class="rule">
-    <label for="rule7value">7. Minutes after 2</label>
-    <input type="number" min="0" max="1440" step="1" name="rule7value" id="rule7value" value="0" required="">
+    <label for="rule7value">7. Pack under voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule7value" id="rule7value" value="12000" required="">
     </div>
 
     <div class="rule">
-    <label for="rule8value">8. Minutes after 1</label>
+    <label for="rule8value">8. Minutes after 2</label>
     <input type="number" min="0" max="1440" step="1" name="rule8value" id="rule8value" value="0" required="">
+    </div>
+
+    <div class="rule">
+    <label for="rule9value">9. Minutes after 1</label>
+    <input type="number" min="0" max="1440" step="1" name="rule9value" id="rule9value" value="0" required="">
     </div>
 
     <div>
