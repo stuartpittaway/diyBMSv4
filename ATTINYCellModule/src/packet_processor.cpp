@@ -33,18 +33,18 @@ void PacketProcessor::incrementPacketAddress() {
 
 //Returns TRUE if the internal thermistor is hotter than the required setting
 bool PacketProcessor::BypassOverheatCheck() {
-  return (InternalTemperature() > _config->  BypassOverTempShutdown);
+  return (InternalTemperature() > _config->BypassOverTempShutdown);
 }
 
 // Returns an integer byte indicating the internal thermistor temperature in degrees C
 // uses basic B Coefficient Steinhart calculaton to give rough approximation in temperature
-int8_t PacketProcessor::InternalTemperature() {
-  return round(Steinhart::ThermistorToCelcius(_config->  Internal_BCoefficient, onboard_temperature));
+int16_t PacketProcessor::InternalTemperature() {
+  return Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature);
 }
 
 //Returns TRUE if the cell voltage is greater than the required setting
 bool PacketProcessor::BypassCheck() {
-  return (CellVoltage() > _config->  BypassThresholdmV);
+  return (CellVoltage() > _config->BypassThresholdmV);
 }
 
 //Determines if a received packet of instruction is for this module
@@ -178,19 +178,6 @@ uint16_t PacketProcessor::CellVoltage() {
 //Returns the last RAW ADC value 0-1023
 uint16_t PacketProcessor::RawADCValue() {
   return raw_adc_voltage;
-}
-
-//This function reduces the scale of temperatures from float types to a single byte (unsigned)
-//We have an artifical floor at 40oC, anything below +40 is considered negative (below freezing)
-//Gives range of -40 to +216 degrees C
-uint8_t PacketProcessor::TemperatureToByte(float TempInCelcius) {
-  TempInCelcius += 40;
-
-  //Set the limits
-  if (TempInCelcius < 0) TempInCelcius = 0;
-  if (TempInCelcius > 255) TempInCelcius = 255;
-
-  return (uint8_t) TempInCelcius;
 }
 
 // Process the request in the received packet
@@ -336,6 +323,6 @@ bool PacketProcessor::processPacket() {
 }
 
 uint16_t PacketProcessor::TemperatureMeasurement() {
-  return (TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature)) << 8) +
-    TemperatureToByte(Steinhart::ThermistorToCelcius(_config->External_BCoefficient, external_temperature));
+  return (Steinhart::TemperatureToByte(Steinhart::ThermistorToCelcius(_config->Internal_BCoefficient, onboard_temperature)) << 8) +
+    Steinhart::TemperatureToByte(Steinhart::ThermistorToCelcius(_config->External_BCoefficient, external_temperature));
 }

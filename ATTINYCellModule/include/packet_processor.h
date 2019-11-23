@@ -53,7 +53,7 @@ public:
   byte identifyModule;
   bool BypassOverheatCheck();
   uint16_t RawADCValue();
-  int8_t InternalTemperature();
+  int16_t InternalTemperature();
   bool WeAreInBypass;
 
 private:
@@ -65,7 +65,7 @@ private:
   bool processPacket();
   void incrementPacketAddress();
   bool isPacketForMe();
-  uint8_t TemperatureToByte(float TempInCelcius);
+  //uint8_t TemperatureToByte(float TempInCelcius);
 
   volatile uint8_t adcmode=0;
   volatile uint16_t raw_adc_voltage;
