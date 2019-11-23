@@ -680,6 +680,12 @@ void setup() {
   //D5 is interrupt pin from PCF8574
   pinMode(D5,INPUT_PULLUP);
 
+  //Fix for issue 5, delay for 3 seconds on power up with green LED lit so
+  //people get chance to jump WIFI reset pin (d3)
+  GREEN_LED_ON;
+  delay(3000);
+  //This is normally pulled high, D3 is used to reset WIFI details
+  uint8_t clearAPSettings=digitalRead(D3);
   GREEN_LED_OFF;
 
   //We generate a unique number which is used in all following JSON requests
@@ -754,24 +760,15 @@ void setup() {
   pcf8574.resetInterruptPin();
   attachInterrupt(digitalPinToInterrupt(D5), PCFInterrupt, FALLING);
 
-  //Ensure we service the cell modules every 5 seconds
-  myTimer.attach(5, timerEnqueueCallback);
+  //Ensure we service the cell modules every 4 seconds
+  myTimer.attach(4, timerEnqueueCallback);
 
-  //Process rules every 10 seconds (this prevents the relays from clattering on and off)
-  myTimerRelay.attach(10, timerProcessRules);
+  //Process rules every 5 seconds (this prevents the relays from clattering on and off)
+  myTimerRelay.attach(5, timerProcessRules);
 
   //We process the transmit queue every 0.5 seconds (this needs to be lower delay than the queue fills)
   myTransmitTimer.attach(0.5, timerTransmitCallback);
 
-
-
-  //Fix for issue 5, delay for 3 seconds on power up with green LED lit so
-  //people get chance to jump WIFI reset pin (d3)
-  GREEN_LED_ON;
-  delay(3000);
-  //This is normally pulled high, D3 is used to reset WIFI details
-  uint8_t clearAPSettings=digitalRead(D3);
-  GREEN_LED_OFF;
 
   //Temporarly force WIFI settings
   //wifi_eeprom_settings xxxx;
