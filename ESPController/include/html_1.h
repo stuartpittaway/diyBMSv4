@@ -224,43 +224,49 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <p>'Minutes after' rules allow timed operation, this rule is active when the number of minutes past midnight has been reached,
     for instance 495 is 08:15am.  Use the combination of both rules to switch on and off.  This only works if connected to internet for time updates.</p>
     <p>Minutes since midnight now is: <span id='minutesnow'></span></p>
+    <p>Emergency stop is triggered by connector J1, once triggered controller needs to be reset to disable</p>
     <div class="error" id='PCF8574'>PCF8574 is NOT fitted, relay control not possible!</div>
     <form id="rulesForm" method="POST" action="saverules.json" autocomplete="off">
     <div class="settings">
 
     <div class="rule">
-      <label for="rule1value">1. Communications error</label>
-      <input type="number" min="0" max="999999" step="1" name="rule1value" id="rule1value" value="0" required="" readonly="">
+      <label for="rule1value">1. Emergency stop</label>
+      <input type="number" min="0" max="0" step="1" name="rule1value" id="rule1value" value="0" required="" readonly="">
     </div>
 
     <div class="rule">
-      <label for="rule2value">2. Individual cell over voltage</label>
-      <input type="number" min="2500" max="4500" step="10" name="rule2value" id="rule2value" value="4100" required="">
+      <label for="rule2value">2. Communications error</label>
+      <input type="number" min="0" max="0" step="1" name="rule2value" id="rule2value" value="0" required="" readonly="">
     </div>
 
     <div class="rule">
-    <label for="rule3value">3. Individual cell over temperature (external probe)</label>
-    <input type="number" min="10" max="90" step="1" name="rule3value" id="rule3value" value="45" required="">
+      <label for="rule3value">3. Individual cell over voltage</label>
+      <input type="number" min="2500" max="4500" step="10" name="rule3value" id="rule3value" value="4100" required="">
     </div>
 
     <div class="rule">
-    <label for="rule4value">4. Pack over voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule4value" id="rule4value" value="16000" required="">
+    <label for="rule4value">4. Individual cell over temperature (external probe)</label>
+    <input type="number" min="10" max="90" step="1" name="rule4value" id="rule4value" value="45" required="">
     </div>
 
     <div class="rule">
-    <label for="rule5value">5. Pack under voltage (mV)</label>
-    <input type="number" min="1000" max="99999999" step="100" name="rule5value" id="rule5value" value="12000" required="">
+    <label for="rule5value">5. Pack over voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule5value" id="rule5value" value="16000" required="">
     </div>
 
     <div class="rule">
-    <label for="rule6value">6. Minutes after 2</label>
-    <input type="number" min="0" max="1440" step="1" name="rule6value" id="rule6value" value="0" required="">
+    <label for="rule6value">6. Pack under voltage (mV)</label>
+    <input type="number" min="1000" max="99999999" step="100" name="rule6value" id="rule6value" value="12000" required="">
     </div>
 
     <div class="rule">
-    <label for="rule7value">7. Minutes after 1</label>
+    <label for="rule7value">7. Minutes after 2</label>
     <input type="number" min="0" max="1440" step="1" name="rule7value" id="rule7value" value="0" required="">
+    </div>
+
+    <div class="rule">
+    <label for="rule8value">8. Minutes after 1</label>
+    <input type="number" min="0" max="1440" step="1" name="rule8value" id="rule8value" value="0" required="">
     </div>
 
     <div>

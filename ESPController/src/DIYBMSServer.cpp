@@ -136,7 +136,6 @@ void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
 void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
 
-
   //Relay default
   for (int i = 0; i < RELAY_TOTAL; i++) {
     String name="defaultrelay";
@@ -164,7 +163,6 @@ void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
       mysettings.rulevalue[rule] =p1->value().toInt();
     }
 
-
       //Rule/relay processing
       for (int i = 0; i < RELAY_TOTAL; i++) {
         //This STRING doesnt work properly if its on a single line!
@@ -172,7 +170,6 @@ void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
         name=name+(rule+1);
         name=name+"relay";
         name=name+(i+1);
-        //Serial1.print('*');    Serial1.print(name.c_str());    Serial1.println('*');
         if (request->hasParam(name, true)) {
           AsyncWebParameter *p1 = request->getParam(name, true);
           mysettings.rulerelaystate[rule][i] =p1->value().equals("X") ? RELAY_X: p1->value().equals("On") ? RELAY_ON:RELAY_OFF;
@@ -444,7 +441,6 @@ void DIYBMSServer::rules(AsyncWebServerRequest *request) {
       default: defaultArray.add((char*)0);break;
     }
   }
-
 
   JsonArray bankArray = root.createNestedArray("rules");
 

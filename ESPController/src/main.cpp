@@ -67,6 +67,8 @@ The time.h file in this library conflicts with the time.h file in the ESP core p
 
 
 bool PCF8574Enabled;
+volatile bool emergencyStop=false;
+bool rule_outcome[RELAY_RULES];
 
 uint16_t ConfigHasChanged=0;
 diybms_eeprom_settings mysettings;
@@ -83,10 +85,14 @@ uint8_t packetType=0;
 //PCF8574P has an i2c address of 0x38 instead of the normal 0x20
 PCF857x pcf8574(0x38, &Wire);
 
-volatile bool PCFInterruptFlag = false;
 
 void ICACHE_RAM_ATTR PCFInterrupt() {
-  PCFInterruptFlag = true;
+
+  if ((pcf8574.read8() & B00010000)==0) {
+      //Emergency Stop (J1) has triggered
+      emergencyStop=true;
+  }
+
 }
 
 //This large array holds all the information about the modules
@@ -177,11 +183,11 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
 
   if (len==sizeof(packet)) {
     // Process decoded incoming packet
-    Serial1.print("Recv:");
+    Serial1.print("R:");
     dumpPacketToDebug((packet*)receivebuffer);
 
     if (!receiveProc.ProcessReply(receivebuffer,sequence)) {
-      Serial1.println("** FAILED PROCESS REPLY **");
+      Serial1.println("**FAILED PROCESS REPLY**");
     }
 
     //We received a packet (although may have been an error)
@@ -190,7 +196,6 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len)
     Serial1.println();
   }
 }
-
 
 void timerTransmitCallback() {
   //Don't send another message until we have received reply from the last one
@@ -222,18 +227,14 @@ void timerTransmitCallback() {
     delay(10);
 
     requestQueue.pop(&transmitBuffer);
-
     sequence++;
-
     transmitBuffer.sequence=sequence;
-    //transmitBuffer.crc = uCRC16Lib::calculate((char*)&transmitBuffer, sizeof(packet) - 2);
-    transmitBuffer.crc =CRC16::CalculateArray((uint8_t*)&transmitBuffer, sizeof(packet) - 2);
-
+    transmitBuffer.crc=CRC16::CalculateArray((uint8_t*)&transmitBuffer, sizeof(packet) - 2);
     myPacketSerial.send((byte*)&transmitBuffer, sizeof(transmitBuffer));
 
     waitingForReply=true;
 
-    Serial1.print("Send:");
+    Serial1.print("S:");
     dumpPacketToDebug(&transmitBuffer);
 
     Serial1.print("/Q:");
@@ -244,8 +245,6 @@ void timerTransmitCallback() {
   }
 }
 
-
-bool rule_outcome[RELAY_RULES];
 
 void timerProcessRules() {
 
@@ -261,14 +260,15 @@ void timerProcessRules() {
     rule_outcome[r]=false;
   }
 
-
   //If we have a communications error
-  if (receiveProc.commsError > 2) {
+  if (emergencyStop) {
     rule_outcome[0]=true;
   }
 
-
-
+  //If we have a communications error
+  if (receiveProc.commsError > 2) {
+    rule_outcome[1]=true;
+  }
 
   //Loop through cells
   for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
@@ -277,14 +277,14 @@ void timerProcessRules() {
 
       packvoltage[bank]+=cmi[bank][i].voltagemV;
 
-      if (cmi[bank][i].voltagemV > mysettings.rulevalue[1]) {
-          //Rule 1 - Individual cell over voltage
-          rule_outcome[1]=true;
+      if (cmi[bank][i].voltagemV > mysettings.rulevalue[2]) {
+          //Rule 2 - Individual cell over voltage
+          rule_outcome[2]=true;
       }
 
-      if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[2])) {
-          //Rule 2 - Individual cell over temperature (external probe)
-          rule_outcome[2]=true;
+      if ((cmi[bank][i].externalTemp!=-40) && (cmi[bank][i].externalTemp > mysettings.rulevalue[3])) {
+          //Rule 3 - Individual cell over temperature (external probe)
+          rule_outcome[3]=true;
       }
     }
   }
@@ -299,23 +299,23 @@ void timerProcessRules() {
 
   for (int8_t bank = 0; bank < mysettings.totalNumberOfBanks; bank++)
   {
-    if (packvoltage[bank] > mysettings.rulevalue[3]) {
-      //Rule 3 - Pack over voltage (mV)
-      rule_outcome[3]=true;
+    if (packvoltage[bank] > mysettings.rulevalue[4]) {
+      //Rule 4 - Pack over voltage (mV)
+      rule_outcome[4]=true;
     }
 
-    if (packvoltage[bank] < mysettings.rulevalue[4]) {
-      //Rule 4 - Pack under voltage (mV)
-      rule_outcome[4]=true;
+    if (packvoltage[bank] < mysettings.rulevalue[5]) {
+      //Rule 5 - Pack under voltage (mV)
+      rule_outcome[5]=true;
     }
   }
 
   //Time based rules
-  if (minutesSinceMidnight() >= mysettings.rulevalue[5]) {
-    rule_outcome[5]=true;
-  }
   if (minutesSinceMidnight() >= mysettings.rulevalue[6]) {
     rule_outcome[6]=true;
+  }
+  if (minutesSinceMidnight() >= mysettings.rulevalue[7]) {
+    rule_outcome[7]=true;
   }
 
   // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
@@ -355,7 +355,7 @@ void timerProcessRules() {
             }
         }
       }
-      }
+    }
   }
 
   if (PCF8574Enabled) {
@@ -375,6 +375,8 @@ void timerProcessRules() {
   //pcf8574.write8(relayState);
 }
 
+uint8_t counter=0;
+
 void timerEnqueueCallback() {
   //this is called regularly on a timer, it determines what request to make to the modules (via the request queue)
   for (uint8_t b = 0; b < mysettings.totalNumberOfBanks; b++)
@@ -382,9 +384,14 @@ void timerEnqueueCallback() {
     prg.sendCellVoltageRequest(b);
     prg.sendCellTemperatureRequest(b);
 
-    prg.sendReadBadPacketCounter(b);
+    //Every 50 loops also ask for bad packet count (saves battery power if we dont ask for this all the time)
+    if (counter % 50==0) {
+      prg.sendReadBadPacketCounter(b);
+    }
   }
 
+  //Its an unsigned byte, let it overflow to reset
+  counter++;
 }
 
 
@@ -638,14 +645,24 @@ void LoadConfiguration() {
       mysettings.rulerelaydefault[x]=RELAY_OFF;
     }
 
+    //1. Emergency stop
     mysettings.rulevalue[0]=0;
-    mysettings.rulevalue[1]=4150;
-    mysettings.rulevalue[2]=55;
-    mysettings.rulevalue[3]=16000;
-    mysettings.rulevalue[4]=12000;
-    mysettings.rulevalue[5]=60*9; //9am
-    mysettings.rulevalue[6]=60*17;  //5pm
+    //2. Communications error
+    mysettings.rulevalue[1]=0;
+    //3. Individual cell over voltage
+    mysettings.rulevalue[2]=4150;
+    //4. Individual cell over temperature (external probe)
+    mysettings.rulevalue[3]=55;
+    //5. Pack over voltage (mV)
+    mysettings.rulevalue[4]=16000;
+    //6. Pack under voltage (mV)
+    mysettings.rulevalue[5]=12000;
+    //7. Minutes after 2
+    mysettings.rulevalue[6]=60*9; //9am
+    //8. Minutes after 1
+    mysettings.rulevalue[7]=60*17;  //5pm
 
+    //Set all relays to don't care
     for (size_t i = 0; i < RELAY_RULES; i++) {
       for (size_t x = 0; x < RELAY_TOTAL; x++) {
         mysettings.rulerelaystate[i][x]=RELAY_X;
@@ -746,8 +763,15 @@ void setup() {
   //We process the transmit queue every 0.5 seconds (this needs to be lower delay than the queue fills)
   myTransmitTimer.attach(0.5, timerTransmitCallback);
 
+
+
+  //Fix for issue 5, delay for 3 seconds on power up with green LED lit so
+  //people get chance to jump WIFI reset pin (d3)
+  GREEN_LED_ON;
+  delay(3000);
   //This is normally pulled high, D3 is used to reset WIFI details
   uint8_t clearAPSettings=digitalRead(D3);
+  GREEN_LED_OFF;
 
   //Temporarly force WIFI settings
   //wifi_eeprom_settings xxxx;
@@ -791,14 +815,10 @@ void setup() {
 }
 
 void loop() {
-
-  //static int last = 0;
-
   // Call update to receive, decode and process incoming packets.
   if (Serial.available()) {
     myPacketSerial.update();
   }
-
 
   if (ConfigHasChanged>0) {
       //Auto reboot if needed (after changing MQTT or INFLUX settings)
@@ -816,12 +836,7 @@ void loop() {
       delay(1);
   }
 
-  if (PCFInterruptFlag) {
-    //Value is ZERO when PIN is grounded
-    Serial1.print("PCFInterruptFlag=");
-    Serial1.println(pcf8574.read8() & B11110000);
-    PCFInterruptFlag=false;
-  }
+  //if (emergencyStop) {    Serial1.println("EMERGENCY STOP");  }
 
   if (wifiFirstConnected) {
       Serial1.print("Requesting NTP from ");
