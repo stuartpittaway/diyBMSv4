@@ -283,6 +283,15 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
     <select id="defaultrelay4" name="defaultrelay4"><option>On</option><option>Off</option></select>
     </div>
 
+    <div>
+    <label for="relaytype">Relay type</label>
+    <input type="number" min="0" max="999999" step="1" name="relaytype" id="relaytype" value="0" required="" readonly="">
+    <select id="relaytype1" name="relaytype1"><option>Std</option><option>Pulse</option></select>
+    <select id="relaytype2" name="relaytype2"><option>Std</option><option>Pulse</option></select>
+    <select id="relaytype3" name="relaytype3"><option>Std</option><option>Pulse</option></select>
+    <select id="relaytype4" name="relaytype4"><option>Std</option><option>Pulse</option></select>
+    </div>
+
     </div>
     <input type="submit" value="Save rules"/>
     </form>
@@ -723,6 +732,12 @@ $(function() {
             if (value2===true) {relay_value="On";}
             if (value2===false){relay_value="Off";}
             $("#defaultrelay"+(index2+1)).val(relay_value);
+          });
+
+
+          //Default relay settings
+          $.each(data.relaytype, function(index2, value2) {
+            $("#relaytype"+(index2+1)).val(value2);
           });
 
           $("#minutesnow").html(data.timenow);
