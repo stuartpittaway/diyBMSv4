@@ -77,22 +77,21 @@ AsyncWebServer server(80);
 
 bool server_running=false;
 bool wifiFirstConnected = false;
-boolean NTPsyncEventTriggered = false; // True if a time even has been triggered
+bool NTPsyncEventTriggered = false; // True if a time even has been triggered
 NTPSyncEvent_t ntpEvent; // Last triggered event
 
 uint8_t packetType=0;
+uint8_t previousRelayState[RELAY_TOTAL];
+bool previousRelayPulse[RELAY_TOTAL];
 
 //PCF8574P has an i2c address of 0x38 instead of the normal 0x20
 PCF857x pcf8574(0x38, &Wire);
 
-
 void ICACHE_RAM_ATTR PCFInterrupt() {
-
   if ((pcf8574.read8() & B00010000)==0) {
       //Emergency Stop (J1) has triggered
       emergencyStop=true;
   }
-
 }
 
 //This large array holds all the information about the modules
@@ -131,6 +130,9 @@ Ticker wifiReconnectTimer;
 Ticker mqttReconnectTimer;
 Ticker myTimerSendMqttPacket;
 Ticker myTimerSendInfluxdbPacket;
+
+Ticker myTimerSwitchPulsedRelay;
+
 
 uint16_t sequence=0;
 
@@ -245,8 +247,9 @@ void timerTransmitCallback() {
   }
 }
 
+void ProcessRules() {
 
-void timerProcessRules() {
+//Runs the rules and populates rule_outcome array with true/false for each rule
 
   uint32_t packvoltage[4];
 
@@ -323,6 +326,32 @@ void timerProcessRules() {
     rule_outcome[8]=true;
   }
 
+}
+
+void timerSwitchPulsedRelay() {
+  //Set defaults based on configuration
+  for (int8_t y = 0; y<RELAY_TOTAL; y++)
+  {
+    if (previousRelayPulse[y]) {
+        //We now need to rapidly turn off the relay after a fixed period of time (pulse mode)
+        //However we leave the relay and previousRelayState looking like the relay has triggered (it has!)
+        //to prevent multiple pulses being sent on each rule refresh
+        pcf8574.write(y, previousRelayState[y]==HIGH ? LOW:HIGH);
+
+      previousRelayPulse[y]=false;
+    }
+  }
+
+  //This only fires once
+  myTimerSwitchPulsedRelay.detach();
+}
+
+
+void timerProcessRules() {
+
+  //Run the rules
+  ProcessRules();
+
   // DO NOTE: When you write LOW to a pin on a PCF8574 it becomes an OUTPUT.
   // It wouldn't generate an interrupt if you were to connect a button to it that pulls it HIGH when you press the button.
   // Any pin you wish to use as input must be written HIGH and be pulled LOW to generate an interrupt.
@@ -331,7 +360,6 @@ void timerProcessRules() {
   for (int8_t r = 0; r < RELAY_RULES; r++)
   {
     Serial1.print(rule_outcome[r]);
-    Serial1.print(" ");
   }
   Serial1.print("=");
 
@@ -367,17 +395,32 @@ void timerProcessRules() {
     //Perhaps we should publish the relay settings over MQTT and INFLUX/website?
     for (int8_t n = 0; n<RELAY_TOTAL; n++)
     {
-      //Would be better here to use the WRITE8 to lower i2c traffic
-      pcf8574.write(n, relay[n]);
-      Serial1.print(' ');
-      Serial1.print(relay[n]);
+      if (previousRelayState[n]!=relay[n]) {
+        //Would be better here to use the WRITE8 to lower i2c traffic
+        Serial1.print("Relay:");
+        Serial1.print(n);
+        Serial1.print("=");
+        Serial1.print(relay[n]);
+
+        //Set the relay
+        pcf8574.write(n, relay[n]);
+
+        previousRelayState[n]=relay[n];
+
+        if (mysettings.relaytype[n]==RELAY_PULSE) {
+          //If its a pulsed relay, invert the output quickly via a one time only timer
+          previousRelayPulse[n]=true;
+          myTimerSwitchPulsedRelay.attach(0.1, timerSwitchPulsedRelay);
+          Serial1.print("P");
+        }
+      }
+
     }
     Serial1.println("");
   } else {
     Serial1.println("N/F");
   }
 
-  //pcf8574.write8(relayState);
 }
 
 uint8_t counter=0;
@@ -650,6 +693,7 @@ void LoadConfiguration() {
       mysettings.rulerelaydefault[x]=RELAY_OFF;
     }
 
+
     int index=0;
     //1. Emergency stop
     mysettings.rulevalue[index++]=0;
@@ -755,7 +799,8 @@ void setup() {
     //Set relay defaults
     for (int8_t y = 0; y<RELAY_TOTAL; y++)
     {
-         pcf8574.write(y,mysettings.rulerelaydefault[y]==RELAY_ON ? LOW:HIGH);
+        previousRelayState[y]= mysettings.rulerelaydefault[y]==RELAY_ON ? LOW:HIGH;
+         pcf8574.write(y,previousRelayState[y]);
     }
     PCF8574Enabled=true;
   } else {
