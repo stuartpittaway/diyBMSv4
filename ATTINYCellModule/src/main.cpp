@@ -50,9 +50,7 @@ PacketSerial_ < COBS, 0, 64 > myPacketSerial;
 //Default values which get overwritten by EEPROM on power up
 CellModuleConfig myConfig;
 
-
 DiyBMSATTiny841 hardware;
-
 
 PacketProcessor PP( & hardware, & myConfig);
 

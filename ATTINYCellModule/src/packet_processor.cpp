@@ -28,7 +28,8 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 
 // Increases the incoming packets address before sending to the next module
 void PacketProcessor::incrementPacketAddress() {
-  buffer.address = (buffer.address & 0xF0) + ((buffer.address & 0x0F) + 1);
+  //See Issue #11 prevent address 16 rolling over and increasing bank address
+  buffer.address = (buffer.address & 0xF0) + (((buffer.address & 0x0F) + 1) & 0x0F);
 }
 
 //Returns TRUE if the internal thermistor is hotter than the required setting
