@@ -604,8 +604,8 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   JsonObject monitor = root.createNestedObject("monitor");
 
-  // Set error flag if we have attempted to send 2 without a reply
-  monitor["commserr"] = (receiveProc.commsError > 2);
+  // Set error flag if we have attempted to send 2*number of banks without a reply
+  monitor["commserr"] = (receiveProc.commsError > (mysettings.totalNumberOfBanks *2));
 
   monitor["badpkt"] = receiveProc.totalMissedPacketCount;
   monitor["badcrc"] = receiveProc.totalCRCErrors;

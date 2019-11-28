@@ -210,7 +210,7 @@ void timerTransmitCallback() {
     receiveProc.commsError++;
 
     //After 5 attempts give up and send another packet
-    if (receiveProc.commsError>10) {
+    if (receiveProc.commsError> (mysettings.totalNumberOfBanks* 10)) {
       waitingForReply=false;
       receiveProc.totalMissedPacketCount++;
     } else {
