@@ -1,5 +1,8 @@
+#include <Arduino.h>
+
 #ifndef DIYBMS_DEFINES_H_
 #define DIYBMS_DEFINES_H_
+
 
 #define GREEN_LED D0
 
@@ -16,6 +19,8 @@
 //Number of relays on board (4)
 #define RELAY_TOTAL 4
 
+#define RELAY_STANDARD 0x00
+#define RELAY_PULSE 0x01
 
 #define SHOW_TIME_PERIOD 5000
 #define NTP_TIMEOUT 1500
@@ -31,6 +36,8 @@ struct diybms_eeprom_settings {
   uint8_t rulerelaystate[RELAY_RULES][RELAY_TOTAL];
   //Default starting state
   uint8_t rulerelaydefault[RELAY_TOTAL];
+  //Default starting state for relay types
+  uint8_t relaytype[RELAY_TOTAL];
 
   int8_t timeZone;// = 0;
   int8_t minutesTimeZone;// = 0;

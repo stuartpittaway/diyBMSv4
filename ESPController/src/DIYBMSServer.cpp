@@ -136,6 +136,22 @@ void DIYBMSServer::saveInfluxDBSetting(AsyncWebServerRequest *request) {
 void DIYBMSServer::saveRuleConfiguration(AsyncWebServerRequest *request) {
   if (!validateXSS(request)) return;
 
+
+  //relaytype
+  for (int i = 0; i < RELAY_TOTAL; i++) {
+    String name="relaytype";
+    name=name+(i+1);
+    if (request->hasParam(name.c_str(), true, false)) {
+      AsyncWebParameter *p1 = request->getParam(name.c_str(), true, false);
+      //Default
+      mysettings.relaytype[i] =RELAY_STANDARD;
+      if (p1->value().equals("Pulse")) {
+        mysettings.relaytype[i] = RELAY_PULSE;
+      }
+    }
+  }
+
+
   //Relay default
   for (int i = 0; i < RELAY_TOTAL; i++) {
     String name="defaultrelay";
@@ -442,6 +458,16 @@ void DIYBMSServer::rules(AsyncWebServerRequest *request) {
     }
   }
 
+  JsonArray typeArray = root.createNestedArray("relaytype");
+  for (uint8_t relay = 0; relay < RELAY_TOTAL; relay++) {
+    switch(mysettings.relaytype[relay]) {
+      case RELAY_STANDARD: typeArray.add("Std");break;
+      case RELAY_PULSE: typeArray.add("Pulse");break;
+      default: typeArray.add((char*)0);break;
+    }
+  }
+
+
   JsonArray bankArray = root.createNestedArray("rules");
 
   for (uint8_t r = 0; r < RELAY_RULES; r++) {
@@ -578,8 +604,8 @@ void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
 
   JsonObject monitor = root.createNestedObject("monitor");
 
-  // Set error flag if we have attempted to send 2 without a reply
-  monitor["commserr"] = (receiveProc.commsError > 2);
+  // Set error flag if we have attempted to send 2*number of banks without a reply
+  monitor["commserr"] = (receiveProc.commsError > (mysettings.totalNumberOfBanks *2));
 
   monitor["badpkt"] = receiveProc.totalMissedPacketCount;
   monitor["badcrc"] = receiveProc.totalCRCErrors;
