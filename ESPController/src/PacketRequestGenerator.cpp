@@ -162,7 +162,8 @@ void PacketRequestGenerator::pushPacketToQueue() {
 
 void PacketRequestGenerator::setPacketAddress(bool broadcast,uint8_t bank,uint8_t module) {
   if (broadcast) {
-    _packetbuffer.address =  B10000000 | ((bank & B00000011)<<4) ;
+    //12 is a debug value to pretend we have more modules than really exist
+    _packetbuffer.address =  (B10000000 | ((bank & B00000011)<<4));// + (12 & B00001111) ;
   } else {
     _packetbuffer.address = ((bank & B00000011)<<4) + (module & B00001111);
   }

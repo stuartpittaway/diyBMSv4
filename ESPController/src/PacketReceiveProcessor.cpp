@@ -26,7 +26,7 @@ bool PacketReceiveProcessor::ProcessReply(const uint8_t* receivebuffer,
             break;  // Ignore reply
           case COMMAND::ReadTemperature:
             ProcessReplyTemperature();
-            break;        
+            break;
           case COMMAND::ReadSettings:
             ProcessReplySettings();
             break;
@@ -52,8 +52,16 @@ bool PacketReceiveProcessor::ProcessReply(const uint8_t* receivebuffer,
     totalCRCErrors++;
   }
 
+  //Serial1.println("Failed ProcessReply");
   return false;
 }
+
+uint8_t PacketReceiveProcessor::ReplyLastAddress() {
+  if ((_packetbuffer.address & 0x0F)==0) return 0x10;
+
+  return (_packetbuffer.address & 0x0F);
+}
+
 
 void PacketReceiveProcessor::ProcessReplyAddressByte() {
   // address byte
@@ -64,6 +72,7 @@ void PacketReceiveProcessor::ProcessReplyAddressByte() {
   // reserved and not used
   // AAAA = 4 bits for address (module id 0 to 15)
 
+
   uint8_t broadcast = (_packetbuffer.address & B10000000) >> 7;
   // uint8_t bank=(_packetbuffer.address & B00110000) >> 4;
   // uint8_t lastAddress=_packetbuffer.address & 0x0F;
@@ -71,6 +80,9 @@ void PacketReceiveProcessor::ProcessReplyAddressByte() {
   // Only set if it was a reply from a broadcast message
   if (broadcast > 0) {
     if (numberOfModules[ReplyFromBank()] != ReplyLastAddress()) {
+
+      //Serial1.println("Reset bank values");
+
       numberOfModules[ReplyFromBank()] = ReplyLastAddress();
 
       // if we have a different number of modules in this bank
@@ -111,7 +123,9 @@ void PacketReceiveProcessor::ProcessReplyVoltage() {
 
   uint8_t b = ReplyFromBank();
 
-  for (size_t i = 0; i < maximum_cell_modules; i++) {
+  //Serial1.print("Bank=");  Serial1.println(b);
+
+  for (uint8_t i = 0; i < maximum_cell_modules; i++) {
     // 3 top bits remaining
     // X = In bypass
     // Y = Bypass over temperature

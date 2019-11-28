@@ -96,9 +96,10 @@ void ICACHE_RAM_ATTR PCFInterrupt() {
 
 //This large array holds all the information about the modules
 //up to 4x16
-CellModuleInfo cmi[4][maximum_cell_modules];
-//Size of array
-uint8_t numberOfModules[4];
+CellModuleInfo cmi[maximum_bank_of_modules][maximum_cell_modules];
+uint8_t numberOfModules[maximum_bank_of_modules];
+
+
 
 #include "crc16.h"
 

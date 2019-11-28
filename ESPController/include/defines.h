@@ -88,6 +88,7 @@ enum COMMAND: uint8_t
 
 //Maximum of 16 cell modules (dont change this!)
 #define maximum_cell_modules 16
+#define maximum_bank_of_modules 4
 
 //NOTE THIS MUST BE EVEN IN SIZE (BYTES) ESP8266 IS 32 BIT AND WILL ALIGN AS SUCH!
 struct packet {
@@ -131,8 +132,7 @@ struct CellModuleInfo {
 };
 
 //This holds all the cell information in a large array 2D array (4x16)
-extern CellModuleInfo cmi[4][maximum_cell_modules];
-extern uint8_t numberOfModules[4];
-
+extern CellModuleInfo cmi[maximum_bank_of_modules][maximum_cell_modules];
+extern uint8_t numberOfModules[maximum_bank_of_modules];
 
 #endif
