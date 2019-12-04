@@ -509,7 +509,7 @@ void setupInfluxClient()
             poststring = poststring
                 + "cells,"
                 +"cell=" + String(bank+1)+"_"+String(i+1)
-                + " v=" + String((float)cmi[bank][i].voltagemV/1000.0)
+                + " v=" + String((float)cmi[bank][i].voltagemV/1000.0,3)
                 + ",inttemp=" + String(cmi[bank][i].internalTemp)+"i"
                 + ",bypass=" + (cmi[bank][i].inBypass ? String("true"):String("false"));
 
