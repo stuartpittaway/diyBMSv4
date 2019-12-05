@@ -511,6 +511,7 @@ void setupInfluxClient()
                 +"cell=" + String(bank+1)+"_"+String(i+1)
                 + " v=" + String((float)cmi[bank][i].voltagemV/1000.0,3)
                 + ",inttemp=" + String(cmi[bank][i].internalTemp)+"i"
+                + ",exttemp=" + String(cmi[bank][i].externalTemp)+"i"
                 + ",bypass=" + (cmi[bank][i].inBypass ? String("true"):String("false"));
 
                 if (cmi[bank][i].externalTemp!=-40) {
