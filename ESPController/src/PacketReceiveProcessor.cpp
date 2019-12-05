@@ -57,11 +57,13 @@ bool PacketReceiveProcessor::ProcessReply(const uint8_t* receivebuffer,
 }
 
 uint8_t PacketReceiveProcessor::ReplyLastAddress() {
-  if ((_packetbuffer.address & 0x0F)==0) return 0x10;
-
-  return (_packetbuffer.address & 0x0F);
+  uint8_t a=ReplyLastAddressRaw();
+  return (a==0) ? 0x10: a;
 }
 
+uint8_t PacketReceiveProcessor::ReplyLastAddressRaw() {
+  return (_packetbuffer.address & 0x0F);
+}
 
 void PacketReceiveProcessor::ProcessReplyAddressByte() {
   // address byte
@@ -147,7 +149,8 @@ void PacketReceiveProcessor::ProcessReplyVoltage() {
 
 void PacketReceiveProcessor::ProcessReplySettings() {
   uint8_t b = ReplyFromBank();
-  uint8_t m = ReplyLastAddress();
+  //Need to use the raw version here
+  uint8_t m = ReplyLastAddressRaw();
 
   // TODO Validate b and m here to prevent array overflow
   cmi[b][m].settingsCached = true;
