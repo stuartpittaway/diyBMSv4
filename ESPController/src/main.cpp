@@ -727,6 +727,8 @@ void LoadConfiguration() {
 }
 
 void setup() {
+  WiFi.mode(WIFI_OFF);
+  
   //Serial is used for communication to modules, Serial1 is for debug output
   pinMode(GREEN_LED, OUTPUT);
   //D3 is used to reset access point WIFI details on boot up
