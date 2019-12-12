@@ -496,13 +496,13 @@ void setupInfluxClient()
 
         //send the request
 
-
         //Construct URL for the influxdb
         //See API at https://docs.influxdata.com/influxdb/v1.7/tools/api/#write-http-endpoint
 
         String poststring;
 
         for (uint8_t bank = 0; bank < 4; bank++) {
+         //TODO: We should send a request per bank not just a single POST as we are likely to exceed capabilities of ESP
           for (uint8_t i = 0; i < numberOfModules[bank]; i++) {
 
             //Data in LINE PROTOCOL format https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/
@@ -510,15 +510,10 @@ void setupInfluxClient()
                 + "cells,"
                 +"cell=" + String(bank+1)+"_"+String(i+1)
                 + " v=" + String((float)cmi[bank][i].voltagemV/1000.0,3)
-                + ",inttemp=" + String(cmi[bank][i].internalTemp)+"i"
-                + ",exttemp=" + String(cmi[bank][i].externalTemp)+"i"
-                + ",bypass=" + (cmi[bank][i].inBypass ? String("true"):String("false"));
-
-                if (cmi[bank][i].externalTemp!=-40) {
-                  //Ensure its valid
-                  poststring = poststring + ",exttemp=" + String(cmi[bank][i].externalTemp)+"i";
-                }
-                poststring = poststring + "\n";
+                + ",i=" + String(cmi[bank][i].internalTemp)+"i"
+                + ",e=" + String(cmi[bank][i].externalTemp)+"i"
+                + ",b=" + (cmi[bank][i].inBypass ? String("true"):String("false"))
+                + "\n";
           }
         }
 
@@ -533,11 +528,10 @@ void setupInfluxClient()
         +"Connection: close\r\n"
         +"Content-Length: "+poststring.length()+"\r\n"
         +"Content-Type: text/plain\r\n"
-
         +"\r\n";
 
-        Serial1.println(header.c_str());
-        Serial1.println(poststring.c_str());
+        //Serial1.println(header.c_str());
+        //Serial1.println(poststring.c_str());
 
         client->write(header.c_str());
         client->write(poststring.c_str());
@@ -629,7 +623,7 @@ void sendMqttPacket() {
   Serial1.println("Sending MQTT");
 
   char buffer[50];
-  char value[50];
+  char value[20];
 
   for (uint8_t bank = 0; bank < 4; bank++) {
     for (uint8_t i = 0; i < numberOfModules[bank]; i++) {
@@ -642,11 +636,9 @@ void sendMqttPacket() {
       sprintf(value, "%d", cmi[bank][i].internalTemp);
       mqttClient.publish(buffer, 0, true, value);
 
-      if (cmi[bank][i].externalTemp!=-40) {
-        sprintf(buffer, "diybms/%d/%d/exttemp", bank,i);
-        sprintf(value, "%d", cmi[bank][i].externalTemp);
-        mqttClient.publish(buffer, 0, true, value);
-      }
+      sprintf(buffer, "diybms/%d/%d/exttemp", bank,i);
+      sprintf(value, "%d", cmi[bank][i].externalTemp);
+      mqttClient.publish(buffer, 0, true, value);
 
       sprintf(buffer, "diybms/%d/%d/bypass", bank,i);
       sprintf(value, "%d", cmi[bank][i].inBypass ? 1:0);
