@@ -1,10 +1,10 @@
 #include "settings.h"
 
-void Settings::WriteConfigToEEPROM(char* settings, int size, uint16_t eepromStartAddress) {
+void Settings::WriteConfigToEEPROM(uint8_t* settings, uint16_t size, uint16_t eepromStartAddress) {
   //TODO: We should probably check EEPROM.length() to ensure its big enough
 
   uint16_t EEPROMaddress=eepromStartAddress;
-  for (int i = 0; i < size; i++) {
+  for (uint16_t i = 0; i < size; i++) {
     EEPROM.update( EEPROMaddress, settings[i] );
     EEPROMaddress++;
   }
@@ -15,9 +15,9 @@ void Settings::WriteConfigToEEPROM(char* settings, int size, uint16_t eepromStar
   EEPROM.put(eepromStartAddress+size, checksum);
 }
 
-bool Settings::ReadConfigFromEEPROM(char* settings, int size, uint16_t eepromStartAddress) {
+bool Settings::ReadConfigFromEEPROM(uint8_t* settings, uint16_t size, uint16_t eepromStartAddress) {
   uint16_t EEPROMaddress=eepromStartAddress;
-  for (int i = 0; i < size; i++) {
+  for (uint16_t i = 0; i < size; i++) {
     settings[i]=EEPROM.read(EEPROMaddress);
     EEPROMaddress++;
   }
@@ -39,6 +39,6 @@ bool Settings::ReadConfigFromEEPROM(char* settings, int size, uint16_t eepromSta
   return false;
 }
 
-void Settings::FactoryDefault(int size, uint16_t eepromStartAddress) {
+void Settings::FactoryDefault(uint16_t size, uint16_t eepromStartAddress) {
   EEPROM.put(eepromStartAddress+size, 0x0000);
 }

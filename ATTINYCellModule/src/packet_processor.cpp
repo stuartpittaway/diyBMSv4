@@ -196,7 +196,7 @@ bool PacketProcessor::processPacket() {
       _config->mybank = buffer.moduledata[mymoduleaddress] & 0x3;
 
       //Save settings
-      Settings::WriteConfigToEEPROM((char*)_config, sizeof(CellModuleConfig), EEPROM_CONFIG_ADDRESS);
+      Settings::WriteConfigToEEPROM((uint8_t*)_config, sizeof(CellModuleConfig), EEPROM_CONFIG_ADDRESS);
 
       //Indicate we processed this packet
       buffer.moduledata[mymoduleaddress] = 0xFFFF;
@@ -314,7 +314,7 @@ bool PacketProcessor::processPacket() {
       }
 
       //Save settings
-      Settings::WriteConfigToEEPROM((char*)_config, sizeof(CellModuleConfig), EEPROM_CONFIG_ADDRESS);
+      Settings::WriteConfigToEEPROM((uint8_t*)_config, sizeof(CellModuleConfig), EEPROM_CONFIG_ADDRESS);
 
       return true;
     }

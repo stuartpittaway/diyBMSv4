@@ -29,8 +29,8 @@ http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontro
 
 class Settings {
    public:
-      static void WriteConfigToEEPROM(char* settings, int size, uint16_t eepromStartAddress);
-      static bool ReadConfigFromEEPROM(char* settings, int size, uint16_t eepromStartAddress);
-      static void FactoryDefault(int size,uint16_t eepromStartAddress);
+      static void WriteConfigToEEPROM(uint8_t* settings, uint16_t size, uint16_t eepromStartAddress);
+      static bool ReadConfigFromEEPROM(uint8_t* settings, uint16_t size, uint16_t eepromStartAddress);
+      static void FactoryDefault(uint16_t size,uint16_t eepromStartAddress);
 };
 #endif

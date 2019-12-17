@@ -159,10 +159,10 @@ void setup() {
   #endif
 
   //Check if setup routine needs to be run
-  if (!Settings::ReadConfigFromEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS)) {
+  if (!Settings::ReadConfigFromEEPROM((uint8_t*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS)) {
     DefaultConfig();
     //Save settings
-    Settings::WriteConfigToEEPROM((char*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
+    Settings::WriteConfigToEEPROM((uint8_t*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS);
   }
 
   hardware.double_tap_green_led();
