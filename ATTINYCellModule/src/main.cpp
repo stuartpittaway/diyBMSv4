@@ -36,7 +36,7 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 //https://github.com/bakercp/PacketSerial
 #include <PacketSerial.h>
 
-#define framingmarker (uint8_t)0x33
+#define framingmarker (uint8_t)0x00
 
 //Consistant byte stuffing mode
 //Use ZERO for packet header/terminator
@@ -99,7 +99,7 @@ ISR(ADC_vect) {
   PP.ADCReading(hardware.ReadADC());
 }
 
-void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
+void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
 
   if (len > 0) {
 
@@ -111,19 +111,21 @@ void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
 
     hardware.EnableSerial0TX();
 
-
     //Wake up the connected cell module from sleep, send a framingmarker
     //byte which the receiver will ignore
     Serial.write(framingmarker);
     //Let connected module wake up
-    delay(6);
+    delay(8);
 
     //Send the packet (even if it was invalid so controller can count crc errors)
     myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
 
-
     //DEBUG: Are there any known issues with Serial Flush causing a CPU to hang?
-    hardware.FlushSerial0();
+    //hardware.FlushSerial0();
+
+    //Replace flush with a simple delay - we have 35+ bytes to transmit at 4800 baud + COBS encoding
+    delay(10);
+
     hardware.DisableSerial0TX();
     //hardware.BlueLedOff();
   }

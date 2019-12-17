@@ -116,7 +116,7 @@ PacketRequestGenerator prg=PacketRequestGenerator(&requestQueue);
 
 PacketReceiveProcessor receiveProc=PacketReceiveProcessor();
 
-#define framingmarker (uint8_t)0x33
+#define framingmarker (uint8_t)0x00
 
 PacketSerial_<COBS, framingmarker, 128> myPacketSerial;
 
