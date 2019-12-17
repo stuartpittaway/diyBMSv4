@@ -1007,4 +1007,8 @@ Wire Wire Line
 	2250 4170 4280 4170
 Text Notes 4560 2810 0    50   ~ 0
 Blue LED and Resistor are OPTIONAL!
+Text GLabel 3180 3670 2    50   Input ~ 0
+TXD1
+Text GLabel 2970 4690 0    50   Input ~ 0
+RXD1
 $EndSCHEMATC
