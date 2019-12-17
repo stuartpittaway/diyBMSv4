@@ -13,10 +13,12 @@ int16_t Steinhart::ThermistorToCelcius(uint16_t BCOEFFICIENT, uint16_t RawADC) {
  if (RawADC>0){
     //47000 = resistor value
     //https://arduinodiy.wordpress.com/2015/11/10/measuring-temperature-with-ntc-the-steinhart-hart-formula/
-    float Resistance = 47000.0 * (1023.0F/(float)RawADC - 1.0);
+    //float Resistance = 47000.0 * (1023.0F/(float)RawADC - 1.0);
+    //float steinhart;
+    //steinhart = Resistance / 47000.0; // (R/Ro)
 
-    float steinhart;
-    steinhart = Resistance / 47000.0; // (R/Ro)
+    float steinhart = (1023.0F/(float)RawADC - 1.0);
+
     steinhart = log(steinhart); // ln(R/Ro)
     steinhart /= BCOEFFICIENT; // 1/B * ln(R/Ro)
     steinhart += 1.0 / (NOMINAL_TEMPERATURE + 273.15); // + (1/To)
@@ -30,7 +32,7 @@ int16_t Steinhart::ThermistorToCelcius(uint16_t BCOEFFICIENT, uint16_t RawADC) {
     //Temp = 1.0 / (A + (B*Temp) + (C * Temp * Temp * Temp ));
  }
 
- return -273.15;
+ return -273;
 }
 
 //This function reduces the scale of temperatures from float types to a single byte (unsigned)

@@ -85,13 +85,6 @@ void DiyBMSATTiny841::StartTimer2() {
   SetTimer2Value(0);
 }
 
-void DiyBMSATTiny841::DisableSerial0TX() {
-  UCSR0B &= ~_BV(TXEN0); //disable transmitter (saves 6mA)
-}
-
-void DiyBMSATTiny841::EnableSerial0TX() {
-  UCSR0B |= (1 << TXEN0); // enable transmitter
-}
 
 void DiyBMSATTiny841::double_tap_green_led() {
   GreenLedOn();
@@ -174,6 +167,14 @@ void DiyBMSATTiny841::BlueLedOff() {
 
 void DiyBMSATTiny841::FlushSerial0() {
   Serial.flush();
+}
+
+void DiyBMSATTiny841::DisableSerial0TX() {
+  UCSR0B &= ~_BV(TXEN0); //disable transmitter (saves 6mA)
+}
+
+void DiyBMSATTiny841::EnableSerial0TX() {
+  UCSR0B |= (1 << TXEN0); // enable transmitter
 }
 
 void DiyBMSATTiny841::DisableSerial0() {

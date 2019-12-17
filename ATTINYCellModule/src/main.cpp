@@ -24,7 +24,6 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
   that legally restrict others from doing anything the license permits.
 */
 
-//#define DIYBMS_DEBUG
 
 #include <Arduino.h>
 
@@ -121,13 +120,12 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
     myPacketSerial.send(PP.GetBufferPointer(), PP.GetBufferSize());
 
     //DEBUG: Are there any known issues with Serial Flush causing a CPU to hang?
-    //hardware.FlushSerial0();
+    hardware.FlushSerial0();
 
     //Replace flush with a simple delay - we have 35+ bytes to transmit at 4800 baud + COBS encoding
-    delay(10);
+    //delay(10);
 
     hardware.DisableSerial0TX();
-    //hardware.BlueLedOff();
   }
 
   hardware.GreenLedOff();
@@ -136,15 +134,14 @@ void onPacketReceived(const uint8_t* receivebuffer, size_t len) {
 ISR(USART0_START_vect) {
   //Needs to be here!
   asm("NOP");
-  //hardware.BlueLedOn();
 }
 
 //Kp: Determines how aggressively the PID reacts to the current amount of error (Proportional)
 //Ki: Determines how aggressively the PID reacts to error over time (Integral)
 //Kd: Determines how aggressively the PID reacts to the change in error (Derivative)
 
-//3Hz rate - number of times we call this code in Loop
-FastPID myPID(150.0, 2.5, 5, 3, 16, false);
+//6Hz rate - number of times we call this code in Loop
+FastPID myPID(175.0, 3.5, 8, 6, 16, false);
 
 void setup() {
   //Must be first line of code
@@ -160,12 +157,7 @@ void setup() {
   //More power saving changes
   hardware.EnableSerial0();
 
-  #ifdef DIYBMS_DEBUG
-  Serial1.begin(38400, SERIAL_8N1);
-  DEBUG_PRINT(F("\r\nDEBUG MODE"))
-  #else
-    hardware.DisableSerial1();
-  #endif
+  hardware.DisableSerial1();
 
   //Check if setup routine needs to be run
   if (!Settings::ReadConfigFromEEPROM((uint8_t*)&myConfig, sizeof(myConfig), EEPROM_CONFIG_ADDRESS)) {
@@ -182,12 +174,6 @@ void setup() {
   myPacketSerial.setStream(&Serial);
   myPacketSerial.setPacketHandler(&onPacketReceived);
 
-  #ifdef DIYBMS_DEBUG
-  if (myPID.err()) {
-    Serial1.println("There is a configuration error!");
-    for (;;) {}
-  }
-  #endif
 }
 
 //bool hztiming=false;
@@ -208,6 +194,7 @@ void loop() {
     }
   }
 
+  //#ifndef DIYBMS_DEBUG
   if (!PP.WeAreInBypass && bypassHasJustFinished == 0) {
     //We don't sleep if we are in bypass mode or just after completing bypass
     hardware.EnableStartFrameDetection();
@@ -215,6 +202,7 @@ void loop() {
     //Program stops here until woken by watchdog or pin change interrupt
     hardware.Sleep();
   }
+  //#endif
 
   //We are awake....
 
@@ -229,7 +217,7 @@ void loop() {
   hardware.ReferenceVoltageOn();
 
   //allow 2.048V to stabalize
-  delay(10);
+  delay(4);
 
   PP.TakeAnAnalogueReading(ADC_CELL_VOLTAGE);
   //Internal temperature
@@ -238,6 +226,12 @@ void loop() {
   PP.TakeAnAnalogueReading(ADC_EXTERNAL_TEMP);
 
   hardware.ReferenceVoltageOff();
+
+  #ifdef DIYBMS_DEBUG
+  Serial1.begin(38400, SERIAL_8N1);
+  Serial1.println(PP.InternalTemperature());
+  Serial1.end();
+  #endif
 
   if (PP.BypassCheck()) {
     //Our cell voltage is OVER the setpoint limit, start draining cell using load bypass resistor
@@ -259,11 +253,11 @@ void loop() {
   }
 
   if (bypassCountDown > 0) {
-    //Compare the real temperature against max setpoint
-    //We want the PID to keep at this temperature
-    //int setpoint = ;
-    //int feedback =
+
+    hardware.BlueLedOn();
+    //Compare the real temperature against max setpoint, we want the PID to keep at this temperature
     uint16_t output = myPID.step(myConfig.BypassOverTempShutdown, PP.InternalTemperature());
+    hardware.BlueLedOff();
 
     hardware.SetTimer2Value(output);
 
