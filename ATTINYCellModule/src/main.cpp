@@ -36,10 +36,12 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 //https://github.com/bakercp/PacketSerial
 #include <PacketSerial.h>
 
+#define framingmarker (uint8_t)0x33
+
 //Consistant byte stuffing mode
 //Use ZERO for packet header/terminator
 //64 byte buffer
-PacketSerial_ <COBS, 0, 64> myPacketSerial;
+PacketSerial_ <COBS, framingmarker, 64> myPacketSerial;
 
 //Our project code includes
 #include "defines.h"
@@ -109,8 +111,10 @@ void onPacketReceived(const uint8_t * receivebuffer, size_t len) {
 
     hardware.EnableSerial0TX();
 
-    //Wake up the connected cell module from sleep
-    Serial.write((byte) 0);
+
+    //Wake up the connected cell module from sleep, send a framingmarker
+    //byte which the receiver will ignore
+    Serial.write(framingmarker);
     //Let connected module wake up
     delay(6);
 

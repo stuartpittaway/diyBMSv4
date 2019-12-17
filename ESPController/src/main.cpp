@@ -116,7 +116,9 @@ PacketRequestGenerator prg=PacketRequestGenerator(&requestQueue);
 
 PacketReceiveProcessor receiveProc=PacketReceiveProcessor();
 
-PacketSerial_<COBS, 0, 128> myPacketSerial;
+#define framingmarker (uint8_t)0x33
+
+PacketSerial_<COBS, framingmarker, 128> myPacketSerial;
 
 volatile bool waitingForReply=false;
 
@@ -226,7 +228,7 @@ void timerTransmitCallback() {
     GREEN_LED_ON;
 
     //Wake up the connected cell module from sleep
-    Serial.write(0x00);
+    Serial.write(framingmarker);
     delay(10);
 
     requestQueue.pop(&transmitBuffer);
@@ -720,7 +722,7 @@ void LoadConfiguration() {
 
 void setup() {
   WiFi.mode(WIFI_OFF);
-  
+
   //Serial is used for communication to modules, Serial1 is for debug output
   pinMode(GREEN_LED, OUTPUT);
   //D3 is used to reset access point WIFI details on boot up
