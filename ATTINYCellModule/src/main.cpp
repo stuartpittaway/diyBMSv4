@@ -36,8 +36,10 @@ https://creativecommons.org/licenses/by-nc-sa/2.0/uk/
 //https://github.com/bakercp/PacketSerial
 #include <PacketSerial.h>
 
-//96 byte buffer
-PacketSerial_ < COBS, 0, 64 > myPacketSerial;
+//Consistant byte stuffing mode
+//Use ZERO for packet header/terminator
+//64 byte buffer
+PacketSerial_ <COBS, 0, 64> myPacketSerial;
 
 //Our project code includes
 #include "defines.h"
@@ -52,7 +54,7 @@ CellModuleConfig myConfig;
 
 DiyBMSATTiny841 hardware;
 
-PacketProcessor PP( & hardware, & myConfig);
+PacketProcessor PP(&hardware, &myConfig);
 
 volatile bool wdt_triggered = false;
 uint16_t bypassCountDown = 0;
@@ -141,6 +143,7 @@ FastPID myPID(150.0, 2.5, 5, 3, 16, false);
 void setup() {
   //Must be first line of code
   wdt_disable();
+  wdt_reset();
 
   //8 second between watchdogs
   hardware.SetWatchdog8sec();
