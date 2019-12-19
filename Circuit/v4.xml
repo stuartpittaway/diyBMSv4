@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>05/12/2019 20:27:04</date>
+    <date>19/12/2019 19:18:25</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -69,9 +69,13 @@
       <tstamp>5D1ECDB4</tstamp>
     </comp>
     <comp ref="D1">
-      <value>LM4040BIM3-2.0/NOPB, 2.048V, SOT-23-3</value>
+      <value>LM4040A20IDBZR 2.048V, SOT-23-3</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
       <datasheet>https://uk.farnell.com/texas-instruments/lm4040bim3-2-0-nopb/voltage-ref-shunt-2-048v-sot-23/dp/2492201</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C127070</field>
+        <field name="PartNumber">LM4040A20IDBZR</field>
+      </fields>
       <libsource lib="Reference_Voltage" part="LM4040DBZ-2.0" description="2.048V Precision Micropower Shunt Voltage Reference, SOT-23"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1FB1C3</tstamp>
@@ -121,11 +125,10 @@
       <tstamp>5D200BDC</tstamp>
     </comp>
     <comp ref="U1">
-      <value>HMHA2801</value>
+      <value>HMHA2801AR2</value>
       <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/ON-Semicon-ON-HMHA2801_C232857.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C232857</field>
+        <field name="LCSCStockCode">C258257</field>
       </fields>
       <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
       <sheetpath names="/" tstamps="/"/>
@@ -398,11 +401,11 @@
       <tstamp>5CCBC109</tstamp>
     </comp>
     <comp ref="R23">
-      <value>2K2</value>
+      <value>1K8</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C4190</field>
-        <field name="PartNumber">0603WAF2201T5E</field>
+        <field name="LCSCStockCode">C4177</field>
+        <field name="PartNumber">0603WAF1801T5E</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
