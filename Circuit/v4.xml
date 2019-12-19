@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>19/12/2019 19:18:25</date>
+    <date>19/12/2019 19:22:15</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -69,12 +69,11 @@
       <tstamp>5D1ECDB4</tstamp>
     </comp>
     <comp ref="D1">
-      <value>LM4040A20IDBZR 2.048V, SOT-23-3</value>
+      <value>Fixed 2.048V</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <datasheet>https://uk.farnell.com/texas-instruments/lm4040bim3-2-0-nopb/voltage-ref-shunt-2-048v-sot-23/dp/2492201</datasheet>
       <fields>
-        <field name="LCSCStockCode">C127070</field>
-        <field name="PartNumber">LM4040A20IDBZR</field>
+        <field name="LCSCStockCode">C48833</field>
+        <field name="PartNumber">ADR5040BRTZ-REEL7</field>
       </fields>
       <libsource lib="Reference_Voltage" part="LM4040DBZ-2.0" description="2.048V Precision Micropower Shunt Voltage Reference, SOT-23"/>
       <sheetpath names="/" tstamps="/"/>
