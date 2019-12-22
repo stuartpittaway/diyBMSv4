@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source E:\source\diyBMSv4\Circuit\v4.sch)
-    (date "19/12/2019 19:22:31")
+    (date "22/12/2019 10:23:09")
     (tool "Eeschema (5.1.0)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
