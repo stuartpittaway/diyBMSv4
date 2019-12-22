@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>22/12/2019 10:47:05</date>
+    <date>22/12/2019 11:24:28</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -103,22 +103,22 @@
       <tstamp>5D1FC233</tstamp>
     </comp>
     <comp ref="R3">
-      <value>475K E96 series (tolerance 1%)</value>
+      <value>470KOHMS ±1% 1/10W</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23180</field>
-        <field name="PartNumber">0603WAF4753T5E</field>
+        <field name="LCSCStockCode">C23178</field>
+        <field name="PartNumber">0603WAF4703T5E</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D200A38</tstamp>
     </comp>
     <comp ref="R4">
-      <value>402K E96 series (tolerance 1%)</value>
+      <value>390KOHMS ±1% 1/10W</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23048</field>
-        <field name="PartNumber">0603WAF4023T5E</field>
+        <field name="LCSCStockCode">C23150</field>
+        <field name="PartNumber">0603WAF3903T5E</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>

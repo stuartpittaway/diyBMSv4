@@ -299,11 +299,11 @@ L Device:R R3
 U 1 1 5D200A38
 P 4280 3980
 F 0 "R3" H 4350 4026 50  0000 L CNN
-F 1 "475K E96 series (tolerance 1%)" H 4350 3935 50  0000 L CNN
+F 1 "470KOHMS ±1% 1/10W" H 4350 3935 50  0000 L CNN
 F 2 "Resistors_SMD:R_0603" V 4210 3980 50  0001 C CNN
 F 3 "" H 4280 3980 50  0001 C CNN
-F 4 "C23180" V 2560 4410 50  0001 C CNN "LCSCStockCode"
-F 5 "0603WAF4753T5E" V 2560 4410 50  0001 C CNN "PartNumber"
+F 4 "C23178" V 2560 4410 50  0001 C CNN "LCSCStockCode"
+F 5 "0603WAF4703T5E" V 2560 4410 50  0001 C CNN "PartNumber"
 	1    4280 3980
 	1    0    0    -1  
 $EndComp
@@ -312,11 +312,11 @@ L Device:R R4
 U 1 1 5D200BDC
 P 4280 4370
 F 0 "R4" H 4350 4416 50  0000 L CNN
-F 1 "402K E96 series (tolerance 1%)" H 4350 4325 50  0000 L CNN
+F 1 "390KOHMS ±1% 1/10W" H 4350 4325 50  0000 L CNN
 F 2 "Resistors_SMD:R_0603" V 4210 4370 50  0001 C CNN
 F 3 "" H 4280 4370 50  0001 C CNN
-F 4 "C23048" V 2560 4410 50  0001 C CNN "LCSCStockCode"
-F 5 "0603WAF4023T5E" V 2560 4410 50  0001 C CNN "PartNumber"
+F 4 "C23150" V 2560 4410 50  0001 C CNN "LCSCStockCode"
+F 5 "0603WAF3903T5E" V 2560 4410 50  0001 C CNN "PartNumber"
 	1    4280 4370
 	1    0    0    -1  
 $EndComp
@@ -351,7 +351,7 @@ Wire Wire Line
 Wire Wire Line
 	2250 3770 2430 3770
 Text Notes 4760 4250 0    50   ~ 0
-Output voltage 2.048 for input of 4.468V (max)
+Output voltage 2.048 for input of 4.516V (max)
 Text Notes 3640 2230 0    50   ~ 0
 AREF input acts like a resistor of 32k from AREF to GND
 Text GLabel 2500 3170 2    50   Input ~ 0
