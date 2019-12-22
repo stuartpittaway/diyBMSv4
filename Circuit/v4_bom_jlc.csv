@@ -1,4 +1,5 @@
 "Comment","Designator","Footprint","LCSC Part #"
+"ATtiny841-SSU","ATTINY841","SOIC-14_3.9x8.7mm_Pitch1.27mm","C219103"
 "100nF","C1","C_0603","C14663"
 "2.2uF","C2","C_0603","C23630"
 "MLCC 10UF 10V","C3","C_0603","C19702"
@@ -19,4 +20,3 @@
 "NCP18WB473J03RB","R19","R_0603","C86142"
 "1K8","R23","R_0603","C4177"
 "HMHA2801AR2","U1","SOP-4_4.4x2.8mm_Pitch1.27mm","C258257"
-"ATtiny841-SSU","U4","SOIC-14_3.9x8.7mm_Pitch1.27mm","C219103"

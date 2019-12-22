@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>22/12/2019 11:24:28</date>
+    <date>22/12/2019 19:43:56</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -19,7 +19,7 @@
     </sheet>
   </design>
   <components>
-    <comp ref="U4">
+    <comp ref="ATTINY841">
       <value>ATtiny841-SSU</value>
       <footprint>Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm</footprint>
       <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</datasheet>
@@ -630,7 +630,7 @@
   <nets>
     <net code="1" name="GND">
       <node ref="R16" pin="1"/>
-      <node ref="U4" pin="14"/>
+      <node ref="ATTINY841" pin="14"/>
       <node ref="POWER1" pin="1"/>
       <node ref="C1" pin="2"/>
       <node ref="R23" pin="1"/>
@@ -657,20 +657,20 @@
     </net>
     <net code="4" name="2_VOLT">
       <node ref="SENSOR1" pin="2"/>
-      <node ref="U4" pin="13"/>
+      <node ref="ATTINY841" pin="13"/>
       <node ref="R19" pin="1"/>
       <node ref="D1" pin="1"/>
       <node ref="R2" pin="2"/>
       <node ref="C2" pin="1"/>
     </net>
-    <net code="5" name="Net-(D4-Pad2)">
+    <net code="5" name="Net-(ATTINY841-Pad7)">
       <node ref="J2" pin="4"/>
-      <node ref="U4" pin="7"/>
+      <node ref="ATTINY841" pin="7"/>
       <node ref="D4" pin="2"/>
     </net>
     <net code="6" name="VCC">
       <node ref="R1" pin="1"/>
-      <node ref="U4" pin="1"/>
+      <node ref="ATTINY841" pin="1"/>
       <node ref="POWER1" pin="2"/>
       <node ref="J2" pin="2"/>
       <node ref="D3" pin="2"/>
@@ -693,11 +693,11 @@
     </net>
     <net code="9" name="RXD0">
       <node ref="R16" pin="2"/>
-      <node ref="U4" pin="11"/>
+      <node ref="ATTINY841" pin="11"/>
       <node ref="RX1" pin="1"/>
     </net>
     <net code="10" name="DUMP_LOAD_ENABLE">
-      <node ref="U4" pin="10"/>
+      <node ref="ATTINY841" pin="10"/>
       <node ref="R14" pin="2"/>
     </net>
     <net code="11" name="Net-(TX1-Pad1)">
@@ -712,35 +712,35 @@
       <node ref="R23" pin="2"/>
       <node ref="D2" pin="1"/>
     </net>
-    <net code="14" name="Net-(SENSOR1-Pad3)">
-      <node ref="U4" pin="3"/>
+    <net code="14" name="Net-(ATTINY841-Pad3)">
+      <node ref="ATTINY841" pin="3"/>
       <node ref="SENSOR1" pin="3"/>
     </net>
-    <net code="15" name="Net-(R21-Pad1)">
-      <node ref="U4" pin="2"/>
+    <net code="15" name="Net-(ATTINY841-Pad2)">
+      <node ref="ATTINY841" pin="2"/>
       <node ref="SENSOR1" pin="1"/>
       <node ref="R21" pin="1"/>
     </net>
     <net code="16" name="ENABLE">
-      <node ref="U4" pin="6"/>
+      <node ref="ATTINY841" pin="6"/>
       <node ref="R3" pin="1"/>
       <node ref="SENSOR1" pin="4"/>
       <node ref="R2" pin="1"/>
     </net>
-    <net code="17" name="Net-(J2-Pad3)">
+    <net code="17" name="Net-(ATTINY841-Pad9)">
       <node ref="R20" pin="1"/>
       <node ref="J2" pin="3"/>
-      <node ref="U4" pin="9"/>
+      <node ref="ATTINY841" pin="9"/>
       <node ref="R19" pin="2"/>
     </net>
-    <net code="18" name="Net-(D2-Pad2)">
+    <net code="18" name="Net-(ATTINY841-Pad8)">
       <node ref="D2" pin="2"/>
       <node ref="J2" pin="1"/>
-      <node ref="U4" pin="8"/>
+      <node ref="ATTINY841" pin="8"/>
     </net>
-    <net code="19" name="Net-(J2-Pad5)">
+    <net code="19" name="Net-(ATTINY841-Pad4)">
       <node ref="J2" pin="5"/>
-      <node ref="U4" pin="4"/>
+      <node ref="ATTINY841" pin="4"/>
       <node ref="R1" pin="2"/>
     </net>
     <net code="20" name="Net-(R10-Pad2)">
@@ -756,7 +756,7 @@
       <node ref="R8" pin="1"/>
     </net>
     <net code="23" name="TXD0">
-      <node ref="U4" pin="12"/>
+      <node ref="ATTINY841" pin="12"/>
       <node ref="R5" pin="2"/>
     </net>
     <net code="24" name="Net-(R5-Pad1)">
@@ -775,8 +775,8 @@
       <node ref="R9" pin="1"/>
       <node ref="R7" pin="2"/>
     </net>
-    <net code="28" name="Net-(R3-Pad2)">
-      <node ref="U4" pin="5"/>
+    <net code="28" name="Net-(ATTINY841-Pad5)">
+      <node ref="ATTINY841" pin="5"/>
       <node ref="R3" pin="2"/>
       <node ref="R4" pin="1"/>
     </net>

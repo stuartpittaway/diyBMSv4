@@ -15,10 +15,10 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L v4-rescue:ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue U4
+L v4-rescue:ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue ATTINY841
 U 1 1 5BC63D51
 P 1650 3670
-F 0 "U4" H 1120 3716 50  0000 R CNN
+F 0 "ATTINY841" H 1120 3716 50  0000 R CNN
 F 1 "ATtiny841-SSU" H 1120 3625 50  0000 R CNN
 F 2 "Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm" H 1650 3670 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf" H 1650 3670 50  0001 C CNN
