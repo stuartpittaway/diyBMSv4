@@ -37,6 +37,7 @@ class DIYBMSServer {
       static void settings(AsyncWebServerRequest *request);
       static void clearModuleValues(uint8_t bank, uint8_t module);
       static void resetCounters(AsyncWebServerRequest *request);
+      static void handleRestartController(AsyncWebServerRequest *request);
 
       static void saveSetting(AsyncWebServerRequest *request);
       static void saveInfluxDBSetting(AsyncWebServerRequest *request);
