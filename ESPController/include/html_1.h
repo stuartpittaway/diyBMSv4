@@ -354,6 +354,16 @@ const char FILE_INDEX_HTML[] PROGMEM = R"=====(
             <input type="submit" value="Reset error counters"/>
         </div>
     </form>
+
+    </div>
+    <div class="region">
+    <h2>Restart Controller</h2>
+    <form id="restartControllerForm" method="POST" action="restartcontroller.json" autocomplete="off">
+        <div class="settings">
+            <input name="handleRestartController" id="handleRestartController" type="hidden" value="0">
+            <input type="submit" value="Restart Controller"/>
+        </div>
+    </form>
     </div>
 </div>
 

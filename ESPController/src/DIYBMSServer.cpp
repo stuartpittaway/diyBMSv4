@@ -588,7 +588,12 @@ void DIYBMSServer::modules(AsyncWebServerRequest *request) {
   }
 }
 
-
+/*
+Restart controller from web interface
+*/
+void DIYBMSServer::handleRestartController(AsyncWebServerRequest *request) {
+  ESP.restart();
+}
 
 
 void DIYBMSServer::monitor(AsyncWebServerRequest *request) {
@@ -702,6 +707,7 @@ void DIYBMSServer::StartServer(AsyncWebServer *webserver) {
   _myserver->on("/saventp.json", HTTP_POST, DIYBMSServer::saveNTP);
 
   _myserver->on("/resetcounters.json", HTTP_POST, DIYBMSServer::resetCounters);
+  _myserver->on("/restartcontroller.json", HTTP_POST, DIYBMSServer::handleRestartController);
 
   _myserver->onNotFound(DIYBMSServer::handleNotFound);
   _myserver->begin();
