@@ -369,10 +369,11 @@ L Isolator:PC817 U1
 U 1 1 5BF1DCDE
 P 8630 4330
 F 0 "U1" H 8630 4655 50  0000 C CNN
-F 1 "HMHA2801AR2" H 8630 4564 50  0000 C CNN
-F 2 "Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm" H 8430 4130 50  0001 L CIN
-F 3 "" H 8630 4330 50  0001 L CNN
-F 4 "C258257" H 8630 4330 50  0001 C CNN "LCSCStockCode"
+F 1 "TCLT1003" H 8630 4564 50  0000 C CNN
+F 2 "Circuit:SOP4-L-Pitch2.54" H 8430 4130 50  0001 L CIN
+F 3 "https://datasheet.lcsc.com/szlcsc/Vishay-Intertech-TCLT1003_C118296.pdf" H 8630 4330 50  0001 L CNN
+F 4 "C118296" H 8630 4330 50  0001 C CNN "LCSCStockCode"
+F 5 "TCLT1003" H 8630 4330 50  0001 C CNN "PartNumber"
 	1    8630 4330
 	1    0    0    -1  
 $EndComp
@@ -898,7 +899,7 @@ Text GLabel 3070 2580 1    50   Input ~ 0
 Text GLabel 4560 5550 0    50   Input ~ 0
 ENABLE
 Text Notes 8150 3920 0    50   ~ 0
-Optocoupler, Phototransistor Output,\n4-SSOP
+Optocoupler, Phototransistor Output,\nSOP-4L, Long Mini-Flat Package\n
 Wire Wire Line
 	2250 3070 3020 3070
 Connection ~ 7310 6070

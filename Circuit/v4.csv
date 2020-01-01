@@ -1,5 +1,5 @@
 "Source:","E:\source\diyBMSv4\Circuit\v4.sch"
-"Date:","22/12/2019 19:43:56"
+"Date:","01/01/2020 13:54:56"
 "Tool:","Eeschema (5.1.0)-1"
 "Generator:","C:\Program Files\KiCad\bin\scripting\plugins/bom_csv_grouped_by_value.py"
 "Component Count:","37"
@@ -43,7 +43,7 @@
 "","","RX1","RX Connector","Connector:Conn_01x02_Male","Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled","https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf","",""
 "","","SENSOR1","Remote temp input 47K @ 25oC","Connector:Conn_01x05_Male","Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm","https://lcsc.com/product-detail/Pin-Header-Female-Header_Shenzhen-Cankemeng-Headers-Pins-1-5P-2-54mm-Straight-line_C124379.html","",""
 "","","TX1","TX Connector","Connector:Conn_01x02_Male","Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled","https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf","",""
-"","","U1","HMHA2801AR2","Isolator:PC817","Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm","","C258257",""
+"","","U1","TCLT1003","Isolator:PC817","Circuit:SOP4-L-Pitch2.54","https://datasheet.lcsc.com/szlcsc/Vishay-Intertech-TCLT1003_C118296.pdf","C118296","TCLT1003"
 
 
 
@@ -75,4 +75,4 @@
 "23","1","RX1","RX Connector","Connector:Conn_01x02_Male","Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled","https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf","",""
 "24","1","SENSOR1","Remote temp input 47K @ 25oC","Connector:Conn_01x05_Male","Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm","https://lcsc.com/product-detail/Pin-Header-Female-Header_Shenzhen-Cankemeng-Headers-Pins-1-5P-2-54mm-Straight-line_C124379.html","",""
 "25","1","TX1","TX Connector","Connector:Conn_01x02_Male","Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled","https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf","",""
-"26","1","U1","HMHA2801AR2","Isolator:PC817","Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm","","C258257",""
+"26","1","U1","TCLT1003","Isolator:PC817","Circuit:SOP4-L-Pitch2.54","https://datasheet.lcsc.com/szlcsc/Vishay-Intertech-TCLT1003_C118296.pdf","C118296","TCLT1003"

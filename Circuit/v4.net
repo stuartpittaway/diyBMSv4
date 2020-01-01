@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source E:\source\diyBMSv4\Circuit\v4.sch)
-    (date "22/12/2019 19:27:44")
+    (date "01/01/2020 13:55:00")
     (tool "Eeschema (5.1.0)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -103,10 +103,12 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 5D200BDC))
     (comp (ref U1)
-      (value HMHA2801AR2)
-      (footprint Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm)
+      (value TCLT1003)
+      (footprint Circuit:SOP4-L-Pitch2.54)
+      (datasheet https://datasheet.lcsc.com/szlcsc/Vishay-Intertech-TCLT1003_C118296.pdf)
       (fields
-        (field (name LCSCStockCode) C258257))
+        (field (name LCSCStockCode) C118296)
+        (field (name PartNumber) TCLT1003))
       (libsource (lib Isolator) (part PC817) (description "DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"))
       (sheetpath (names /) (tstamps /))
       (tstamp 5BF1DCDE))
