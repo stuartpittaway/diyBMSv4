@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source E:\source\diyBMSv4\Circuit\v4.sch)
-    (date "02/01/2020 19:33:47")
+    (date "02/01/2020 20:19:25")
     (tool "Eeschema (5.1.0)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -236,10 +236,10 @@
       (tstamp 5BF5A518))
     (comp (ref D3)
       (value Red)
-      (footprint LEDs:LED_0603)
+      (footprint LEDs:LED_0805)
       (fields
-        (field (name LCSCStockCode) C2286)
-        (field (name PartNumber) KT-0603R))
+        (field (name LCSCStockCode) C84256)
+        (field (name PartNumber) FC-2012HRK-620D))
       (libsource (lib Device) (part LED) (description "Light emitting diode"))
       (sheetpath (names /) (tstamps /))
       (tstamp 5BF65B89))
@@ -254,11 +254,11 @@
       (tstamp 5BF65CB1))
     (comp (ref D4)
       (value Green)
-      (footprint LEDs:LED_0603)
-      (datasheet https://datasheet.lcsc.com/szlcsc/Everlight-Elec-19-217-G7C-AN1P2-3T_C72042.pdf)
+      (footprint LEDs:LED_0805)
+      (datasheet https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Green-0805-Iv-207-249-mcd-atIF-20mA_C2297.pdf)
       (fields
-        (field (name LCSCStockCode) C72042)
-        (field (name PartNumber) 19-217/G7C-AN1P2/3T))
+        (field (name LCSCStockCode) C2297)
+        (field (name PartNumber) "Hubei KENTO Elec Green 0805"))
       (libsource (lib Device) (part LED) (description "Light emitting diode"))
       (sheetpath (names /) (tstamps /))
       (tstamp 5BF67C78))

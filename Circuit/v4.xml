@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>02/01/2020 19:36:14</date>
+    <date>02/01/2020 20:36:14</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -32,10 +32,10 @@
     </comp>
     <comp ref="C1">
       <value>100nF</value>
-      <footprint>Capacitors_SMD:C_0603</footprint>
+      <footprint>Capacitors_SMD:C_0805</footprint>
       <fields>
-        <field name="LCSCStockCode">C14663</field>
-        <field name="PartNumber">CC0603KRX7R9BB104</field>
+        <field name="LCSCStockCode">C49678</field>
+        <field name="PartNumber">CC0805KRX7R9BB104</field>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -103,7 +103,7 @@
       <tstamp>5D1FC233</tstamp>
     </comp>
     <comp ref="R3">
-      <value>470KOHMS ±1% 1/10W</value>
+      <value>470KOHMS 1% 1/10W</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C23178</field>
@@ -114,7 +114,7 @@
       <tstamp>5D200A38</tstamp>
     </comp>
     <comp ref="R4">
-      <value>390KOHMS ±1% 1/10W</value>
+      <value>390KOHMS 1% 1/10W</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C23150</field>
@@ -286,10 +286,10 @@
     </comp>
     <comp ref="D3">
       <value>Red</value>
-      <footprint>LEDs:LED_0603</footprint>
+      <footprint>LEDs:LED_0805</footprint>
       <fields>
-        <field name="LCSCStockCode">C2286</field>
-        <field name="PartNumber">KT-0603R</field>
+        <field name="LCSCStockCode">C84256</field>
+        <field name="PartNumber">FC-2012HRK-620D</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -394,10 +394,10 @@
     </comp>
     <comp ref="D2">
       <value>Blue</value>
-      <footprint>LEDs:LED_0603</footprint>
+      <footprint>LEDs:LED_0805</footprint>
       <fields>
-        <field name="LCSCStockCode">C72041</field>
-        <field name="PartNumber">19-217/BHC-ZL1M2RY/3T</field>
+        <field name="LCSCStockCode">C2293</field>
+        <field name="PartNumber">HUBEI KENTO ELEC</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
