@@ -369,11 +369,11 @@ L Isolator:PC817 U1
 U 1 1 5BF1DCDE
 P 8630 4330
 F 0 "U1" H 8630 4655 50  0000 C CNN
-F 1 "TCLT1003" H 8630 4564 50  0000 C CNN
-F 2 "Circuit:SOP4-L-Pitch2.54" H 8430 4130 50  0001 L CIN
-F 3 "https://datasheet.lcsc.com/szlcsc/Vishay-Intertech-TCLT1003_C118296.pdf" H 8630 4330 50  0001 L CNN
-F 4 "C118296" H 8630 4330 50  0001 C CNN "LCSCStockCode"
-F 5 "TCLT1003" H 8630 4330 50  0001 C CNN "PartNumber"
+F 1 "EL3H7(B)(TA)-G" H 8630 4564 50  0000 C CNN
+F 2 "Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm" H 8430 4130 50  0001 L CIN
+F 3 "https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf" H 8630 4330 50  0001 L CNN
+F 4 "C32565" H 8630 4330 50  0001 C CNN "LCSCStockCode"
+F 5 "EL3H7(B)(TA)-G" H 8630 4330 50  0001 C CNN "PartNumber"
 	1    8630 4330
 	1    0    0    -1  
 $EndComp
@@ -483,7 +483,7 @@ Wire Wire Line
 Wire Wire Line
 	8050 1990 8100 1990
 Text Notes 5990 1620 0    50   ~ 0
-Each row is 8R and 4W max (needs to carry 2.2W @ 4.2V), drops about 525mA.\n
+Each row is 8R and 4W max. Needs to carry 4.41W total @ 4.2V max 1050mA.\n
 $Comp
 L Device:R R7
 U 1 1 5BF2D135
@@ -722,10 +722,10 @@ U 1 1 5BF67C78
 P 4310 3370
 F 0 "D4" H 4450 3470 50  0000 C CNN
 F 1 "Green" H 4340 3540 50  0000 C CNN
-F 2 "LEDs:LED_0603" H 4310 3370 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/Everlight-Elec-19-217-G7C-AN1P2-3T_C72042.pdf" H 4310 3370 50  0001 C CNN
-F 4 "C72042" H 4310 3370 50  0001 C CNN "LCSCStockCode"
-F 5 "19-217/G7C-AN1P2/3T" H 4310 3370 50  0001 C CNN "PartNumber"
+F 2 "LEDs:LED_0805" H 4310 3370 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Green-0805-Iv-207-249-mcd-atIF-20mA_C2297.pdf" H 4310 3370 50  0001 C CNN
+F 4 "C2297" H 4310 3370 50  0001 C CNN "LCSCStockCode"
+F 5 "Hubei KENTO Elec Green 0805" H 4310 3370 50  0001 C CNN "PartNumber"
 	1    4310 3370
 	-1   0    0    1   
 $EndComp
@@ -898,8 +898,8 @@ Text GLabel 3070 2580 1    50   Input ~ 0
 2_VOLT
 Text GLabel 4560 5550 0    50   Input ~ 0
 ENABLE
-Text Notes 8150 3920 0    50   ~ 0
-Optocoupler, Phototransistor Output,\nSOP-4L, Long Mini-Flat Package\n
+Text Notes 7880 3940 0    50   ~ 0
+4 PIN ULTRA SMALL SSOP\nPHOTOTRANSISTOR PHOTOCOUPLER EL3H7-G Series\n
 Wire Wire Line
 	2250 3070 3020 3070
 Connection ~ 7310 6070
@@ -986,8 +986,6 @@ F 3 "" H 7370 1050 50  0001 C CNN
 	1    7370 1050
 	1    0    0    -1  
 $EndComp
-Text Notes 6640 760  0    50   ~ 0
-Either the SMD or larger power resistor is used - NOT BOTH !\nNote you must pick a resistor with correct power rating!
 Wire Wire Line
 	7540 1350 7540 1050
 $Comp

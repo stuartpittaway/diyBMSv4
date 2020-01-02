@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>01/01/2020 13:54:56</date>
+    <date>02/01/2020 19:36:14</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -125,12 +125,12 @@
       <tstamp>5D200BDC</tstamp>
     </comp>
     <comp ref="U1">
-      <value>TCLT1003</value>
-      <footprint>Circuit:SOP4-L-Pitch2.54</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Vishay-Intertech-TCLT1003_C118296.pdf</datasheet>
+      <value>EL3H7(B)(TA)-G</value>
+      <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C118296</field>
-        <field name="PartNumber">TCLT1003</field>
+        <field name="LCSCStockCode">C32565</field>
+        <field name="PartNumber">EL3H7(B)(TA)-G</field>
       </fields>
       <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
       <sheetpath names="/" tstamps="/"/>
@@ -308,10 +308,11 @@
     </comp>
     <comp ref="D4">
       <value>Green</value>
-      <footprint>LEDs:LED_0603</footprint>
+      <footprint>LEDs:LED_0805</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Green-0805-Iv-207-249-mcd-atIF-20mA_C2297.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C72043</field>
-        <field name="PartNumber">19-217/GHC-YR1S2/3T</field>
+        <field name="LCSCStockCode">C2297</field>
+        <field name="PartNumber">Hubei KENTO Elec Green 0805</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
