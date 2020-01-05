@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>02/01/2020 20:36:14</date>
+    <date>05/01/2020 18:38:57</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -50,7 +50,7 @@
       <tstamp>5D1EB9F6</tstamp>
     </comp>
     <comp ref="R1">
-      <value>10K</value>
+      <value>10KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C25804</field>
@@ -81,7 +81,7 @@
       <tstamp>5D1FB1C3</tstamp>
     </comp>
     <comp ref="R2">
-      <value>1K</value>
+      <value>1KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C21190</field>
@@ -103,7 +103,7 @@
       <tstamp>5D1FC233</tstamp>
     </comp>
     <comp ref="R3">
-      <value>470KOHMS 1% 1/10W</value>
+      <value>470KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C23178</field>
@@ -114,7 +114,7 @@
       <tstamp>5D200A38</tstamp>
     </comp>
     <comp ref="R4">
-      <value>390KOHMS 1% 1/10W</value>
+      <value>390KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C23150</field>
@@ -145,7 +145,7 @@
       <tstamp>5BF1DEA4</tstamp>
     </comp>
     <comp ref="R5">
-      <value>510R</value>
+      <value>510OHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C23193</field>
@@ -156,7 +156,7 @@
       <tstamp>5BF1E307</tstamp>
     </comp>
     <comp ref="R6">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -167,7 +167,7 @@
       <tstamp>5BF274CC</tstamp>
     </comp>
     <comp ref="R8">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -178,7 +178,7 @@
       <tstamp>5BF29A02</tstamp>
     </comp>
     <comp ref="R10">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -189,7 +189,7 @@
       <tstamp>5BF29A5C</tstamp>
     </comp>
     <comp ref="R12">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -200,7 +200,7 @@
       <tstamp>5BF29ADC</tstamp>
     </comp>
     <comp ref="R7">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -211,7 +211,7 @@
       <tstamp>5BF2D135</tstamp>
     </comp>
     <comp ref="R9">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -222,7 +222,7 @@
       <tstamp>5BF2D13B</tstamp>
     </comp>
     <comp ref="R11">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -233,7 +233,7 @@
       <tstamp>5BF2D141</tstamp>
     </comp>
     <comp ref="R13">
-      <value>2R 1W</value>
+      <value>2OHMS</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
         <field name="LCSCStockCode">C49298</field>
@@ -244,18 +244,18 @@
       <tstamp>5BF2D147</tstamp>
     </comp>
     <comp ref="Q1">
-      <value>IRLML6244TRPBF</value>
+      <value>AO3400A</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Infineon-Technologies-IRLML6244TRPBF_C143946.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3400A_C20917.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C143946</field>
+        <field name="LCSCStockCode">C20917</field>
       </fields>
       <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF2E627</tstamp>
     </comp>
     <comp ref="R15">
-      <value>47K</value>
+      <value>47KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C25819</field>
@@ -274,7 +274,7 @@
       <tstamp>5BF5891C</tstamp>
     </comp>
     <comp ref="R16">
-      <value>4K7</value>
+      <value>4.7KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C23162</field>
@@ -296,7 +296,7 @@
       <tstamp>5BF65B89</tstamp>
     </comp>
     <comp ref="R17">
-      <value>2K2</value>
+      <value>2.2KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C4190</field>
@@ -319,7 +319,7 @@
       <tstamp>5BF67C78</tstamp>
     </comp>
     <comp ref="R18">
-      <value>2K2</value>
+      <value>2.2KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C4190</field>
@@ -341,7 +341,7 @@
       <tstamp>5BF374BB</tstamp>
     </comp>
     <comp ref="R20">
-      <value>47K</value>
+      <value>47KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C25819</field>
@@ -352,7 +352,7 @@
       <tstamp>5BF374C1</tstamp>
     </comp>
     <comp ref="R21">
-      <value>47K</value>
+      <value>47KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C25819</field>
@@ -371,7 +371,7 @@
       <tstamp>5BF61617</tstamp>
     </comp>
     <comp ref="R14">
-      <value>510R</value>
+      <value>510OHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C23193</field>
@@ -382,7 +382,7 @@
       <tstamp>5CB1F559</tstamp>
     </comp>
     <comp ref="C3">
-      <value>MLCC 10UF 10V</value>
+      <value>10uF X5R</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C19702</field>
@@ -404,7 +404,7 @@
       <tstamp>5CCBC109</tstamp>
     </comp>
     <comp ref="R23">
-      <value>1K8</value>
+      <value>1.8KOHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
         <field name="LCSCStockCode">C4177</field>
