@@ -547,10 +547,10 @@ L Device:Q_NMOS_GSD Q1
 U 1 1 5BF2E627
 P 8780 2900
 F 0 "Q1" V 9030 2900 50  0000 C CNN
-F 1 "IRLML6244TRPBF" V 9121 2900 50  0000 C CNN
+F 1 "AO3400A" V 9121 2900 50  0000 C CNN
 F 2 "TO_SOT_Packages_SMD:SOT-23" H 8980 3000 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/Infineon-Technologies-IRLML6244TRPBF_C143946.pdf" H 8780 2900 50  0001 C CNN
-F 4 "C143946" V 8780 2900 50  0001 C CNN "LCSCStockCode"
+F 3 "https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3400A_C20917.pdf" H 8780 2900 50  0001 C CNN
+F 4 "C20917" V 8780 2900 50  0001 C CNN "LCSCStockCode"
 	1    8780 2900
 	0    1    1    0   
 $EndComp
@@ -1046,4 +1046,6 @@ Text Notes 4560 2810 0    50   ~ 0
 Blue LED and Resistor are OPTIONAL!
 Wire Wire Line
 	7370 1050 7540 1050
+Text Notes 9080 2980 0    50   ~ 0
+MOSFET N TRENCH 30V 5.7A \n1.5V @ 250UA \n26.5 @ 5.7A\n10V SOT-23-3L ROHS
 $EndSCHEMATC
