@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>05/01/2020 18:38:57</date>
+    <date>06/01/2020 18:18:57</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -155,94 +155,6 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1E307</tstamp>
     </comp>
-    <comp ref="R6">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF274CC</tstamp>
-    </comp>
-    <comp ref="R8">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF29A02</tstamp>
-    </comp>
-    <comp ref="R10">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF29A5C</tstamp>
-    </comp>
-    <comp ref="R12">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF29ADC</tstamp>
-    </comp>
-    <comp ref="R7">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF2D135</tstamp>
-    </comp>
-    <comp ref="R9">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF2D13B</tstamp>
-    </comp>
-    <comp ref="R11">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF2D141</tstamp>
-    </comp>
-    <comp ref="R13">
-      <value>2OHMS</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
-      <fields>
-        <field name="LCSCStockCode">C49298</field>
-        <field name="PartNumber">25121WF200KT4E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF2D147</tstamp>
-    </comp>
     <comp ref="Q1">
       <value>AO3400A</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
@@ -294,17 +206,6 @@
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF65B89</tstamp>
-    </comp>
-    <comp ref="R17">
-      <value>2.2KOHMS</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
-      <fields>
-        <field name="LCSCStockCode">C4190</field>
-        <field name="PartNumber">0603WAF2201T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5BF65CB1</tstamp>
     </comp>
     <comp ref="D4">
       <value>Green</value>
@@ -413,6 +314,237 @@
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CCBC10F</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>2.2KOHMS</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <fields>
+        <field name="LCSCStockCode">C4190</field>
+        <field name="PartNumber">0603WAF2201T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF65CB1</tstamp>
+    </comp>
+    <comp ref="R30">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E15FED3</tstamp>
+    </comp>
+    <comp ref="R28">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E15FEC7</tstamp>
+    </comp>
+    <comp ref="R26">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E15FEBB</tstamp>
+    </comp>
+    <comp ref="R24">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E15FEAF</tstamp>
+    </comp>
+    <comp ref="R29">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E15609A</tstamp>
+    </comp>
+    <comp ref="R27">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E15608E</tstamp>
+    </comp>
+    <comp ref="R25">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E156082</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E156076</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D147</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D141</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D13B</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D135</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF29ADC</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF29A5C</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF29A02</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF274CC</tstamp>
+    </comp>
+    <comp ref="R34">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E13D181</tstamp>
+    </comp>
+    <comp ref="R33">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E13D18D</tstamp>
+    </comp>
+    <comp ref="R32">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E13D199</tstamp>
+    </comp>
+    <comp ref="R31">
+      <value>6.2OHMS</value>
+      <footprint>Resistors_SMD:R_1206</footprint>
+      <fields>
+        <field name="LCSCStockCode">C25344</field>
+        <field name="PartNumber">1206W4F620KT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E13D1A5</tstamp>
     </comp>
   </components>
   <libparts>
@@ -631,157 +763,199 @@
     </library>
   </libraries>
   <nets>
-    <net code="1" name="GND">
-      <node ref="R16" pin="1"/>
-      <node ref="ATTINY841" pin="14"/>
-      <node ref="POWER1" pin="1"/>
-      <node ref="C1" pin="2"/>
-      <node ref="R23" pin="1"/>
-      <node ref="SENSOR1" pin="5"/>
-      <node ref="R15" pin="2"/>
-      <node ref="C3" pin="2"/>
-      <node ref="J2" pin="6"/>
-      <node ref="D1" pin="2"/>
-      <node ref="U1" pin="2"/>
-      <node ref="C2" pin="2"/>
-      <node ref="R21" pin="2"/>
-      <node ref="R18" pin="1"/>
-      <node ref="R4" pin="2"/>
-      <node ref="Q1" pin="2"/>
+    <net code="1" name="ENABLE">
+      <node ref="R2" pin="1"/>
+      <node ref="ATTINY841" pin="6"/>
+      <node ref="SENSOR1" pin="4"/>
+      <node ref="R3" pin="1"/>
+    </net>
+    <net code="2" name="GND">
       <node ref="R20" pin="2"/>
+      <node ref="R21" pin="2"/>
+      <node ref="SENSOR1" pin="5"/>
+      <node ref="POWER1" pin="1"/>
+      <node ref="R16" pin="1"/>
+      <node ref="J2" pin="6"/>
+      <node ref="ATTINY841" pin="14"/>
+      <node ref="R18" pin="1"/>
+      <node ref="C1" pin="2"/>
+      <node ref="R15" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="U1" pin="2"/>
+      <node ref="D1" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="R4" pin="2"/>
+      <node ref="R23" pin="1"/>
     </net>
-    <net code="2" name="Net-(D4-Pad1)">
-      <node ref="D4" pin="1"/>
-      <node ref="R18" pin="2"/>
-    </net>
-    <net code="3" name="Net-(D3-Pad1)">
-      <node ref="R17" pin="2"/>
-      <node ref="D3" pin="1"/>
-    </net>
-    <net code="4" name="2_VOLT">
-      <node ref="SENSOR1" pin="2"/>
-      <node ref="ATTINY841" pin="13"/>
-      <node ref="R19" pin="1"/>
-      <node ref="D1" pin="1"/>
-      <node ref="R2" pin="2"/>
-      <node ref="C2" pin="1"/>
-    </net>
-    <net code="5" name="Net-(ATTINY841-Pad7)">
-      <node ref="J2" pin="4"/>
-      <node ref="ATTINY841" pin="7"/>
-      <node ref="D4" pin="2"/>
-    </net>
-    <net code="6" name="VCC">
-      <node ref="R1" pin="1"/>
-      <node ref="ATTINY841" pin="1"/>
-      <node ref="POWER1" pin="2"/>
-      <node ref="J2" pin="2"/>
-      <node ref="D3" pin="2"/>
-      <node ref="RX1" pin="2"/>
-      <node ref="R6" pin="1"/>
-      <node ref="R7" pin="1"/>
-      <node ref="C1" pin="1"/>
-    </net>
-    <net code="7" name="Net-(Q1-Pad3)">
-      <node ref="Q1" pin="3"/>
-      <node ref="R12" pin="2"/>
-      <node ref="R17" pin="1"/>
-      <node ref="R13" pin="2"/>
-    </net>
-    <net code="8" name="Net-(C3-Pad1)">
-      <node ref="R15" pin="1"/>
-      <node ref="Q1" pin="1"/>
-      <node ref="C3" pin="1"/>
-      <node ref="R14" pin="1"/>
-    </net>
-    <net code="9" name="RXD0">
-      <node ref="R16" pin="2"/>
-      <node ref="ATTINY841" pin="11"/>
-      <node ref="RX1" pin="1"/>
-    </net>
-    <net code="10" name="DUMP_LOAD_ENABLE">
+    <net code="3" name="DUMP_LOAD_ENABLE">
       <node ref="ATTINY841" pin="10"/>
       <node ref="R14" pin="2"/>
     </net>
-    <net code="11" name="Net-(TX1-Pad1)">
-      <node ref="TX1" pin="1"/>
-      <node ref="U1" pin="3"/>
-    </net>
-    <net code="12" name="Net-(TX1-Pad2)">
-      <node ref="TX1" pin="2"/>
-      <node ref="U1" pin="4"/>
-    </net>
-    <net code="13" name="Net-(D2-Pad1)">
+    <net code="4" name="Net-(D2-Pad1)">
       <node ref="R23" pin="2"/>
       <node ref="D2" pin="1"/>
     </net>
-    <net code="14" name="Net-(ATTINY841-Pad3)">
+    <net code="5" name="VCC">
+      <node ref="R24" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="ATTINY841" pin="1"/>
+      <node ref="R7" pin="1"/>
+      <node ref="R22" pin="1"/>
+      <node ref="D3" pin="2"/>
+      <node ref="R1" pin="1"/>
+      <node ref="POWER1" pin="2"/>
+      <node ref="R6" pin="1"/>
+      <node ref="RX1" pin="2"/>
+      <node ref="J2" pin="2"/>
+      <node ref="R31" pin="1"/>
+    </net>
+    <net code="6" name="RXD0">
+      <node ref="RX1" pin="1"/>
+      <node ref="R16" pin="2"/>
+      <node ref="ATTINY841" pin="11"/>
+    </net>
+    <net code="7" name="Net-(TX1-Pad1)">
+      <node ref="U1" pin="3"/>
+      <node ref="TX1" pin="1"/>
+    </net>
+    <net code="8" name="Net-(TX1-Pad2)">
+      <node ref="U1" pin="4"/>
+      <node ref="TX1" pin="2"/>
+    </net>
+    <net code="9" name="Net-(ATTINY841-Pad3)">
       <node ref="ATTINY841" pin="3"/>
       <node ref="SENSOR1" pin="3"/>
     </net>
-    <net code="15" name="Net-(ATTINY841-Pad2)">
-      <node ref="ATTINY841" pin="2"/>
+    <net code="10" name="Net-(ATTINY841-Pad7)">
+      <node ref="ATTINY841" pin="7"/>
+      <node ref="D4" pin="2"/>
+      <node ref="J2" pin="4"/>
+    </net>
+    <net code="11" name="Net-(ATTINY841-Pad2)">
       <node ref="SENSOR1" pin="1"/>
       <node ref="R21" pin="1"/>
+      <node ref="ATTINY841" pin="2"/>
     </net>
-    <net code="16" name="ENABLE">
-      <node ref="ATTINY841" pin="6"/>
-      <node ref="R3" pin="1"/>
-      <node ref="SENSOR1" pin="4"/>
-      <node ref="R2" pin="1"/>
-    </net>
-    <net code="17" name="Net-(ATTINY841-Pad9)">
-      <node ref="R20" pin="1"/>
-      <node ref="J2" pin="3"/>
+    <net code="12" name="Net-(ATTINY841-Pad9)">
       <node ref="ATTINY841" pin="9"/>
       <node ref="R19" pin="2"/>
+      <node ref="R20" pin="1"/>
+      <node ref="J2" pin="3"/>
     </net>
-    <net code="18" name="Net-(ATTINY841-Pad8)">
-      <node ref="D2" pin="2"/>
-      <node ref="J2" pin="1"/>
-      <node ref="ATTINY841" pin="8"/>
-    </net>
-    <net code="19" name="Net-(ATTINY841-Pad4)">
-      <node ref="J2" pin="5"/>
-      <node ref="ATTINY841" pin="4"/>
-      <node ref="R1" pin="2"/>
-    </net>
-    <net code="20" name="Net-(R10-Pad2)">
-      <node ref="R10" pin="2"/>
-      <node ref="R12" pin="1"/>
-    </net>
-    <net code="21" name="Net-(R10-Pad1)">
-      <node ref="R8" pin="2"/>
-      <node ref="R10" pin="1"/>
-    </net>
-    <net code="22" name="Net-(R6-Pad2)">
+    <net code="13" name="Net-(R6-Pad2)">
       <node ref="R6" pin="2"/>
       <node ref="R8" pin="1"/>
     </net>
-    <net code="23" name="TXD0">
-      <node ref="ATTINY841" pin="12"/>
-      <node ref="R5" pin="2"/>
+    <net code="14" name="Net-(R10-Pad1)">
+      <node ref="R8" pin="2"/>
+      <node ref="R10" pin="1"/>
     </net>
-    <net code="24" name="Net-(R5-Pad1)">
-      <node ref="R5" pin="1"/>
-      <node ref="U1" pin="1"/>
+    <net code="15" name="Net-(R10-Pad2)">
+      <node ref="R10" pin="2"/>
+      <node ref="R12" pin="1"/>
     </net>
-    <net code="25" name="Net-(R11-Pad2)">
-      <node ref="R13" pin="1"/>
-      <node ref="R11" pin="2"/>
+    <net code="16" name="Net-(R31-Pad2)">
+      <node ref="R32" pin="1"/>
+      <node ref="R31" pin="2"/>
     </net>
-    <net code="26" name="Net-(R11-Pad1)">
+    <net code="17" name="Net-(R33-Pad2)">
+      <node ref="R34" pin="1"/>
+      <node ref="R33" pin="2"/>
+    </net>
+    <net code="18" name="Net-(R32-Pad2)">
+      <node ref="R32" pin="2"/>
+      <node ref="R33" pin="1"/>
+    </net>
+    <net code="19" name="Net-(R28-Pad2)">
+      <node ref="R28" pin="2"/>
+      <node ref="R30" pin="1"/>
+    </net>
+    <net code="20" name="Net-(R26-Pad2)">
+      <node ref="R26" pin="2"/>
+      <node ref="R28" pin="1"/>
+    </net>
+    <net code="21" name="Net-(R24-Pad2)">
+      <node ref="R24" pin="2"/>
+      <node ref="R26" pin="1"/>
+    </net>
+    <net code="22" name="Net-(R25-Pad2)">
+      <node ref="R27" pin="1"/>
+      <node ref="R25" pin="2"/>
+    </net>
+    <net code="23" name="Net-(R27-Pad2)">
+      <node ref="R29" pin="1"/>
+      <node ref="R27" pin="2"/>
+    </net>
+    <net code="24" name="Net-(R22-Pad2)">
+      <node ref="R25" pin="1"/>
+      <node ref="R22" pin="2"/>
+    </net>
+    <net code="25" name="Net-(Q1-Pad3)">
+      <node ref="R17" pin="1"/>
+      <node ref="R12" pin="2"/>
+      <node ref="Q1" pin="3"/>
+      <node ref="R30" pin="2"/>
+      <node ref="R29" pin="2"/>
+      <node ref="R13" pin="2"/>
+      <node ref="R34" pin="2"/>
+    </net>
+    <net code="26" name="Net-(D3-Pad1)">
+      <node ref="R17" pin="2"/>
+      <node ref="D3" pin="1"/>
+    </net>
+    <net code="27" name="Net-(ATTINY841-Pad5)">
+      <node ref="R4" pin="1"/>
+      <node ref="R3" pin="2"/>
+      <node ref="ATTINY841" pin="5"/>
+    </net>
+    <net code="28" name="Net-(R11-Pad1)">
       <node ref="R9" pin="2"/>
       <node ref="R11" pin="1"/>
     </net>
-    <net code="27" name="Net-(R7-Pad2)">
-      <node ref="R9" pin="1"/>
+    <net code="29" name="Net-(R7-Pad2)">
       <node ref="R7" pin="2"/>
+      <node ref="R9" pin="1"/>
     </net>
-    <net code="28" name="Net-(ATTINY841-Pad5)">
-      <node ref="ATTINY841" pin="5"/>
-      <node ref="R3" pin="2"/>
-      <node ref="R4" pin="1"/>
+    <net code="30" name="Net-(R11-Pad2)">
+      <node ref="R13" pin="1"/>
+      <node ref="R11" pin="2"/>
+    </net>
+    <net code="31" name="Net-(ATTINY841-Pad4)">
+      <node ref="ATTINY841" pin="4"/>
+      <node ref="R1" pin="2"/>
+      <node ref="J2" pin="5"/>
+    </net>
+    <net code="32" name="Net-(ATTINY841-Pad8)">
+      <node ref="D2" pin="2"/>
+      <node ref="ATTINY841" pin="8"/>
+      <node ref="J2" pin="1"/>
+    </net>
+    <net code="33" name="2_VOLT">
+      <node ref="SENSOR1" pin="2"/>
+      <node ref="C2" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="ATTINY841" pin="13"/>
+      <node ref="R2" pin="2"/>
+      <node ref="R19" pin="1"/>
+    </net>
+    <net code="34" name="TXD0">
+      <node ref="ATTINY841" pin="12"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="35" name="Net-(C3-Pad1)">
+      <node ref="C3" pin="1"/>
+      <node ref="R14" pin="1"/>
+      <node ref="Q1" pin="1"/>
+      <node ref="R15" pin="1"/>
+    </net>
+    <net code="36" name="Net-(D4-Pad1)">
+      <node ref="R18" pin="2"/>
+      <node ref="D4" pin="1"/>
+    </net>
+    <net code="37" name="Net-(R5-Pad1)">
+      <node ref="R5" pin="1"/>
+      <node ref="U1" pin="1"/>
     </net>
   </nets>
 </export>
