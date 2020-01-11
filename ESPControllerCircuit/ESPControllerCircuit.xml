@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>E:\source\diyBMSv4\ESPControllerCircuit\ESPControllerCircuit.sch</source>
-    <date>22/05/2019 21:36:23</date>
-    <tool>Eeschema (5.1.0)-1</tool>
+    <source>/home/user/Téléchargements/diyBMSv4-jlcpcb_assembly/ESPControllerCircuit/ESPControllerCircuit.sch</source>
+    <date>Sat 11 Jan 2020 10:15:24 CET</date>
+    <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title/>
@@ -46,6 +46,9 @@
       <value>470R</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSC">C17710</field>
+      </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD4DABA</tstamp>
@@ -59,15 +62,18 @@
       <tstamp>5CD51ABF</tstamp>
     </comp>
     <comp ref="U2">
-      <value>HMHA2801</value>
-      <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
+      <value>HMHA2801AR2</value>
+      <footprint>Package_SO:SOIC-4_4.55x2.6mm_P1.27mm</footprint>
       <datasheet>https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504</datasheet>
-      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
+      <fields>
+        <field name="LCSC">C258257</field>
+      </fields>
+      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD55A2D</tstamp>
     </comp>
     <comp ref="RX1">
-      <value>Conn_01x02_Male</value>
+      <value>Receive</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -75,7 +81,7 @@
       <tstamp>5CD589E5</tstamp>
     </comp>
     <comp ref="TX1">
-      <value>Conn_01x02_Male</value>
+      <value>Transmit</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -86,6 +92,9 @@
       <value>4K7</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSC">C17673</field>
+      </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD5BA4A</tstamp>
@@ -94,6 +103,9 @@
       <value>220R</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSC">C17557</field>
+      </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CE037A1</tstamp>
@@ -102,6 +114,9 @@
       <value>4K7</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSC">C17673</field>
+      </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CE1118E</tstamp>
@@ -110,6 +125,9 @@
       <value>4K7</value>
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSC">C17673</field>
+      </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CE113C9</tstamp>
@@ -123,12 +141,63 @@
       <tstamp>5CE6037F</tstamp>
     </comp>
     <comp ref="U3">
-      <value>PCF8574AT/3</value>
+      <value>PCF8574T/3,518</value>
       <footprint>SMD_Packages:SO-16-W</footprint>
-      <datasheet>http://www.nxp.com/documents/data_sheet/PCF8574_PCF8574A.pdf</datasheet>
+      <datasheet>https://lcsc.com/product-detail/I-O-Expansion_NXP_PCF8574T-3-518_PCF8574T-3-518_C7605.html</datasheet>
+      <fields>
+        <field name="LCSC">C7605</field>
+      </fields>
       <libsource lib="Interface_Expansion" part="PCF8574" description="8 Bit Port/Expander to I2C Bus, DIP/SOIC-16"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CE02B8B</tstamp>
+    </comp>
+    <comp ref="C_SEN1">
+      <value>Current Sensor</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="Conn_01x03_Male" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE723DE</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>Input</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CEAA4FE</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>Input</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CEAAE9A</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>Input</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CEB6FE6</tstamp>
+    </comp>
+    <comp ref="J4">
+      <value>Input</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CEB74DB</tstamp>
+    </comp>
+    <comp ref="J5">
+      <value>Optional</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="Conn_01x03_Male" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CEE1C26</tstamp>
     </comp>
   </components>
   <libparts>
@@ -160,6 +229,22 @@
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
         <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x03_Male">
+      <description>Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x03_Male</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Connector" part="Conn_01x06_Male">
@@ -249,7 +334,10 @@
       </pins>
     </libpart>
     <libpart lib="Isolator" part="PC817">
-      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP4</description>
+      <aliases>
+        <alias>EL817</alias>
+      </aliases>
+      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4</description>
       <docs>http://www.soselectronic.cz/a_info/resource/d/pc817.pdf</docs>
       <footprints>
         <fp>DIP*W7.62mm*</fp>
@@ -305,142 +393,156 @@
   </libparts>
   <libraries>
     <library logical="Connector">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
+      <uri>/usr/share/kicad/library/Connector.lib</uri>
     </library>
     <library logical="Device">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+      <uri>/usr/share/kicad/library/Device.lib</uri>
     </library>
     <library logical="Interface_Expansion">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Interface_Expansion.lib</uri>
+      <uri>/usr/share/kicad/library/Interface_Expansion.lib</uri>
     </library>
     <library logical="Isolator">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Isolator.lib</uri>
+      <uri>/usr/share/kicad/library/Isolator.lib</uri>
     </library>
     <library logical="MyLibrary">
-      <uri>E:\source\diyBMSv4\ESPControllerCircuit/MyLibrary.lib</uri>
+      <uri>/home/user/Téléchargements/diyBMSv4-jlcpcb_assembly/ESPControllerCircuit/MyLibrary.lib</uri>
     </library>
     <library logical="Switch">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Switch.lib</uri>
+      <uri>/usr/share/kicad/library/Switch.lib</uri>
     </library>
   </libraries>
   <nets>
-    <net code="1" name="Net-(U1-Pad4)">
-      <node ref="U1" pin="4"/>
-      <node ref="WIFI_RST1" pin="2"/>
+    <net code="1" name="Net-(JRELAY1-Pad3)">
+      <node ref="JRELAY1" pin="3"/>
+      <node ref="U3" pin="5"/>
     </net>
-    <net code="2" name="SCL">
-      <node ref="R5" pin="2"/>
-      <node ref="U1" pin="5"/>
-      <node ref="U3" pin="14"/>
+    <net code="2" name="Net-(JRELAY1-Pad5)">
+      <node ref="JRELAY1" pin="5"/>
+      <node ref="U3" pin="7"/>
     </net>
-    <net code="3" name="PCFINT">
+    <net code="3" name="Net-(JRELAY1-Pad2)">
+      <node ref="U3" pin="4"/>
+      <node ref="JRELAY1" pin="2"/>
+    </net>
+    <net code="4" name="Net-(JRELAY1-Pad4)">
+      <node ref="JRELAY1" pin="4"/>
+      <node ref="U3" pin="6"/>
+    </net>
+    <net code="5" name="GND">
+      <node ref="J5" pin="2"/>
+      <node ref="DEBUG1" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="D1" pin="1"/>
+      <node ref="J4" pin="1"/>
+      <node ref="J3" pin="1"/>
+      <node ref="WIFI_RST1" pin="1"/>
+      <node ref="U1" pin="2"/>
+      <node ref="J2" pin="1"/>
+      <node ref="J1" pin="1"/>
+      <node ref="R2" pin="1"/>
+      <node ref="JRELAY1" pin="1"/>
+      <node ref="C_SEN1" pin="2"/>
+      <node ref="U3" pin="8"/>
+      <node ref="U3" pin="1"/>
+      <node ref="U3" pin="3"/>
+      <node ref="U3" pin="2"/>
+    </net>
+    <net code="6" name="PCFINT">
       <node ref="U1" pin="12"/>
       <node ref="U3" pin="13"/>
     </net>
-    <net code="4" name="GND">
-      <node ref="U1" pin="2"/>
-      <node ref="U2" pin="2"/>
-      <node ref="U3" pin="3"/>
-      <node ref="R2" pin="1"/>
-      <node ref="D1" pin="1"/>
-      <node ref="U3" pin="2"/>
-      <node ref="U3" pin="1"/>
-      <node ref="DEBUG1" pin="2"/>
-      <node ref="JRELAY1" pin="1"/>
-      <node ref="U3" pin="8"/>
-      <node ref="WIFI_RST1" pin="1"/>
+    <net code="7" name="Net-(J3-Pad2)">
+      <node ref="J3" pin="2"/>
+      <node ref="U3" pin="11"/>
     </net>
-    <net code="5" name="+3V3">
-      <node ref="U3" pin="16"/>
+    <net code="8" name="Net-(J4-Pad2)">
+      <node ref="U3" pin="12"/>
+      <node ref="J4" pin="2"/>
+    </net>
+    <net code="9" name="Net-(J5-Pad1)">
+      <node ref="J5" pin="1"/>
+      <node ref="U1" pin="13"/>
+    </net>
+    <net code="10" name="+3V3">
       <node ref="RX1" pin="2"/>
       <node ref="U1" pin="16"/>
       <node ref="R4" pin="1"/>
       <node ref="R5" pin="1"/>
+      <node ref="U3" pin="16"/>
+      <node ref="C_SEN1" pin="3"/>
+      <node ref="J5" pin="3"/>
     </net>
-    <net code="6" name="SDA">
-      <node ref="U1" pin="6"/>
-      <node ref="U3" pin="15"/>
-      <node ref="R4" pin="2"/>
+    <net code="11" name="Net-(C_SEN1-Pad1)">
+      <node ref="U1" pin="10"/>
+      <node ref="C_SEN1" pin="1"/>
     </net>
-    <net code="7" name="Net-(JRELAY1-Pad2)">
-      <node ref="JRELAY1" pin="2"/>
-      <node ref="U3" pin="4"/>
-    </net>
-    <net code="8" name="Net-(JRELAY1-Pad3)">
-      <node ref="U3" pin="5"/>
-      <node ref="JRELAY1" pin="3"/>
-    </net>
-    <net code="9" name="Net-(JRELAY1-Pad5)">
-      <node ref="JRELAY1" pin="5"/>
-      <node ref="U3" pin="7"/>
-    </net>
-    <net code="10" name="Net-(U3-Pad9)">
+    <net code="12" name="Net-(J1-Pad2)">
       <node ref="U3" pin="9"/>
+      <node ref="J1" pin="2"/>
     </net>
-    <net code="11" name="Net-(JRELAY1-Pad4)">
-      <node ref="U3" pin="6"/>
-      <node ref="JRELAY1" pin="4"/>
-    </net>
-    <net code="12" name="Net-(U3-Pad10)">
+    <net code="13" name="Net-(J2-Pad2)">
+      <node ref="J2" pin="2"/>
       <node ref="U3" pin="10"/>
     </net>
-    <net code="13" name="Net-(U3-Pad11)">
-      <node ref="U3" pin="11"/>
+    <net code="14" name="Net-(DEBUG1-Pad1)">
+      <node ref="U1" pin="3"/>
+      <node ref="DEBUG1" pin="1"/>
     </net>
-    <net code="14" name="Net-(U3-Pad12)">
-      <node ref="U3" pin="12"/>
-    </net>
-    <net code="15" name="+5V">
-      <node ref="U1" pin="1"/>
-      <node ref="JRELAY1" pin="6"/>
-    </net>
-    <net code="16" name="Net-(D1-Pad2)">
+    <net code="15" name="Net-(D1-Pad2)">
       <node ref="R1" pin="1"/>
       <node ref="D1" pin="2"/>
     </net>
-    <net code="17" name="Net-(R1-Pad2)">
+    <net code="16" name="Net-(R1-Pad2)">
       <node ref="U1" pin="11"/>
       <node ref="R1" pin="2"/>
     </net>
-    <net code="18" name="Net-(DEBUG1-Pad1)">
-      <node ref="DEBUG1" pin="1"/>
-      <node ref="U1" pin="3"/>
-    </net>
-    <net code="19" name="Net-(U1-Pad7)">
-      <node ref="U1" pin="7"/>
-    </net>
-    <net code="20" name="Net-(U1-Pad8)">
-      <node ref="U1" pin="8"/>
-    </net>
-    <net code="21" name="Net-(U1-Pad9)">
-      <node ref="U1" pin="9"/>
-    </net>
-    <net code="22" name="Net-(U1-Pad10)">
-      <node ref="U1" pin="10"/>
-    </net>
-    <net code="23" name="Net-(U1-Pad13)">
-      <node ref="U1" pin="13"/>
-    </net>
-    <net code="24" name="Net-(TX1-Pad1)">
-      <node ref="U2" pin="3"/>
-      <node ref="TX1" pin="1"/>
-    </net>
-    <net code="25" name="Net-(R3-Pad1)">
+    <net code="17" name="Net-(R3-Pad1)">
       <node ref="U2" pin="1"/>
       <node ref="R3" pin="1"/>
     </net>
-    <net code="26" name="Net-(R3-Pad2)">
+    <net code="18" name="Net-(TX1-Pad1)">
+      <node ref="TX1" pin="1"/>
+      <node ref="U2" pin="3"/>
+    </net>
+    <net code="19" name="Net-(TX1-Pad2)">
+      <node ref="TX1" pin="2"/>
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="20" name="Net-(U1-Pad7)">
+      <node ref="U1" pin="7"/>
+    </net>
+    <net code="21" name="Net-(U1-Pad8)">
+      <node ref="U1" pin="8"/>
+    </net>
+    <net code="22" name="Net-(U1-Pad9)">
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="23" name="Net-(R3-Pad2)">
       <node ref="U1" pin="15"/>
       <node ref="R3" pin="2"/>
     </net>
-    <net code="27" name="Net-(R2-Pad2)">
+    <net code="24" name="Net-(U1-Pad4)">
+      <node ref="WIFI_RST1" pin="2"/>
+      <node ref="U1" pin="4"/>
+    </net>
+    <net code="25" name="+5V">
+      <node ref="U1" pin="1"/>
+      <node ref="JRELAY1" pin="6"/>
+    </net>
+    <net code="26" name="SCL">
+      <node ref="U1" pin="5"/>
+      <node ref="R5" pin="2"/>
+      <node ref="U3" pin="14"/>
+    </net>
+    <net code="27" name="SDA">
+      <node ref="U3" pin="15"/>
+      <node ref="U1" pin="6"/>
+      <node ref="R4" pin="2"/>
+    </net>
+    <net code="28" name="Net-(R2-Pad2)">
+      <node ref="U1" pin="14"/>
       <node ref="R2" pin="2"/>
       <node ref="RX1" pin="1"/>
-      <node ref="U1" pin="14"/>
-    </net>
-    <net code="28" name="Net-(TX1-Pad2)">
-      <node ref="TX1" pin="2"/>
-      <node ref="U2" pin="4"/>
     </net>
   </nets>
 </export>
