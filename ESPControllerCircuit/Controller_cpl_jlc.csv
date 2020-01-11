@@ -1,4 +1,4 @@
-Ref,Val,Package,PosX,PosY,Rot,Side
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
 "R1","470R","R_0805_HandSoldering",3.500000,20.750000,180.000000,top
 "R2","4K7","R_0805_HandSoldering",19.500000,19.062500,180.000000,top
 "R3","220R","R_0805_HandSoldering",19.500000,15.625000,180.000000,top
