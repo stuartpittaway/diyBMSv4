@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>/home/user/Téléchargements/diyBMSv4-jlcpcb_assembly/ESPControllerCircuit/ESPControllerCircuit.sch</source>
-    <date>Sat 11 Jan 2020 10:15:24 CET</date>
+    <source>/home/user/Documents/GitHub/diyBMSv4/ESPControllerCircuit/ESPControllerCircuit.sch</source>
+    <date>Sat 11 Jan 2020 14:03:18 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -62,11 +62,11 @@
       <tstamp>5CD51ABF</tstamp>
     </comp>
     <comp ref="U2">
-      <value>HMHA2801AR2</value>
-      <footprint>Package_SO:SOIC-4_4.55x2.6mm_P1.27mm</footprint>
+      <value>EL3H7(B)(TA)-G</value>
+      <footprint>Package_SO:SOP-4_4.4x2.6mm_P1.27mm</footprint>
       <datasheet>https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504</datasheet>
       <fields>
-        <field name="LCSC">C258257</field>
+        <field name="LCSC">C32565</field>
       </fields>
       <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"/>
       <sheetpath names="/" tstamps="/"/>
@@ -405,7 +405,7 @@
       <uri>/usr/share/kicad/library/Isolator.lib</uri>
     </library>
     <library logical="MyLibrary">
-      <uri>/home/user/Téléchargements/diyBMSv4-jlcpcb_assembly/ESPControllerCircuit/MyLibrary.lib</uri>
+      <uri>/home/user/Documents/GitHub/diyBMSv4/ESPControllerCircuit/MyLibrary.lib</uri>
     </library>
     <library logical="Switch">
       <uri>/usr/share/kicad/library/Switch.lib</uri>

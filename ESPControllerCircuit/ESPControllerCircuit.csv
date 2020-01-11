@@ -11,6 +11,6 @@ Comment,Designator,Footprint,LCSC, LCSC
 "Receive","RX1","Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled",""
 "Transmit","TX1","Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled",""
 "WeMos_mini","U1","ESPControllerCircuit:wemos-d1-mini-with-pin-header",""
-"HMHA2801AR2","U2","Package_SO:SOIC-4_4.55x2.6mm_P1.27mm","","C258257"
+"EL3H7(B)(TA)-G","U2","Package_SO:SOP-4_4.4x2.6mm_P1.27mm","","C32565"
 "PCF8574T/3,518","U3","SMD_Packages:SO-16-W","","C7605"
 "WIFI RST","WIFI_RST1","Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm",""
