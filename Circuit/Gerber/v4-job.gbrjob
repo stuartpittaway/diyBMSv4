@@ -7,7 +7,7 @@
       "Application": "Pcbnew",
       "Version":     "(5.1.0)-1"
     },
-    "CreationDate":  "2019-06-23T17:01:32+01:00"
+    "CreationDate":  "2020-01-02T20:36:26+00:00"
   },
   "GeneralSpecs":
   {
@@ -47,6 +47,16 @@
     {
       "Path":  "v4-B_Cu.gbr",
       "FileFunction":  "Copper,L2,Bot",
+      "FilePolarity":  "Positive"
+    },
+    {
+      "Path":  "v4-F_Adhes.gbr",
+      "FileFunction":  "Glue,Top",
+      "FilePolarity":  "Positive"
+    },
+    {
+      "Path":  "v4-B_Adhes.gbr",
+      "FileFunction":  "Glue,Bot",
       "FilePolarity":  "Positive"
     },
     {
