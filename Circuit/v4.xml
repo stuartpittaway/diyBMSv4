@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>02/01/2020 20:36:14</date>
-    <tool>Eeschema (5.1.0)-1</tool>
+    <source>/home/user/Documents/GitHub/diyBMSv4/Circuit/v4.sch</source>
+    <date>Mon 13 Jan 2020 19:03:52 CET</date>
+    <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>DIYBMS cell monitoring module</title>
@@ -24,7 +24,10 @@
       <footprint>Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm</footprint>
       <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C219103</field>
+        <field name="Manufacturer">Microchip Tech</field>
+        <field name="PartNumber">ATTINY841-SSU</field>
+        <field name="Supplier">Farnell</field>
+        <field name="SupplierRef">2396716</field>
       </fields>
       <libsource lib="v4-rescue" part="ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -34,8 +37,10 @@
       <value>100nF</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
       <fields>
-        <field name="LCSCStockCode">C49678</field>
+        <field name="Manufacturer">Yageo</field>
         <field name="PartNumber">CC0805KRX7R9BB104</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49678</field>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -45,6 +50,12 @@
       <value>Battery</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1EB9F6</tstamp>
@@ -53,8 +64,10 @@
       <value>10K</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C25804</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF1002T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C25804</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -64,6 +77,12 @@
       <value>AVR-ISP-6</value>
       <footprint>Pin_Headers:Pin_Header_Straight_2x03_Pitch2.54mm</footprint>
       <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html</datasheet>
+      <fields>
+        <field name="Manufacturer">Boom Precision Elec</field>
+        <field name="PartNumber">C65114</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C65114</field>
+      </fields>
       <libsource lib="Connector" part="AVR-ISP-6" description="Atmel 6-pin ISP connector"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5D1ECDB4</tstamp>
@@ -73,8 +92,10 @@
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1810161810_Analog-Devices-ADR5040BRTZ-REEL7_C48833.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C48833</field>
+        <field name="Manufacturer">Analog Devices</field>
         <field name="PartNumber">ADR5040BRTZ-REEL7</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C48833</field>
       </fields>
       <libsource lib="Reference_Voltage" part="LM4040DBZ-2.0" description="2.048V Precision Micropower Shunt Voltage Reference, SOT-23"/>
       <sheetpath names="/" tstamps="/"/>
@@ -84,8 +105,10 @@
       <value>1K</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C21190</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF1001T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C21190</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -95,8 +118,10 @@
       <value>2.2uF</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23630</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
         <field name="PartNumber">CL10A225KO8NNNC</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C23630</field>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -106,8 +131,10 @@
       <value>470KOHMS 1% 1/10W</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23178</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4703T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C23178</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -117,8 +144,10 @@
       <value>390KOHMS 1% 1/10W</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23150</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF3903T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C23150</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -129,10 +158,12 @@
       <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C32565</field>
+        <field name="Manufacturer">Everlight Elec</field>
         <field name="PartNumber">EL3H7(B)(TA)-G</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C32565</field>
       </fields>
-      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
+      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DCDE</tstamp>
     </comp>
@@ -140,6 +171,12 @@
       <value>TX Connector</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DEA4</tstamp>
@@ -148,8 +185,10 @@
       <value>510R</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23193</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF5100T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C23193</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -159,8 +198,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -170,8 +211,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -181,8 +224,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -192,8 +237,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -203,8 +250,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -214,8 +263,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -225,8 +276,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -236,8 +289,10 @@
       <value>2R 1W</value>
       <footprint>Resistors_SMD:R_2512</footprint>
       <fields>
-        <field name="LCSCStockCode">C49298</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C49298</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -248,7 +303,10 @@
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/Infineon-Technologies-IRLML6244TRPBF_C143946.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C143946</field>
+        <field name="Manufacturer">Infineon Technologies</field>
+        <field name="PartNumber">IRLML6244TRPBF</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C143946</field>
       </fields>
       <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
       <sheetpath names="/" tstamps="/"/>
@@ -258,8 +316,10 @@
       <value>47K</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C25819</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4702T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C25819</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -269,6 +329,12 @@
       <value>RX Connector</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer"> JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF5891C</tstamp>
@@ -277,8 +343,10 @@
       <value>4K7</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23162</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4701T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C23162</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -288,8 +356,10 @@
       <value>Red</value>
       <footprint>LEDs:LED_0805</footprint>
       <fields>
-        <field name="LCSCStockCode">C84256</field>
+        <field name="Manufacturer">Foshan NationStar Optoelectronics</field>
         <field name="PartNumber">FC-2012HRK-620D</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C84256</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -299,8 +369,10 @@
       <value>2K2</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C4190</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF2201T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C4190</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -311,8 +383,10 @@
       <footprint>LEDs:LED_0805</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Green-0805-Iv-207-249-mcd-atIF-20mA_C2297.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C2297</field>
-        <field name="PartNumber">Hubei KENTO Elec Green 0805</field>
+        <field name="Manufacturer">Hubei KENTO Elec</field>
+        <field name="PartNumber">Hubei KENTO Green 0805</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C2297</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -322,8 +396,10 @@
       <value>2K2</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C4190</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF2201T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C4190</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -333,8 +409,10 @@
       <value>NCP18WB473J03RB</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C86142</field>
+        <field name="Manufacturer">Murata Electronics</field>
         <field name="PartNumber">NCP18WB473J03RB</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C86142</field>
       </fields>
       <libsource lib="Device" part="Thermistor" description="Temperature dependent resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -344,8 +422,10 @@
       <value>47K</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C25819</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4702T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C25819</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -355,8 +435,10 @@
       <value>47K</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C25819</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4702T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C25819</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -366,6 +448,12 @@
       <value>Remote temp input 47K @ 25oC</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm</footprint>
       <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Shenzhen-Cankemeng-Headers-Pins-1-5P-2-54mm-Straight-line_C124379.html</datasheet>
+      <fields>
+        <field name="Manufacturer">Shenzhen Cankemeng</field>
+        <field name="PartNumber">C124379</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C124379</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x05_Male" description="Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF61617</tstamp>
@@ -374,8 +462,10 @@
       <value>510R</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23193</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF5100T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C23193</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -385,8 +475,10 @@
       <value>MLCC 10UF 10V</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C19702</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
         <field name="PartNumber">CL10A106KP8NNNC</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C19702</field>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -396,8 +488,10 @@
       <value>Blue</value>
       <footprint>LEDs:LED_0805</footprint>
       <fields>
-        <field name="LCSCStockCode">C2293</field>
-        <field name="PartNumber">HUBEI KENTO ELEC</field>
+        <field name="Manufacturer">Hubei KENTO Elec</field>
+        <field name="PartNumber">Hubei KENTO Blue 0805</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C2293</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -407,8 +501,10 @@
       <value>1K8</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C4177</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF1801T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C4177</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -429,11 +525,11 @@
       </fields>
       <pins>
         <pin num="1" name="MISO" type="passive"/>
-        <pin num="2" name="VCC" type="power_in"/>
+        <pin num="2" name="VCC" type="passive"/>
         <pin num="3" name="SCK" type="passive"/>
         <pin num="4" name="MOSI" type="passive"/>
         <pin num="5" name="~RST" type="passive"/>
-        <pin num="6" name="GND" type="power_in"/>
+        <pin num="6" name="GND" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Connector" part="Conn_01x02_Male">
@@ -545,7 +641,10 @@
       </pins>
     </libpart>
     <libpart lib="Isolator" part="PC817">
-      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP4</description>
+      <aliases>
+        <alias>EL817</alias>
+      </aliases>
+      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4</description>
       <docs>http://www.soselectronic.cz/a_info/resource/d/pc817.pdf</docs>
       <footprints>
         <fp>DIP*W7.62mm*</fp>
@@ -615,19 +714,19 @@
   </libparts>
   <libraries>
     <library logical="Connector">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
+      <uri>/usr/share/kicad/library/Connector.lib</uri>
     </library>
     <library logical="Device">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+      <uri>/usr/share/kicad/library/Device.lib</uri>
     </library>
     <library logical="Isolator">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Isolator.lib</uri>
+      <uri>/usr/share/kicad/library/Isolator.lib</uri>
     </library>
     <library logical="Reference_Voltage">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Reference_Voltage.lib</uri>
+      <uri>/usr/share/kicad/library/Reference_Voltage.lib</uri>
     </library>
     <library logical="v4-rescue">
-      <uri>E:\source\diyBMSv4\Circuit/v4-rescue.lib</uri>
+      <uri>/home/user/Documents/GitHub/diyBMSv4/Circuit/v4-rescue.lib</uri>
     </library>
   </libraries>
   <nets>

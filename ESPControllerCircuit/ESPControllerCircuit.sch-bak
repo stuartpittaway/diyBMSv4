@@ -20,12 +20,7 @@ P 2640 6480
 F 0 "U1" H 2640 7117 60  0000 C CNN
 F 1 "WeMos_mini" H 2640 7011 60  0000 C CNN
 F 2 "ESPControllerCircuit:wemos-d1-mini-with-pin-header" H 3190 5780 60  0001 C CNN
-F 3 "" H 3190 5780 60  0001 C CNN
-F 4 "Shenzhen CanKemeng" H 2640 6480 50  0001 C CNN "Manufacturer"
-F 5 "C124416" H 2640 6480 50  0001 C CNN "PartNumber"
-F 6 "LCSC" H 2640 6480 50  0001 C CNN "Supplier"
-F 7 "C124416" H 2640 6480 50  0001 C CNN "SupplierRef"
-F 8 "2" H 2640 6480 50  0001 C CNN "Qantity"
+F 3 "" H 3190 5780 60  0000 C CNN
 	1    2640 6480
 	1    0    0    -1  
 $EndComp

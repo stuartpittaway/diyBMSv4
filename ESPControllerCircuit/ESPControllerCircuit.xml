@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/user/Documents/GitHub/diyBMSv4/ESPControllerCircuit/ESPControllerCircuit.sch</source>
-    <date>Sat 11 Jan 2020 14:03:18 CET</date>
+    <date>Mon 13 Jan 2020 19:06:20 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -22,6 +22,13 @@
     <comp ref="U1">
       <value>WeMos_mini</value>
       <footprint>ESPControllerCircuit:wemos-d1-mini-with-pin-header</footprint>
+      <fields>
+        <field name="Manufacturer">Shenzhen CanKemeng</field>
+        <field name="PartNumber">C124416</field>
+        <field name="Qantity">2</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C124416</field>
+      </fields>
       <libsource lib="MyLibrary" part="WeMos_mini" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD4757A</tstamp>
@@ -37,7 +44,13 @@
     <comp ref="D1">
       <value>COMMS</value>
       <footprint>LEDs:LED_D5.0mm</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1811021515_Lite-On-LTL-293SJW_C125079.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Lite-On</field>
+        <field name="PartNumber">LTL-293SJW</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C125079</field>
+      </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD4CF59</tstamp>
@@ -47,7 +60,10 @@
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSC">C17710</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
+        <field name="PartNumber">0805W8F4700T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C17710</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -57,6 +73,12 @@
       <value>Conn_01x02_Female</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="Manufacturer">Shenzhen Cankemeng</field>
+        <field name="PartNumber">C124375</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C124375</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Female" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD51ABF</tstamp>
@@ -66,7 +88,10 @@
       <footprint>Package_SO:SOP-4_4.4x2.6mm_P1.27mm</footprint>
       <datasheet>https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504</datasheet>
       <fields>
-        <field name="LCSC">C32565</field>
+        <field name="Manufacturer">Everlight Elec</field>
+        <field name="PartNumber">EL3H7(B)(TA)-G</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C32565</field>
       </fields>
       <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"/>
       <sheetpath names="/" tstamps="/"/>
@@ -75,7 +100,13 @@
     <comp ref="RX1">
       <value>Receive</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
-      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD589E5</tstamp>
@@ -83,7 +114,13 @@
     <comp ref="TX1">
       <value>Transmit</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
-      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD595C3</tstamp>
@@ -93,7 +130,10 @@
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSC">C17673</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
+        <field name="PartNumber">0805W8F4701T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C17673</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -104,7 +144,10 @@
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSC">C17557</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
+        <field name="PartNumber">0805W8F2200T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C17557</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -115,7 +158,10 @@
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSC">C17673</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
+        <field name="PartNumber">0805W8F4701T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C17673</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -126,7 +172,10 @@
       <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSC">C17673</field>
+        <field name="Manufacturer">Uniroyal Elec</field>
+        <field name="PartNumber">0805W8F4701T5E</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C17673</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -135,7 +184,13 @@
     <comp ref="JRELAY1">
       <value>Conn_01x06_Male</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm</footprint>
-      <datasheet>~</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1810312320_BOOMELE-Boom-Precision-Elec-C37208_C37208.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Boom Precision Elec</field>
+        <field name="PartNumber">C37208</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C37208</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x06_Male" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CE6037F</tstamp>
@@ -145,7 +200,10 @@
       <footprint>SMD_Packages:SO-16-W</footprint>
       <datasheet>https://lcsc.com/product-detail/I-O-Expansion_NXP_PCF8574T-3-518_PCF8574T-3-518_C7605.html</datasheet>
       <fields>
-        <field name="LCSC">C7605</field>
+        <field name="Manufacturer">NXP Semicon</field>
+        <field name="PartNumber">PCF8574T/3,518</field>
+        <field name="Supplier">JLCPcb</field>
+        <field name="SupplierRef">C7605</field>
       </fields>
       <libsource lib="Interface_Expansion" part="PCF8574" description="8 Bit Port/Expander to I2C Bus, DIP/SOIC-16"/>
       <sheetpath names="/" tstamps="/"/>
@@ -155,6 +213,12 @@
       <value>Current Sensor</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="Manufacturer">Mintron</field>
+        <field name="PartNumber">MTP125-1103S1</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C358685</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x03_Male" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CE723DE</tstamp>
@@ -162,7 +226,13 @@
     <comp ref="J1">
       <value>Input</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
-      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CEAA4FE</tstamp>
@@ -170,7 +240,13 @@
     <comp ref="J2">
       <value>Input</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
-      <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CEAAE9A</tstamp>
@@ -179,6 +255,12 @@
       <value>Input</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CEB6FE6</tstamp>
@@ -187,6 +269,12 @@
       <value>Input</value>
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">JST Sales America</field>
+        <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C173752</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CEB74DB</tstamp>
@@ -195,6 +283,12 @@
       <value>Optional</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="Manufacturer">Mintron</field>
+        <field name="PartNumber">MTP125-1103S1</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C358685</field>
+      </fields>
       <libsource lib="Connector" part="Conn_01x03_Male" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CEE1C26</tstamp>
