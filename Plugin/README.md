@@ -11,25 +11,27 @@
 
 ### Use:
 
-It is necessary for the operation to add 4 additional fields in Eeschema, which are:
-- Manufacturer
-- PartNumber
-- Supplier
-- SupplierRef
+It is necessary for the operation to add 4 additional custom fields in Eeschema, which are:
+- `Manufacturer`
+- `PartNumber`
+- `Supplier`
+- `SupplierRef`
 
-it is also possible to add an optional 'Quantity' field in order to be able to manage the quantities in Eeschema.
+The required custom field `Supplier` must be set to one of the predefined supplier (LCSC or JLCPcb) or any other supplier name case insensitive.
+
+it is also possible to add an optional `Quantity` field in order to be able to manage the quantities in Eeschema.
 In the absence of this field, the default quantity is 1.
 
-if necessary, a grouping is carried out on the quantities, making it possible to generate a single row for identical components in the BOM file.
+If necessary, a grouping is carried out on the quantities, making it possible to generate a single row for identical components in the BOM file.
 
 If you know a little Python, the grouping and the order of the components in the BOM files is fully configurable ...
 
-When launching the plugin (in Eeschema BOM) it will create as many BOM files as there are different ‘Supplier’ encountered.
+When launching the plugin (in Eeschema BOM) it will create as many BOM files as there are different `Supplier` encountered.
 
-It also creates the CPL file for JLCPcb from one of the position files found in the working directory.
+It also creates the CPL file for JLCPcb from one of the position files found in the working directory (ie: `your_project-all-pos.csv`, `your_project-top-pos.csv`, `your_project-bottom-pos.csv`).
 
 
-### Plugin configuration:
+### Predefined suppliers:
 
 This plugin has been configured to work with LCSC, JLCPcb and also with many other suppliers ...
 
@@ -43,13 +45,11 @@ CSV BOM file columns:
 - LCSC Part Number
 - Package
 
-CSV BOM grouping rows:
-Componant are grouped by: PartNumber, SupplierRef
+CSV BOM componants are grouped by same PartNumber and SupplierRef
 
-CSV BOM ordering:
-Componant are order by: Manufacturer, PartNumber
+CSV BOM componants are order by: Manufacturer, PartNumber
 
-No CPL file while be generated.
+No CPL file will be generated.
 
 #### JLCPcb configuration:
 
@@ -61,10 +61,9 @@ CSV BOM file columns:
 
 No CSV grouping is performed, in the absence of a BOM Quantity column
 
-CSV BOM ordering:
-Componant are order by: SupplierRef
+CSV BOM componants are order by: SupplierRef
 
-CPL file while be generated if a position file can be found.
+CPL file will be generated if a position file can be found.
 
 #### Default configuration:
 
@@ -78,15 +77,19 @@ CSV BOM file columns:
 - Supplier Part Number
 - Package
 
-CSV BOM grouping rows:
-Componant are grouped by: PartNumber, SupplierRef
+CSV BOM componants are grouped by same PartNumber and SupplierRef
 
-CSV BOM ordering:
-Componant are order by: Manufacturer, PartNumber
+CSV BOM componants are order by: Manufacturer, PartNumber
 
-No CPL file while be generated.
+No CPL file will be generated.
 
 
 ### Has been tested with:
 
 * KiCad 5.1.5 - Ubuntu 18.04 - LxQt 0.11.1
+
+### If errors occur:
+
+In case of problem, :-(  
+I encourage you to create an [issue](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/issues/new)
+I will try to solve it :-)  

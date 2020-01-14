@@ -11,8 +11,8 @@ __version__ = "0.0.1"
 """
 @package
 Generates a BOM or CPL csv file compatible with:
-    * JLCPcb SMT Assembly service (bom and cpl file)
-    * LCSC BOM Service (bom file)
+    * JLCPcb SMT Assembly service (BOM and CPL file)
+    * LCSC BOM Service (BOM file)
     * Otherwise a csv file corresponding to the following characteristics
 
     Functionality:
@@ -29,6 +29,7 @@ Generates a BOM or CPL csv file compatible with:
     Usage:
         python "full_path/jlcpcb-bom-plugin.py" "%I" "%O"
 """
+
 
 import os
 import sys
@@ -51,16 +52,39 @@ g_suppliers['Default']['fields']['Manufacturer'] = 'Manufacturer'
 g_suppliers['Default']['fields']['Description'] = 'ref'
 g_suppliers['Default']['fields']['Supplier Part Number'] = 'SupplierRef'
 g_suppliers['Default']['fields']['Package'] = 'footprint'
+g_suppliers['Default']['delimiter'] = ','
+g_suppliers['Default']['quotechar'] = '"'
+g_suppliers['Default']['quoting'] = csv.QUOTE_MINIMAL
 g_suppliers['Default']['equal'] = ('PartNumber', 'SupplierRef')
 g_suppliers['Default']['sorted'] = ('Manufacturer', 'PartNumber')
 g_suppliers['Default']['grouped'] = True
 g_suppliers['Default']['generatecpl'] = False
+
+g_suppliers['LCSC'] = {}
+g_suppliers['LCSC']['fields'] = OrderedDict()
+g_suppliers['LCSC']['fields']['Quantity'] = 'Quantity'
+g_suppliers['LCSC']['fields']['Manufacture Part Number'] = 'PartNumber'
+g_suppliers['LCSC']['fields']['Manufacturer'] = 'Manufacturer'
+g_suppliers['LCSC']['fields']['Description'] = 'ref'
+g_suppliers['LCSC']['fields']['LCSC Part Number'] = 'SupplierRef'
+g_suppliers['LCSC']['fields']['Package'] = 'footprint'
+g_suppliers['LCSC']['delimiter'] = ','
+g_suppliers['LCSC']['quotechar'] = '"'
+g_suppliers['LCSC']['quoting'] = csv.QUOTE_MINIMAL
+g_suppliers['LCSC']['equal'] = ('PartNumber', 'SupplierRef')
+g_suppliers['LCSC']['sorted'] = ('Manufacturer', 'PartNumber')
+g_suppliers['LCSC']['grouped'] = True
+g_suppliers['LCSC']['generatecpl'] = False
+
 g_suppliers['JLCPCB'] = {}
 g_suppliers['JLCPCB']['fields'] = OrderedDict()
 g_suppliers['JLCPCB']['fields']['Comment'] = 'value'
 g_suppliers['JLCPCB']['fields']['Designator'] = 'ref'
 g_suppliers['JLCPCB']['fields']['Footprint'] = 'footprint'
 g_suppliers['JLCPCB']['fields']['LCSC Part #'] = 'SupplierRef'
+g_suppliers['JLCPCB']['delimiter'] = ','
+g_suppliers['JLCPCB']['quotechar'] = '"'
+g_suppliers['JLCPCB']['quoting'] = csv.QUOTE_MINIMAL
 g_suppliers['JLCPCB']['equal'] = ('ref', )
 g_suppliers['JLCPCB']['sorted'] = ('SupplierRef', )
 g_suppliers['JLCPCB']['grouped'] = False
@@ -70,18 +94,6 @@ g_suppliers['JLCPCB']['cplheaders'] = {0: 'Designator',
                                        4: 'Mid Y',
                                        5: 'Rotation',
                                        6: 'Layer'}
-g_suppliers['LCSC'] = {}
-g_suppliers['LCSC']['fields'] = OrderedDict()
-g_suppliers['LCSC']['fields']['Quantity'] = 'Quantity'
-g_suppliers['LCSC']['fields']['Manufacture Part Number'] = 'PartNumber'
-g_suppliers['LCSC']['fields']['Manufacturer'] = 'Manufacturer'
-g_suppliers['LCSC']['fields']['Description'] = 'ref'
-g_suppliers['LCSC']['fields']['LCSC Part Number'] = 'SupplierRef'
-g_suppliers['LCSC']['fields']['Package'] = 'footprint'
-g_suppliers['LCSC']['equal'] = ('PartNumber', 'SupplierRef')
-g_suppliers['LCSC']['sorted'] = ('Manufacturer', 'PartNumber')
-g_suppliers['LCSC']['grouped'] = True
-g_suppliers['LCSC']['generatecpl'] = False
 
 
 def getEqual(supplier):
@@ -107,6 +119,21 @@ def getFields(supplier):
         return g_suppliers[supplier]['fields']
     return g_suppliers['Default']['fields']
 
+def getDelimiter(supplier):
+    if supplier in g_suppliers:
+        return g_suppliers[supplier]['delimiter']
+    return g_suppliers['Default']['delimiter']
+
+def getQuotechar(supplier):
+    if supplier in g_suppliers:
+        return g_suppliers[supplier]['quotechar']
+    return g_suppliers['Default']['quotechar']
+
+def getQuoting(supplier):
+    if supplier in g_suppliers:
+        return g_suppliers[supplier]['quoting']
+    return g_suppliers['Default']['quoting']
+
 def generateCpl(supplier):
     if supplier in g_suppliers:
         return g_suppliers[supplier]['generatecpl']
@@ -130,7 +157,7 @@ def getOutput(path, supplier, post, ext='csv'):
     return "%s_%s_%s.%s" % (path, supplier.title(), post, ext)
 
 
-class Part(object):
+class Component(object):
     def __init__(self, component):
         self.ref = component.attrib['ref']
         value = component.find('value')
@@ -147,15 +174,15 @@ class Part(object):
         if supplier is not None:
             self.Supplier = supplier.text.upper()
         else:
-            self.Supplier = None
+            self.Supplier = ''
         self.Manufacturer = ''
-        self.PartNumber = None
-        self.SupplierRef = None
+        self.PartNumber = ''
+        self.SupplierRef = ''
         self.Quantity = 1
 
     @property
     def isvalid(self):
-        return self.Supplier is not None and self.Supplier != ''
+        return self.Supplier != ''
 
     def __eq__(self, other):
         if self.Supplier != other.Supplier:
@@ -172,7 +199,7 @@ class Part(object):
     def setCustomFields(self, fields, suppliers):
         for f in fields:
             name = f.attrib['name']
-            if name in getFields(self.Supplier).values():
+            if hasattr(self, name):
                 setattr(self, name, f.text)
         if all((getattr(self, a) for a in getValid(self.Supplier))):
             if self.Supplier not in suppliers:
@@ -184,53 +211,51 @@ class Part(object):
 def parseXml(file):
     tree = ElementTree.parse(file)
     root = tree.getroot()
-
     suppliers = []
-    parts = []
+    components = []
     missings = []
-
-    for f in root.findall('./components/'):
-        part = Part(f)
-        if not part.isvalid:
-            missings.append(part.ref)
+    for c in root.findall('./components/'):
+        component = Component(c)
+        if not component.isvalid:
+            missings.append(component.ref)
             continue
-        fields = f.find('fields')
-        if not part.setCustomFields(fields, suppliers):
-            missings.append(part.ref)
+        fields = c.find('fields')
+        if not component.setCustomFields(fields, suppliers):
+            missings.append(component.ref)
             continue
-
-        if needGrouping(part.Supplier):
-            exist = next((p for p in parts if p == part), None)
+        if needGrouping(component.Supplier):
+            exist = next((c for c in components if c == component), None)
             if exist is None:
-                parts.append(part)
+                components.append(component)
             else:
-                exist.Quantity += part.Quantity
+                exist.Quantity += component.Quantity
         else:
-            for i in range(part.Quantity):
-                parts.append(part)
+            for i in range(component.Quantity):
+                components.append(component)
+    return suppliers, components, missings
 
-    return suppliers, parts, missings
 
-
-def writeCsv(suppliers, parts, path):
+def writeCsv(suppliers, components, path):
     for supplier in suppliers:
         file = getOutput(path, supplier, g_bomext)
         columns = getFields(supplier).keys()
-        fieldsname = getFields(supplier).items()
+        delimiter = getDelimiter(supplier)
+        quotechar = getQuotechar(supplier)
+        quoting = getQuoting(supplier)
+        fields = getFields(supplier).items()
         with open(file, 'w') as csvfile:
-            bom = csv.DictWriter(csvfile,
-                                 fieldnames = columns,
-                                 delimiter = ',',
-                                 quotechar = '"',
-                                 quoting = csv.QUOTE_MINIMAL)
-            bom.writeheader()
-
-            while(len(parts) and parts[0].Supplier == supplier):
+            c = csv.DictWriter(csvfile,
+                               fieldnames = columns,
+                               delimiter = delimiter,
+                               quotechar = quotechar,
+                               quoting = quoting)
+            c.writeheader()
+            while(len(components) and components[0].Supplier == supplier):
                 row = {}
-                part = parts.pop(0)
-                for key, value in fieldsname:
-                    row[key] = getattr(part, value)
-                bom.writerow(row)
+                component = components.pop(0)
+                for key, value in fields:
+                    row[key] = getattr(component, value)
+                c.writerow(row)
 
 
 def rewriteCsv(suppliers, path):
@@ -261,9 +286,9 @@ def copyCsv(input, output, headers):
 
 
 if __name__ == "__main__":
-    suppliers, parts, missings = parseXml(sys.argv[1])
+    suppliers, components, missings = parseXml(sys.argv[1])
     path = sys.argv[2]
-    writeCsv(sorted(suppliers), sorted(parts), path)
+    writeCsv(sorted(suppliers), sorted(components), path)
 
     print("")
     print("Generating BOM csv file for:")
@@ -273,7 +298,7 @@ if __name__ == "__main__":
     if len(missings) > 0:
         print("")
         print("*******************************************************************************")
-        print("Ignoring parts:")
+        print("Ignoring components:")
         print(", ".join(missings))
         print("*******************************************************************************")
 
