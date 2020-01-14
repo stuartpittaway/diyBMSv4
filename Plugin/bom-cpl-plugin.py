@@ -94,6 +94,9 @@ def getSorted(supplier):
         return g_suppliers[supplier]['sorted']
     return g_suppliers['Default']['sorted']
 
+def getValid(supplier):
+    return getEqual(supplier) + getSorted(supplier)
+
 def needGrouping(supplier):
     if supplier in g_suppliers:
         return g_suppliers[supplier]['grouped']
@@ -171,7 +174,7 @@ class Part(object):
             name = f.attrib['name']
             if name in getFields(self.Supplier).values():
                 setattr(self, name, f.text)
-        if all((getattr(self, a) for a in getEqual(self.Supplier))):
+        if all((getattr(self, a) for a in getValid(self.Supplier))):
             if self.Supplier not in suppliers:
                 suppliers.append(self.Supplier)
             return True
