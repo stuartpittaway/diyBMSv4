@@ -5,7 +5,7 @@
 ### Install:
 
 - Download the [plugin](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/archive/v0.0.1.zip)
-- Unzip and put the pugin file 'bom-cpl-plugin.py' in your KiCad working directory.
+- Unzip and put the plugin file `bom-cpl-plugin.py` in your KiCad working directory.
 - In KiCad open Eeschema go to BOM (Generate Bill Of Materials) and add A New Plugin
 
 
@@ -31,7 +31,7 @@ It also creates the CPL file for JLCPcb from one of the position files found in 
 
 ### Plugin configuration:
 
-This plugin has been configured to work with LCSC, JLCPcb and also with many other providers ...
+This plugin has been configured to work with LCSC, JLCPcb and also with many other suppliers ...
 
 #### LCSC configuration:
 
