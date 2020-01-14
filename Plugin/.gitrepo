@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/prrvchr/KiCad-BOM-CPL-Plugin.git
+	branch = master
+	commit = 06f675fca7c80334af1ee5f16ebce41b9f9aea78
+	parent = f2ebbff7ea3c487be59d854d3c05da0c3c995783
+	method = merge
+	cmdver = 0.4.0
