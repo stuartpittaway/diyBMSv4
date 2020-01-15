@@ -2,9 +2,11 @@
 
 ## KiCad python plugin that generate BOM and CPL files for JCLPcb, LCSC and even any other supplier... such as Farnell.
 
+# KiCad BOM CPL Plugin v0.0.2
+
 ### Install:
 
-- Download the [plugin](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/archive/v0.0.1.zip)
+- Download the [plugin](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/archive/v0.0.2.zip)
 - Unzip and put the plugin file `bom-cpl-plugin.py` in your KiCad working directory.
 - In KiCad open Eeschema go to BOM (Generate Bill Of Materials) and add A New Plugin
 
@@ -17,9 +19,11 @@ It is necessary for the operation to add 4 additional custom fields in Eeschema,
 - `Supplier`
 - `SupplierRef`
 
-The required custom field `Supplier` must be set to one of the predefined supplier (LCSC or JLCPcb) or any other supplier name case insensitive.
+The required custom field `Supplier` must be set to one of the predefined supplier (LCSC or JLCPcb for example) or any other supplier name case insensitive.
 
-it is also possible to add an optional `Quantity` field in order to be able to manage the quantities in Eeschema.
+The required custom field `SupplierRef` can be replaced by other custom fields such as: `LCSCRef` or `JLCPcbRef` in order to make possible the referencing of several suppliers on a Eeschema component. In this case, changing the value of the `Supplier` field will allow you to switch to the correct supplier reference.
+
+it is also possible to add an optional `Quantity` custom field in order to be able to manage the quantities in Eeschema.
 In the absence of this field, the default quantity is 1.
 
 If necessary, a grouping is carried out on the quantities, making it possible to generate a single row for identical components in the BOM file.
@@ -91,5 +95,5 @@ No CPL file will be generated.
 ### If errors occur:
 
 In case of problem, :-(  
-I encourage you to create an [issue](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/issues/new)
-I will try to solve it :-)  
+I encourage you to create an [issue](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/issues/new)  
+I will try to solve it :-)

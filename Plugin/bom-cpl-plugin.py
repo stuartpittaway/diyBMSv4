@@ -5,7 +5,7 @@
 __author__ = "prrvchr@gmail.com"
 __copyright__ = "Copyright 2020, prrvchr"
 __license__ = "Mozilla Public License v2 or GNU Lesser General Public License v3"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 
 """
@@ -172,7 +172,8 @@ class Component(object):
             self.footprint = ''
         supplier = component.find('./fields/field[@name="Supplier"]')
         if supplier is not None:
-            self.Supplier = supplier.text.upper()
+            self.supplier = supplier.text
+            self.Supplier = self.supplier.upper()
         else:
             self.Supplier = ''
         self.Manufacturer = ''
@@ -197,12 +198,22 @@ class Component(object):
         return (getattr(self, a) for a in attrs) < (getattr(other, a) for a in attrs)
 
     def setCustomFields(self, fields, suppliers):
-        for f in fields:
-            name = f.attrib['name']
-            if name == 'Supplier':
-                continue
-            if hasattr(self, name):
-                setattr(self, name, f.text)
+        manufacturer = fields.find('./field[@name="Manufacturer"]')
+        if manufacturer is not None:
+            self.Manufacturer = manufacturer.text
+        partnumber = fields.find('./field[@name="PartNumber"]')
+        if partnumber is not None:
+            self.PartNumber = partnumber.text
+        reference = fields.find('./field[@name="%sRef"]' % self.supplier)
+        if reference is not None:
+            self.SupplierRef = reference.text
+        else:
+            reference = fields.find('./field[@name="SupplierRef"]')
+            if reference is not None:
+                self.SupplierRef = reference.text
+        quantity = fields.find('./field[@name="Quantity"]')
+        if quantity is not None:
+            self.Quantity = quantity.text
         if all((getattr(self, a) for a in getValid(self.Supplier))):
             if self.Supplier not in suppliers:
                 suppliers.append(self.Supplier)
