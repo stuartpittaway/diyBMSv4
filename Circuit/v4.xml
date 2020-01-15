@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/user/Documents/GitHub/diyBMSv4/Circuit/v4.sch</source>
-    <date>Wed 15 Jan 2020 01:26:39 CET</date>
+    <date>Wed 15 Jan 2020 16:11:25 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -24,10 +24,11 @@
       <footprint>Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm</footprint>
       <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</datasheet>
       <fields>
+        <field name="FarnellRef">2396716</field>
+        <field name="LCSCRef">C219103</field>
         <field name="Manufacturer">Microchip Tech</field>
         <field name="PartNumber">ATTINY841-SSU</field>
-        <field name="Supplier">Farnell</field>
-        <field name="SupplierRef">2396716</field>
+        <field name="Supplier">LCSC</field>
       </fields>
       <libsource lib="v4-rescue" part="ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue" description=""/>
       <sheetpath names="/" tstamps="/"/>

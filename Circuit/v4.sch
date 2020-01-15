@@ -24,7 +24,8 @@ F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microc
 F 4 "Microchip Tech" H 1650 3670 50  0001 C CNN "Manufacturer"
 F 5 "ATTINY841-SSU" H 1650 3670 50  0001 C CNN "PartNumber"
 F 6 "Farnell" H 1650 3670 50  0001 C CNN "Supplier"
-F 7 "2396716" H 1650 3670 50  0001 C CNN "SupplierRef"
+F 7 "C219103" H 1650 3670 50  0001 C CNN "SupplierRef"
+F 8 "2396716" H 1650 3670 50  0001 C CNN "FarnellRef"
 	1    1650 3670
 	1    0    0    -1  
 $EndComp
