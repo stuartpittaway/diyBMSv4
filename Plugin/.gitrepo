@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/prrvchr/KiCad-BOM-CPL-Plugin.git
 	branch = master
-	commit = 1d7841c0409884c9e839294e47f323009dc82341
-	parent = 5e41c184e276ff7f98eafff1fffe351c05e6c690
+	commit = bae58be91d27a5825010645e701f76bcd79e763b
+	parent = 3db44229040d49338fa7eef04628afdd53a992b6
 	method = merge
 	cmdver = 0.4.0

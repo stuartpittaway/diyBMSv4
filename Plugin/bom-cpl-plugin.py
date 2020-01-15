@@ -199,6 +199,8 @@ class Component(object):
     def setCustomFields(self, fields, suppliers):
         for f in fields:
             name = f.attrib['name']
+            if name == 'Supplier':
+                continue
             if hasattr(self, name):
                 setattr(self, name, f.text)
         if all((getattr(self, a) for a in getValid(self.Supplier))):
@@ -291,7 +293,7 @@ if __name__ == "__main__":
     writeCsv(sorted(suppliers), sorted(components), path)
 
     print("")
-    print("Generating BOM csv file for:")
+    print("Generating BOM (Bill Of Materials) csv file for:")
     for supplier in suppliers:
         print("%s: %s" % (supplier, getOutput(path, supplier, g_bomext)))
 
@@ -312,7 +314,7 @@ if __name__ == "__main__":
         else:
             print("")
             print("*******************************************************************************")
-            print("Error can't retrieve a position file like:")
+            print("Error: Can't retrieve a position file like:")
             for input in getInputs(path):
                 print(input)
             print("*******************************************************************************")
