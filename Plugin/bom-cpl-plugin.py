@@ -1,11 +1,11 @@
-#!
+ #!
 # -*- coding: utf-8 -*-
 
 
 __author__ = "prrvchr@gmail.com"
 __copyright__ = "Copyright 2020, prrvchr"
 __license__ = "Mozilla Public License v2 or GNU Lesser General Public License v3"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 
 """
@@ -27,7 +27,7 @@ Generates a BOM or CPL csv file compatible with:
             'Quantity', 'Manufacture Part Number', 'Manufacturer', 'Description', 'Supplier Part Number', 'Package'
 
     Usage:
-        python "full_path/jlcpcb-bom-plugin.py" "%I" "%O"
+        python "full_path/jlcpcb-bom-plugin.py" "%I" "%O" Quantity=1
 """
 
 
@@ -134,7 +134,7 @@ def getQuoting(supplier):
         return g_suppliers[supplier]['quoting']
     return g_suppliers['Default']['quoting']
 
-def generateCpl(supplier):
+def needCpl(supplier):
     if supplier in g_suppliers:
         return g_suppliers[supplier]['generatecpl']
     return g_suppliers['Default']['generatecpl']
@@ -156,6 +156,13 @@ def getInput(path, post, ext='csv'):
 def getOutput(path, supplier, post, ext='csv'):
     return "%s_%s_%s.%s" % (path, supplier.title(), post, ext)
 
+def getQuantity(quantity, minimum=0):
+    try:
+        i = int(quantity)
+    except ValueError:
+        i = minimum
+    return max(i, minimum)
+
 
 class Component(object):
     def __init__(self, component):
@@ -172,10 +179,9 @@ class Component(object):
             self.footprint = ''
         supplier = component.find('./fields/field[@name="Supplier"]')
         if supplier is not None:
-            self.supplier = supplier.text
-            self.Supplier = self.supplier.upper()
+            self._supplier = supplier.text
         else:
-            self.Supplier = ''
+            self._supplier = ''
         self.Manufacturer = ''
         self.PartNumber = ''
         self.SupplierRef = ''
@@ -183,19 +189,28 @@ class Component(object):
 
     @property
     def isvalid(self):
-        return self.Supplier != ''
+        if self._supplier != '':
+            self.Supplier = self._supplier.upper()
+            self._sorted = getSorted(self.Supplier)
+            self._equal = getEqual(self.Supplier)
+            return True
+        return False
 
     def __eq__(self, other):
         if self.Supplier != other.Supplier:
             return False
-        attrs = getEqual(self.Supplier)
-        return (getattr(self, a) for a in attrs) == (getattr(other, a) for a in attrs)
+        for a in self._equal:
+            if getattr(self, a) != getattr(other, a):
+                return False
+        return True
 
     def __lt__(self, other):
         if self.Supplier != other.Supplier:
             return self.Supplier < other.Supplier
-        attrs = getSorted(self.Supplier)
-        return (getattr(self, a) for a in attrs) < (getattr(other, a) for a in attrs)
+        for a in self._sorted:
+            if getattr(self, a) != getattr(other, a):
+                return getattr(self, a) < getattr(other, a)
+        return False
 
     def setCustomFields(self, fields, suppliers):
         manufacturer = fields.find('./field[@name="Manufacturer"]')
@@ -204,7 +219,7 @@ class Component(object):
         partnumber = fields.find('./field[@name="PartNumber"]')
         if partnumber is not None:
             self.PartNumber = partnumber.text
-        reference = fields.find('./field[@name="%sRef"]' % self.supplier)
+        reference = fields.find('./field[@name="%sRef"]' % self._supplier)
         if reference is not None:
             self.SupplierRef = reference.text
         else:
@@ -213,7 +228,7 @@ class Component(object):
                 self.SupplierRef = reference.text
         quantity = fields.find('./field[@name="Quantity"]')
         if quantity is not None:
-            self.Quantity = quantity.text
+            self.Quantity = getQuantity(quantity.text)
         if all((getattr(self, a) for a in getValid(self.Supplier))):
             if self.Supplier not in suppliers:
                 suppliers.append(self.Supplier)
@@ -221,8 +236,14 @@ class Component(object):
         return False
 
 
-def parseXml(file):
-    tree = ElementTree.parse(file)
+def generateBom(xml, path, quantity):
+    suppliers, components, missings = parseXml(xml, quantity)
+    writeCsv(suppliers, components, path)
+    return suppliers, missings
+
+
+def parseXml(xml, quantity):
+    tree = ElementTree.parse(xml)
     root = tree.getroot()
     suppliers = []
     components = []
@@ -236,6 +257,10 @@ def parseXml(file):
         if not component.setCustomFields(fields, suppliers):
             missings.append(component.ref)
             continue
+        if component.Quantity == 0:
+            missings.append(component.ref)
+            continue
+        component.Quantity *= quantity
         if needGrouping(component.Supplier):
             exist = next((c for c in components if c == component), None)
             if exist is None:
@@ -243,20 +268,19 @@ def parseXml(file):
             else:
                 exist.Quantity += component.Quantity
         else:
-            for i in range(component.Quantity):
-                components.append(component)
-    return suppliers, components, missings
+            components.extend([component for c in range(component.Quantity)])
+    return sorted(suppliers), sorted(components), missings
 
 
 def writeCsv(suppliers, components, path):
     for supplier in suppliers:
-        file = getOutput(path, supplier, g_bomext)
+        out = getOutput(path, supplier, g_bomext)
         columns = getFields(supplier).keys()
         delimiter = getDelimiter(supplier)
         quotechar = getQuotechar(supplier)
         quoting = getQuoting(supplier)
         fields = getFields(supplier).items()
-        with open(file, 'w') as csvfile:
+        with open(out, 'w') as csvfile:
             c = csv.DictWriter(csvfile,
                                fieldnames = columns,
                                delimiter = delimiter,
@@ -271,16 +295,16 @@ def writeCsv(suppliers, components, path):
                 c.writerow(row)
 
 
-def rewriteCsv(suppliers, path):
+def generateCpl(suppliers, path):
     rewrited = {}
     for supplier in suppliers:
-        if generateCpl(supplier):
+        if needCpl(supplier):
             rewrited[supplier] = False
-            for input in getInputs(path):
-                if os.path.isfile(input):
-                    output = getOutput(path, supplier, g_cplext)
+            for i in getInputs(path):
+                if os.path.isfile(i):
+                    out = getOutput(path, supplier, g_cplext)
                     headers = getHeaders(supplier)
-                    copyCsv(input, output, headers)
+                    copyCsv(i, out, headers)
                     rewrited[supplier] = True
                     break
     return rewrited
@@ -298,34 +322,39 @@ def copyCsv(input, output, headers):
             writer.writerow(row)
 
 
-if __name__ == "__main__":
-    suppliers, components, missings = parseXml(sys.argv[1])
+def getArguments():
+    xml = sys.argv[1]
     path = sys.argv[2]
-    writeCsv(sorted(suppliers), sorted(components), path)
+    quantity = 1
+    if len(sys.argv) > 3:
+        quantity = getQuantity(sys.argv[3], 1)
+    return xml, path, quantity
 
+
+if __name__ == "__main__":
+    xml, path, quantity = getArguments()
+    suppliers, missings = generateBom(xml, path, quantity)
     print("")
-    print("Generating BOM (Bill Of Materials) csv file for:")
+    print(">>> Generating BOM (Bill Of Materials) csv file for (Quantity = %s):" % quantity)
     for supplier in suppliers:
+        print("")
         print("%s: %s" % (supplier, getOutput(path, supplier, g_bomext)))
 
     if len(missings) > 0:
         print("")
-        print("*******************************************************************************")
-        print("Ignoring components:")
+        print("WARNING: These componants cannot be integrated:")
         print(", ".join(missings))
-        print("*******************************************************************************")
 
-    suppliers = rewriteCsv(suppliers, path)
+    suppliers = generateCpl(suppliers, path)
     if len(suppliers):
         print("")
-        print("Generating CPL (Component Placement List) csv file for:")
+        print(">>> Generating CPL (Component Placement List) csv file for:")
     for supplier, status in suppliers.items():
         if status:
+            print("")
             print("%s: %s:" % (supplier, getOutput(path, supplier, g_cplext)))
         else:
             print("")
-            print("*******************************************************************************")
-            print("Error: Can't retrieve a position file like:")
-            for input in getInputs(path):
-                print(input)
-            print("*******************************************************************************")
+            print("ERROR: Can't retrieve a position file like:")
+            for i in getInputs(path):
+                print(i)

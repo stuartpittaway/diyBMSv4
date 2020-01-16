@@ -2,11 +2,11 @@
 
 ## KiCad python plugin that generate BOM and CPL files for JCLPcb, LCSC and even any other supplier... such as Farnell.
 
-# KiCad BOM CPL Plugin v0.0.2
+# KiCad BOM CPL Plugin v0.0.3
 
 ### Install:
 
-- Download the [plugin](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/archive/v0.0.2.zip)
+- Download the [plugin](https://github.com/prrvchr/KiCad-BOM-CPL-Plugin/archive/v0.0.3.zip)
 - Unzip and put the plugin file `bom-cpl-plugin.py` in your KiCad working directory.
 - In KiCad open Eeschema go to BOM (Generate Bill Of Materials) and add A New Plugin
 
@@ -24,13 +24,15 @@ The required custom field `Supplier` must be set to one of the predefined suppli
 The required custom field `SupplierRef` can be replaced by other custom fields such as: `LCSCRef` or `JLCPcbRef` in order to make possible the referencing of several suppliers on a Eeschema component. In this case, changing the value of the `Supplier` field will allow you to switch to the correct supplier reference.
 
 it is also possible to add an optional `Quantity` custom field in order to be able to manage the quantities in Eeschema.
-In the absence of this field, the default quantity is 1.
+In the absence of this field, the default quantity is 1. If value is set to 0 or is invalid, the component will not be integrated to any BOM file...
 
 If necessary, a grouping is carried out on the quantities, making it possible to generate a single row for identical components in the BOM file.
 
 If you know a little Python, the grouping and the order of the components in the BOM files is fully configurable ...
 
 When launching the plugin (in Eeschema BOM) it will create as many BOM files as there are different `Supplier` encountered.
+
+It is possible to add a quantity argument at the end of the plugin command line (ie: `bom-cpl-plugin.py" "%I" "%O"  1234`), without this argument or with an invalid value, a default quantity of 1 will be used.
 
 It also creates the CPL file for JLCPcb from one of the position files found in the working directory (ie: `your_project-all-pos.csv`, `your_project-top-pos.csv`, `your_project-bottom-pos.csv`).
 
