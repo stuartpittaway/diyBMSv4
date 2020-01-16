@@ -695,7 +695,7 @@ F 0 "RX1" H 9203 4970 50  0000 R CNN
 F 1 "RX Connector" H 9203 5061 50  0000 R CNN
 F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 9230 5090 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 9230 5090 50  0001 C CNN
-F 4 " JST Sales America" H 9230 5090 50  0001 C CNN "Manufacturer"
+F 4 "JST Sales America" H 9230 5090 50  0001 C CNN "Manufacturer"
 F 5 "S2B-PH-K-S(LF)(SN)" H 9230 5090 50  0001 C CNN "PartNumber"
 F 6 "LCSC" H 9230 5090 50  0001 C CNN "Supplier"
 F 7 "C173752" H 9230 5090 50  0001 C CNN "SupplierRef"

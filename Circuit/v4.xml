@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/user/Documents/GitHub/diyBMSv4/Circuit/v4.sch</source>
-    <date>Wed 15 Jan 2020 16:11:25 CET</date>
+    <date>Thu 16 Jan 2020 21:54:16 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -25,10 +25,10 @@
       <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</datasheet>
       <fields>
         <field name="FarnellRef">2396716</field>
-        <field name="LCSCRef">C219103</field>
         <field name="Manufacturer">Microchip Tech</field>
         <field name="PartNumber">ATTINY841-SSU</field>
-        <field name="Supplier">LCSC</field>
+        <field name="Supplier">Farnell</field>
+        <field name="SupplierRef">C219103</field>
       </fields>
       <libsource lib="v4-rescue" part="ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -331,7 +331,7 @@
       <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
-        <field name="Manufacturer"> JST Sales America</field>
+        <field name="Manufacturer">JST Sales America</field>
         <field name="PartNumber">S2B-PH-K-S(LF)(SN)</field>
         <field name="Supplier">LCSC</field>
         <field name="SupplierRef">C173752</field>

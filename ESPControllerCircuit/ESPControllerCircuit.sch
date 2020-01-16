@@ -25,7 +25,7 @@ F 4 "Shenzhen CanKemeng" H 2640 6480 50  0001 C CNN "Manufacturer"
 F 5 "C124416" H 2640 6480 50  0001 C CNN "PartNumber"
 F 6 "LCSC" H 2640 6480 50  0001 C CNN "Supplier"
 F 7 "C124416" H 2640 6480 50  0001 C CNN "SupplierRef"
-F 8 "2" H 2640 6480 50  0001 C CNN "Qantity"
+F 8 "2" H 2640 6480 50  0001 C CNN "Quantity"
 	1    2640 6480
 	1    0    0    -1  
 $EndComp
@@ -37,6 +37,10 @@ F 0 "WIFI_RST1" H 1690 6915 50  0000 C CNN
 F 1 "WIFI RST" H 1690 6824 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 1690 6830 50  0001 C CNN
 F 3 "~" H 1690 6830 50  0001 C CNN
+F 4 "Shenzhen Cankemeng" H 1690 6630 50  0001 C CNN "Manufacturer"
+F 5 "C124375" H 1690 6630 50  0001 C CNN "PartNumber"
+F 6 "LCSC" H 1690 6630 50  0001 C CNN "Supplier"
+F 7 "C124375" H 1690 6630 50  0001 C CNN "SupplierRef"
 	1    1690 6630
 	1    0    0    -1  
 $EndComp
@@ -96,10 +100,10 @@ F 0 "D1" H 4040 6540 50  0000 C CNN
 F 1 "COMMS" H 4030 6720 50  0000 C CNN
 F 2 "LEDs:LED_D5.0mm" H 4040 6630 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/1811021515_Lite-On-LTL-293SJW_C125079.pdf" H 4040 6630 50  0001 C CNN
-F 4 "Lite-On" H 4040 6630 50  0001 C CNN "Manufacturer"
-F 5 "LTL-293SJW" H 4040 6630 50  0001 C CNN "PartNumber"
+F 4 "Everlight Elec" H 4040 6630 50  0001 C CNN "Manufacturer"
+F 5 "333-2SURC/S530-A3" H 4040 6630 50  0001 C CNN "PartNumber"
 F 6 "LCSC" H 4040 6630 50  0001 C CNN "Supplier"
-F 7 "C125079" H 4040 6630 50  0001 C CNN "SupplierRef"
+F 7 "C125756" H 4040 6630 50  0001 C CNN "SupplierRef"
 	1    4040 6630
 	-1   0    0    1   
 $EndComp
@@ -518,10 +522,10 @@ F 0 "C_SEN1" H 5422 6832 50  0000 R CNN
 F 1 "Current Sensor" H 5422 6923 50  0000 R CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5450 6950 50  0001 C CNN
 F 3 "~" H 5450 6950 50  0001 C CNN
-F 4 "Mintron" H 5450 6950 50  0001 C CNN "Manufacturer"
-F 5 "MTP125-1103S1" H 5450 6950 50  0001 C CNN "PartNumber"
+F 4 "Boom Precision Elec" H 5450 6950 50  0001 C CNN "Manufacturer"
+F 5 "C92159" H 5450 6950 50  0001 C CNN "PartNumber"
 F 6 "LCSC" H 5450 6950 50  0001 C CNN "Supplier"
-F 7 "C358685" H 5450 6950 50  0001 C CNN "SupplierRef"
+F 7 "C92159" H 5450 6950 50  0001 C CNN "SupplierRef"
 	1    5450 6950
 	-1   0    0    1   
 $EndComp
@@ -685,10 +689,10 @@ F 0 "J5" H 5092 6192 50  0000 R CNN
 F 1 "Optional" H 5092 6283 50  0000 R CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5120 6310 50  0001 C CNN
 F 3 "~" H 5120 6310 50  0001 C CNN
-F 4 "Mintron" H 5120 6310 50  0001 C CNN "Manufacturer"
-F 5 "MTP125-1103S1" H 5120 6310 50  0001 C CNN "PartNumber"
+F 4 "Boom Precision Elec" H 5120 6310 50  0001 C CNN "Manufacturer"
+F 5 "C92159" H 5120 6310 50  0001 C CNN "PartNumber"
 F 6 "LCSC" H 5120 6310 50  0001 C CNN "Supplier"
-F 7 "C358685" H 5120 6310 50  0001 C CNN "SupplierRef"
+F 7 "C92159" H 5120 6310 50  0001 C CNN "SupplierRef"
 	1    5120 6310
 	-1   0    0    1   
 $EndComp

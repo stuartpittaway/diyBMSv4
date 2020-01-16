@@ -1,7 +1,4 @@
 Quantity,Manufacture Part Number,Manufacturer,Description,LCSC Part Number,Package
 1,C65114,Boom Precision Elec,J2,C65114,Pin_Header_Straight_2x03_Pitch2.54mm
+3,S2B-PH-K-S(LF)(SN),JST Sales America,POWER1,C173752,JST_PH_S2B-PH-K_02x2.00mm_Angled
 1,C124379,Shenzhen Cankemeng,SENSOR1,C124379,Pin_Header_Straight_1x05_Pitch2.54mm
-1,S2B-PH-K-S(LF)(SN), JST Sales America,RX1,C173752,JST_PH_S2B-PH-K_02x2.00mm_Angled
-1,S2B-PH-K-S(LF)(SN),JST Sales America,POWER1,C173752,JST_PH_S2B-PH-K_02x2.00mm_Angled
-1,S2B-PH-K-S(LF)(SN),JST Sales America,TX1,C173752,JST_PH_S2B-PH-K_02x2.00mm_Angled
-1,ATTINY841-SSU,Microchip Tech,ATTINY841,C219103,SOIC-14_3.9x8.7mm_Pitch1.27mm

@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/user/Documents/GitHub/diyBMSv4/ESPControllerCircuit/ESPControllerCircuit.sch</source>
-    <date>Tue 14 Jan 2020 12:50:02 CET</date>
+    <date>Thu 16 Jan 2020 21:53:26 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -25,7 +25,7 @@
       <fields>
         <field name="Manufacturer">Shenzhen CanKemeng</field>
         <field name="PartNumber">C124416</field>
-        <field name="Qantity">2</field>
+        <field name="Quantity">2</field>
         <field name="Supplier">LCSC</field>
         <field name="SupplierRef">C124416</field>
       </fields>
@@ -37,6 +37,12 @@
       <value>WIFI RST</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm</footprint>
       <datasheet>~</datasheet>
+      <fields>
+        <field name="Manufacturer">Shenzhen Cankemeng</field>
+        <field name="PartNumber">C124375</field>
+        <field name="Supplier">LCSC</field>
+        <field name="SupplierRef">C124375</field>
+      </fields>
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5CD48DA7</tstamp>
@@ -46,10 +52,10 @@
       <footprint>LEDs:LED_D5.0mm</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1811021515_Lite-On-LTL-293SJW_C125079.pdf</datasheet>
       <fields>
-        <field name="Manufacturer">Lite-On</field>
-        <field name="PartNumber">LTL-293SJW</field>
+        <field name="Manufacturer">Everlight Elec</field>
+        <field name="PartNumber">333-2SURC/S530-A3</field>
         <field name="Supplier">LCSC</field>
-        <field name="SupplierRef">C125079</field>
+        <field name="SupplierRef">C125756</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -214,10 +220,10 @@
       <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="Manufacturer">Mintron</field>
-        <field name="PartNumber">MTP125-1103S1</field>
+        <field name="Manufacturer">Boom Precision Elec</field>
+        <field name="PartNumber">C92159</field>
         <field name="Supplier">LCSC</field>
-        <field name="SupplierRef">C358685</field>
+        <field name="SupplierRef">C92159</field>
       </fields>
       <libsource lib="Connector" part="Conn_01x03_Male" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
@@ -284,10 +290,10 @@
       <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="Manufacturer">Mintron</field>
-        <field name="PartNumber">MTP125-1103S1</field>
+        <field name="Manufacturer">Boom Precision Elec</field>
+        <field name="PartNumber">C92159</field>
         <field name="Supplier">LCSC</field>
-        <field name="SupplierRef">C358685</field>
+        <field name="SupplierRef">C92159</field>
       </fields>
       <libsource lib="Connector" part="Conn_01x03_Male" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
