@@ -1,3 +1,11 @@
+# Last Controller:
+
+![Controller](./ESPControllerCircuit/ESPControllerCircuit.png)
+
+# Last Modules:
+
+![Module](./Circuit/v4.png)
+
 # diyBMS v4
 
 Version 4 of the diyBMS
@@ -64,12 +72,12 @@ Existing balancing solutions are available in the market place, but at a relativ
 
 # BMS Design
 
-Design Goals: 
-* Build upon my existing skill set and knowledge. 
+Design Goals:
+* Build upon my existing skill set and knowledge.
 * Building something that others can contribute to using regular standard libraries and off the shelf components.
 * Build something that is inheriently safe
 * Use platform.io to manage code and libraries
-* Use Arduino based libraries and tools 
+* Use Arduino based libraries and tools
 * Put everything on GITHUB
 * Document it (always gets left to the end!)
 
