@@ -35,7 +35,7 @@ U 1 1 5CD48DA7
 P 1690 6630
 F 0 "WIFI_RST1" H 1690 6915 50  0000 C CNN
 F 1 "WIFI RST" H 1690 6824 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 1690 6830 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1690 6830 50  0001 C CNN
 F 3 "~" H 1690 6830 50  0001 C CNN
 F 4 "Shenzhen Cankemeng" H 1690 6630 50  0001 C CNN "Manufacturer"
 F 5 "C124375" H 1690 6630 50  0001 C CNN "PartNumber"
@@ -98,7 +98,7 @@ U 1 1 5CD4CF59
 P 4040 6630
 F 0 "D1" H 4040 6540 50  0000 C CNN
 F 1 "COMMS" H 4030 6720 50  0000 C CNN
-F 2 "LEDs:LED_D5.0mm" H 4040 6630 50  0001 C CNN
+F 2 "LED_THT:LED_D5.0mm" H 4040 6630 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/1811021515_Lite-On-LTL-293SJW_C125079.pdf" H 4040 6630 50  0001 C CNN
 F 4 "Everlight Elec" H 4040 6630 50  0001 C CNN "Manufacturer"
 F 5 "333-2SURC/S530-A3" H 4040 6630 50  0001 C CNN "PartNumber"
@@ -113,7 +113,7 @@ U 1 1 5CD4DABA
 P 3580 6630
 F 0 "R1" V 3500 6630 50  0000 C CNN
 F 1 "470R" V 3660 6630 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 3510 6630 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 3510 6630 50  0001 C CNN
 F 3 "~" H 3580 6630 50  0001 C CNN
 F 4 "Uniroyal Elec" V 3580 6630 50  0001 C CNN "Manufacturer"
 F 5 "0805W8F4700T5E" V 3580 6630 50  0001 C CNN "PartNumber"
@@ -145,7 +145,7 @@ U 1 1 5CD51ABF
 P 2170 5310
 F 0 "DEBUG1" H 2198 5240 50  0000 L CNN
 F 1 "Conn_01x02_Female" H 2198 5240 50  0001 L CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 2198 5149 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 2198 5149 50  0001 L CNN
 F 3 "~" H 2170 5310 50  0001 C CNN
 F 4 "Shenzhen Cankemeng" H 2170 5310 50  0001 C CNN "Manufacturer"
 F 5 "C124375" H 2170 5310 50  0001 C CNN "PartNumber"
@@ -188,7 +188,7 @@ U 1 1 5CD589E5
 P 4530 5640
 F 0 "RX1" H 4340 5520 50  0000 L CNN
 F 1 "Receive" H 4220 5640 50  0000 L CNN
-F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4530 5640 50  0001 C CNN
+F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4530 5640 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 4530 5640 50  0001 C CNN
 F 4 "JST Sales America" H 4530 5640 50  0001 C CNN "Manufacturer"
 F 5 "S2B-PH-K-S(LF)(SN)" H 4530 5640 50  0001 C CNN "PartNumber"
@@ -203,7 +203,7 @@ U 1 1 5CD595C3
 P 4650 5170
 F 0 "TX1" H 4622 5052 50  0000 R CNN
 F 1 "Transmit" H 4622 5143 50  0000 R CNN
-F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4650 5170 50  0001 C CNN
+F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4650 5170 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 4650 5170 50  0001 C CNN
 F 4 "JST Sales America" H 4650 5170 50  0001 C CNN "Manufacturer"
 F 5 "S2B-PH-K-S(LF)(SN)" H 4650 5170 50  0001 C CNN "PartNumber"
@@ -225,7 +225,7 @@ U 1 1 5CD5BA4A
 P 3930 5790
 F 0 "R2" V 3723 5790 50  0000 C CNN
 F 1 "4K7" V 3814 5790 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 3860 5790 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 3860 5790 50  0001 C CNN
 F 3 "~" H 3930 5790 50  0001 C CNN
 F 4 "Uniroyal Elec" V 3930 5790 50  0001 C CNN "Manufacturer"
 F 5 "0805W8F4701T5E" V 3930 5790 50  0001 C CNN "PartNumber"
@@ -269,7 +269,7 @@ U 1 1 5CE037A1
 P 3440 5010
 F 0 "R3" V 3233 5010 50  0000 C CNN
 F 1 "220R" V 3324 5010 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 3370 5010 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 3370 5010 50  0001 C CNN
 F 3 "~" H 3440 5010 50  0001 C CNN
 F 4 "Uniroyal Elec" V 3440 5010 50  0001 C CNN "Manufacturer"
 F 5 "0805W8F2200T5E" V 3440 5010 50  0001 C CNN "PartNumber"
@@ -336,7 +336,7 @@ U 1 1 5CE1118E
 P 1830 3350
 F 0 "R4" H 1680 3390 50  0000 L CNN
 F 1 "4K7" H 1650 3290 50  0000 L CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 1760 3350 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 1760 3350 50  0001 C CNN
 F 3 "~" H 1830 3350 50  0001 C CNN
 F 4 "Uniroyal Elec" H 1830 3350 50  0001 C CNN "Manufacturer"
 F 5 "0805W8F4701T5E" H 1830 3350 50  0001 C CNN "PartNumber"
@@ -351,7 +351,7 @@ U 1 1 5CE113C9
 P 2020 3350
 F 0 "R5" H 2090 3396 50  0000 L CNN
 F 1 "4K7" H 2090 3305 50  0000 L CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 1950 3350 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 1950 3350 50  0001 C CNN
 F 3 "~" H 2020 3350 50  0001 C CNN
 F 4 "Uniroyal Elec" H 2020 3350 50  0001 C CNN "Manufacturer"
 F 5 "0805W8F4701T5E" H 2020 3350 50  0001 C CNN "PartNumber"
@@ -444,7 +444,7 @@ U 1 1 5CE6037F
 P 3870 3860
 F 0 "JRELAY1" H 3842 3742 50  0000 R CNN
 F 1 "Conn_01x06_Male" H 3842 3833 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm" H 3870 3860 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 3870 3860 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/1810312320_BOOMELE-Boom-Precision-Elec-C37208_C37208.pdf" H 3870 3860 50  0001 C CNN
 F 4 "Boom Precision Elec" H 3870 3860 50  0001 C CNN "Manufacturer"
 F 5 "C37208" H 3870 3860 50  0001 C CNN "PartNumber"
@@ -473,7 +473,7 @@ U 1 1 5CE02B8B
 P 2670 3900
 F 0 "U3" H 2670 4781 50  0000 C CNN
 F 1 "PCF8574T/3,518" H 2690 4880 50  0000 C CNN
-F 2 "SMD_Packages:SO-16-W" H 2670 3900 50  0001 C CNN
+F 2 "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm" H 2670 3900 50  0001 C CNN
 F 3 "https://lcsc.com/product-detail/I-O-Expansion_NXP_PCF8574T-3-518_PCF8574T-3-518_C7605.html" H 2670 3900 50  0001 C CNN
 F 4 "NXP Semicon" H 2670 3900 50  0001 C CNN "Manufacturer"
 F 5 "PCF8574T/3,518" H 2670 3900 50  0001 C CNN "PartNumber"
@@ -520,7 +520,7 @@ U 1 1 5CE723DE
 P 5450 6950
 F 0 "C_SEN1" H 5422 6832 50  0000 R CNN
 F 1 "Current Sensor" H 5422 6923 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5450 6950 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 5450 6950 50  0001 C CNN
 F 3 "~" H 5450 6950 50  0001 C CNN
 F 4 "Boom Precision Elec" H 5450 6950 50  0001 C CNN "Manufacturer"
 F 5 "C92159" H 5450 6950 50  0001 C CNN "PartNumber"
@@ -577,7 +577,7 @@ U 1 1 5CEAA4FE
 P 4210 4350
 F 0 "J1" H 4182 4232 50  0000 R CNN
 F 1 "Input" H 4182 4323 50  0000 R CNN
-F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4210 4350 50  0001 C CNN
+F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4210 4350 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 4210 4350 50  0001 C CNN
 F 4 "JST Sales America" H 4210 4350 50  0001 C CNN "Manufacturer"
 F 5 "S2B-PH-K-S(LF)(SN)" H 4210 4350 50  0001 C CNN "PartNumber"
@@ -592,7 +592,7 @@ U 1 1 5CEAAE9A
 P 4210 4570
 F 0 "J2" H 4182 4452 50  0000 R CNN
 F 1 "Input" H 4182 4543 50  0000 R CNN
-F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4210 4570 50  0001 C CNN
+F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4210 4570 50  0001 C CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf" H 4210 4570 50  0001 C CNN
 F 4 "JST Sales America" H 4210 4570 50  0001 C CNN "Manufacturer"
 F 5 "S2B-PH-K-S(LF)(SN)" H 4210 4570 50  0001 C CNN "PartNumber"
@@ -631,7 +631,7 @@ U 1 1 5CEB6FE6
 P 4800 4350
 F 0 "J3" H 4772 4232 50  0000 R CNN
 F 1 "Input" H 4772 4323 50  0000 R CNN
-F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4800 4350 50  0001 C CNN
+F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4800 4350 50  0001 C CNN
 F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4800 4350 50  0001 C CNN
 F 4 "JST Sales America" H 4800 4350 50  0001 C CNN "Manufacturer"
 F 5 "S2B-PH-K-S(LF)(SN)" H 4800 4350 50  0001 C CNN "PartNumber"
@@ -646,7 +646,7 @@ U 1 1 5CEB74DB
 P 4800 4550
 F 0 "J4" H 4772 4432 50  0000 R CNN
 F 1 "Input" H 4772 4523 50  0000 R CNN
-F 2 "Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled" H 4800 4550 50  0001 C CNN
+F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4800 4550 50  0001 C CNN
 F 3 "http://www.farnell.com/datasheets/2057211.pdf" H 4800 4550 50  0001 C CNN
 F 4 "JST Sales America" H 4800 4550 50  0001 C CNN "Manufacturer"
 F 5 "S2B-PH-K-S(LF)(SN)" H 4800 4550 50  0001 C CNN "PartNumber"
@@ -687,7 +687,7 @@ U 1 1 5CEE1C26
 P 5120 6310
 F 0 "J5" H 5092 6192 50  0000 R CNN
 F 1 "Optional" H 5092 6283 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5120 6310 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 5120 6310 50  0001 C CNN
 F 3 "~" H 5120 6310 50  0001 C CNN
 F 4 "Boom Precision Elec" H 5120 6310 50  0001 C CNN "Manufacturer"
 F 5 "C92159" H 5120 6310 50  0001 C CNN "PartNumber"

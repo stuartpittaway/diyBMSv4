@@ -1,7 +1,7 @@
 Quantity,Manufacture Part Number,Manufacturer,Description,LCSC Part Number,Package
-1,C37208,Boom Precision Elec,JRELAY1,C37208,Pin_Header_Straight_1x06_Pitch2.54mm
-2,C92159,Boom Precision Elec,C_SEN1,C92159,Pin_Header_Straight_1x03_Pitch2.54mm
+1,C37208,Boom Precision Elec,JRELAY1,C37208,PinHeader_1x06_P2.54mm_Vertical
+2,C92159,Boom Precision Elec,C_SEN1,C92159,PinHeader_1x03_P2.54mm_Vertical
 1,333-2SURC/S530-A3,Everlight Elec,D1,C125756,LED_D5.0mm
-6,S2B-PH-K-S(LF)(SN),JST Sales America,RX1,C173752,JST_PH_S2B-PH-K_02x2.00mm_Angled
+6,S2B-PH-K-S(LF)(SN),JST Sales America,RX1,C173752,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal
 2,C124416,Shenzhen CanKemeng,U1,C124416,wemos-d1-mini-with-pin-header
-2,C124375,Shenzhen Cankemeng,WIFI_RST1,C124375,Pin_Header_Straight_1x02_Pitch2.54mm
+2,C124375,Shenzhen Cankemeng,WIFI_RST1,C124375,PinHeader_1x02_P2.54mm_Vertical

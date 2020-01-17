@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/user/Documents/GitHub/diyBMSv4/ESPControllerCircuit/ESPControllerCircuit.sch</source>
-    <date>Thu 16 Jan 2020 21:53:26 CET</date>
+    <date>Fri 17 Jan 2020 22:57:09 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -35,7 +35,7 @@
     </comp>
     <comp ref="WIFI_RST1">
       <value>WIFI RST</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Shenzhen Cankemeng</field>
@@ -49,7 +49,7 @@
     </comp>
     <comp ref="D1">
       <value>COMMS</value>
-      <footprint>LEDs:LED_D5.0mm</footprint>
+      <footprint>LED_THT:LED_D5.0mm</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1811021515_Lite-On-LTL-293SJW_C125079.pdf</datasheet>
       <fields>
         <field name="Manufacturer">Everlight Elec</field>
@@ -63,7 +63,7 @@
     </comp>
     <comp ref="R1">
       <value>470R</value>
-      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <footprint>Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
@@ -77,7 +77,7 @@
     </comp>
     <comp ref="DEBUG1">
       <value>Conn_01x02_Female</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Shenzhen Cankemeng</field>
@@ -105,7 +105,7 @@
     </comp>
     <comp ref="RX1">
       <value>Receive</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -119,7 +119,7 @@
     </comp>
     <comp ref="TX1">
       <value>Transmit</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -133,7 +133,7 @@
     </comp>
     <comp ref="R2">
       <value>4K7</value>
-      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <footprint>Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
@@ -147,7 +147,7 @@
     </comp>
     <comp ref="R3">
       <value>220R</value>
-      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <footprint>Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
@@ -161,7 +161,7 @@
     </comp>
     <comp ref="R4">
       <value>4K7</value>
-      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <footprint>Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
@@ -175,7 +175,7 @@
     </comp>
     <comp ref="R5">
       <value>4K7</value>
-      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <footprint>Resistors_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
@@ -189,7 +189,7 @@
     </comp>
     <comp ref="JRELAY1">
       <value>Conn_01x06_Male</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1810312320_BOOMELE-Boom-Precision-Elec-C37208_C37208.pdf</datasheet>
       <fields>
         <field name="Manufacturer">Boom Precision Elec</field>
@@ -203,7 +203,7 @@
     </comp>
     <comp ref="U3">
       <value>PCF8574T/3,518</value>
-      <footprint>SMD_Packages:SO-16-W</footprint>
+      <footprint>Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm</footprint>
       <datasheet>https://lcsc.com/product-detail/I-O-Expansion_NXP_PCF8574T-3-518_PCF8574T-3-518_C7605.html</datasheet>
       <fields>
         <field name="Manufacturer">NXP Semicon</field>
@@ -217,7 +217,7 @@
     </comp>
     <comp ref="C_SEN1">
       <value>Current Sensor</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Boom Precision Elec</field>
@@ -231,7 +231,7 @@
     </comp>
     <comp ref="J1">
       <value>Input</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -245,7 +245,7 @@
     </comp>
     <comp ref="J2">
       <value>Input</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1810261107_JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -259,7 +259,7 @@
     </comp>
     <comp ref="J3">
       <value>Input</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -273,7 +273,7 @@
     </comp>
     <comp ref="J4">
       <value>Input</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>http://www.farnell.com/datasheets/2057211.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -287,7 +287,7 @@
     </comp>
     <comp ref="J5">
       <value>Optional</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
       <datasheet>~</datasheet>
       <fields>
         <field name="Manufacturer">Boom Precision Elec</field>

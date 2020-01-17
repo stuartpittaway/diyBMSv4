@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/user/Documents/GitHub/diyBMSv4/Circuit/v4.sch</source>
-    <date>Thu 16 Jan 2020 21:54:16 CET</date>
+    <date>Fri 17 Jan 2020 22:54:42 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -21,7 +21,7 @@
   <components>
     <comp ref="ATTINY841">
       <value>ATtiny841-SSU</value>
-      <footprint>Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm</footprint>
+      <footprint>Package_SO:SOIC-14_3.9x8.7mm_P1.27mm</footprint>
       <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</datasheet>
       <fields>
         <field name="FarnellRef">2396716</field>
@@ -36,7 +36,7 @@
     </comp>
     <comp ref="C1">
       <value>100nF</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Manufacturer">Yageo</field>
         <field name="PartNumber">CC0805KRX7R9BB104</field>
@@ -49,7 +49,7 @@
     </comp>
     <comp ref="POWER1">
       <value>Battery</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -63,7 +63,7 @@
     </comp>
     <comp ref="R1">
       <value>10K</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF1002T5E</field>
@@ -76,7 +76,7 @@
     </comp>
     <comp ref="J2">
       <value>AVR-ISP-6</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_2x03_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical</footprint>
       <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html</datasheet>
       <fields>
         <field name="Manufacturer">Boom Precision Elec</field>
@@ -90,11 +90,12 @@
     </comp>
     <comp ref="D1">
       <value>ADR5040BRTZ-REEL7 2.048V</value>
-      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1810161810_Analog-Devices-ADR5040BRTZ-REEL7_C48833.pdf</datasheet>
       <fields>
         <field name="Manufacturer">Analog Devices</field>
         <field name="PartNumber">ADR5040BRTZ-REEL7</field>
+        <field name="Rotation">180</field>
         <field name="Supplier">JLCPcb</field>
         <field name="SupplierRef">C48833</field>
       </fields>
@@ -104,7 +105,7 @@
     </comp>
     <comp ref="R2">
       <value>1K</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF1001T5E</field>
@@ -117,7 +118,7 @@
     </comp>
     <comp ref="C2">
       <value>2.2uF</value>
-      <footprint>Capacitors_SMD:C_0603</footprint>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Samsung Electro-Mechanics</field>
         <field name="PartNumber">CL10A225KO8NNNC</field>
@@ -130,7 +131,7 @@
     </comp>
     <comp ref="R3">
       <value>470KOHMS 1% 1/10W</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4703T5E</field>
@@ -143,7 +144,7 @@
     </comp>
     <comp ref="R4">
       <value>390KOHMS 1% 1/10W</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF3903T5E</field>
@@ -156,7 +157,7 @@
     </comp>
     <comp ref="U1">
       <value>EL3H7(B)(TA)-G</value>
-      <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
+      <footprint>Package_SO:SOP-4_4.4x2.6mm_P1.27mm</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf</datasheet>
       <fields>
         <field name="Manufacturer">Everlight Elec</field>
@@ -170,7 +171,7 @@
     </comp>
     <comp ref="TX1">
       <value>TX Connector</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -184,7 +185,7 @@
     </comp>
     <comp ref="R5">
       <value>510R</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF5100T5E</field>
@@ -197,7 +198,7 @@
     </comp>
     <comp ref="R6">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -210,7 +211,7 @@
     </comp>
     <comp ref="R8">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -223,7 +224,7 @@
     </comp>
     <comp ref="R10">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -236,7 +237,7 @@
     </comp>
     <comp ref="R12">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -249,7 +250,7 @@
     </comp>
     <comp ref="R7">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -262,7 +263,7 @@
     </comp>
     <comp ref="R9">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -275,7 +276,7 @@
     </comp>
     <comp ref="R11">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -288,7 +289,7 @@
     </comp>
     <comp ref="R13">
       <value>2R 1W</value>
-      <footprint>Resistors_SMD:R_2512</footprint>
+      <footprint>Resistors_SMD:R_2512_6332Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">25121WF200KT4E</field>
@@ -301,11 +302,12 @@
     </comp>
     <comp ref="Q1">
       <value>IRLML6244TRPBF</value>
-      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/Infineon-Technologies-IRLML6244TRPBF_C143946.pdf</datasheet>
       <fields>
         <field name="Manufacturer">Infineon Technologies</field>
         <field name="PartNumber">IRLML6244TRPBF</field>
+        <field name="Rotation">180</field>
         <field name="Supplier">JLCPcb</field>
         <field name="SupplierRef">C143946</field>
       </fields>
@@ -315,7 +317,7 @@
     </comp>
     <comp ref="R15">
       <value>47K</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4702T5E</field>
@@ -328,7 +330,7 @@
     </comp>
     <comp ref="RX1">
       <value>RX Connector</value>
-      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
       <fields>
         <field name="Manufacturer">JST Sales America</field>
@@ -342,7 +344,7 @@
     </comp>
     <comp ref="R16">
       <value>4K7</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4701T5E</field>
@@ -355,7 +357,7 @@
     </comp>
     <comp ref="D3">
       <value>Red</value>
-      <footprint>LEDs:LED_0805</footprint>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
       <fields>
         <field name="Manufacturer">Foshan NationStar Optoelectronics</field>
         <field name="PartNumber">FC-2012HRK-620D</field>
@@ -368,7 +370,7 @@
     </comp>
     <comp ref="R17">
       <value>2K2</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF2201T5E</field>
@@ -381,7 +383,7 @@
     </comp>
     <comp ref="D4">
       <value>Green</value>
-      <footprint>LEDs:LED_0805</footprint>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Green-0805-Iv-207-249-mcd-atIF-20mA_C2297.pdf</datasheet>
       <fields>
         <field name="Manufacturer">Hubei KENTO Elec</field>
@@ -395,7 +397,7 @@
     </comp>
     <comp ref="R18">
       <value>2K2</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF2201T5E</field>
@@ -408,7 +410,7 @@
     </comp>
     <comp ref="R19">
       <value>NCP18WB473J03RB</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Murata Electronics</field>
         <field name="PartNumber">NCP18WB473J03RB</field>
@@ -421,7 +423,7 @@
     </comp>
     <comp ref="R20">
       <value>47K</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4702T5E</field>
@@ -434,7 +436,7 @@
     </comp>
     <comp ref="R21">
       <value>47K</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF4702T5E</field>
@@ -447,7 +449,7 @@
     </comp>
     <comp ref="SENSOR1">
       <value>Remote temp input 47K @ 25oC</value>
-      <footprint>Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</footprint>
       <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Shenzhen-Cankemeng-Headers-Pins-1-5P-2-54mm-Straight-line_C124379.html</datasheet>
       <fields>
         <field name="Manufacturer">Shenzhen Cankemeng</field>
@@ -461,7 +463,7 @@
     </comp>
     <comp ref="R14">
       <value>510R</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF5100T5E</field>
@@ -474,7 +476,7 @@
     </comp>
     <comp ref="C3">
       <value>MLCC 10UF 10V</value>
-      <footprint>Capacitors_SMD:C_0603</footprint>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Samsung Electro-Mechanics</field>
         <field name="PartNumber">CL10A106KP8NNNC</field>
@@ -487,7 +489,7 @@
     </comp>
     <comp ref="D2">
       <value>Blue</value>
-      <footprint>LEDs:LED_0805</footprint>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
       <fields>
         <field name="Manufacturer">Hubei KENTO Elec</field>
         <field name="PartNumber">Hubei KENTO Blue 0805</field>
@@ -500,7 +502,7 @@
     </comp>
     <comp ref="R23">
       <value>1K8</value>
-      <footprint>Resistors_SMD:R_0603</footprint>
+      <footprint>Resistors_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Manufacturer">Uniroyal Elec</field>
         <field name="PartNumber">0603WAF1801T5E</field>
