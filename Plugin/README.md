@@ -13,18 +13,32 @@
 
 ### Use:
 
+#### Required Eeschema custom fields:
+
 It is necessary for the operation to add 4 additional custom fields in Eeschema, which are:
 - `Manufacturer`
 - `PartNumber`
 - `Supplier`
 - `SupplierRef`
 
-The required custom field `Supplier` must be set to one of the predefined supplier (LCSC or JLCPcb for example) or any other supplier name case insensitive.
+The required field `Supplier` must be set to one of the predefined supplier (LCSC or JLCPcb for example) or any other supplier name case insensitive.
 
-The required custom field `SupplierRef` can be replaced by other custom fields such as: `LCSCRef` or `JLCPcbRef` in order to make possible the referencing of several suppliers on a Eeschema component. In this case, changing the value of the `Supplier` field will allow you to switch to the correct supplier reference.
+The required field `SupplierRef` can be replaced by other custom fields such as: `LCSCRef` or `JLCPcbRef` in order to make possible the referencing of several suppliers on a Eeschema component.
+In this case, changing the value of the `Supplier` field will allow you to switch to the correct supplier reference automatically.
 
-it is also possible to add an optional `Quantity` custom field in order to be able to manage the quantities in Eeschema.
-In the absence of this field, the default quantity is 1. If value is set to 0 or is invalid, the component will not be integrated to any BOM file...
+#### Optional Eeschema custom fields:
+
+Two additional fields can be add to an Eeschema componant, witch are:
+- `Quantity`
+- `Rotation`
+
+The optional `Quantity` field allow to manage the quantities in Eeschema.
+In the absence of this field, the default quantity is 1.
+If value is set to 0 or is invalid, the component will not be integrated to any BOM file...
+
+The optional `Rotation` field allow to correct rotation, if needed when generating the CPL file...
+
+#### Customisation:
 
 If necessary, a grouping is carried out on the quantities, making it possible to generate a single row for identical components in the BOM file.
 
@@ -32,10 +46,11 @@ If you know a little Python, the grouping and the order of the components in the
 
 When launching the plugin (in Eeschema BOM) it will create as many BOM files as there are different `Supplier` encountered.
 
-It is possible to add a quantity argument at the end of the plugin command line (ie: `bom-cpl-plugin.py" "%I" "%O"  1234`), without this argument or with an invalid value, a default quantity of 1 will be used.
+In order to generate a BOM file for several pieces, it is possible to add a quantity argument at the end of the plugin command line (ie: `"bom-cpl-plugin.py" "%I" "%O"  100` for 100 pieces).
+Without this argument or with an invalid value, a default quantity of 1 will be used.
 
 It also creates the CPL file for JLCPcb from one of the position files found in the working directory (ie: `your_project-all-pos.csv`, `your_project-top-pos.csv`, `your_project-bottom-pos.csv`).
-
+A correction on the rotations will be made according to the `Rotation` field of each component.
 
 ### Predefined suppliers:
 

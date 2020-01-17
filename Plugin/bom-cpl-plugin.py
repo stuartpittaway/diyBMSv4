@@ -42,6 +42,7 @@ from collections import OrderedDict
 g_bomext = 'BOM'
 g_cplext = 'CPL'
 g_posfiles = ('all-pos', 'top-pos', 'bottom-pos')
+g_rotations = {'Reference': 0, 'Value': 5, 'Format': '%.6f'}
 
 g_suppliers = {}
 g_suppliers['Default'] = {}
@@ -144,6 +145,9 @@ def getHeaders(supplier):
         return g_suppliers[supplier]['cplheaders']
     return ()
 
+def getRotations(value):
+    return g_rotations[value]
+
 def getInputs(path):
     inputs = []
     for post in g_posfiles:
@@ -156,12 +160,21 @@ def getInput(path, post, ext='csv'):
 def getOutput(path, supplier, post, ext='csv'):
     return "%s_%s_%s.%s" % (path, supplier.title(), post, ext)
 
-def getQuantity(quantity, minimum=0):
+def getInteger(string, default=0, minimum=None):
     try:
-        i = int(quantity)
+        i = int(string)
     except ValueError:
-        i = minimum
-    return max(i, minimum)
+        i = default
+    if minimum is not None:
+        i = max(i, minimum)
+    return i
+
+def getFloat(string, default=0):
+    try:
+        i = float(string)
+    except ValueError:
+        i = default
+    return i
 
 
 class Component(object):
@@ -186,6 +199,7 @@ class Component(object):
         self.PartNumber = ''
         self.SupplierRef = ''
         self.Quantity = 1
+        self.Rotation = 0
 
     @property
     def isvalid(self):
@@ -226,9 +240,12 @@ class Component(object):
             reference = fields.find('./field[@name="SupplierRef"]')
             if reference is not None:
                 self.SupplierRef = reference.text
+        rotation = fields.find('./field[@name="Rotation"]')
+        if rotation is not None:
+            self.Rotation = getInteger(rotation.text, 0)
         quantity = fields.find('./field[@name="Quantity"]')
         if quantity is not None:
-            self.Quantity = getQuantity(quantity.text)
+            self.Quantity = getInteger(quantity.text, 0, 0)
         if all((getattr(self, a) for a in getValid(self.Supplier))):
             if self.Supplier not in suppliers:
                 suppliers.append(self.Supplier)
@@ -238,8 +255,8 @@ class Component(object):
 
 def generateBom(xml, path, quantity):
     suppliers, components, missings = parseXml(xml, quantity)
-    writeCsv(suppliers, components, path)
-    return suppliers, missings
+    rotations = writeCsv(suppliers, components, path)
+    return suppliers, missings, rotations
 
 
 def parseXml(xml, quantity):
@@ -273,7 +290,10 @@ def parseXml(xml, quantity):
 
 
 def writeCsv(suppliers, components, path):
+    rotations = {}
     for supplier in suppliers:
+        if needCpl(supplier) and supplier not in rotations:
+            rotations[supplier] = {}
         out = getOutput(path, supplier, g_bomext)
         columns = getFields(supplier).keys()
         delimiter = getDelimiter(supplier)
@@ -293,32 +313,40 @@ def writeCsv(suppliers, components, path):
                 for key, value in fields:
                     row[key] = getattr(component, value)
                 c.writerow(row)
+                if needCpl(supplier) and component.Rotation != 0:
+                    rotations[supplier][component.ref] = component.Rotation
+    return rotations
 
 
 def generateCpl(suppliers, path):
-    rewrited = {}
+    rotations = {}
+    ref = getRotations('Reference')
+    value = getRotations('Value')
+    format = getRotations('Format')
     for supplier in suppliers:
-        if needCpl(supplier):
-            rewrited[supplier] = False
-            for i in getInputs(path):
-                if os.path.isfile(i):
-                    out = getOutput(path, supplier, g_cplext)
-                    headers = getHeaders(supplier)
-                    copyCsv(i, out, headers)
-                    rewrited[supplier] = True
-                    break
-    return rewrited
+        rotations[supplier] = False
+        for i in getInputs(path):
+            if os.path.isfile(i):
+                out = getOutput(path, supplier, g_cplext)
+                headers = getHeaders(supplier)
+                copyCsv(i, out, headers, suppliers[supplier], ref, value, format)
+                rotations[supplier] = True
+                break
+    return rotations
 
 
-def copyCsv(input, output, headers):
-    with open(input) as r, open(output, 'w') as w:
+def copyCsv(i, o, headers, rotations, ref, value, format):
+    with open(i) as r, open(o, 'w') as w:
         reader = csv.reader(r)
         writer = csv.writer(w)
         header = next(reader)
-        for i, value in headers.items():
-           header[i] = value
+        for k, v in headers.items():
+           header[k] = v
         writer.writerow(header)
         for row in reader:
+            if row[ref] in rotations:
+                rotation = getFloat(row[value]) + rotations[row[ref]]
+                row[value] = format % rotation
             writer.writerow(row)
 
 
@@ -327,13 +355,13 @@ def getArguments():
     path = sys.argv[2]
     quantity = 1
     if len(sys.argv) > 3:
-        quantity = getQuantity(sys.argv[3], 1)
+        quantity = getInteger(sys.argv[3], 1, 1)
     return xml, path, quantity
 
 
 if __name__ == "__main__":
     xml, path, quantity = getArguments()
-    suppliers, missings = generateBom(xml, path, quantity)
+    suppliers, missings, rotations = generateBom(xml, path, quantity)
     print("")
     print(">>> Generating BOM (Bill Of Materials) csv file for (Quantity = %s):" % quantity)
     for supplier in suppliers:
@@ -345,7 +373,7 @@ if __name__ == "__main__":
         print("WARNING: These componants cannot be integrated:")
         print(", ".join(missings))
 
-    suppliers = generateCpl(suppliers, path)
+    suppliers = generateCpl(rotations, path)
     if len(suppliers):
         print("")
         print(">>> Generating CPL (Component Placement List) csv file for:")
