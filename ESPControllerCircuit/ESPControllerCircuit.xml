@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/user/Documents/GitHub/diyBMSv4/ESPControllerCircuit/ESPControllerCircuit.sch</source>
-    <date>Fri 17 Jan 2020 22:57:09 CET</date>
+    <date>Sat 18 Jan 2020 02:15:31 CET</date>
     <tool>Eeschema 5.1.5-52549c5~84~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -208,6 +208,7 @@
       <fields>
         <field name="Manufacturer">NXP Semicon</field>
         <field name="PartNumber">PCF8574T/3,518</field>
+        <field name="Rotation">270</field>
         <field name="Supplier">JLCPcb</field>
         <field name="SupplierRef">C7605</field>
       </fields>

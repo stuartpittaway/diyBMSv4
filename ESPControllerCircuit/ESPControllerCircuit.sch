@@ -479,6 +479,7 @@ F 4 "NXP Semicon" H 2670 3900 50  0001 C CNN "Manufacturer"
 F 5 "PCF8574T/3,518" H 2670 3900 50  0001 C CNN "PartNumber"
 F 6 "JLCPcb" H 2670 3900 50  0001 C CNN "Supplier"
 F 7 "C7605" H 2670 3900 50  0001 C CNN "SupplierRef"
+F 8 "270" H 2670 3900 50  0001 C CNN "Rotation"
 	1    2670 3900
 	1    0    0    -1  
 $EndComp
