@@ -6,8 +6,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "DIYBMS cell monitoring module"
-Date "2019-04-30"
-Rev "4"
+Date "2020-01-25"
+Rev "4.2"
 Comp "Stuart Pittaway"
 Comment1 ""
 Comment2 ""
