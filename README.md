@@ -9,10 +9,16 @@ If you are looking for version 3 of this project take a look here https://github
 # TRAVIS-CI
 [![Build Status](https://travis-ci.org/stuartpittaway/diyBMSv4.svg?branch=master)](https://travis-ci.org/stuartpittaway/diyBMSv4)
 
-
 # Videos on how to use and build
 
 https://www.youtube.com/stuartpittaway
+
+# CODE/SOFTWARE
+
+Software and code for the modules and controller can now be found in a seperate repo
+
+https://github.com/stuartpittaway/diyBMSv4Code
+
 
 
 # WARNING
