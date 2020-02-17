@@ -363,10 +363,10 @@ F 3 "https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C17375
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:R e1
+L Device:R R5
 U 1 1 5BF1E307
 P 8070 4230
-F 0 "e1" V 7863 4230 50  0000 C CNN
+F 0 "R5" V 7863 4230 50  0000 C CNN
 F 1 "220OHMS" V 7954 4230 50  0000 C CNN
 F 2 "Resistors_SMD:R_0603" V 8000 4230 50  0001 C CNN
 F 3 "" H 8070 4230 50  0001 C CNN

@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source E:\source\diyBMSv4\Circuit\v4.sch)
-    (date "17/02/2020 18:55:01")
+    (date "17/02/2020 19:17:20")
     (tool "Eeschema (5.1.0)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -110,7 +110,7 @@
       (libsource (lib Connector) (part Conn_01x02_Male) (description "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"))
       (sheetpath (names /) (tstamps /))
       (tstamp 5BF1DEA4))
-    (comp (ref e1)
+    (comp (ref R5)
       (value 220OHMS)
       (footprint Resistors_SMD:R_0603)
       (fields
@@ -719,7 +719,7 @@
       (node (ref R3) (pin 2)))
     (net (code 29) (name TXD0)
       (node (ref ATTINY841) (pin 12))
-      (node (ref e1) (pin 2)))
+      (node (ref R5) (pin 2)))
     (net (code 30) (name "Net-(D3-Pad1)")
       (node (ref R17) (pin 2))
       (node (ref D3) (pin 1)))
@@ -754,6 +754,6 @@
     (net (code 36) (name "Net-(TX1-Pad1)")
       (node (ref U1) (pin 3))
       (node (ref TX1) (pin 1)))
-    (net (code 37) (name "Net-(U1-Pad1)")
+    (net (code 37) (name "Net-(R5-Pad1)")
       (node (ref U1) (pin 1))
-      (node (ref e1) (pin 1)))))
+      (node (ref R5) (pin 1)))))

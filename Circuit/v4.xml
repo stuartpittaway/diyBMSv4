@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>17/02/2020 18:54:55</date>
+    <date>17/02/2020 19:17:23</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -133,7 +133,7 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DEA4</tstamp>
     </comp>
-    <comp ref="e1">
+    <comp ref="R5">
       <value>220OHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
@@ -894,7 +894,7 @@
     </net>
     <net code="29" name="TXD0">
       <node ref="ATTINY841" pin="12"/>
-      <node ref="e1" pin="2"/>
+      <node ref="R5" pin="2"/>
     </net>
     <net code="30" name="Net-(D3-Pad1)">
       <node ref="R17" pin="2"/>
@@ -937,9 +937,9 @@
       <node ref="U1" pin="3"/>
       <node ref="TX1" pin="1"/>
     </net>
-    <net code="37" name="Net-(U1-Pad1)">
+    <net code="37" name="Net-(R5-Pad1)">
       <node ref="U1" pin="1"/>
-      <node ref="e1" pin="1"/>
+      <node ref="R5" pin="1"/>
     </net>
   </nets>
 </export>
