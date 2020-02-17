@@ -2,14 +2,14 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>25/01/2020 09:11:33</date>
+    <date>17/02/2020 18:54:55</date>
     <tool>Eeschema (5.1.0)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>DIYBMS cell monitoring module</title>
         <company>Stuart Pittaway</company>
-        <rev>4</rev>
-        <date>2019-04-30</date>
+        <rev>4.2</rev>
+        <date>2020-01-25</date>
         <source>v4.sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -133,12 +133,12 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DEA4</tstamp>
     </comp>
-    <comp ref="R5">
-      <value>510OHMS</value>
+    <comp ref="e1">
+      <value>220OHMS</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="LCSCStockCode">C23193</field>
-        <field name="PartNumber">0603WAF5100T5E</field>
+        <field name="LCSCStockCode">C22962</field>
+        <field name="PartNumber">0603WAF2200T5E</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -894,7 +894,7 @@
     </net>
     <net code="29" name="TXD0">
       <node ref="ATTINY841" pin="12"/>
-      <node ref="R5" pin="2"/>
+      <node ref="e1" pin="2"/>
     </net>
     <net code="30" name="Net-(D3-Pad1)">
       <node ref="R17" pin="2"/>
@@ -937,9 +937,9 @@
       <node ref="U1" pin="3"/>
       <node ref="TX1" pin="1"/>
     </net>
-    <net code="37" name="Net-(R5-Pad1)">
+    <net code="37" name="Net-(U1-Pad1)">
       <node ref="U1" pin="1"/>
-      <node ref="R5" pin="1"/>
+      <node ref="e1" pin="1"/>
     </net>
   </nets>
 </export>
