@@ -1,6 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:v4-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -130,7 +129,7 @@ $EndComp
 Wire Wire Line
 	2710 4410 2810 4410
 $Comp
-L Connector:AVR-ISP-6 J2
+L v4-rescue:AVR-ISP-6-Connector J2
 U 1 1 5D1ECDB4
 P 1720 6130
 F 0 "J2" H 1440 6226 50  0000 R CNN

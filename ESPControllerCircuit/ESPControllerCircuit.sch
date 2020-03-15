@@ -1,6 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:ESPControllerCircuit-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -658,4 +657,7 @@ Wire Wire Line
 	4750 6310 4750 6050
 Wire Wire Line
 	4750 6050 4620 6050
+NoConn ~ 2140 6730
+NoConn ~ 2140 6830
+NoConn ~ 3140 6830
 $EndSCHEMATC
