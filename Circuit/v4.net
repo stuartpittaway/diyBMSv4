@@ -1,8 +1,8 @@
 (export (version D)
   (design
     (source E:\source\diyBMSv4\Circuit\v4.sch)
-    (date "17/02/2020 19:17:20")
-    (tool "Eeschema (5.1.0)-1")
+    (date "24/03/2020 09:43:23")
+    (tool "Eeschema (5.1.5)-3")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
         (title "DIYBMS cell monitoring module")
@@ -100,7 +100,7 @@
       (fields
         (field (name LCSCStockCode) C32565)
         (field (name PartNumber) "EL3H7(B)(TA)-G"))
-      (libsource (lib Isolator) (part PC817) (description "DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"))
+      (libsource (lib Isolator) (part PC817) (description "DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"))
       (sheetpath (names /) (tstamps /))
       (tstamp 5BF1DCDE))
     (comp (ref TX1)
@@ -452,11 +452,11 @@
         (field (name Value) AVR-ISP-6))
       (pins
         (pin (num 1) (name MISO) (type passive))
-        (pin (num 2) (name VCC) (type power_in))
+        (pin (num 2) (name VCC) (type passive))
         (pin (num 3) (name SCK) (type passive))
         (pin (num 4) (name MOSI) (type passive))
         (pin (num 5) (name ~RST) (type passive))
-        (pin (num 6) (name GND) (type power_in))))
+        (pin (num 6) (name GND) (type passive))))
     (libpart (lib Connector) (part Conn_01x02_Male)
       (description "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)")
       (docs ~)
@@ -539,7 +539,9 @@
         (pin (num 1) (name ~) (type passive))
         (pin (num 2) (name ~) (type passive))))
     (libpart (lib Isolator) (part PC817)
-      (description "DC Optocoupler, Vce 35V, CTR 50-300%, DIP4")
+      (aliases
+        (alias EL817))
+      (description "DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4")
       (docs http://www.soselectronic.cz/a_info/resource/d/pc817.pdf)
       (footprints
         (fp DIP*W7.62mm*))

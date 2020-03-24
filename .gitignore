@@ -55,3 +55,4 @@ dkms.conf
 *.bak
 ESPControllerCircuit/fp-info-cache
 ESPControllerCircuit/fp-info-cache
+*.sch-bak

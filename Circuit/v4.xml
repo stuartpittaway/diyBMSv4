@@ -2,8 +2,8 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
-    <date>17/02/2020 19:17:23</date>
-    <tool>Eeschema (5.1.0)-1</tool>
+    <date>24/03/2020 09:43:26</date>
+    <tool>Eeschema (5.1.5)-3</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>DIYBMS cell monitoring module</title>
@@ -121,7 +121,7 @@
         <field name="LCSCStockCode">C32565</field>
         <field name="PartNumber">EL3H7(B)(TA)-G</field>
       </fields>
-      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
+      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5BF1DCDE</tstamp>
     </comp>
@@ -550,11 +550,11 @@
       </fields>
       <pins>
         <pin num="1" name="MISO" type="passive"/>
-        <pin num="2" name="VCC" type="power_in"/>
+        <pin num="2" name="VCC" type="passive"/>
         <pin num="3" name="SCK" type="passive"/>
         <pin num="4" name="MOSI" type="passive"/>
         <pin num="5" name="~RST" type="passive"/>
-        <pin num="6" name="GND" type="power_in"/>
+        <pin num="6" name="GND" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Connector" part="Conn_01x02_Male">
@@ -666,7 +666,10 @@
       </pins>
     </libpart>
     <libpart lib="Isolator" part="PC817">
-      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP4</description>
+      <aliases>
+        <alias>EL817</alias>
+      </aliases>
+      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4</description>
       <docs>http://www.soselectronic.cz/a_info/resource/d/pc817.pdf</docs>
       <footprints>
         <fp>DIP*W7.62mm*</fp>
