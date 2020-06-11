@@ -93,7 +93,7 @@ ATTINY841 provides:
 * Spare input/output for 3rd party use
 * autonomous cell voltage balancing - it should still work even if controller is down
 
-# How as v4 improved over v3?
+# How has v4 improved over v3?
 
 * Code is better!
 * Web interface no longer requires access to internet to download javascript libraries
