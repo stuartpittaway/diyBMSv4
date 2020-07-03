@@ -9,7 +9,13 @@ If you are looking for version 3 (obsolete) of this project take a look here htt
 
 # Videos on how to use and build
 
+Building & ordering the PCB from JLCPCB
+https://youtu.be/E1OS0ZOmOT8
+
+General background on the DIYBMS
 https://www.youtube.com/stuartpittaway
+
+
 
 # CODE/SOFTWARE
 
