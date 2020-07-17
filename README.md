@@ -13,7 +13,9 @@ Building & ordering the PCB from JLCPCB
 https://youtu.be/E1OS0ZOmOT8
 
 If you use this coupon code when you place a JLCPCB order
+
 JLC-Stuart
+
 you will get a discount and I get a very small amount of credit for every 30 orders, which helps to support the cost of prototyping new designs and adding new features.
 
 General background on the DIYBMS
