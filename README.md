@@ -21,7 +21,11 @@ you will get a discount and I get a very small amount of credit for every 30 ord
 General background on the DIYBMS
 https://www.youtube.com/stuartpittaway
 
+# Support
 
+If you find the BMS useful, please consider buying me a beer, check out Patron for more information
+
+https://www.patreon.com/bePatron?u=41013995
 
 # CODE/SOFTWARE
 
