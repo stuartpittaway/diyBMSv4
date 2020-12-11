@@ -25,7 +25,7 @@ https://www.youtube.com/stuartpittaway
 
 If you find the BMS useful, please consider buying me a beer, check out Patron for more information
 
-https://www.patreon.com/bePatron?u=41013995
+https://patreon.com/StuartP
 
 # CODE/SOFTWARE
 
