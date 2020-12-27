@@ -4,6 +4,8 @@ Version 4 of the diyBMS
 
 Do it yourself battery management system for Lithium ion battery packs/cells
 
+More discussion https://community.openenergymonitor.org/c/hardware/diybms/53
+
 If you are looking for version 3 (obsolete) of this project take a look here https://github.com/stuartpittaway/diyBMS
 
 
