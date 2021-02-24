@@ -1,0 +1,7 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MicroSD_SPI_CD
+D MicroSD slot with card detect signal
+$ENDCMP
+#
+#End Doc Library
