@@ -10,7 +10,6 @@ If you are looking for version 3 (obsolete) of this project take a look here htt
 
 THIS REPOSITORY CONTAINS THE HARDWARE FOR THE SYSTEM
 
-
 # Videos on how to use and build
 
 YouTube playlist for DIYBMS videos
@@ -26,19 +25,20 @@ If you find the BMS useful, please consider buying me a beer, check out Patron f
 
 https://patreon.com/StuartP
 
+
 # HARDWARE
 
-This repository contains the hardware designs, generally in KiCad format.  Unless you are changing the design, you don't need to use/install KiCad, just use the premade files.
+This repository contains the hardware designs, generally in KiCad format.  Unless you are changing the design, you don't need to use/install KiCad, just use the pre-made Gerber files.
 
 The folder structure in the repository contains:
 
 ## Controller Designs
-* ESP8266ControllerCircuit - the circuit board for the legacy ESP8266 based controller
+* ControllerCircuit - ESP32 controller board (newest design)
+* ESP8266ControllerCircuit - [legacy] the circuit board for the legacy ESP8266 based controller
 
 ## Modules for ESP8266ControllerCircuit
-* ModuleV400 - the module circuit board V4.00, designed for easier hand soldering (larger parts)
 * ModuleV421 - the module circuit board V4.21, designed for mass production using JLCPCB assembly service
-
+* ModuleV400 - the module circuit board V4.00, designed for easier hand soldering (larger parts)
 
 If you use this coupon code when you place a JLCPCB order
 
@@ -46,16 +46,24 @@ JLC-Stuart
 
 you will get a discount and I get a very small amount of credit for every 30 orders, which helps to support the cost of prototyping new designs and adding new features.
 
+### ESP32 Controller 
+
+The latest version of the controller uses an ESP32 and supports CANBUS, RS485, SD CARD logging, relays, SSR outputs, multiple inputs, AVR programmer and much more.
+
+Although the hardware is complete, not all features are usable from the software, this will be developed and improved over time to make use of the hardware.
+
+Bill of Materials[./ControllerCircuit/ComponentListBOM.md]
+
 
 # CODE/SOFTWARE
 
-Software and code for the modules and controller can now be found in a seperate repo
-
-For the legacy controller (ESP8266)
-https://github.com/stuartpittaway/diyBMSv4Code
+Software and code for the modules and controller can now be found in a seperate repository
 
 For the latest controller (ESP32)
 https://github.com/stuartpittaway/diyBMSv4ESP32
+
+For the legacy controller (ESP8266)
+https://github.com/stuartpittaway/diyBMSv4Code
 
 
 # WARNING
