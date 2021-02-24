@@ -10,6 +10,7 @@ If you are looking for version 3 (obsolete) of this project take a look here htt
 
 THIS REPOSITORY CONTAINS THE HARDWARE FOR THE SYSTEM
 
+
 # Videos on how to use and build
 
 YouTube playlist for DIYBMS videos
@@ -25,10 +26,9 @@ If you find the BMS useful, please consider buying me a beer, check out Patron f
 
 https://patreon.com/StuartP
 
-
 # HARDWARE
 
-This repository contains the hardware designs, generally in KiCad format.  Unless you are changing the design, you don't need to use/install KiCad, just use the pre-made Gerber files.
+This repository contains the hardware designs, generally in KiCad format.  Unless you are changing the design, you don't need to use/install KiCad, just use the premade files.
 
 The folder structure in the repository contains:
 
@@ -37,8 +37,9 @@ The folder structure in the repository contains:
 * ESP8266ControllerCircuit - [legacy] the circuit board for the legacy ESP8266 based controller
 
 ## Modules for ESP8266ControllerCircuit
-* ModuleV421 - the module circuit board V4.21, designed for mass production using JLCPCB assembly service
-* ModuleV400 - the module circuit board V4.00, designed for easier hand soldering (larger parts)
+* ModuleV440 - the latest module design, recommended for both hand soldering or mass production
+* ModuleV400 - [legacy] the module circuit board V4.00, designed for easier hand soldering (larger parts)
+* ModuleV421 - [legacy] the module circuit board V4.21, designed for mass production using JLCPCB assembly service
 
 If you use this coupon code when you place a JLCPCB order
 
@@ -55,15 +56,32 @@ Although the hardware is complete, not all features are usable from the software
 Bill of Materials[./ControllerCircuit/ComponentListBOM.md]
 
 
+### Module V4.40
+
+The latest version of the module hardware was designed to cater for those who want to use assembly services like JLCPCB and also for those who wish to hand solder.
+
+The parts are no smaller than 0805 size (about 2mm!) which is probably the smallest size you want to attempt to hand solder.
+
+In addition, the hardware has a higher balance current, fuse and TVS diode to help with voltage spikes.  
+Most importantly, an external crystal has been added to the micro controller (attiny841) which means the device is more reliable in low voltage situations.
+
+The balance current for V4.40 modules is as follows:
+* 1.27A at 4.2V (5.35W)
+* 1.21A at 4.0V (4.84W)
+* 1.13A at 3.75V (4.26W)
+
+The module is physically larger than previous modules, this aids heat dispersal but also features a "snap off" external temperature daughter board for use in cell temperature monitoring.
+
+
 # CODE/SOFTWARE
 
-Software and code for the modules and controller can now be found in a seperate repository
-
-For the latest controller (ESP32)
-https://github.com/stuartpittaway/diyBMSv4ESP32
+Software and code for the modules and controller can now be found in a seperate repo
 
 For the legacy controller (ESP8266)
 https://github.com/stuartpittaway/diyBMSv4Code
+
+For the latest controller (ESP32)
+https://github.com/stuartpittaway/diyBMSv4ESP32
 
 
 # WARNING
