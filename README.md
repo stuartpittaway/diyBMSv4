@@ -4,20 +4,20 @@ Version 4 of the diyBMS
 
 Do it yourself battery management system for Lithium ion battery packs/cells
 
-More discussion https://community.openenergymonitor.org/c/hardware/diybms/53
+More discussion [Open Energy Monitor Forum](https://community.openenergymonitor.org/c/hardware/diybms/53)
 
-If you are looking for version 3 (obsolete) of this project take a look here https://github.com/stuartpittaway/diyBMS
+If you are looking for version 3 (obsolete) of this project take a look [here](https://github.com/stuartpittaway/diyBMS)
 
 THIS REPOSITORY CONTAINS THE HARDWARE FOR THE SYSTEM
 
 
 # Videos on how to use and build
 
-YouTube playlist for DIYBMS videos
-https://youtube.com/playlist?list=PLHhwQCDPuRcZW3u0jJucsiCCsUbNbMy-c
+[YouTube playlist](https://youtube.com/playlist?list=PLHhwQCDPuRcZW3u0jJucsiCCsUbNbMy-c) for DIYBMS videos
 
-Building & ordering the PCB from JLCPCB
-https://youtu.be/E1OS0ZOmOT8
+
+[Building & ordering the PCB from JLCPCB](https://youtu.be/E1OS0ZOmOT8)
+
 
 
 # Support
@@ -53,7 +53,7 @@ The latest version of the controller uses an ESP32 and supports CANBUS, RS485, S
 
 Although the hardware is complete, not all features are usable from the software, this will be developed and improved over time to make use of the hardware.
 
-Bill of Materials[./ControllerCircuit/ComponentListBOM.md]
+[Bill of Materials](./ControllerCircuit/ComponentListBOM.md)
 
 
 ### Module V4.40
@@ -78,10 +78,10 @@ The module is physically larger than previous modules, this aids heat dispersal 
 Software and code for the modules and controller can now be found in a seperate repo
 
 For the legacy controller (ESP8266)
-https://github.com/stuartpittaway/diyBMSv4Code
+[diyBMSv4Code](https://github.com/stuartpittaway/diyBMSv4Code)
 
 For the latest controller (ESP32)
-https://github.com/stuartpittaway/diyBMSv4ESP32
+[diyBMSv4ESP32](https://github.com/stuartpittaway/diyBMSv4ESP32)
 
 
 # WARNING
