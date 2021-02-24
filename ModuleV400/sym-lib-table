@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name si8631ab-b-is1)(type Legacy)(uri E:/Dropbox/diyBMSv4/v4/si8631ab-b-is1.lib)(options "")(descr ""))
+  (lib (name EL3H7-G)(type Legacy)(uri E:/Dropbox/diyBMSv4/v4/EL3H7-G.lib)(options "")(descr ""))
+  (lib (name v4-rescue)(type Legacy)(uri ${KIPRJMOD}/v4-rescue.lib)(options "")(descr ""))
+)

@@ -1,0 +1,7 @@
+(sym_lib_table
+  (lib (name si8631ab-b-is1)(type Legacy)(uri si8631ab-b-is1.lib)(options "")(descr ""))
+  (lib (name EL3H7-G)(type Legacy)(uri EL3H7-G.lib)(options "")(descr ""))
+  (lib (name v4-rescue)(type Legacy)(uri ${KIPRJMOD}/v421-rescue.lib)(options "")(descr ""))
+  (lib (name v421-rescue)(type Legacy)(uri ${KIPRJMOD}/v421-rescue.lib)(options "")(descr ""))
+  (lib (name ModuleV421-rescue)(type Legacy)(uri ${KIPRJMOD}/ModuleV421-rescue.lib)(options "")(descr ""))
+)

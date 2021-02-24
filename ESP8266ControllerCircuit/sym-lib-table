@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name wemos_mini)(type Legacy)(uri C:/temp/wemos-d1-mini-kicad-master/libraries/wemos_mini.lib)(options "")(descr ""))
+  (lib (name MyLibrary)(type Legacy)(uri ${KIPRJMOD}/MyLibrary.lib)(options "")(descr ""))
+)

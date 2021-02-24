@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>E:\source\diyBMSv4\Circuit\v4.sch</source>
+    <date>17/02/2020 18:52:37</date>
+    <tool>Eeschema (5.1.0)-1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>DIYBMS cell monitoring module</title>
+        <company>Stuart Pittaway</company>
+        <rev>4</rev>
+        <date>2019-04-30</date>
+        <source>v4.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U4">
+      <value>ATtiny841-SSU</value>
+      <footprint>Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm</footprint>
+      <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</datasheet>
+      <libsource lib="v4-rescue" part="ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BC63D51</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_100nF-104-10-50V_C49678.html</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1EAD64</tstamp>
+    </comp>
+    <comp ref="POWER1">
+      <value>Battery</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1EB9F6</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-0710KL</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1EC483</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>AVR-ISP-6</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_2x03_Pitch2.54mm</footprint>
+      <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html</datasheet>
+      <libsource lib="Connector" part="AVR-ISP-6" description="Atmel 6-pin ISP connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1ECDB4</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>LM4040BIM3-2.0/NOPB, 2.048V, SOT-23-3</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <datasheet>https://uk.farnell.com/texas-instruments/lm4040bim3-2-0-nopb/voltage-ref-shunt-2-048v-sot-23/dp/2492201</datasheet>
+      <libsource lib="Reference_Voltage" part="LM4040DBZ-2.0" description="2.048V Precision Micropower Shunt Voltage Reference, SOT-23"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1FB1C3</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>1K</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-071KL</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1FB25D</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>2.2uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_2-2uF-225-10-16V_C113841.html</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1FC233</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>475K  E96 series (tolerance 1%)</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-07475KL</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D200A38</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>402K E96 series (tolerance 1%)</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>0805W8F4023T5E</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D200BDC</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>HMHA2801</value>
+      <footprint>Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/ON-Semicon-ON-HMHA2801_C232857.pdf</datasheet>
+      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF1DCDE</tstamp>
+    </comp>
+    <comp ref="TX1">
+      <value>TX Connector</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF1DEA4</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>220R</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>0805W8F2200T5E</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF1E307</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF274CC</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF29A02</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF29A5C</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF29ADC</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D135</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D13B</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D141</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>2R2 1W</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Ever-Ohms-Tech-CR2512F2R2E04_C147074.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2D147</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>IRLML6244TRPBF</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Infineon-Technologies-IRLML6244TRPBF_C143946.pdf</datasheet>
+      <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2E627</tstamp>
+    </comp>
+    <comp ref="R15">
+      <value>47K</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF2E6E2</tstamp>
+    </comp>
+    <comp ref="RX1">
+      <value>RX Connector</value>
+      <footprint>Connectors_JST:JST_PH_S2B-PH-K_02x2.00mm_Angled</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf</datasheet>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF5891C</tstamp>
+    </comp>
+    <comp ref="R16">
+      <value>4K7</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-074K7L</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF5A518</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>RED LED</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_BL-HUF35A-AV-TRB-Iv-80mcd-Typ-atIF-20mA_C94741.html</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF65B89</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>2K2</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-072K2L</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF65CB1</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>Green</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_Emerald-SMDLED-Iv-220-270mcd-atIF-5mA_C84260.html</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF67C78</tstamp>
+    </comp>
+    <comp ref="R18">
+      <value>2K2</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-072K2L</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF67C7F</tstamp>
+    </comp>
+    <comp ref="R19">
+      <value>SDNT2012X473F4150FTF</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Sunlord-SDNT2012X473F4150FTF_C95969.pdf</datasheet>
+      <libsource lib="Device" part="Thermistor" description="Temperature dependent resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF374BB</tstamp>
+    </comp>
+    <comp ref="R20">
+      <value>47K</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF374C1</tstamp>
+    </comp>
+    <comp ref="R21">
+      <value>47K</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-RC0805FR-0747KL_C126351.pdf</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF5CD4B</tstamp>
+    </comp>
+    <comp ref="SENSOR1">
+      <value>Remote temp input 47K @ 25oC</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x05_Pitch2.54mm</footprint>
+      <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Shenzhen-Cankemeng-Headers-Pins-1-5P-2-54mm-Straight-line_C124379.html</datasheet>
+      <libsource lib="Connector" part="Conn_01x05_Male" description="Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BF61617</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>510R</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>RC0805FR-07510RL</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CB1F559</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>10uF 10V</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX5R6BB106_C272880.pdf</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CB3BB54</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>10R</value>
+      <footprint>Resistors_THT:R_Axial_Power_L25.0mm_W9.0mm_P27.94mm</footprint>
+      <datasheet>https://lcsc.com/product-detail/Others_Chian-Chia-Elec-CR-M5W-10RJ_C334310.html</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CB93D51</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>Blue</value>
+      <footprint>LEDs:LED_0805</footprint>
+      <datasheet>https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_SMDLED-blue_C189307.html</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CCBC109</tstamp>
+    </comp>
+    <comp ref="R23">
+      <value>2K2</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <datasheet>RC0805FR-072K2L</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CCBC10F</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="AVR-ISP-6">
+      <description>Atmel 6-pin ISP connector</description>
+      <docs> ~</docs>
+      <footprints>
+        <fp>IDC?Header*2x03*</fp>
+        <fp>Pin?Header*2x03*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">AVR-ISP-6</field>
+      </fields>
+      <pins>
+        <pin num="1" name="MISO" type="passive"/>
+        <pin num="2" name="VCC" type="power_in"/>
+        <pin num="3" name="SCK" type="passive"/>
+        <pin num="4" name="MOSI" type="passive"/>
+        <pin num="5" name="~RST" type="passive"/>
+        <pin num="6" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x02_Male">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_Male</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x05_Male">
+      <description>Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x05_Male</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Q_NMOS_GSD">
+      <description>N-MOSFET transistor, gate/source/drain</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">Q_NMOS_GSD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Thermistor">
+      <description>Temperature dependent resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TH</field>
+        <field name="Value">Thermistor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Isolator" part="PC817">
+      <description>DC Optocoupler, Vce 35V, CTR 50-300%, DIP4</description>
+      <docs>http://www.soselectronic.cz/a_info/resource/d/pc817.pdf</docs>
+      <footprints>
+        <fp>DIP*W7.62mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">PC817</field>
+        <field name="Footprint">Package_DIP:DIP-4_W7.62mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Reference_Voltage" part="LM4040DBZ-2.0">
+      <aliases>
+        <alias>LM4040DBZ-2.5</alias>
+        <alias>LM4040DBZ-3</alias>
+        <alias>LM4040DBZ-4.1</alias>
+        <alias>LM4040DBZ-5</alias>
+        <alias>LM4040DBZ-8.2</alias>
+        <alias>LM4040DBZ-10</alias>
+      </aliases>
+      <description>2.048V Precision Micropower Shunt Voltage Reference, SOT-23</description>
+      <docs>http://www.ti.com/lit/ds/symlink/lm4040-n.pdf</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM4040DBZ-2.0</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="v4-rescue" part="ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue">
+      <footprints>
+        <fp>SOIC*3.9x8.7mm*P1.27mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ATtiny841-SSU-MCU_Microchip_ATtiny-v4-rescue</field>
+        <field name="Footprint">Package_SO:SOIC-14_3.9x8.7mm_P1.27mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_in"/>
+        <pin num="2" name="XTAL1/PB0" type="BiDi"/>
+        <pin num="3" name="XTAL2/PB1" type="BiDi"/>
+        <pin num="4" name="~RESET~/PB3" type="BiDi"/>
+        <pin num="5" name="PB2" type="BiDi"/>
+        <pin num="6" name="PA7" type="BiDi"/>
+        <pin num="7" name="PA6" type="BiDi"/>
+        <pin num="8" name="PA5" type="BiDi"/>
+        <pin num="9" name="PA4" type="BiDi"/>
+        <pin num="10" name="PA3" type="BiDi"/>
+        <pin num="11" name="PA2" type="BiDi"/>
+        <pin num="12" name="PA1" type="BiDi"/>
+        <pin num="13" name="AREF/PA0" type="BiDi"/>
+        <pin num="14" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+    </library>
+    <library logical="Isolator">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Isolator.lib</uri>
+    </library>
+    <library logical="Reference_Voltage">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Reference_Voltage.lib</uri>
+    </library>
+    <library logical="v4-rescue">
+      <uri>E:\source\diyBMSv4\Circuit/v4-rescue.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(D4-Pad2)">
+      <node ref="D4" pin="2"/>
+      <node ref="U4" pin="7"/>
+      <node ref="J2" pin="4"/>
+    </net>
+    <net code="2" name="GND">
+      <node ref="U4" pin="14"/>
+      <node ref="POWER1" pin="1"/>
+      <node ref="C1" pin="2"/>
+      <node ref="R16" pin="1"/>
+      <node ref="C3" pin="2"/>
+      <node ref="R23" pin="1"/>
+      <node ref="D1" pin="2"/>
+      <node ref="J2" pin="6"/>
+      <node ref="R18" pin="1"/>
+      <node ref="R21" pin="2"/>
+      <node ref="SENSOR1" pin="5"/>
+      <node ref="C2" pin="2"/>
+      <node ref="U1" pin="2"/>
+      <node ref="R15" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="R4" pin="2"/>
+      <node ref="R20" pin="2"/>
+    </net>
+    <net code="3" name="Net-(D4-Pad1)">
+      <node ref="R18" pin="2"/>
+      <node ref="D4" pin="1"/>
+    </net>
+    <net code="4" name="2_VOLT">
+      <node ref="R19" pin="1"/>
+      <node ref="C2" pin="1"/>
+      <node ref="U4" pin="13"/>
+      <node ref="D1" pin="1"/>
+      <node ref="R2" pin="2"/>
+      <node ref="SENSOR1" pin="2"/>
+    </net>
+    <net code="5" name="ENABLE">
+      <node ref="R3" pin="1"/>
+      <node ref="U4" pin="6"/>
+      <node ref="R2" pin="1"/>
+      <node ref="SENSOR1" pin="4"/>
+    </net>
+    <net code="6" name="Net-(SENSOR1-Pad3)">
+      <node ref="SENSOR1" pin="3"/>
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="7" name="Net-(R21-Pad1)">
+      <node ref="U4" pin="2"/>
+      <node ref="R21" pin="1"/>
+      <node ref="SENSOR1" pin="1"/>
+    </net>
+    <net code="8" name="Net-(D3-Pad1)">
+      <node ref="R17" pin="2"/>
+      <node ref="D3" pin="1"/>
+    </net>
+    <net code="9" name="VCC">
+      <node ref="J2" pin="2"/>
+      <node ref="R22" pin="2"/>
+      <node ref="D3" pin="2"/>
+      <node ref="RX1" pin="2"/>
+      <node ref="POWER1" pin="2"/>
+      <node ref="R7" pin="1"/>
+      <node ref="U4" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="R1" pin="1"/>
+      <node ref="R6" pin="1"/>
+    </net>
+    <net code="10" name="Net-(C3-Pad1)">
+      <node ref="R15" pin="1"/>
+      <node ref="R14" pin="1"/>
+      <node ref="Q1" pin="1"/>
+      <node ref="C3" pin="1"/>
+    </net>
+    <net code="11" name="Net-(Q1-Pad3)">
+      <node ref="R12" pin="2"/>
+      <node ref="R17" pin="1"/>
+      <node ref="R13" pin="2"/>
+      <node ref="R22" pin="1"/>
+      <node ref="Q1" pin="3"/>
+    </net>
+    <net code="12" name="RXD0">
+      <node ref="R16" pin="2"/>
+      <node ref="RX1" pin="1"/>
+      <node ref="U4" pin="11"/>
+    </net>
+    <net code="13" name="Net-(TX1-Pad1)">
+      <node ref="TX1" pin="1"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="14" name="Net-(TX1-Pad2)">
+      <node ref="U1" pin="4"/>
+      <node ref="TX1" pin="2"/>
+    </net>
+    <net code="15" name="RXD1">
+      <node ref="R19" pin="2"/>
+      <node ref="R20" pin="1"/>
+      <node ref="J2" pin="3"/>
+      <node ref="U4" pin="9"/>
+    </net>
+    <net code="16" name="TXD1">
+      <node ref="D2" pin="2"/>
+      <node ref="J2" pin="1"/>
+      <node ref="U4" pin="8"/>
+    </net>
+    <net code="17" name="Net-(D2-Pad1)">
+      <node ref="D2" pin="1"/>
+      <node ref="R23" pin="2"/>
+    </net>
+    <net code="18" name="DUMP_LOAD_ENABLE">
+      <node ref="R14" pin="2"/>
+      <node ref="U4" pin="10"/>
+    </net>
+    <net code="19" name="Net-(J2-Pad5)">
+      <node ref="R1" pin="2"/>
+      <node ref="U4" pin="4"/>
+      <node ref="J2" pin="5"/>
+    </net>
+    <net code="20" name="Net-(R6-Pad2)">
+      <node ref="R6" pin="2"/>
+      <node ref="R8" pin="1"/>
+    </net>
+    <net code="21" name="Net-(R10-Pad2)">
+      <node ref="R10" pin="2"/>
+      <node ref="R12" pin="1"/>
+    </net>
+    <net code="22" name="Net-(R10-Pad1)">
+      <node ref="R8" pin="2"/>
+      <node ref="R10" pin="1"/>
+    </net>
+    <net code="23" name="TXD0">
+      <node ref="R5" pin="2"/>
+      <node ref="U4" pin="12"/>
+    </net>
+    <net code="24" name="Net-(R5-Pad1)">
+      <node ref="R5" pin="1"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="25" name="Net-(R11-Pad1)">
+      <node ref="R9" pin="2"/>
+      <node ref="R11" pin="1"/>
+    </net>
+    <net code="26" name="Net-(R11-Pad2)">
+      <node ref="R11" pin="2"/>
+      <node ref="R13" pin="1"/>
+    </net>
+    <net code="27" name="Net-(R7-Pad2)">
+      <node ref="R9" pin="1"/>
+      <node ref="R7" pin="2"/>
+    </net>
+    <net code="28" name="Net-(R3-Pad2)">
+      <node ref="U4" pin="5"/>
+      <node ref="R3" pin="2"/>
+      <node ref="R4" pin="1"/>
+    </net>
+  </nets>
+</export>
