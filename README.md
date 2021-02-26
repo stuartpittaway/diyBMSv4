@@ -72,6 +72,9 @@ The balance current for V4.40 modules is as follows:
 
 The module is physically larger than previous modules, this aids heat dispersal but also features a "snap off" external temperature daughter board for use in cell temperature monitoring.
 
+You will also need to order [these parts](./ModuleV440/HandAssemblyParts.md)
+
+
 
 # CODE/SOFTWARE
 

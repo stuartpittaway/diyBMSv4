@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 48)
+    (drawings 47)
     (tracks 384)
     (zones 0)
     (modules 52)
@@ -61,7 +61,7 @@
     (pad_drill 0.7)
     (pad_to_mask_clearance 0.2)
     (aux_axis_origin 101.9176 109.3376)
-    (grid_origin 101.9176 97.9876)
+    (grid_origin 101.9176 109.3376)
     (visible_elements 7FFFFFFF)
     (pcbplotparams
       (layerselection 0x030ff_ffffffff)
@@ -2235,7 +2235,6 @@
   (gr_line (start 112.1876 107.8276) (end 112.1876 99.7576) (layer Edge.Cuts) (width 0.15) (tstamp 601626A9))
   (gr_line (start 112.1876 99.7576) (end 112.7976 99.7576) (layer Edge.Cuts) (width 0.15) (tstamp 601626A8))
   (gr_line (start 101.9376 98.2976) (end 101.9176 49.4876) (layer Edge.Cuts) (width 0.15) (tstamp 5E9C86D0))
-  (target plus (at 101.9176 109.3376) (size 5) (width 0.15) (layer Edge.Cuts))
   (gr_text DIYBMS (at 102.3676 101.6376) (layer B.SilkS) (tstamp 6015C921)
     (effects (font (size 1 1) (thickness 0.25)) (justify right mirror))
   )
