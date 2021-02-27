@@ -2076,6 +2076,11 @@
       (scale (xyz 0.393701 0.393701 0.393701))
       (rotate (xyz 0 0 0))
     )
+    (model ${KISYS3DMOD}/Crystal.3dshapes/Crystal_SMD_0603-2Pin_6.0x3.5mm.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Mounting_Holes:MountingHole_3.2mm_M3 locked (layer F.Cu) (tedit 56D1B4CB) (tstamp 5CC84405)
