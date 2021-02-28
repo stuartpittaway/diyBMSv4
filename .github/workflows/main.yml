@@ -38,7 +38,7 @@ jobs:
           sudo apt install --install-recommends kicad
 
       - name: Run kikit
-        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV421/ModuleV440.sch ./ModuleV421/ModuleV421.kicad_pcb ./ModuleV421
+        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV421/ModuleV421.sch ./ModuleV421/ModuleV421.kicad_pcb ./ModuleV421
 
       - name: Publish Artifacts 1
         uses: actions/upload-artifact@v2
@@ -49,5 +49,17 @@ jobs:
              ./ModuleV421/pos.csv
              ./ModuleV421/gerbers.zip
           if-no-files-found: error
-          
-          
+
+      - name: Run kikit
+        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV421/ModuleV440.sch ./ModuleV421/ModuleV440.kicad_pcb ./ModuleV440
+
+      - name: Publish Artifacts 2
+        uses: actions/upload-artifact@v2
+        with:
+          name: V440-Gerber
+          path: |
+             ./ModuleV440/bom.csv
+             ./ModuleV440/pos.csv
+             ./ModuleV440/gerbers.zip
+          if-no-files-found: error
+
