@@ -38,7 +38,7 @@ jobs:
           sudo apt install --install-recommends kicad
 
       - name: Run kikit
-        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV421/ModuleV421.sch ./ModuleV421/ModuleV421.kicad_pcb ./ModuleV421
+        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV421/ModuleV421.sch --field LCSCStockCode --missingWarn ./ModuleV421/ModuleV421.kicad_pcb ./ModuleV421
 
       - name: Publish Artifacts 1
         uses: actions/upload-artifact@v2
@@ -51,7 +51,7 @@ jobs:
           if-no-files-found: error
 
       - name: Run kikit
-        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV440/ModuleV440.sch ./ModuleV440/ModuleV440.kicad_pcb ./ModuleV440
+        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV440/ModuleV440.sch --field LCSCStockCode --missingWarn ./ModuleV440/ModuleV440.kicad_pcb ./ModuleV440
 
       - name: Publish Artifacts 2
         uses: actions/upload-artifact@v2
