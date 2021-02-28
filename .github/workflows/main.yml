@@ -53,8 +53,8 @@ jobs:
       - name: Run kikit for GERBER
         run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV440/ModuleV440.sch --field LCSCStockCode --missingWarn ./ModuleV440/ModuleV440.kicad_pcb ./ModuleV440
 
-      - name: Run kikit for 3D print solder stencil
-        run: /home/runner/.local/bin/kikit stencil createprinted --pcbthickness 1.6 --thickness 1.0  ./ModuleV440/ModuleV440.kicad_pcb ./ModuleV440
+#      - name: Run kikit for 3D print solder stencil
+#        run: /home/runner/.local/bin/kikit stencil createprinted --pcbthickness 1.6 --thickness 1.0  ./ModuleV440/ModuleV440.kicad_pcb ./ModuleV440
 
       - name: Publish Artifacts 2
         uses: actions/upload-artifact@v2
