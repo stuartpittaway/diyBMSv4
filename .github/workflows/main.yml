@@ -28,8 +28,8 @@ jobs:
       - name: Install KIKIT
         run: pip3 install git+https://github.com/yaqwsx/KiKit@master
         
-      - name: Install kicad
-        run: pip3 install kicad
+      - name: Install PcbDraw
+        run: pip3 install PcbDraw
 
       - name: Run kikit
         run: /home/runner/.local/bin/kikit present boardpage -d Board.md --name "diyBMS" -b "V4.21" " " ./ModuleV421/ModuleV421.kicad_pcb  --repository 'https://github.com/stuartpittaway/diyBMSv4' build/
