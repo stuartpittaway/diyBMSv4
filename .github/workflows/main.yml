@@ -38,5 +38,16 @@ jobs:
           sudo apt install --install-recommends kicad
 
       - name: Run kikit
-        run: /home/runner/.local/bin/kikit present boardpage -d Board.md --name "diyBMS" -b "V4.21" " " ./ModuleV421/ModuleV421.kicad_pcb  --repository 'https://github.com/stuartpittaway/diyBMSv4' build/
+        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV421/ModuleV440.sch ./ModuleV421/ModuleV421.kicad_pcb ./ModuleV421
 
+      - name: Publish Artifacts 1
+        uses: actions/upload-artifact@v2
+        with:
+          name: V421-Gerber
+          path: |
+             ./ModuleV421/bom.csv
+             ./ModuleV421/pos.csv
+             ./ModuleV421/gerbers.zip
+          if-no-files-found: error
+          
+          
