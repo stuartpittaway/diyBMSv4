@@ -51,7 +51,7 @@ jobs:
           if-no-files-found: error
 
       - name: Run kikit
-        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV421/ModuleV440.sch ./ModuleV421/ModuleV440.kicad_pcb ./ModuleV440
+        run: /home/runner/.local/bin/kikit fab jlcpcb --assembly --schematic ./ModuleV440/ModuleV440.sch ./ModuleV440/ModuleV440.kicad_pcb ./ModuleV440
 
       - name: Publish Artifacts 2
         uses: actions/upload-artifact@v2
