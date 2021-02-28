@@ -31,6 +31,12 @@ jobs:
       - name: Install PcbDraw
         run: pip3 install PcbDraw
 
+      - name: Install KICAD
+        run: |
+          sudo add-apt-repository --yes ppa:kicad/kicad-5.1-releases
+          sudo apt update
+          sudo apt install --install-recommends kicad
+
       - name: Run kikit
         run: /home/runner/.local/bin/kikit present boardpage -d Board.md --name "diyBMS" -b "V4.21" " " ./ModuleV421/ModuleV421.kicad_pcb  --repository 'https://github.com/stuartpittaway/diyBMSv4' build/
 
