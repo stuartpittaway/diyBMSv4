@@ -58,3 +58,4 @@ ESPControllerCircuit/fp-info-cache
 
 **/.vscode
 *.sch-bak
+*.bck
