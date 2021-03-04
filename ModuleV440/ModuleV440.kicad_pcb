@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 47)
+    (drawings 46)
     (tracks 392)
     (zones 0)
     (modules 45)
@@ -2044,9 +2044,6 @@
   )
   (gr_text "DIYBMS v4.4" (at 130.0076 93.1876) (layer F.SilkS) (tstamp 5E9CAA6B)
     (effects (font (size 1.5 1.5) (thickness 0.35)) (justify right))
-  )
-  (gr_text - (at 122.3176 91.2376 180) (layer F.SilkS)
-    (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (dimension 30 (width 0.3) (layer F.SilkS) (tstamp 5CB876C1)
     (gr_text "30.000 mm" (at 116.8926 119.2126) (layer F.SilkS) (tstamp 5CB876C1)
