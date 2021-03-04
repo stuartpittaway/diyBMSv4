@@ -1,49 +1,4 @@
-# Prerequisites
-*.d
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
 *.cmd
 .tmp_versions/
 modules.order
@@ -54,8 +9,15 @@ dkms.conf
 *.kicad_pcb-bak
 *.bak
 ESPControllerCircuit/fp-info-cache
-ESPControllerCircuit/fp-info-cache
 
 **/.vscode
 *.sch-bak
 *.bck
+ControllerCircuit/ControllerCircuit-cache.lib
+ControllerCircuit/ControllerCircuit-rescue.lib
+ControllerCircuit/fp-info-cache
+ModuleV400/v4-cache.lib
+ModuleV400/v4-rescue.lib
+ModuleV421/ModuleV421-cache.lib
+ModuleV421/ModuleV421-rescue.lib
+ModuleV440/fp-info-cache
