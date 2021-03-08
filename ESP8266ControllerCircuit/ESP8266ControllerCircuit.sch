@@ -89,8 +89,10 @@ U 1 1 5CD4CF59
 P 4040 6630
 F 0 "D1" H 4040 6540 50  0000 C CNN
 F 1 "COMMS" H 4030 6720 50  0000 C CNN
-F 2 "LEDs:LED_D5.0mm" H 4040 6630 50  0001 C CNN
-F 3 "~" H 4040 6630 50  0001 C CNN
+F 2 "LEDs:LED_0805" H 4040 6630 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Green-0805-Iv-207-249-mcd-atIF-20mA_C2297.pdf" H 4040 6630 50  0001 C CNN
+F 4 "C2297" H 4040 6630 50  0001 C CNN "LCSCStockCode"
+F 5 "Hubei KENTO Elec Green 0805" H 4040 6630 50  0001 C CNN "PartNumber"
 	1    4040 6630
 	-1   0    0    1   
 $EndComp
@@ -102,6 +104,8 @@ F 0 "R1" V 3500 6630 50  0000 C CNN
 F 1 "470R" V 3660 6630 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 3510 6630 50  0001 C CNN
 F 3 "~" H 3580 6630 50  0001 C CNN
+F 4 "C17710" H 3580 6630 50  0001 C CNN "LCSCStockCode"
+F 5 "0805W8F4700T5E" H 3580 6630 50  0001 C CNN "PartNumber"
 	1    3580 6630
 	0    1    1    0   
 $EndComp
@@ -151,9 +155,10 @@ L Isolator:PC817 U2
 U 1 1 5CD55A2D
 P 3960 5110
 F 0 "U2" H 3960 5435 50  0000 C CNN
-F 1 "HMHA2801" H 3960 5344 50  0000 C CNN
+F 1 "EL3H7(B)(TA)-G" H 3960 5344 50  0000 C CNN
 F 2 "Housings_SSOP:SOP-4_4.4x2.8mm_Pitch1.27mm" H 3760 4910 50  0001 L CIN
-F 3 "https://uk.farnell.com/on-semiconductor/hmha2801/optocoupler-single-channel/dp/1652504" H 3960 5110 50  0001 L CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf" H 3960 5110 50  0001 L CNN
+F 4 "C32565" H 3960 5110 50  0001 C CNN "LCSCStockCode"
 	1    3960 5110
 	1    0    0    -1  
 $EndComp
@@ -194,6 +199,8 @@ F 0 "R2" V 3723 5790 50  0000 C CNN
 F 1 "2K2" V 3814 5790 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 3860 5790 50  0001 C CNN
 F 3 "~" H 3930 5790 50  0001 C CNN
+F 4 "C17520" H 3930 5790 50  0001 C CNN "LCSCStockCode"
+F 5 "0805W8F2201T5E" H 3930 5790 50  0001 C CNN "PartNumber"
 	1    3930 5790
 	-1   0    0    1   
 $EndComp
@@ -234,6 +241,8 @@ F 0 "R3" V 3233 5010 50  0000 C CNN
 F 1 "220R" V 3324 5010 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 3370 5010 50  0001 C CNN
 F 3 "~" H 3440 5010 50  0001 C CNN
+F 4 "C17557" V 3440 5010 50  0001 C CNN "LCSCStockCode"
+F 5 "0805W8F2200T5E" V 3440 5010 50  0001 C CNN "PartNumber"
 	1    3440 5010
 	0    1    1    0   
 $EndComp
@@ -297,6 +306,8 @@ F 0 "R4" H 1680 3390 50  0000 L CNN
 F 1 "4K7" H 1650 3290 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 1760 3350 50  0001 C CNN
 F 3 "~" H 1830 3350 50  0001 C CNN
+F 4 "C17673" H 1830 3350 50  0001 C CNN "LCSCStockCode"
+F 5 "0805W8F4701T5E" H 1830 3350 50  0001 C CNN "PartNumber"
 	1    1830 3350
 	1    0    0    -1  
 $EndComp
@@ -308,6 +319,8 @@ F 0 "R5" H 2090 3396 50  0000 L CNN
 F 1 "4K7" H 2090 3305 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 1950 3350 50  0001 C CNN
 F 3 "~" H 2020 3350 50  0001 C CNN
+F 4 "C17673" H 2020 3350 50  0001 C CNN "LCSCStockCode"
+F 5 "0805W8F4701T5E" H 2020 3350 50  0001 C CNN "PartNumber"
 	1    2020 3350
 	1    0    0    -1  
 $EndComp
@@ -420,8 +433,11 @@ U 1 1 5CE02B8B
 P 2670 3900
 F 0 "U3" H 2670 4781 50  0000 C CNN
 F 1 "PCF8574T/3,518" H 2690 4880 50  0000 C CNN
-F 2 "SMD_Packages:SO-16-W" H 2670 3900 50  0001 C CNN
+F 2 "Housings_SOIC:SOIC-16W_7.5x10.3mm_Pitch1.27mm" H 2670 3900 50  0001 C CNN
 F 3 "https://lcsc.com/product-detail/I-O-Expansion_NXP_PCF8574T-3-518_PCF8574T-3-518_C7605.html" H 2670 3900 50  0001 C CNN
+F 4 "" H 2670 3900 50  0001 C CNN "LCSCPart"
+F 5 "C7605" H 2670 3900 50  0001 C CNN "LCSCStockCode"
+F 6 "PCF8574T/3,518" H 2670 3900 50  0001 C CNN "PartNumber"
 	1    2670 3900
 	1    0    0    -1  
 $EndComp
@@ -604,17 +620,6 @@ Wire Wire Line
 	4530 4680 4600 4680
 Text Notes 5150 4430 0    50   ~ 0
 J1-J4 switch inputs (not optoisolated!)
-$Comp
-L Connector:Conn_01x03_Male J5
-U 1 1 5CEE1C26
-P 5120 6310
-F 0 "J5" H 5092 6192 50  0000 R CNN
-F 1 "Optional" H 5092 6283 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5120 6310 50  0001 C CNN
-F 3 "~" H 5120 6310 50  0001 C CNN
-	1    5120 6310
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	3140 6430 3420 6430
 Wire Wire Line
@@ -657,7 +662,15 @@ Wire Wire Line
 	4750 6310 4750 6050
 Wire Wire Line
 	4750 6050 4620 6050
-NoConn ~ 2140 6730
-NoConn ~ 2140 6830
-NoConn ~ 3140 6830
+$Comp
+L Connector:Conn_01x03_Male J5
+U 1 1 5CEE1C26
+P 5120 6310
+F 0 "J5" H 5092 6192 50  0000 R CNN
+F 1 "Optional" H 5092 6283 50  0000 R CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 5120 6310 50  0001 C CNN
+F 3 "~" H 5120 6310 50  0001 C CNN
+	1    5120 6310
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
