@@ -1,4 +1,4 @@
-update=18/05/2019 15:40:46
+update=08/03/2021 13:16:50
 version=1
 last_client=kicad
 [general]
@@ -15,7 +15,7 @@ LibDir=
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=ESPControllerCircuit.net
+LastNetListRead=ESP8266ControllerCircuit.net
 CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0

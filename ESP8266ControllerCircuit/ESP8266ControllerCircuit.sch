@@ -4,11 +4,11 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
-Comp ""
-Comment1 ""
+Title "diyBMS ESP8266 Controller [legacy]"
+Date "2021-03-08"
+Rev "ESP8266"
+Comp "Stuart Pittaway"
+Comment1 "NOT FOR NEW DESIGNS"
 Comment2 ""
 Comment3 ""
 Comment4 ""
@@ -19,7 +19,7 @@ U 1 1 5CD4757A
 P 2640 6480
 F 0 "U1" H 2640 7117 60  0000 C CNN
 F 1 "WeMos_mini" H 2640 7011 60  0000 C CNN
-F 2 "ESPControllerCircuit:wemos-d1-mini-with-pin-header" H 3190 5780 60  0001 C CNN
+F 2 "ESP8266ControllerCircuit:wemos-d1-mini-with-pin-header" H 3190 5780 60  0001 C CNN
 F 3 "" H 3190 5780 60  0000 C CNN
 	1    2640 6480
 	1    0    0    -1  
