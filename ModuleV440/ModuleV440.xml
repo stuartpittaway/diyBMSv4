@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\ModuleV440\ModuleV440.sch</source>
-    <date>03/03/2021 16:41:12</date>
+    <date>11/03/2021 18:31:06</date>
     <tool>Eeschema (5.1.5)-3</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -482,6 +482,7 @@
       <footprint>Diode_SMD:D_SMB</footprint>
       <datasheet>https://datasheet.lcsc.com/szlcsc/1912111437_AnBon-SMBJ5-0A_C440263.pdf</datasheet>
       <fields>
+        <field name="JLCPCBRotation">0</field>
         <field name="LCSCStockCode">C440263</field>
       </fields>
       <libsource lib="Diode" part="SM6T6V8A" description="600W unidirectional Transil Transient Voltage Suppressor, 6.8Vrwm, DO-214AA"/>
