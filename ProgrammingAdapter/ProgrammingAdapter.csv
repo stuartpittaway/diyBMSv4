@@ -1,0 +1,20 @@
+"Source:","E:\source\diyBMSv4\ProgrammingAdapter\ProgrammingAdapter.sch"
+"Date:","11/03/2021 16:18:23"
+"Tool:","Eeschema (5.1.5)-3"
+"Generator:","C:\Program Files\KiCad\bin\scripting\plugins/bom_csv_grouped_by_value.py"
+"Component Count:","3"
+
+"Individual Components:"
+
+"Item","Qty","Reference(s)","Value","LibPart","Footprint","Datasheet","LCSCStockCode"
+"","","J1","AVR-ISP-6","Connector:AVR-ISP-6","Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical"," ~","C124421"
+"","","J2","AVR-ISP-6","Connector:AVR-ISP-6","Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical"," ~","C124421"
+"","","J3","Conn_01x03_Female","Connector:Conn_01x03_Female","Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical","https://datasheet.lcsc.com/szlcsc/2010160505_CJT-Changjiang-Connectors-A2541HWV-3P_C225500.pdf","C225500"
+
+
+
+"Collated Components:"
+
+"Item","Qty","Reference(s)","Value","LibPart","Footprint","Datasheet","LCSCStockCode"
+"1","2","J1, J2","AVR-ISP-6","Connector:AVR-ISP-6","Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical"," ~","C124421"
+"2","1","J3","Conn_01x03_Female","Connector:Conn_01x03_Female","Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical","https://datasheet.lcsc.com/szlcsc/2010160505_CJT-Changjiang-Connectors-A2541HWV-3P_C225500.pdf","C225500"
