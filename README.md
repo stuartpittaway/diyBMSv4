@@ -45,6 +45,10 @@ If you use this coupon code when you place a JLCPCB order
 
 JLC-Stuart
 
+and this link
+
+https://jlcpcb.com/RSZ
+
 you will get a discount and I get a very small amount of credit for every 30 orders, which helps to support the cost of prototyping new designs and adding new features.
 
 ### ESP32 Controller 
