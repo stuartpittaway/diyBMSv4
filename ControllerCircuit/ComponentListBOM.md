@@ -1,3 +1,24 @@
+# ESP controller and TFT screen
+
+## BANG GOOD 
+(affiliate links)
+2.8 Inch ILI9341 240x320 SPI TFT LCD Display Touch
+https://www.banggood.com/custlink/mmmRI7iYr3
+
+## Amazon 
+(affiliate links)
+ESP32 DEVKITC (pack of 3)
+https://amzn.to/3bFOaah
+
+ESP32 DEVKITC (single board)
+https://amzn.to/3qG3YOG
+
+## JLCPCB
+(affiliate links)
+https://jlcpcb.com/RSZ
+
+Discount code:  JLC-STUART
+
 # Surface Mount Component List
 
 These parts are necessary for the DIYBMS CONTROLLER
