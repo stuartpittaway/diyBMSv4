@@ -5,8 +5,8 @@ $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
 Title "DIYBMS ESP32 CONTROLLER"
-Date "2021-02-24"
-Rev "1"
+Date "2021-04-08"
+Rev "1.1"
 Comp "Stuart Pittaway"
 Comment1 ""
 Comment2 ""
@@ -2146,11 +2146,11 @@ L ControllerCircuit-rescue:TCA6408AQPWRQ1-ControllerCircuit U3
 U 1 1 5F6428C9
 P 2015 8450
 F 0 "U3" H 2015 7261 50  0000 C CNN
-F 1 "TCA6408AQPWRQ1" H 2015 7170 50  0000 C CNN
+F 1 "TCA6408APWR" H 2015 7170 50  0000 C CNN
 F 2 "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" H 2215 7450 50  0001 L CNN
-F 3 "https://www.ti.com/lit/ds/symlink/tca6408a.pdf" H 2215 7350 50  0001 L CNN
-F 4 "C201668" H 2015 8450 50  0001 C CNN "LCSCStockCode"
-F 5 "TCA6408AQPWRQ1" H 2015 8450 50  0001 C CNN "PartNumber"
+F 3 "https://datasheet.lcsc.com/szlcsc/Texas-Instruments-TI-TCA6408APWR_C206177.pdf" H 2215 7350 50  0001 L CNN
+F 4 "C206177" H 2015 8450 50  0001 C CNN "LCSCStockCode"
+F 5 "TCA6408APWR" H 2015 8450 50  0001 C CNN "PartNumber"
 	1    2015 8450
 	1    0    0    -1  
 $EndComp

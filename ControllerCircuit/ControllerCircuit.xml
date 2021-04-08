@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>E:\source\diyBMSv4Hardware\ControllerCircuit\ControllerCircuit.sch</source>
-    <date>24/02/2021 12:16:35</date>
+    <source>E:\source\diyBMSv4\ControllerCircuit\ControllerCircuit.sch</source>
+    <date>08/04/2021 12:11:46</date>
     <tool>Eeschema (5.1.5)-3</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>DIYBMS ESP32 CONTROLLER</title>
         <company>Stuart Pittaway</company>
-        <rev/>
-        <date>2021-02-21</date>
+        <rev>1</rev>
+        <date>2021-02-24</date>
         <source>ControllerCircuit.sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -775,12 +775,12 @@
       <tstamp>5FF757DB</tstamp>
     </comp>
     <comp ref="U3">
-      <value>TCA6408AQPWRQ1</value>
+      <value>TCA6408APWR</value>
       <footprint>Package_SO:TSSOP-16_4.4x5mm_P0.65mm</footprint>
-      <datasheet>https://www.ti.com/lit/ds/symlink/tca6408a.pdf</datasheet>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Texas-Instruments-TI-TCA6408APWR_C206177.pdf</datasheet>
       <fields>
-        <field name="LCSCStockCode">C201668</field>
-        <field name="PartNumber">TCA6408AQPWRQ1</field>
+        <field name="LCSCStockCode">C206177</field>
+        <field name="PartNumber">TCA6408APWR</field>
       </fields>
       <libsource lib="ControllerCircuit-rescue" part="TCA6408AQPWRQ1-ControllerCircuit" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -1641,7 +1641,7 @@
       <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
     </library>
     <library logical="ControllerCircuit-rescue">
-      <uri>E:\source\diyBMSv4Hardware\ControllerCircuit/ControllerCircuit-rescue.lib</uri>
+      <uri>E:\source\diyBMSv4\ControllerCircuit/ControllerCircuit-rescue.lib</uri>
     </library>
     <library logical="Device">
       <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
