@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name ControllerCircuit-rescue)(type Legacy)(uri ${KIPRJMOD}/ControllerCircuit-rescue.lib)(options "")(descr ""))
   (lib (name ControllerCircuit)(type Legacy)(uri ${KIPRJMOD}/ControllerCircuit.lib)(options "")(descr ""))
+  (lib (name 0472192001)(type Legacy)(uri ${KIPRJMOD}/0472192001.lib)(options "")(descr ""))
 )
