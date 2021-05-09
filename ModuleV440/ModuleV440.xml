@@ -2,11 +2,7 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\ModuleV440\ModuleV440.sch</source>
-<<<<<<< Updated upstream
-    <date>16/03/2021 13:47:03</date>
-=======
-    <date>14/04/2021 08:09:49</date>
->>>>>>> Stashed changes
+    <date>09/05/2021 10:57:15</date>
     <tool>Eeschema (5.1.5)-3</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -128,7 +124,7 @@
       <tstamp>5BF1DEA4</tstamp>
     </comp>
     <comp ref="R5">
-      <value>220OHMS</value>
+      <value>220 OHMS</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
         <field name="LCSCStockCode">C17557</field>
@@ -174,12 +170,11 @@
       <tstamp>5BF5891C</tstamp>
     </comp>
     <comp ref="R16">
-      <value>4.7KOHMS</value>
+      <value>2.2KOHMS</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17673</field>
-        <field name="PartNumber">0805W8F4701T5E</field>
+        <field name="LCSCStockCode">C17520</field>
+        <field name="PartNumber">0805W8F2201T5E</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -234,8 +229,8 @@
       <value>510OHMS</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="LCSCStockCode">C25317</field>
-        <field name="PartNumber">0805W8J0511T5E</field>
+        <field name="LCSCStockCode">C17734</field>
+        <field name="PartNumber">0805W8F5100T5E</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
