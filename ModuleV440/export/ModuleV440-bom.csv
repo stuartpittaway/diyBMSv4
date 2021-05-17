@@ -1,0 +1,25 @@
+Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber,JLCPCBRotation
+1,"16MHz, 8kB Flash, 512B SRAM, 512B EEPROM, ADC, ACI, debugWIRE, SOIC-14",ATtiny841-SSU,ATTINY841,ATtiny841-SSU,SOIC-14_3.9x8.7mm_P1.27mm,1, ,http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf,C219103,,
+2,Unpolarized capacitor,C,C4 C5,22pF,C_0805_2012Metric,2, ,https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10C220JB8NNNC_C1653.pdf,C1804,CL21C220JBANNNC,0
+3,Unpolarized capacitor,C,C1,100nF,C_0805_2012Metric,1, ,,C49678,CC0805KRX7R9BB104,
+4,Unpolarized capacitor,C,C2,1uF,C_0805_2012Metric,1, ,,C28323,CL21B105KBFNNNE,
+5,"Adjustable Micropower Voltage Reference Diodes, TO-92",LM385Z-ADJ,D1,AZ432ANTR-E1,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Diodes-Incorporated-AZ432ANTR-E1_C84139.pdf,C84139,AZ432ANTR-E1,
+6,Light emitting diode,LED,D4,Blue,LED_0805_2012Metric,1, ,https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Green-0805-Iv-207-249-mcd-atIF-20mA_C2297.pdf,C2293,Blue LED,
+7,Light emitting diode,LED,D3,Red,LED_0805_2012Metric,1, ,,C84256,2012HRK-620D,
+8,"600W unidirectional Transil Transient Voltage Suppressor, 6.8Vrwm, DO-214AA",SM6T6V8A,D2,SMBJ5.0A,D_SMB,1, ,https://datasheet.lcsc.com/szlcsc/1912111437_AnBon-SMBJ5-0A_C440263.pdf,C440263,,0
+9,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,EXTTEMP1 POWER1 RX1 TX1,Ext Temp Sensor,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,4, ,https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf,C265016,S2B-PH-K(LF)(SN),
+10,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,mSMD150,Fuse_1812_4532Metric,1, ,https://datasheet.lcsc.com/szlcsc/TECHFUSE-mSMD150_C70121.pdf,C70121,mSMD150,
+11,Atmel 6-pin ISP connector,AVR-ISP-6,J2,AVR-ISP-6,Pin_Header_Straight_2x03_Pitch2.54mm,1, ,https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html,C65114,,
+12,"N-MOSFET transistor, gate/source/drain",Q_NMOS_GSD,Q1,AO3400A,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3400A_C20917.pdf,C20917,AO3400A,
+13,Resistor,R,R5,220 OHMS,R_0805_2012Metric,1, ,,C17557,0805W8F2200T5E,
+14,Resistor,R,R14,510OHMS,R_0805_2012Metric,1, ,,C17734,0805W8F5100T5E,
+15,Resistor,R,R2,1KOHMS,R_0805_2012Metric,1, ,,C17513,0805W8F1001T5E,
+16,Resistor,R,R16 R17 R18,2.2KOHMS,R_0805_2012Metric,3, ,,C17520,0805W8F2201T5E,0
+17,Resistor,R,R4,2.7K,R_0805_2012Metric,1, ,,C17530,0805W8F2701T5E,
+18,Resistor,R,R3,6.8K,R_0805_2012Metric,1, ,,C17772,0805W8F6801T5E,
+19,Resistor,R,R1 R15 R20 R21,10KOHMS,R_0805_2012Metric,4, ,,C17414,0805W8F1002T5E,
+20,Resistor,R,R6 R8 R12 R22 R24 R25 R26 R29 R30,3.3OHM 3/4W,R_2010_5025Metric,9, ,,C270971,201007F330KT4E,
+21,Temperature dependent resistor,Thermistor,R19 R23,CMFB103F3950FANT,R_0805_2012Metric,2, ,https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-CMFB103F3950FANT_C51597.pdf,C51597,CMFB103F3950FANT,
+22,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,REMOTE1,Ext Temp Sensor,PinHeader_1x02_P2.54mm_Vertical,1, ,https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf,,,
+23,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U1,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,EL3H7(B)(TA)-G,90
+24,"Two pin crystal, small symbol",Crystal_Small,Y1,8MHZ Ceramic Resonator,Crystal_SMD_5032-2pin_5.0x3.2mm,1, ,https://datasheet.lcsc.com/szlcsc/1903061615_Yangxing-Tech-X50328MSB2GI_C115962.pdf,C115962,X50328MSB2GI,
