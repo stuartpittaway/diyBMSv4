@@ -6,13 +6,13 @@ on:
     - 'ControllerCircuit/**.sch'
     - 'ControllerCircuit/**.kicad_pcb'
     - '.github/workflows/pcb-artifacts-esp32-controller.yaml'
-    - '**.kibot.yaml'
+    - 'ControllerCircuit/config-2layer.kibot.yaml'
   pull_request:
     paths:
     - 'ControllerCircuit/**.sch'
     - 'ControllerCircuit/**.kicad_pcb'
     - '.github/workflows/pcb-artifacts-esp32-controller.yaml'
-    - '**.kibot.yaml'
+    - 'ControllerCircuit/config-2layer.kibot.yaml'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -62,7 +62,7 @@ jobs:
       run: |
         cd ControllerCircuit
         rm -rf export/
-        kibot -c ../config-2layer.kibot.yaml -e ControllerCircuit.sch -b ControllerCircuit.kicad_pcb -d export
+        kibot -c config-2layer.kibot.yaml -e ControllerCircuit.sch -b ControllerCircuit.kicad_pcb -d export
 
     # Splitting this out to ensure a failed kibot run will mark a check as failed.
     - name: Prepare Gerbers artifact
