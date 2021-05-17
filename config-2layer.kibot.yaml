@@ -204,7 +204,3 @@ outputs:
         - id: Rot
           name: Rotation
 
-  - name: 'step_file'
-    comment: 'STEP file generation'
-    type: step
-    dir: .
