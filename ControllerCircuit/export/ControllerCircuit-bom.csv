@@ -1,46 +1,47 @@
 Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber,Height,Manufacturer_Name,Manufacturer_Part_Number,Mouser Part Number,Mouser Price/Stock,Arrow Part Number,Arrow Price/Stock,DONOTPLACE,JLCPCBRotation
 1,Unpolarized capacitor,C,C1 C2 C6 C8,100nF,C_0805_2012Metric,4, ,https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf,C49678,,,,,,,,,TRUE,0.0
 2,Unpolarized capacitor,C,C7 C9 C10 C11,1uF,C_0805_2012Metric,4, ,,C28323,CL21B105KBFNNNE,,,,,,,,TRUE,0
-3,Unpolarized capacitor,C,C3 C4,22uF 6.3V,CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder,2, ,https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf,C126948,CA45-A010M226T,,,,,,,,,
-4,"Zener diode, small symbol",D_Zener_Small,D7,D_Zener_Small,D_5W_P10.16mm_Horizontal,1, ,~,,1N5338BRLG,,,,,,,,TRUE,
-5,Light emitting diode,LED,D6,LED,LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,1, ,https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Blue-light_C2293.pdf,,,,,,,,,,TRUE,
-6,Diode,D,D2 D5,LL4148,D_MiniMELF,2, ,https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf,C9808,LL4148,,,,,,,,,
-7,"Dual Line CAN Bus Protector, 24Vrwm",NUP2105L,D8,NUP2105LT1G,SOT-23,1, ,http://www.onsemi.com/pub_link/Collateral/NUP2105L-D.PDF,C14486,,,,,,,,,,
-8,"RGB LED, 6 pin package",LED_RGB,D1,RGB,LED_RGB_5050-6,1, ,https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf,C219409,,,,,,,,,,
-9,Light emitting diode,LED,D3 D4,YELLOW LED,LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,2, ,,C72038,,,,,,,,,,
-10,"Resettable fuse, polymeric positive temperature coefficient",Polyfuse,F1,"Fuse, 1.85A",Fuse_2920_7451Metric,1, ,https://datasheet.lcsc.com/szlcsc/TLC-Electronic-TLC-LSMD185_C262041.pdf,C262041,TLC-LSMD185,,,,,,,,,0
-11,Atmel 6-pin ISP connector,AVR-ISP-6,J6 J8,AVR-ISP-6,PinHeader_2x03_P2.54mm_Vertical,2, ,https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html,C132438,,,,,,,,,TRUE,
-12,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Female,J10,Conn_01x02_Female,PinHeader_1x02_P2.54mm_Horizontal,1, ,~,C376120,,,,,,,,,,
-13,"Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x03_Female,J11,Conn_01x03_Female,PinHeader_1x03_P2.54mm_Vertical,1, ,~,,,,,,,,,,,
-14,"Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x06_Female,J9,Conn_01x06_Female,PinHeader_1x06_P2.54mm_Vertical,1, ,~,,,,,,,,,,TRUE,
-15,Memory Card Connectors 1.10MM MICRO SD 08P HINGE TYPE,0472192001,J15,Molex 0472192001,0472192001,1, ,https://www.molex.com/pdm_docs/sd/472192001_sd.pdf,C164170,,1.9,Molex,0472192001,N/A,https://www.mouser.com/Search/Refine.aspx?Keyword=N%2FA,0472192001,https://www.arrow.com/en/products/0472192001/molex,,
-16,"Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x04_Female,J1 J4 J5 J7 J12,ScrewTerminal,Terminal-Block_3.81_4P_LCSC_C395880,5, ,~,C395880,,,,,,,,,,
-17,"Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x03_Female,J2 J3,ScrewTerminal3Pin,Terminal-Block_5.0mm_3P-LCSC_C395850,2, ,~,C395850,,,,,,,,,,
-18,"Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x05_Female,J14,Unused header,PinHeader_1x05_P2.54mm_Vertical,1, ,~,,,,,,,,,,,
-19,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,JP2 JP3,Conn_01x02_Female,PinHeader_1x02_P2.54mm_Vertical,2, ,,,,,,,,,,,TRUE,
-20,,SRD-05VDC-SL-C-ControllerCircuit,K1 K2,SRD-05VDC-SL-C,RELAY_SRD-05VDC-SL-C,2, ,https://datasheet.lcsc.com/szlcsc/1811021933_Ningbo-Songle-Relay-SRD-05VDC-SL-C_C35449.pdf,C35449,SRD-05VDC-SL-C,,,,,,,,,
-21,,LCD-ControllerCircuit,LCD1,LCD,TFTSPI_2_8_240x320_TOUCH,1, ,,C52711/C358718,,,,,,,,,,
-22,"N-MOSFET transistor, gate/source/drain",Q_NMOS_GSD,Q1 Q2,AO3400A,SOT-23,2, ,https://datasheet.lcsc.com/szlcsc/1812111733_Bourne-Semicon-Shenzhen-AO3400A_C344010.pdf,C344010,AO3400A,,,,,,,,,
-23,"30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23",AO3400A,Q4,AO3400A,SOT-23,1, ,http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf,C344010,,,,,,,,,,
-24,"-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23",AO3401A,Q3,AO3401A,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf,C15127,,,,,,,,,,
-25,Resistor,R,R8,100R,R_0805_2012Metric,1, ,~,C17408,0805W8F1000T5E,,,,,,,,,90
-26,Resistor,R,R6 R9,120R,R_0805_2012Metric,2, ,~,C17437,0805W8F1200T5E,,,,,,,,,0
-27,Resistor,R,R3 R22,180R,R_0805_2012Metric,2, ,~,C25270,0805W8F1800T5E,,,,,,,,TRUE,
-28,Resistor,R,R18 R21 R25,220R,R_0805_2012Metric,3, ,~,C17557,0805W8F2200T5E,,,,,,,,,0
-29,Resistor,R,R1 R17,300R,R_0805_2012Metric,2, ,~,C28636 C17617,0805W8F5600T5E 0805W8F3000T5E,,,,,,,,,0
-30,Resistor,R,R4 R10 R12 R13 R14,560R,R_0805_2012Metric,5, ,~,C28636,0805W8F5600T5E,,,,,,,,,0 90
-31,Resistor,R,R2 R5 R16,2K2,R_0805_2012Metric,3, ,~,C17520,0805W8F2201T5E,,,,,,,,,
-32,Resistor,R,R19 R23,10K,R_0805_2012Metric,2, ,~,C17414,0805W8F1002T5E,,,,,,,,TRUE,
-33,Resistor,R,R24 R26 R28,22K,R_0805_2012Metric,3, ,~,C17560,0805W8F2202T5E,,,,,,,,,0
-34,Resistor,R,R7 R11 R15 R27,51K,R_0805_2012Metric,4, ,~,C17737,0805W8F5102T5E,,,,,,,,,0
-35,Resistor,R,R20,1M,R_0805_2012Metric,1, ,~,C17514,0805W8F1004T5E,,,,,,,,,
-36,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,RX1 TX1,Receive,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,2, ,,C157932,S2B-PH-K-S-GW,,,,,,,,,
-37,"Push button switch, generic, two pins",SW_Push,SW1 SW2,SW_Push,SW_PUSH_6mm_H5mm,2, ,~,C285483,PTS645SL502LFS,,,,,,,,,
-38,"1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223",AMS1117-3.3,U6,AMS1117-3.3,SOT-223-3_TabPin2,1, ,http://www.advanced-monolithic.com/pdf/ds1117.pdf,C6186,AMS1117-3.3,,,,,,,,,
-39,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,AQY212GSZ,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf,C129283,,,,,,,,,,
-40,"16MHz, 8kB Flash, 512B SRAM, 512B EEPROM, ADC, ACI, debugWIRE, SOIC-14",ATtiny841-SSU,U10,ATtiny841-SSU,SOIC-14_3.9x8.7mm_P1.27mm,1, ,http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf,,,,,,,,,,TRUE,
-41,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U2,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,,,,,,,,,,90
-42,,ESP32-DEVKITC-32D-ControllerCircuit,U4,ESP32-DEVKITC-32D,MODULE_ESP32-DEVKITC-32D,1, ,Espressif Systems,C319202/C319202,,,,,,,,,,
-43,,SN65HVD75DR-ControllerCircuit,U5,SN65HVD75DR,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR,C57928,SN65HVD75DR,,,,,,,,,
-44,,TCA6416APWR,U3,TCA6416APWR,TSSOP-24_6.1x7.8mm_P0.65mm,1, ,,C130203,,,,,,,,,,
-45,"High-Speed CAN Transceiver, separate VIO, silent mode, SOIC-8",TJA1051T-3,U1,TJA1057GT/3,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://datasheet.lcsc.com/lcsc/1811151538_NXP-Semicon-TJA1057GT-3J_C112947.pdf,C112947,,,,,,,,,,
+3,Unpolarized capacitor,C,C5,100uF,C_1206_3216Metric,1, ,,C15008,CL31A107MQHNNNE,,,,,,,,,0
+4,Unpolarized capacitor,C,C3 C4,22uF 6.3V,CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder,2, ,https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf,C126948,CA45-A010M226T,,,,,,,,,
+5,"Zener diode, small symbol",D_Zener_Small,D7,D_Zener_Small,D_5W_P10.16mm_Horizontal,1, ,~,,1N5338BRLG,,,,,,,,TRUE,
+6,Light emitting diode,LED,D6,LED,LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,1, ,https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Blue-light_C2293.pdf,,,,,,,,,,TRUE,
+7,Diode,D,D2 D5,LL4148,D_MiniMELF,2, ,https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf,C9808,LL4148,,,,,,,,,
+8,"Dual Line CAN Bus Protector, 24Vrwm",NUP2105L,D8,NUP2105LT1G,SOT-23,1, ,http://www.onsemi.com/pub_link/Collateral/NUP2105L-D.PDF,C14486,,,,,,,,,,
+9,"RGB LED, 6 pin package",LED_RGB,D1,RGB,LED_RGB_5050-6,1, ,https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf,C219409,,,,,,,,,,
+10,Light emitting diode,LED,D3 D4,YELLOW LED,LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,2, ,,C72038,,,,,,,,,,
+11,"Resettable fuse, polymeric positive temperature coefficient",Polyfuse,F1,"Fuse, 1.85A",Fuse_2920_7451Metric,1, ,https://datasheet.lcsc.com/szlcsc/TLC-Electronic-TLC-LSMD185_C262041.pdf,C262041,TLC-LSMD185,,,,,,,,,0
+12,Atmel 6-pin ISP connector,AVR-ISP-6,J6 J8,AVR-ISP-6,PinHeader_2x03_P2.54mm_Vertical,2, ,https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html,C132438,,,,,,,,,TRUE,
+13,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Female,J10,Conn_01x02_Female,PinHeader_1x02_P2.54mm_Horizontal,1, ,~,C376120,,,,,,,,,,
+14,"Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x03_Female,J11,Conn_01x03_Female,PinHeader_1x03_P2.54mm_Vertical,1, ,~,,,,,,,,,,,
+15,"Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x06_Female,J9,Conn_01x06_Female,PinHeader_1x06_P2.54mm_Vertical,1, ,~,,,,,,,,,,TRUE,
+16,Memory Card Connectors 1.10MM MICRO SD 08P HINGE TYPE,0472192001,J15,Molex 0472192001,0472192001,1, ,https://www.molex.com/pdm_docs/sd/472192001_sd.pdf,C164170,,1.9,Molex,0472192001,N/A,https://www.mouser.com/Search/Refine.aspx?Keyword=N%2FA,0472192001,https://www.arrow.com/en/products/0472192001/molex,,
+17,"Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x04_Female,J1 J4 J5 J7 J12,ScrewTerminal,Terminal-Block_3.81_4P_LCSC_C395880,5, ,~,C395880,,,,,,,,,,
+18,"Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x03_Female,J2 J3,ScrewTerminal3Pin,Terminal-Block_5.0mm_3P-LCSC_C395850,2, ,~,C395850,,,,,,,,,,
+19,"Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x05_Female,J14,Unused header,PinHeader_1x05_P2.54mm_Vertical,1, ,~,,,,,,,,,,,
+20,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,JP2 JP3,Conn_01x02_Female,PinHeader_1x02_P2.54mm_Vertical,2, ,,,,,,,,,,,TRUE,
+21,,SRD-05VDC-SL-C-ControllerCircuit,K1 K2,SRD-05VDC-SL-C,RELAY_SRD-05VDC-SL-C,2, ,https://datasheet.lcsc.com/szlcsc/1811021933_Ningbo-Songle-Relay-SRD-05VDC-SL-C_C35449.pdf,C35449,SRD-05VDC-SL-C,,,,,,,,,
+22,,LCD-ControllerCircuit,LCD1,LCD,TFTSPI_2_8_240x320_TOUCH,1, ,,C52711/C358718,,,,,,,,,,
+23,"N-MOSFET transistor, gate/source/drain",Q_NMOS_GSD,Q1 Q2,AO3400A,SOT-23,2, ,https://datasheet.lcsc.com/szlcsc/1812111733_Bourne-Semicon-Shenzhen-AO3400A_C344010.pdf,C344010,AO3400A,,,,,,,,,
+24,"30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23",AO3400A,Q4,AO3400A,SOT-23,1, ,http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf,C344010,,,,,,,,,,
+25,"-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23",AO3401A,Q3,AO3401A,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf,C15127,,,,,,,,,,
+26,Resistor,R,R8,100R,R_0805_2012Metric,1, ,~,C17408,0805W8F1000T5E,,,,,,,,,90
+27,Resistor,R,R6 R9,120R,R_0805_2012Metric,2, ,~,C17437,0805W8F1200T5E,,,,,,,,,0
+28,Resistor,R,R3 R22,180R,R_0805_2012Metric,2, ,~,C25270,0805W8F1800T5E,,,,,,,,TRUE,
+29,Resistor,R,R18 R21 R25,220R,R_0805_2012Metric,3, ,~,C17557,0805W8F2200T5E,,,,,,,,,0
+30,Resistor,R,R1 R17,300R,R_0805_2012Metric,2, ,~,C28636 C17617,0805W8F5600T5E 0805W8F3000T5E,,,,,,,,,0
+31,Resistor,R,R4 R10 R12 R13 R14,560R,R_0805_2012Metric,5, ,~,C28636,0805W8F5600T5E,,,,,,,,,0 90
+32,Resistor,R,R2 R5 R16,2K2,R_0805_2012Metric,3, ,~,C17520,0805W8F2201T5E,,,,,,,,,
+33,Resistor,R,R19 R23 R29,10K,R_0805_2012Metric,3, ,~,C17414,0805W8F1002T5E,,,,,,,,TRUE,
+34,Resistor,R,R24 R26 R28,22K,R_0805_2012Metric,3, ,~,C17560,0805W8F2202T5E,,,,,,,,,0
+35,Resistor,R,R7 R11 R15 R27,51K,R_0805_2012Metric,4, ,~,C17737,0805W8F5102T5E,,,,,,,,,0
+36,Resistor,R,R20,1M,R_0805_2012Metric,1, ,~,C17514,0805W8F1004T5E,,,,,,,,,
+37,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,RX1 TX1,Receive,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,2, ,,C157932,S2B-PH-K-S-GW,,,,,,,,,
+38,"Push button switch, generic, two pins",SW_Push,SW1 SW2,SW_Push,SW_PUSH_6mm_H5mm,2, ,~,C285483,PTS645SL502LFS,,,,,,,,,
+39,"1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223",AMS1117-3.3,U6,AMS1117-3.3,SOT-223-3_TabPin2,1, ,http://www.advanced-monolithic.com/pdf/ds1117.pdf,C6186,AMS1117-3.3,,,,,,,,,
+40,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,AQY212GSZ,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf,C129283,,,,,,,,,,
+41,"16MHz, 8kB Flash, 512B SRAM, 512B EEPROM, ADC, ACI, debugWIRE, SOIC-14",ATtiny841-SSU,U10,ATtiny841-SSU,SOIC-14_3.9x8.7mm_P1.27mm,1, ,http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf,,,,,,,,,,TRUE,
+42,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U2,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,,,,,,,,,,90
+43,,ESP32-DEVKITC-32D-ControllerCircuit,U4,ESP32-DEVKITC-32D,MODULE_ESP32-DEVKITC-32D,1, ,Espressif Systems,C319202/C319202,,,,,,,,,,
+44,,SN65HVD75DR-ControllerCircuit,U5,SN65HVD75DR,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR,C57928,SN65HVD75DR,,,,,,,,,
+45,,TCA6416APWR,U3,TCA6416APWR,TSSOP-24_6.1x7.8mm_P0.65mm,1, ,,C130203,,,,,,,,,,
+46,"High-Speed CAN Transceiver, separate VIO, silent mode, SOIC-8",TJA1051T-3,U1,TJA1057GT/3,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://datasheet.lcsc.com/lcsc/1811151538_NXP-Semicon-TJA1057GT-3J_C112947.pdf,C112947,,,,,,,,,,

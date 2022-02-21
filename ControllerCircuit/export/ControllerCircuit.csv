@@ -1,6 +1,7 @@
 Reference, Quantity, Value, Footprint, Datasheet, LCSCStockCode, PartNumber, Arrow Part Number, Arrow Price/Stock, Description, Height, Manufacturer_Name, Manufacturer_Part_Number, Mouser Part Number, Mouser Price/Stock, DONOTPLACE, JLCPCBRotation
 C7 C9 C10 C11 ,4,"1uF","Capacitor_SMD:C_0805_2012Metric","","C28323","","","","","","","","","","",""
 C3 C4 ,2,"22uF 6.3V","Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder","https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf","C126948","CA45-A010M226T","","","","","","","","","",""
+C5 ,1,"100uF","Capacitor_SMD:C_1206_3216Metric","","C15008","CL31A107MQHNNNE","","","","","","","","","","0"
 C1 C2 C6 C8 ,4,"100nF","Capacitor_SMD:C_0805_2012Metric","https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf","","","","","","","","","","","TRUE",""
 D1 ,1,"RGB","LED_SMD:LED_RGB_5050-6","https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf","C219409","","","","","","","","","","",""
 D3 D4 ,2,"YELLOW LED","LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder","","C72038","","","","","","","","","","",""
@@ -27,7 +28,7 @@ R2 R5 R16 ,3,"2K2","Resistor_SMD:R_0805_2012Metric","~","C17520","0805W8F2201T5E
 R1 R17 ,2,"300R","Resistor_SMD:R_0805_2012Metric","~","C17617","0805W8F3000T5E","","","","","","","","","","0"
 R20 ,1,"1M","Resistor_SMD:R_0805_2012Metric","~","C17514","0805W8F1004T5E","","","","","","","","","",""
 R3 R22 ,2,"180R","Resistor_SMD:R_0805_2012Metric","~","","","","","","","","","","","TRUE",""
-R19 R23 ,2,"10K","Resistor_SMD:R_0805_2012Metric","~","","0805W8F1002T5E","","","","","","","","","TRUE",""
+R19 R23 R29 ,3,"10K","Resistor_SMD:R_0805_2012Metric","~","","0805W8F1002T5E","","","","","","","","","TRUE",""
 R18 R21 R25 ,3,"220R","Resistor_SMD:R_0805_2012Metric","~","C17557","0805W8F2200T5E","","","","","","","","","","0"
 R7 R11 R15 R27 ,4,"51K","Resistor_SMD:R_0805_2012Metric","~","C17737","0805W8F5102T5E","","","","","","","","","",""
 R24 R26 R28 ,3,"22K","Resistor_SMD:R_0805_2012Metric","~","C17560","0805W8F2202T5E","","","","","","","","","",""
