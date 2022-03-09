@@ -1,7 +1,7 @@
 Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber,Height,Manufacturer_Name,Manufacturer_Part_Number,Mouser Part Number,Mouser Price/Stock,Arrow Part Number,Arrow Price/Stock,DONOTPLACE,JLCPCBRotation
 1,Unpolarized capacitor,C,C1 C2 C6 C8,100nF,C_0805_2012Metric,4, ,https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf,C49678,,,,,,,,,TRUE,0.0
 2,Unpolarized capacitor,C,C7 C9 C10 C11,1uF,C_0805_2012Metric,4, ,,C28323,CL21B105KBFNNNE,,,,,,,,TRUE,0
-3,Unpolarized capacitor,C,C5,100uF,C_1206_3216Metric,1, ,,C15008,CL31A107MQHNNNE,,,,,,,,,0
+3,Unpolarized capacitor,C,C5,22uF,C_1206_3216Metric,1, ,,C5672,CL31A226KPHNNNE,,,,,,,,,0
 4,Unpolarized capacitor,C,C3 C4,22uF 6.3V,CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder,2, ,https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf,C126948,CA45-A010M226T,,,,,,,,,
 5,"Zener diode, small symbol",D_Zener_Small,D7,D_Zener_Small,D_5W_P10.16mm_Horizontal,1, ,~,,1N5338BRLG,,,,,,,,TRUE,
 6,Light emitting diode,LED,D6,LED,LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,1, ,https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Blue-light_C2293.pdf,,,,,,,,,,TRUE,
@@ -43,5 +43,5 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 42,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U2,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,,,,,,,,,,90
 43,,ESP32-DEVKITC-32D-ControllerCircuit,U4,ESP32-DEVKITC-32D,MODULE_ESP32-DEVKITC-32D,1, ,Espressif Systems,C319202/C319202,,,,,,,,,,
 44,,SN65HVD75DR-ControllerCircuit,U5,SN65HVD75DR,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR,C57928,SN65HVD75DR,,,,,,,,,
-45,,TCA6416APWR,U3,TCA6416APWR,TSSOP-24_6.1x7.8mm_P0.65mm,1, ,,C130203,,,,,,,,,,
+45,,TCA6416APWR,U3,TCA6416APWR,TSSOP-24_4.4x7.8mm_P0.65mm,1, ,,C130203,,,,,,,,,,
 46,"High-Speed CAN Transceiver, separate VIO, silent mode, SOIC-8",TJA1051T-3,U1,TJA1057GT/3,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://datasheet.lcsc.com/lcsc/1811151538_NXP-Semicon-TJA1057GT-3J_C112947.pdf,C112947,,,,,,,,,,
