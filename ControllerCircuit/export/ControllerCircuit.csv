@@ -1,7 +1,7 @@
 Reference, Quantity, Value, Footprint, Datasheet, LCSCStockCode, PartNumber, Arrow Part Number, Arrow Price/Stock, Description, Height, Manufacturer_Name, Manufacturer_Part_Number, Mouser Part Number, Mouser Price/Stock, DONOTPLACE, JLCPCBRotation
 C7 C9 C10 C11 ,4,"1uF","Capacitor_SMD:C_0805_2012Metric","","C28323","","","","","","","","","","",""
 C3 C4 ,2,"22uF 6.3V","Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder","https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf","C126948","CA45-A010M226T","","","","","","","","","",""
-C5 ,1,"100uF","Capacitor_SMD:C_1206_3216Metric","","C15008","CL31A107MQHNNNE","","","","","","","","","","0"
+C5 ,1,"22uF","Capacitor_SMD:C_1206_3216Metric","","C5672","CL31A226KPHNNNE","","","","","","","","","","0"
 C1 C2 C6 C8 ,4,"100nF","Capacitor_SMD:C_0805_2012Metric","https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf","","","","","","","","","","","TRUE",""
 D1 ,1,"RGB","LED_SMD:LED_RGB_5050-6","https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf","C219409","","","","","","","","","","",""
 D3 D4 ,2,"YELLOW LED","LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder","","C72038","","","","","","","","","","",""
@@ -42,5 +42,5 @@ U1 ,1,"TJA1057GT/3","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm","https://datasheet.lcs
 U10 ,1,"ATtiny841-SSU","Package_SO:SOIC-14_3.9x8.7mm_P1.27mm","http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf","","","","","","","","","","","TRUE",""
 U9 U12 ,2,"AQY212GSZ","Package_SO:SO-4_4.4x3.6mm_P2.54mm","https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf","C129283","","","","","","","","","","",""
 U2 ,1,"EL3H7(B)(TA)-G","Package_SO:SOP-4_4.4x2.6mm_P1.27mm","https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf","C32565","","","","","","","","","","","90"
-U3 ,1,"TCA6416APWR","Package_SO:TSSOP-24_6.1x7.8mm_P0.65mm","","C130203","","","","","","","","","","",""
+U3 ,1,"TCA6416APWR","Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm","","C130203","","","","","","","","","","",""
 U6 ,1,"AMS1117-3.3","Package_TO_SOT_SMD:SOT-223-3_TabPin2","http://www.advanced-monolithic.com/pdf/ds1117.pdf","C6186","AMS1117-3.3","","","","","","","","","",""
