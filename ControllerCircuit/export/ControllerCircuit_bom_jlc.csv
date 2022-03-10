@@ -2,7 +2,7 @@
 "100nF","C1,C2,C6,C8","C_0805_2012Metric","C49678"
 "1uF","C7,C9,C10,C11","C_0805_2012Metric","C28323"
 "22uF","C5","C_1206_3216Metric","C5672"
-"22uF 6.3V","C3,C4","CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder","C126948"
+"22uF 6.3V","C3,C4","CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder","C190381"
 "D_Zener_Small","D7","D_5W_P10.16mm_Horizontal",""
 "LED","D6","LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder",""
 "LL4148","D2,D5","D_MiniMELF","C9808"
