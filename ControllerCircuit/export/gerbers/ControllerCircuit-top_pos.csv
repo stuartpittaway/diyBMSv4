@@ -19,7 +19,7 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "FID2","Fiducial_1mm_Mask2mm","Fiducial_1mm_Mask2mm",97.7500,-131.5000,0.0000,top
 "FID3","Fiducial_1mm_Mask2mm","Fiducial_1mm_Mask2mm",202.5000,-131.5000,0.0000,top
 "FID4","Fiducial_1mm_Mask2mm","Fiducial_1mm_Mask2mm",202.5000,-57.0000,0.0000,top
-"J15","Molex 0472192001","0472192001",198.6100,-89.2400,270.0000,top
+"J15","Molex 0472192001","0472192001",192.4500,-93.6000,270.0000,top
 "Q1","AO3400A","SOT-23",205.5500,-67.4000,180.0000,top
 "Q2","AO3400A","SOT-23",152.7500,-66.9000,180.0000,top
 "Q3","AO3401A","SOT-23",161.3750,-66.0250,180.0000,top
