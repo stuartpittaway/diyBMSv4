@@ -1,14 +1,14 @@
 Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber,Height,Manufacturer_Name,Manufacturer_Part_Number,Mouser Part Number,Mouser Price/Stock,Arrow Part Number,Arrow Price/Stock,DONOTPLACE,JLCPCBRotation
-1,Unpolarized capacitor,C,C1 C2 C6,100nF,C_0805_2012Metric,3, ,https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf,C49678,,,,,,,,,,0.0
-2,Unpolarized capacitor,C,C7 C10 C11,1uF,C_0805_2012Metric,3, ,,C28323,CL21B105KBFNNNE,,,,,,,,,0
-3,Unpolarized capacitor,C,C5,22uF,C_1206_3216Metric,1, ,,C5672,CL31A226KPHNNNE,,,,,,,,,0
+1,Unpolarized capacitor,C,C1 C2 C6,100nF,C_0805_2012Metric,3, ,https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf,C49678,,,,,,,,,,
+2,Unpolarized capacitor,C,C7 C10 C11,1uF,C_0805_2012Metric,3, ,,C28323,CL21B105KBFNNNE,,,,,,,,,
+3,Unpolarized capacitor,C,C5,22uF,C_1206_3216Metric,1, ,,C5672,CL31A226KPHNNNE,,,,,,,,,
 4,Unpolarized capacitor,C,C3 C4,22uF 6.3V,CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder,2, ,https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf,C190381,TC212A226K004Y,,,,,,,,,
 5,"Zener diode, small symbol",D_Zener_Small,D7,D_Zener_Small,D_5W_P10.16mm_Horizontal,1, ,~,,1N5338BRLG,,,,,,,,TRUE,
 6,Diode,D,D2 D5,LL4148,D_MiniMELF,2, ,https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf,C9808,LL4148,,,,,,,,,
 7,"Dual Line CAN Bus Protector, 24Vrwm",NUP2105L,D8,NUP2105LT1G,SOT-23,1, ,http://www.onsemi.com/pub_link/Collateral/NUP2105L-D.PDF,C14486,,,,,,,,,,
 8,"RGB LED, 6 pin package",LED_RGB,D1,RGB,LED_RGB_5050-6,1, ,https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf,C219409,,,,,,,,,,
 9,Light emitting diode,LED,D3 D4,YELLOW LED,LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,2, ,,C72038,,,,,,,,,,
-10,"Resettable fuse, polymeric positive temperature coefficient",Polyfuse,F1,"Fuse, 1.85A",Fuse_2920_7451Metric,1, ,https://datasheet.lcsc.com/szlcsc/TLC-Electronic-TLC-LSMD185_C262041.pdf,C262041,TLC-LSMD185,,,,,,,,,0
+10,"Resettable fuse, polymeric positive temperature coefficient",Polyfuse,F1,"Fuse, 1.85A",Fuse_2920_7451Metric,1, ,https://datasheet.lcsc.com/szlcsc/TLC-Electronic-TLC-LSMD185_C262041.pdf,C262041,TLC-LSMD185,,,,,,,,,
 11,Atmel 6-pin ISP connector,AVR-ISP-6,J8,2x3 2.54mm IDC Connectors,PinHeader_2x03_P2.54mm_Vertical,1, ,https://lcsc.com/product-detail/IDC-Connectors_Ckmtw-Shenzhen-Cankemeng-C132438_C132438.html,C132438,,,,,,,,,,
 12,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Female,J10,Conn_01x02_Female,PinHeader_1x02_P2.54mm_Horizontal,1, ,~,C376120,,,,,,,,,,
 13,"Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x03_Female,J11,Conn_01x03_Female,PinHeader_1x03_P2.54mm_Vertical,1, ,~,,,,,,,,,,TRUE,
@@ -33,7 +33,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 32,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,RX1 TX1,Receive,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,2, ,,C157932,S2B-PH-K-S-GW,,,,,,,,,
 33,"Push button switch, generic, two pins",SW_Push,SW1 SW2,SW_Push,SW_PUSH_6mm_H5mm,2, ,~,C285483,PTS645SL502LFS,,,,,,,,,
 34,"1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223",AMS1117-3.3,U6,AMS1117-3.3,SOT-223-3_TabPin2,1, ,http://www.advanced-monolithic.com/pdf/ds1117.pdf,C6186,AMS1117-3.3,,,,,,,,,
-35,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,AQY212GSZ,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf,C129283,,,,,,,,,,
+35,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,AQY212GSZ,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf,C129283,,,,,,,,,,0 90
 36,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U2,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,,,,,,,,,,90
 37,,ESP32-DEVKITC-32D-ControllerCircuit,U4,ESP32-DEVKITC-32D,MODULE_ESP32-DEVKITC-32D,1, ,Espressif Systems,C319202/C319202,,,,,,,,,,
 38,,SN65HVD75DR-ControllerCircuit,U5,SN65HVD75DR,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR,C57928,SN65HVD75DR,,,,,,,,,
