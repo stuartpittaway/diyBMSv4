@@ -14,6 +14,7 @@ filters:
     type: rot_footprint
     rotations:
       - ["^SOP-4_4.4x2.6mm_P1.27mm", 0.0]
+      - ["^SO-4_4.4x3.6mm_P2.54mm", 90.0]
 
 global:
   variant: default

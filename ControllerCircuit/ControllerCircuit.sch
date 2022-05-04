@@ -1712,7 +1712,7 @@ F 1 "AQY212GSZ" H 7125 6814 50  0000 C CNN
 F 2 "Package_SO:SO-4_4.4x3.6mm_P2.54mm" H 6925 6380 50  0001 L CIN
 F 3 "https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf" H 7125 6580 50  0001 L CNN
 F 4 "C129283" H 7125 6580 50  0001 C CNN "LCSCStockCode"
-F 5 "90" H 7125 6580 50  0001 C CNN "JLCPCBRotation"
+F 5 "" H 7125 6580 50  0001 C CNN "JLCPCBRotation"
 	1    7125 6580
 	1    0    0    -1  
 $EndComp
@@ -1805,7 +1805,7 @@ F 1 "AQY212GSZ" H 7050 5974 50  0000 C CNN
 F 2 "Package_SO:SO-4_4.4x3.6mm_P2.54mm" H 6850 5540 50  0001 L CIN
 F 3 "https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf" H 7050 5740 50  0001 L CNN
 F 4 "C129283" H 7050 5740 50  0001 C CNN "LCSCStockCode"
-F 5 "0" H 7050 5740 50  0001 C CNN "JLCPCBRotation"
+F 5 "" H 7050 5740 50  0001 C CNN "JLCPCBRotation"
 	1    7050 5740
 	1    0    0    -1  
 $EndComp
@@ -1882,7 +1882,7 @@ F 1 "EL3H7(B)(TA)-G" H 6480 1154 50  0000 C CNN
 F 2 "Package_SO:SOP-4_4.4x2.6mm_P1.27mm" H 6280 720 50  0001 L CIN
 F 3 "https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf" H 6480 920 50  0001 L CNN
 F 4 "C32565" H 6480 920 50  0001 C CNN "LCSCStockCode"
-F 5 "90" H 6480 920 50  0001 C CNN "JLCPCBRotation"
+F 5 "" H 6480 920 50  0001 C CNN "JLCPCBRotation"
 	1    6480 920 
 	1    0    0    -1  
 $EndComp
