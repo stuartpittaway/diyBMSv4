@@ -33,8 +33,8 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 32,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,RX1 TX1,Receive,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,2, ,,C157932,S2B-PH-K-S-GW,,,,,,,,,
 33,"Push button switch, generic, two pins",SW_Push,SW1 SW2,SW_Push,SW_PUSH_6mm_H5mm,2, ,~,C285483,PTS645SL502LFS,,,,,,,,,
 34,"1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223",AMS1117-3.3,U6,AMS1117-3.3,SOT-223-3_TabPin2,1, ,http://www.advanced-monolithic.com/pdf/ds1117.pdf,C6186,AMS1117-3.3,,,,,,,,,
-35,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,AQY212GSZ,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf,C129283,,,,,,,,,,0 90
-36,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U2,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,,,,,,,,,,90
+35,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,AQY212GSZ,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf,C129283,,,,,,,,,,
+36,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U2,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,,,,,,,,,,
 37,,ESP32-DEVKITC-32D-ControllerCircuit,U4,ESP32-DEVKITC-32D,MODULE_ESP32-DEVKITC-32D,1, ,Espressif Systems,C319202/C319202,,,,,,,,,,
 38,,SN65HVD75DR-ControllerCircuit,U5,SN65HVD75DR,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR,C57928,SN65HVD75DR,,,,,,,,,
 39,,TCA6416APWR,U3,TCA6416APWR,TSSOP-24_4.4x7.8mm_P0.65mm,1, ,,C130203,,,,,,,,,,
