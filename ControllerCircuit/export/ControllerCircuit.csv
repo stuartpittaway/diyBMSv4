@@ -35,7 +35,7 @@ RX1 ,1,"Receive","Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal","","C15
 SW1 SW2 ,2,"SW_Push","Button_Switch_THT:SW_PUSH_6mm_H5mm","~","C285483","PTS645SL502LFS","","","","","","","","","",""
 TX1 ,1,"Transmit","Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal","","C157932","S2B-PH-K-S-GW","","","","","","","","","",""
 U1 ,1,"TJA1057GT/3J","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm","https://datasheet.lcsc.com/lcsc/1811151538_NXP-Semicon-TJA1057GT-3J_C112947.pdf","C112947","","","","","","","","","","",""
-U9 U12 ,2,"AQY212GSZ","Package_SO:SO-4_4.4x3.6mm_P2.54mm","https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf","C129283","","","","","","","","","","","90"
+U9 U12 ,2,"AQY212GSZ","Package_SO:SO-4_4.4x3.6mm_P2.54mm","https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf","C129283","","","","","","","","","","",""
 U2 ,1,"EL3H7(B)(TA)-G","Package_SO:SOP-4_4.4x2.6mm_P1.27mm","https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf","C32565","","","","","","","","","","","90"
 U3 ,1,"TCA6416APWR","Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm","","C130203","","","","","","","","","","",""
 U4 ,1,"ESP32-DEVKITC-32D","ControllerCircuit:MODULE_ESP32-DEVKITC-32D","Espressif Systems","C319202/C319202","","","","","","","","","","",""
