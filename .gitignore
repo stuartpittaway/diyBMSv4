@@ -14,7 +14,6 @@ ESPControllerCircuit/fp-info-cache
 *.sch-bak
 *.bck
 ControllerCircuit/ControllerCircuit-cache.lib
-ControllerCircuit/ControllerCircuit-rescue.lib
 ControllerCircuit/fp-info-cache
 ModuleV400/v4-cache.lib
 ModuleV400/v4-rescue.lib

@@ -59,12 +59,16 @@ Although the hardware is complete, not all features are usable from the software
 
 [Bill of Materials](./ControllerCircuit/ComponentListBOM.md)
 
+<img src="ControllerCircuit/export/ControllerCircuit-top.png" alt="circuit board" width="512"/>
 
 ### Module V4.40
 
 The latest version of the module hardware was designed to cater for those who want to use assembly services like JLCPCB and also for those who wish to hand solder.
 
 The parts are no smaller than 0805 size (about 2mm!) which is probably the smallest size you want to attempt to hand solder.
+
+<img src="./ModuleV440/export/ModuleV440-top.png" alt="circuit board" width="200"/>
+
 
 In addition, the hardware has a higher balance current, fuse and TVS diode to help with voltage spikes.  
 Most importantly, an external crystal has been added to the micro controller (attiny841) which means the device is more reliable in low voltage situations.

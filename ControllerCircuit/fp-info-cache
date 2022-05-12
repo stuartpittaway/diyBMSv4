@@ -1,4 +1,4 @@
-19048102364216430
+19277540683184427
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -47194,7 +47194,28 @@ Terminal-Block_5.0mm_3P-LCSC_C395850
 3
 3
 ControllerCircuit
+diybms_logo_24x10mm
+
+
+0
+0
+0
+ControllerCircuit
+diybms_logo_47x21mm
+
+
+0
+0
+0
+ControllerCircuit
 diybmslogo_pcb
+
+
+0
+0
+0
+ControllerCircuit
+logo
 
 
 0
