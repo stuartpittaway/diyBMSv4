@@ -11,14 +11,14 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 10,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,mSMD150,Fuse_1812_4532Metric,1, ,https://datasheet.lcsc.com/szlcsc/TECHFUSE-mSMD150_C70121.pdf,C70121,mSMD150,
 11,Atmel 6-pin ISP connector,AVR-ISP-6,J2,AVR-ISP-6,Pin_Header_Straight_2x03_Pitch2.54mm,1, ,https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html,C65114,,
 12,"N-MOSFET transistor, gate/source/drain",Q_NMOS_GSD,Q1,AO3400A,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3400A_C20917.pdf,C20917,AO3400A,
-13,Resistor,R,R5,220 OHMS,R_0805_2012Metric,1, ,,C17557,0805W8F2200T5E,
-14,Resistor,R,R14,510OHMS,R_0805_2012Metric,1, ,,C17734,0805W8F5100T5E,
-15,Resistor,R,R2,1KOHMS,R_0805_2012Metric,1, ,,C17513,0805W8F1001T5E,
-16,Resistor,R,R16 R17 R18,2.2KOHMS,R_0805_2012Metric,3, ,,C17520,0805W8F2201T5E,0
-17,Resistor,R,R4,2.7K,R_0805_2012Metric,1, ,,C17530,0805W8F2701T5E,
-18,Resistor,R,R3,6.8K,R_0805_2012Metric,1, ,,C17772,0805W8F6801T5E,
-19,Resistor,R,R1 R15 R20 R21,10KOHMS,R_0805_2012Metric,4, ,,C17414,0805W8F1002T5E,
-20,Resistor,R,R6 R8 R12 R22 R24 R25 R26 R29 R30,3.3OHM 3/4W,R_2010_5025Metric,9, ,,C270971,201007F330KT4E,
+13,Resistor,R,R6 R8 R12 R22 R24 R25 R26 R29 R30,3.3OHM 3/4W,R_2010_5025Metric,9, ,,C270971,201007F330KT4E,
+14,Resistor,R,R5,220 OHMS,R_0805_2012Metric,1, ,,C17557,0805W8F2200T5E,
+15,Resistor,R,R14,510OHMS,R_0805_2012Metric,1, ,,C17734,0805W8F5100T5E,
+16,Resistor,R,R2,1KOHMS,R_0805_2012Metric,1, ,,C17513,0805W8F1001T5E,
+17,Resistor,R,R16 R17 R18,2.2KOHMS,R_0805_2012Metric,3, ,,C17520,0805W8F2201T5E,0
+18,Resistor,R,R4,2.7K,R_0805_2012Metric,1, ,,C17530,0805W8F2701T5E,
+19,Resistor,R,R3,6.8K,R_0805_2012Metric,1, ,,C17772,0805W8F6801T5E,
+20,Resistor,R,R1 R15 R20 R21,10KOHMS,R_0805_2012Metric,4, ,,C17414,0805W8F1002T5E,
 21,Temperature dependent resistor,Thermistor,R19 R23,CMFB103F3950FANT,R_0805_2012Metric,2, ,https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-CMFB103F3950FANT_C51597.pdf,C51597,CMFB103F3950FANT,
 22,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,REMOTE1,Ext Temp Sensor,PinHeader_1x02_P2.54mm_Vertical,1, ,https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf,,,
 23,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U1,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,EL3H7(B)(TA)-G,90
