@@ -1,8 +1,8 @@
 Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber,Height,Manufacturer_Name,Manufacturer_Part_Number,Mouser Part Number,Mouser Price/Stock,Arrow Part Number,Arrow Price/Stock,DONOTPLACE,JLCPCBRotation
 1,Unpolarized capacitor,C,C1 C2 C6,100nF,C_0805_2012Metric,3, ,https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf,C49678,,,,,,,,,,
 2,Unpolarized capacitor,C,C7 C10 C11,1uF,C_0805_2012Metric,3, ,,C28323,CL21B105KBFNNNE,,,,,,,,,
-3,Unpolarized capacitor,C,C5,22uF,C_1206_3216Metric,1, ,,C5672,CL31A226KPHNNNE,,,,,,,,,
-4,Unpolarized capacitor,C,C3 C4,22uF 6.3V,CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder,2, ,https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf,C190381,TC212A226K004Y,,,,,,,,,
+3,Unpolarized capacitor,C,C3 C4,22uF 6.3V,CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder,2, ,https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf,C190381,TC212A226K004Y,,,,,,,,,
+4,Unpolarized capacitor,C,C5,22uF,C_1206_3216Metric,1, ,,C5672,CL31A226KPHNNNE,,,,,,,,,
 5,"Zener diode, small symbol",D_Zener_Small,D7,D_Zener_Small,D_5W_P10.16mm_Horizontal,1, ,~,,1N5338BRLG,,,,,,,,TRUE,
 6,Diode,D,D2 D5,LL4148,D_MiniMELF,2, ,https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf,C9808,LL4148,,,,,,,,,
 7,"Dual Line CAN Bus Protector, 24Vrwm",NUP2105L,D8,NUP2105LT1G,SOT-23,1, ,http://www.onsemi.com/pub_link/Collateral/NUP2105L-D.PDF,C14486,,,,,,,,,,
