@@ -5,7 +5,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 4,Unpolarized capacitor,C,C5,22uF,C_1206_3216Metric,1, ,,C5672,CL31A226KPHNNNE,,,,,,,,,
 5,"Zener diode, small symbol",D_Zener_Small,D7,D_Zener_Small,D_5W_P10.16mm_Horizontal,1, ,~,,1N5338BRLG,,,,,,,,,TRUE
 6,Diode,D,D2 D5,LL4148,D_MiniMELF,2, ,https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf,C9808,LL4148,,,,,,,,,
-7,"RGB LED, red/green/blue/cathode",LED_RGBC,D6,MHPC3528CRGBCT,LED_Kingbright_AAA3528ESGCT,1, ,https://datasheet.lcsc.com/lcsc/2202141600_MEIHUA-MHPC3528CRGBCT_C2962096.pdf,C2962096,,,,,,,,,,
+7,"RGB LED, red/green/blue/cathode",LED_RGBC,D6,MHPC3528CRGBCT,LED_Kingbright_AAA3528ESGCT,1, ,https://datasheet.lcsc.com/lcsc/2202141600_MEIHUA-MHPC3528CRGBCT_C2962096.pdf,,,,,,,,,,,
 8,"Dual Line CAN Bus Protector, 24Vrwm",NUP2105L,D8,NUP2105LT1G,SOT-23,1, ,http://www.onsemi.com/pub_link/Collateral/NUP2105L-D.PDF,C14486,,,,,,,,,,
 9,"RGB LED, 6 pin package",LED_RGB,D1,RGB,LED_RGB_5050-6,1, ,https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf,C219409,,,,,,,,,,
 10,Light emitting diode,LED,D3 D4,YELLOW LED,LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,2, ,,C72038,,,,,,,,,,
