@@ -64,6 +64,8 @@ Although the hardware is complete, not all features are usable from the software
 
 The latest version of the module hardware uses the ATTINY1624 chip - part of the tinyAVR2 range.
 
+This board requires an UPDI programmer/device - see the instructions in the code repository for how to program the boards once built.
+
 The parts are no smaller than 0805 size (about 2mm!) which is probably the smallest size you want to attempt to hand solder.
 
 <img src="./ModuleV450/export/ModuleV450-top.png" alt="circuit board" width="200"/>
