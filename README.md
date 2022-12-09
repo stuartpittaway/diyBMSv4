@@ -35,7 +35,8 @@ The folder structure in the repository contains:
 * ESP8266ControllerCircuit - [legacy] the circuit board for the legacy ESP8266 based controller
 
 ## Modules for Controller
-* ModuleV440 - the latest module design, recommended for both hand soldering or mass production
+* ModuleV450 - the latest module design, using ATTINY1624 chip. Recommended for both hand soldering or mass production
+* ModuleV440 - [legacy] the module circuit board V4.40, final board using ATTINY841 chip
 * ModuleV400 - [legacy] the module circuit board V4.00, designed for easier hand soldering (larger parts)
 * ModuleV421 - [legacy] the module circuit board V4.21, designed for mass production using JLCPCB assembly service
 
@@ -59,11 +60,20 @@ Although the hardware is complete, not all features are usable from the software
 
 <img src="ControllerCircuit/export/ControllerCircuit-top.png" alt="circuit board" width="512"/>
 
-### Module V4.40
+### Module V4.50
 
-The latest version of the module hardware was designed to cater for those who want to use assembly services like JLCPCB and also for those who wish to hand solder.
+The latest version of the module hardware uses the ATTINY1624 chip - part of the tinyAVR2 range.
 
 The parts are no smaller than 0805 size (about 2mm!) which is probably the smallest size you want to attempt to hand solder.
+
+<img src="./ModuleV450/export/ModuleV450-top.png" alt="circuit board" width="200"/>
+
+Specifications are similar to the V4.40 board.
+
+
+### Module V4.40
+
+V4.40 is the last board to use the ATTINY841 chip - V4.50 is the newest design if you are starting fresh.
 
 <img src="./ModuleV440/export/ModuleV440-top.png" alt="circuit board" width="200"/>
 
@@ -79,18 +89,15 @@ The module is physically larger than previous modules, this aids heat dispersal 
 
 You will also need to order [these parts](./ModuleV440/HandAssemblyParts.md)
 
-
-
 # CODE/SOFTWARE
 
 Software and code for the modules and controller can now be found in a seperate repo
 
-For the legacy controller (ESP8266)
-[diyBMSv4Code](https://github.com/stuartpittaway/diyBMSv4Code)
-
 For the latest controller (ESP32)
 [diyBMSv4ESP32](https://github.com/stuartpittaway/diyBMSv4ESP32)
 
+For the legacy controller (ESP8266)
+[diyBMSv4Code](https://github.com/stuartpittaway/diyBMSv4Code)
 
 # WARNING
 
