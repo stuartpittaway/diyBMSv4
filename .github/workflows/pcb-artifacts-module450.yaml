@@ -16,10 +16,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  repo: stuartpittaway/diyBMSv4
-  main_branch: master
-
 jobs:
   generate-artifacts:
     runs-on: ubuntu-latest
@@ -37,24 +33,23 @@ jobs:
       with:
         lfs: true
 
-    - name: Extract branch name
-      shell: bash
-      run: echo "{branch}={$(echo ${GITHUB_REF#refs/heads/})}" >> $GITHUB_OUTPUT
-      id: extract_branch
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v6
 
-    - name: Output branch details
+    - name: Running on branch
       run: |
-        echo "ref: ${{ github.ref }}"
-        echo "default: ${{ env.default }}"
-
+        echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
+  
     - name: Update the PCBs with on default branch with git hash
-      if: steps.extract_branch.outputs.branch == env.main_branch
+      if: steps.branch-name.outputs.is_default == 'true'
       run: |
         export COMMIT=$(git rev-parse --short HEAD)
+        echo "COMMIT = ${COMMIT}"
         sed -i "s!<<hash>>!${COMMIT}!" ModuleV450/ModuleV450.kicad_pcb
 
     - name: Update the PCBs with the git hash and BETA.
-      if: steps.extract_branch.outputs.branch != env.main_branch
+      if: steps.branch-name.outputs.is_default != 'true'
       run: |
         export COMMIT=$(git rev-parse --short HEAD)
         echo "COMMIT = ${COMMIT}"
