@@ -630,7 +630,7 @@ Wire Notes Line
 	3145 3515 3145 5145
 Text Notes 530  3685 0    79   ~ 16
 RS-485
-Text Notes 2385 710  0    79   ~ 16
+Text Notes 2205 665  0    79   ~ 16
 CANBUS
 Wire Wire Line
 	1005 2635 1040 2635
@@ -1635,7 +1635,7 @@ L Jumper:SolderJumper_3_Bridged12 JP5
 U 1 1 6009A56D
 P 3435 800
 F 0 "JP5" V 3370 910 50  0000 C CNN
-F 1 "CANBUS Volt Select" V 3155 645 50  0000 C CNN
+F 1 "CANBUS Volt Select" V 3165 545 50  0000 C CNN
 F 2 "Jumper:SolderJumper-3_P1.3mm_Bridged12_RoundedPad1.0x1.5mm" H 3435 800 50  0001 C CNN
 F 3 "~" H 3435 800 50  0001 C CNN
 	1    3435 800 
@@ -1646,7 +1646,7 @@ L Interface_CAN_LIN:TJA1051T-3 U1
 U 1 1 5FFD25FC
 P 3255 1350
 F 0 "U1" H 3095 1000 50  0000 C CNN
-F 1 "TJA1057GT/3J" H 2935 1705 50  0000 C CNN
+F 1 "TJA1057GT/3J" H 2760 1770 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 3255 850 50  0001 C CIN
 F 3 "https://datasheet.lcsc.com/lcsc/1811151538_NXP-Semicon-TJA1057GT-3J_C112947.pdf" H 3255 1350 50  0001 C CNN
 F 4 "C112947" H 3255 1350 50  0001 C CNN "LCSCStockCode"
@@ -2538,4 +2538,6 @@ Text Label 15035 9380 2    50   ~ 0
 SW1EXT
 Text Label 15035 9480 2    50   ~ 0
 SW2EXT
+Text Notes 2220 2125 0    39   ~ 0
+LCSC C132227\nTJA1042T/3/1J could be used as alternative part
 $EndSCHEMATC
