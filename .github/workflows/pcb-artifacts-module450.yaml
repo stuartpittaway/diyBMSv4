@@ -75,13 +75,13 @@ jobs:
 
     - name: upload artifacts
       uses: actions/upload-artifact@v2
-      if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.repository != env.repo)
+      if: steps.branch-name.outputs.is_default != 'true'
       with:
         name: modulev450_gerbers
         path: ModuleV450/export/modulev450_gerbers.zip
 
     - name: Commit files
-      if: github.event_name == 'push' && github.repository == env.repo
+      if: steps.branch-name.outputs.is_default == 'true'
       run: |
         git add -f ModuleV450/export
         git config --local user.email "action@github.com"
