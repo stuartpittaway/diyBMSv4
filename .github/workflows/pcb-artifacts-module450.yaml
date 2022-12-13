@@ -42,13 +42,15 @@ jobs:
       run: echo "{branch}={$(echo ${GITHUB_REF#refs/heads/})}" >> $GITHUB_OUTPUT
       id: extract_branch
 
+    - name: Output branch details
+      run: |
+        echo "ref: ${{ github.ref }}"
+        echo "default: ${{ env.default }}"
+
     - name: Update the PCBs with on default branch with git hash
       if: steps.extract_branch.outputs.branch == env.main_branch
       run: |
         export COMMIT=$(git rev-parse --short HEAD)
-        echo "COMMIT = ${COMMIT}"    
-        echo "ref: ${{ github.ref }}"
-        echo "default: ${{ env.default }}"
         sed -i "s!<<hash>>!${COMMIT}!" ModuleV450/ModuleV450.kicad_pcb
 
     - name: Update the PCBs with the git hash and BETA.
@@ -62,7 +64,14 @@ jobs:
       run: |
         cd ModuleV450
         rm -rf export/
-        kibot -c module450-config-2layer.kibot.yaml -e ModuleV450.sch -b ModuleV450.kicad_pcb -d export
+
+    - name: Run KiBot
+      uses: INTI-CMNB/KiBot@v2
+      with:
+        config: ./module450-config-2layer.kibot.yaml
+        dir: ./export
+        schema: 'ModuleV450.sch'
+        board: 'ModuleV450.kicad_pcb'
 
     # Splitting this out to ensure a failed kibot run will mark a check as failed.
     - name: Prepare Gerbers artifact
