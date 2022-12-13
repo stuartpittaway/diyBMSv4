@@ -68,10 +68,10 @@ jobs:
     - name: Run KiBot
       uses: INTI-CMNB/KiBot@v2
       with:
-        config: ./module450-config-2layer.kibot.yaml
-        dir: ./export
-        schema: 'ModuleV450.sch'
-        board: 'ModuleV450.kicad_pcb'
+        config: ./ModuleV450/module450-config-2layer.kibot.yaml
+        dir: ./ModuleV450/export
+        schema: './ModuleV450/ModuleV450.sch'
+        board: './ModuleV450/ModuleV450.kicad_pcb'
 
     # Splitting this out to ensure a failed kibot run will mark a check as failed.
     - name: Prepare Gerbers artifact
