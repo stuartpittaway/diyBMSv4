@@ -60,10 +60,9 @@ jobs:
         echo "COMMIT = ${COMMIT}"
         sed -i "s!<<hash>>!BETA-${COMMIT}!" ModuleV450/ModuleV450.kicad_pcb
 
-    - name: Prepare artifacts
+    - name: Remove existing export folder
       run: |
-        cd ModuleV450
-        rm -rf export/
+        rm -rf ./ModuleV450/export/
 
     - name: Run KiBot
       uses: INTI-CMNB/KiBot@v2
