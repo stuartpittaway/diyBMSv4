@@ -1,0 +1,96 @@
+name: pcb-artifacts-module450
+
+on:
+  push:
+    paths:
+    - 'ModuleV450/**.sch'
+    - 'ModuleV450/**.kicad_pcb'
+    - '.github/workflows/pcb-artifacts-module450.yaml'
+    - 'ModuleV450/module450-config-2layer.kibot.yaml'
+  pull_request:
+    paths:
+    - 'ModuleV450/**.sch'
+    - 'ModuleV450/**.kicad_pcb'
+    - '.github/workflows/pcb-artifacts-module450.yaml'
+    - 'ModuleV450/module450-config-2layer.kibot.yaml'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  repo: stuartpittaway/diyBMSv4
+  main_branch: master
+
+jobs:
+  generate-artifacts:
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:latest
+
+    steps:
+    - name: Update system repositories, Install Required Libraries and Initialize git-lfs
+      run: |
+        apt update
+        apt -y install git git-lfs zip librsvg2-bin imagemagick
+        git lfs install
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        lfs: true
+
+    - name: Extract branch name
+      shell: bash
+      run: echo "{branch}={$(echo ${GITHUB_REF#refs/heads/})}" >> $GITHUB_OUTPUT
+      id: extract_branch
+
+    - name: Output branch details
+      run: |
+        echo "ref: ${{ github.ref }}"
+        echo "default: ${{ env.default }}"
+
+    - name: Update the PCBs with on default branch with git hash
+      if: steps.extract_branch.outputs.branch == env.main_branch
+      run: |
+        export COMMIT=$(git rev-parse --short HEAD)
+        sed -i "s!<<hash>>!${COMMIT}!" ModuleV450/ModuleV450.kicad_pcb
+
+    - name: Update the PCBs with the git hash and BETA.
+      if: steps.extract_branch.outputs.branch != env.main_branch
+      run: |
+        export COMMIT=$(git rev-parse --short HEAD)
+        echo "COMMIT = ${COMMIT}"
+        sed -i "s!<<hash>>!BETA-${COMMIT}!" ModuleV450/ModuleV450.kicad_pcb
+
+    - name: Remove existing export folder
+      run: |
+        rm -rf ./ModuleV450/export/
+
+    - name: Run KiBot
+      uses: INTI-CMNB/KiBot@v2
+      with:
+        config: ./ModuleV450/module450-config-2layer.kibot.yaml
+        dir: ./ModuleV450/export
+        schema: './ModuleV450/ModuleV450.sch'
+        board: './ModuleV450/ModuleV450.kicad_pcb'
+
+    # Splitting this out to ensure a failed kibot run will mark a check as failed.
+    - name: Prepare Gerbers artifact
+      run: |
+        cd ModuleV450/export/gerbers
+        zip -r -j ../modulev450_gerbers.zip *        
+
+    - name: upload artifacts
+      uses: actions/upload-artifact@v2
+      if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.repository != env.repo)
+      with:
+        name: modulev450_gerbers
+        path: ModuleV450/export/modulev450_gerbers.zip
+
+    - name: Commit files
+      if: github.event_name == 'push' && github.repository == env.repo
+      run: |
+        git add -f ModuleV450/export
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git status
+        git commit -m "CI: pcb-artifacts-module450"
+        git push -u origin
