@@ -10,7 +10,7 @@ The latest version of the controller uses an ESP32 and supports CANBUS, RS485, S
 
 Although the hardware is complete, not all features are usable from the software, this will be developed and improved over time to make use of the hardware.
 
-[Bill of Materials](./ControllerCircuit/ComponentListBOM.md)
+[Bill of Materials](https://github.com/stuartpittaway/diyBMSv4/blob/master/ControllerCircuit/ComponentListBOM.md)
 
 
 # Videos on how to use and build

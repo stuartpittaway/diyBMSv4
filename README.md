@@ -10,15 +10,13 @@ If you are looking for version 3 (obsolete) of this project take a look [here](h
 
 THIS REPOSITORY CONTAINS THE HARDWARE FOR THE SYSTEM
 
-
 # Videos on how to use and build
 
 [YouTube playlist](https://youtube.com/playlist?list=PLHhwQCDPuRcZW3u0jJucsiCCsUbNbMy-c) for DIYBMS videos
 
-
 [Building & ordering the PCB from JLCPCB](https://youtu.be/E1OS0ZOmOT8)
 
-
+If you order a PCB, please use my affiliate link to help support this project [JLCPCB](https://jlcpcb.com/RSZ)
 
 # Support
 
@@ -28,7 +26,7 @@ https://patreon.com/StuartP
 
 # HARDWARE
 
-This repository contains the hardware designs, generally in KiCad format.  Unless you are changing the design, you don't need to use/install KiCad, just use the premade files.
+This repository contains the hardware designs, generally in KiCad format.  Unless you are changing the design, you don't need to use/install KiCad, just use the precompiled files.
 
 The folder structure in the repository contains:
 
@@ -36,8 +34,9 @@ The folder structure in the repository contains:
 * ControllerCircuit - ESP32 controller board (newest design)
 * ESP8266ControllerCircuit - [legacy] the circuit board for the legacy ESP8266 based controller
 
-## Modules for ESP8266ControllerCircuit
-* ModuleV440 - the latest module design, recommended for both hand soldering or mass production
+## Modules for Controller
+* ModuleV450 - the latest module design, using ATTINY1624 chip. Recommended for both hand soldering or mass production
+* ModuleV440 - [legacy] the module circuit board V4.40, final board using ATTINY841 chip
 * ModuleV400 - [legacy] the module circuit board V4.00, designed for easier hand soldering (larger parts)
 * ModuleV421 - [legacy] the module circuit board V4.21, designed for mass production using JLCPCB assembly service
 
@@ -61,14 +60,24 @@ Although the hardware is complete, not all features are usable from the software
 
 <img src="ControllerCircuit/export/ControllerCircuit-top.png" alt="circuit board" width="512"/>
 
-### Module V4.40
+### Module V4.50
 
-The latest version of the module hardware was designed to cater for those who want to use assembly services like JLCPCB and also for those who wish to hand solder.
+The latest version of the module hardware uses the ATTINY1624 chip - part of the tinyAVR2 range.
+
+This board requires an UPDI programmer/device - see the instructions in the code repository for how to program the boards once built.
 
 The parts are no smaller than 0805 size (about 2mm!) which is probably the smallest size you want to attempt to hand solder.
 
-<img src="./ModuleV440/export/ModuleV440-top.png" alt="circuit board" width="200"/>
+<img src="./ModuleV450/export/ModuleV450-top.png" alt="circuit board" width="200"/>
 
+Specifications are similar to the V4.40 board.
+
+
+### Module V4.40
+
+V4.40 is the last board to use the ATTINY841 chip - V4.50 is the newest design if you are starting fresh.
+
+<img src="./ModuleV440/export/ModuleV440-top.png" alt="circuit board" width="200"/>
 
 In addition, the hardware has a higher balance current, fuse and TVS diode to help with voltage spikes.  
 Most importantly, an external crystal has been added to the micro controller (attiny841) which means the device is more reliable in low voltage situations.
@@ -82,18 +91,15 @@ The module is physically larger than previous modules, this aids heat dispersal 
 
 You will also need to order [these parts](./ModuleV440/HandAssemblyParts.md)
 
-
-
 # CODE/SOFTWARE
 
 Software and code for the modules and controller can now be found in a seperate repo
 
-For the legacy controller (ESP8266)
-[diyBMSv4Code](https://github.com/stuartpittaway/diyBMSv4Code)
-
 For the latest controller (ESP32)
 [diyBMSv4ESP32](https://github.com/stuartpittaway/diyBMSv4ESP32)
 
+For the legacy controller (ESP8266)
+[diyBMSv4Code](https://github.com/stuartpittaway/diyBMSv4Code)
 
 # WARNING
 
