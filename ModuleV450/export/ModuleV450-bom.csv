@@ -1,5 +1,5 @@
 Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber,JLCPCBRotation
-1,Unpolarized capacitor,C,C1,100nF,C_0805_2012Metric,1, ,,C1525,CL05B104KO5NNNC,
+1,Unpolarized capacitor,C,C1,100nF,C_0805_2012Metric,1, ,,C49678,CC0805KRX7R9BB104,
 2,Unpolarized capacitor,C,C2,10uF,C_0805_2012Metric,1, ,,C15850,CL21A106KAYNNNE,
 3,"Adjustable Micropower Voltage Reference Diodes, TO-92",LM385Z-ADJ,D1,AZ432ANTR-E1,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Diodes-Incorporated-AZ432ANTR-E1_C84139.pdf,C84139,AZ432ANTR-E1,
 4,Light emitting diode,LED,D4,Blue,LED_0603_1608Metric,1, ,https://datasheet.lcsc.com/lcsc/1811101510_Everlight-Elec-19-217-GHC-YR1S2-3T_C72043.pdf,C72043,19-217/GHC-YR1S2/3T,
