@@ -437,12 +437,12 @@ $EndComp
 $Comp
 L power:+5V #PWR0122
 U 1 1 5F272E63
-P 1075 2635
-F 0 "#PWR0122" H 1075 2485 50  0001 C CNN
-F 1 "+5V" H 1075 2585 50  0000 C CNN
-F 2 "" H 1075 2635 50  0001 C CNN
-F 3 "" H 1075 2635 50  0001 C CNN
-	1    1075 2635
+P 1005 2535
+F 0 "#PWR0122" H 1005 2385 50  0001 C CNN
+F 1 "+5V" H 1005 2485 50  0000 C CNN
+F 2 "" H 1005 2535 50  0001 C CNN
+F 3 "" H 1005 2535 50  0001 C CNN
+	1    1005 2535
 	1    0    0    -1  
 $EndComp
 Text Label 3920 4100 2    50   ~ 0
@@ -615,8 +615,6 @@ Text Notes 530  3685 0    79   ~ 16
 RS-485
 Text Notes 520  635  0    79   ~ 16
 CANBUS
-Wire Wire Line
-	1005 2635 1040 2635
 $Comp
 L power:GND #PWR0121
 U 1 1 5F2E481F
@@ -632,8 +630,6 @@ Wire Wire Line
 	9500 4850 9750 4850
 Text Notes 555  5110 0    50   ~ 0
 PIN 1 is an output (received data).  RS485 half duplex IC required.
-Wire Wire Line
-	1005 2435 1050 2435
 Text Label 9510 3075 2    50   ~ 0
 MODULE_RX1
 Text Label 9750 3265 0    50   ~ 0
@@ -1123,48 +1119,22 @@ Wire Wire Line
 Connection ~ 4465 1320
 Text Notes 610  2280 0    50   ~ 0
 Power input
-Wire Wire Line
-	1005 2335 1050 2335
-Wire Wire Line
-	1050 2335 1050 2435
-Connection ~ 1050 2435
-Wire Wire Line
-	1050 2435 1305 2435
-Wire Wire Line
-	1005 2535 1040 2535
-Wire Wire Line
-	1040 2535 1040 2635
-Connection ~ 1040 2635
-Wire Wire Line
-	1040 2635 1075 2635
-Text Notes 1220 2760 0    39   ~ 0
-Consider using part\nC7245 WJ15EDGRC-3.81-4P\nPluggable System Terminal \nBlock 3.81mm
+Text Notes 1175 2430 0    39   ~ 0
+Consider using part\nC8387 WJ15EDGRC-3.81-2P\nPluggable System Terminal \nBlock 3.81mm
 Text Notes 2275 3870 0    39   ~ 0
 120R optional resistor \nfor termination, \nnot connected by default
 Text Notes 2105 6955 0    39   ~ 0
 Flyback diode calc\nRelay, 5VDC = 72mA 70ohm+/-10% 0.36W\n\nLL4148, Peak Reverse Voltage 100V\nPeak Fwd Surge Current 0.5A @1s, 1A@1ms\nPower Dissipation 500mW
 Text Notes 6470 2075 0    50   ~ 0
 Reverse polarity protection
-Connection ~ 6615 2255
-Wire Wire Line
-	6615 2255 6690 2255
 Wire Wire Line
 	5875 2555 6310 2555
 Wire Wire Line
 	6020 2255 6110 2255
-Wire Wire Line
-	6310 2555 6615 2555
-Wire Wire Line
-	6615 2555 6615 2455
-Connection ~ 6310 2555
-Wire Wire Line
-	6510 2255 6615 2255
 Text Notes 755  10625 0    50   ~ 0
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 2.0 UK: England & Wales License.\n\nhttps://creativecommons.org/licenses/by-nc-sa/2.0/uk/\n\nYou are free to:\nShare — copy and redistribute the material in any medium or format\nAdapt — remix, transform, and build upon the material\nThe licensor cannot revoke these freedoms as long as you follow the license terms.
 Text Notes 575  11070 0    118  ~ 0
 Non-Commercial — You may not use the material for commercial purposes.\n
-Text Notes 6765 2450 0    59   ~ 0
-Not fitted
 Text Label 15035 9180 2    50   ~ 0
 IO33
 Text Label 15035 9080 2    50   ~ 0
@@ -1193,7 +1163,7 @@ F 3 "" H 15035 8980 50  0001 C CNN
 $EndComp
 Text Label 7395 4355 0    50   ~ 0
 VSPI_MISO
-Text Label 6095 4455 2    50   ~ 0
+Text Label 5845 4455 2    50   ~ 0
 SD_CS
 Text Label 6095 4555 2    50   ~ 0
 VSPI_MOSI
@@ -1203,12 +1173,12 @@ NoConn ~ 6095 4355
 $Comp
 L power:+3V3 #PWR0135
 U 1 1 609CE1C7
-P 5495 4610
-F 0 "#PWR0135" H 5495 4460 50  0001 C CNN
-F 1 "+3V3" H 5470 4555 50  0000 C CNN
-F 2 "" H 5495 4610 50  0001 C CNN
-F 3 "" H 5495 4610 50  0001 C CNN
-	1    5495 4610
+P 5560 4060
+F 0 "#PWR0135" H 5560 3910 50  0001 C CNN
+F 1 "+3V3" H 5535 4005 50  0000 C CNN
+F 2 "" H 5560 4060 50  0001 C CNN
+F 3 "" H 5560 4060 50  0001 C CNN
+	1    5560 4060
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1230,7 +1200,7 @@ Wire Wire Line
 	5955 4610 5635 4610
 Connection ~ 5635 4610
 Wire Wire Line
-	5635 4610 5495 4610
+	5635 4610 5560 4610
 Wire Wire Line
 	5635 4910 5935 4910
 Wire Wire Line
@@ -1521,43 +1491,6 @@ F 4 "" H 15235 9280 50  0001 C CNN "LCSCStockCode"
 F 5 "TRUE" H 15235 9280 50  0001 C CNN "DONOTPLACE"
 	1    15235 9280
 	1    0    0    -1  
-$EndComp
-$Comp
-L Device:D_Zener_Small D7
-U 1 1 60260A34
-P 6615 2355
-F 0 "D7" V 6665 2410 50  0000 L CNN
-F 1 "D_Zener_Small" V 6750 2370 50  0000 L CNN
-F 2 "Diode_THT:D_5W_P10.16mm_Horizontal" V 6615 2355 50  0001 C CNN
-F 3 "~" V 6615 2355 50  0001 C CNN
-F 4 "1N5338BRLG" V 6615 2355 50  0001 C CNN "PartNumber"
-F 5 "TRUE" V 6615 2355 50  0001 C CNN "DONOTPLACE"
-	1    6615 2355
-	0    1    1    0   
-$EndComp
-$Comp
-L Transistor_FET:AO3401A Q3
-U 1 1 5F8FC31C
-P 6310 2355
-F 0 "Q3" V 6652 2355 50  0000 C CNN
-F 1 "AO3401A" V 6561 2355 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 6510 2280 50  0001 L CIN
-F 3 "https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf" H 6310 2355 50  0001 L CNN
-F 4 "C15127" H 6310 2355 50  0001 C CNN "LCSCStockCode"
-	1    6310 2355
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector:Conn_01x04_Female J5
-U 1 1 60054FFC
-P 805 2535
-F 0 "J5" H 833 2561 50  0000 L CNN
-F 1 "ScrewTerminal" H 833 2470 50  0000 L CNN
-F 2 "ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880" H 805 2535 50  0001 C CNN
-F 3 "~" H 805 2535 50  0001 C CNN
-F 4 "C395880" H 805 2535 50  0001 C CNN "LCSCStockCode"
-	1    805  2535
-	-1   0    0    1   
 $EndComp
 $Comp
 L Power_Protection:NUP2105L D8
@@ -2648,4 +2581,57 @@ Wire Wire Line
 	3010 2570 3060 2570
 Text Notes 4430 3105 1    50   ~ 0
 LCSC C2962096
+$Comp
+L Device:R R22
+U 1 1 63AF7118
+P 5945 4305
+F 0 "R22" V 5865 4305 50  0000 C CNN
+F 1 "10K" V 6025 4305 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 5875 4305 50  0001 C CNN
+F 3 "~" H 5945 4305 50  0001 C CNN
+F 4 "C17414" H 5945 4305 50  0001 C CNN "LCSCStockCode"
+F 5 "0805W8F1002T5E" H 5945 4305 50  0001 C CNN "PartNumber"
+	1    5945 4305
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6095 4455 5945 4455
+Wire Wire Line
+	5945 4455 5845 4455
+Connection ~ 5945 4455
+Wire Wire Line
+	5945 4155 5560 4155
+Wire Wire Line
+	5560 4060 5560 4155
+Connection ~ 5560 4155
+Wire Wire Line
+	5560 4155 5560 4610
+Wire Wire Line
+	6510 2255 6690 2255
+$Comp
+L Transistor_FET:AO3401A Q3
+U 1 1 5F8FC31C
+P 6310 2355
+F 0 "Q3" V 6652 2355 50  0000 C CNN
+F 1 "AO3401A" V 6561 2355 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 6510 2280 50  0001 L CIN
+F 3 "https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf" H 6310 2355 50  0001 L CNN
+F 4 "C15127" H 6310 2355 50  0001 C CNN "LCSCStockCode"
+	1    6310 2355
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1005 2435 1305 2435
+$Comp
+L Connector:Conn_01x02_Female J5
+U 1 1 60054FFC
+P 805 2535
+F 0 "J5" H 833 2561 50  0000 L CNN
+F 1 "ScrewTerminal" H 465 2730 50  0000 L CNN
+F 2 "ControllerCircuit:Terminal-Block_3.81_2P-LCSC_C395878" H 805 2535 50  0001 C CNN
+F 3 "~" H 805 2535 50  0001 C CNN
+F 4 "C395878" H 805 2535 50  0001 C CNN "LCSCStockCode"
+	1    805  2535
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
