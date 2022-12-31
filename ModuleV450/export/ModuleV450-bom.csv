@@ -4,7 +4,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 3,"Adjustable Micropower Voltage Reference Diodes, TO-92",LM385Z-ADJ,D1,AZ432ANTR-E1,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Diodes-Incorporated-AZ432ANTR-E1_C84139.pdf,C84139,AZ432ANTR-E1,
 4,Light emitting diode,LED,D4,Blue,LED_0603_1608Metric,1, ,https://datasheet.lcsc.com/lcsc/1811101510_Everlight-Elec-19-217-GHC-YR1S2-3T_C72043.pdf,C72043,19-217/GHC-YR1S2/3T,
 5,Light emitting diode,LED,D3,Red,LED_0805_2012Metric,1, ,,C84256,NCD0805R1,
-6,"600W unidirectional Transil Transient Voltage Suppressor, 6.8Vrwm, DO-214AA",SM6T6V8A,D2,SMBJ5.0A,D_SMB,1, ,https://datasheet.lcsc.com/szlcsc/1912111437_AnBon-SMBJ5-0A_C440263.pdf,C440263,,
+6,"600W unidirectional Transil Transient Voltage Suppressor, 6.8Vrwm, DO-214AA",SM6T6V8A,D2,SMBJ5.0A,D_SMB,1, ,https://datasheet.lcsc.com/lcsc/1809042032_Littelfuse-SMBJ5-0A_C83333.pdf,C83333,,
 7,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,EXTTEMP1 POWER1 RX1 TX1,Ext Temp Sensor,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,4, ,https://datasheet.lcsc.com/szlcsc/JST-Sales-America-S2B-PH-K-S-LF-SN_C173752.pdf,C265016,S2B-PH-K(LF)(SN),
 8,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,mSMD150,Fuse_1812_4532Metric,1, ,https://datasheet.lcsc.com/szlcsc/TECHFUSE-mSMD150_C70121.pdf,C70121,mSMD150,
 9,"Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x04_Male,J2,Comms,"PhoenixContact_MC_1,5_4-G-3.81_1x04_P3.81mm_Horizontal",1, ,,C265016,,
