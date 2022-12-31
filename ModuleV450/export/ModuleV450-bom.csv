@@ -11,7 +11,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 10,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,J1,J,PinSocket_1x02_P2.54mm_Vertical,1, ,,,,
 11,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02_Male,POWER2,Battery,"PhoenixContact_MC_1,5_2-G-3.81_1x02_P3.81mm_Horizontal",1, ,,C265016,S2B-PH-K(LF)(SN),
 12,"N-MOSFET transistor, gate/source/drain",Q_NMOS_GSD,Q1,AO3400A,SOT-23,1, ,https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3400A_C20917.pdf,C347475,AO3400A,
-13,Resistor,R,R6 R8 R10 R22 R24 R25 R26 R27 R28,3R,R_2010_5025Metric,9, ,,C474300,201007J030JT4E,
+13,Resistor,R,R6 R8 R10 R22 R24 R25 R26 R27 R28,3R,R_2010_5025Metric,9, ,https://datasheet.lcsc.com/lcsc/2006112334_YAGEO-RC2010JK-073RL_C606211.pdf,C606211,RC2010JK-073RL,
 14,Resistor,R,R5,180R,R_0805_2012Metric,1, ,,C25270,0805W8F1800T5E,
 15,Resistor,R,R14,510OHMS,R_0805_2012Metric,1, ,,C17734,0805W8F5100T5E,
 16,Resistor,R,R2,1KOHMS,R_0805_2012Metric,1, ,,C17513,0805W8F1001T5E,
