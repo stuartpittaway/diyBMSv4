@@ -20,3 +20,6 @@ ModuleV400/v4-rescue.lib
 ModuleV421/ModuleV421-cache.lib
 ModuleV421/ModuleV421-rescue.lib
 ModuleV440/fp-info-cache
+ControllerCircuit/_autosave-ControllerCircuit.kicad_pcb
+ControllerCircuit/fp-info-cache
+ControllerCircuit/sym-lib-table
