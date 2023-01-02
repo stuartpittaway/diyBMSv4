@@ -1135,10 +1135,6 @@ Text Notes 755  10625 0    50   ~ 0
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 2.0 UK: England & Wales License.\n\nhttps://creativecommons.org/licenses/by-nc-sa/2.0/uk/\n\nYou are free to:\nShare — copy and redistribute the material in any medium or format\nAdapt — remix, transform, and build upon the material\nThe licensor cannot revoke these freedoms as long as you follow the license terms.
 Text Notes 575  11070 0    118  ~ 0
 Non-Commercial — You may not use the material for commercial purposes.\n
-Text Label 15035 9180 2    50   ~ 0
-IO33
-Text Label 15035 9080 2    50   ~ 0
-IO35_INPUT
 $Comp
 L power:GND #PWR0142
 U 1 1 60A70D1B
@@ -2797,10 +2793,10 @@ F 3 "" H 7165 8720 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+3V3 #PWR?
+L power:+3V3 #PWR0109
 U 1 1 63F9DA09
 P 7910 7345
-F 0 "#PWR?" H 7910 7195 50  0001 C CNN
+F 0 "#PWR0109" H 7910 7195 50  0001 C CNN
 F 1 "+3V3" H 7925 7518 50  0000 C CNN
 F 2 "" H 7910 7345 50  0001 C CNN
 F 3 "" H 7910 7345 50  0001 C CNN
@@ -2819,10 +2815,10 @@ IO35_INPUT
 Wire Wire Line
 	7565 8520 7665 8520
 $Comp
-L Device:R R?
+L Device:R R32
 U 1 1 640098B5
 P 7665 8670
-F 0 "R?" V 7585 8670 50  0000 C CNN
+F 0 "R32" V 7585 8670 50  0000 C CNN
 F 1 "10K" V 7745 8670 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 7595 8670 50  0001 C CNN
 F 3 "~" H 7665 8670 50  0001 C CNN
@@ -2835,10 +2831,10 @@ Connection ~ 7665 8520
 Wire Wire Line
 	7665 8520 7725 8520
 $Comp
-L power:+3V3 #PWR?
+L power:+3V3 #PWR0113
 U 1 1 6400A76C
 P 7665 8820
-F 0 "#PWR?" H 7665 8670 50  0001 C CNN
+F 0 "#PWR0113" H 7665 8670 50  0001 C CNN
 F 1 "+3V3" H 7680 8993 50  0000 C CNN
 F 2 "" H 7665 8820 50  0001 C CNN
 F 3 "" H 7665 8820 50  0001 C CNN
@@ -2850,10 +2846,10 @@ IO33
 Wire Wire Line
 	7565 7920 7610 7920
 $Comp
-L Device:R R?
+L Device:R R31
 U 1 1 64025E46
 P 7610 7770
-F 0 "R?" V 7530 7770 50  0000 C CNN
+F 0 "R31" V 7530 7770 50  0000 C CNN
 F 1 "10K" V 7690 7770 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 7540 7770 50  0001 C CNN
 F 3 "~" H 7610 7770 50  0001 C CNN
@@ -2877,11 +2873,13 @@ VSPI_MOSI
 Text Label 7565 8320 0    50   ~ 0
 VSPI_CLK
 Text Label 7565 8220 0    50   ~ 0
-HSPI_MISO
+VSPI_MISO
 Text Notes 5710 8540 0    39   ~ 0
 BATTERY+
 Text Notes 5545 8650 0    39   ~ 0
 CHARGER/LOAD
 Text Notes 5845 8350 0    39   ~ 0
 VBUS
+NoConn ~ 15035 9180
+NoConn ~ 15035 9080
 $EndSCHEMATC
