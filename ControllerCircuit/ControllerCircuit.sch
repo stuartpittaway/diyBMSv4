@@ -115,7 +115,7 @@ Wire Wire Line
 Wire Wire Line
 	4085 930  4165 930 
 Text Notes 4425 770  0    39   ~ 0
-120R optional resistor \nfor CAN termination, \nnot connected by default
+120R optional resistor \nfor CAN termination, \nCONNECTED by default
 $Comp
 L power:+3V3 #PWR0117
 U 1 1 5F2218B7
@@ -1122,7 +1122,7 @@ Power input
 Text Notes 1175 2430 0    39   ~ 0
 Consider using part\nC8387 WJ15EDGRC-3.81-2P\nPluggable System Terminal \nBlock 3.81mm
 Text Notes 2275 3870 0    39   ~ 0
-120R optional resistor \nfor termination, \nnot connected by default
+120R optional resistor \nfor termination, \nCONNECTED by default
 Text Notes 2105 6955 0    39   ~ 0
 Flyback diode calc\nRelay, 5VDC = 72mA 70ohm+/-10% 0.36W\n\nLL4148, Peak Reverse Voltage 100V\nPeak Fwd Surge Current 0.5A @1s, 1A@1ms\nPower Dissipation 500mW
 Text Notes 6470 2075 0    50   ~ 0
@@ -1514,12 +1514,12 @@ F 5 "0805W8F1200T5E" H 2115 3775 50  0001 C CNN "PartNumber"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Jumper:SolderJumper_2_Open JP4
+L Jumper:SolderJumper_2_Bridged JP4
 U 1 1 5FF74B21
 P 2115 4075
 F 0 "JP4" H 2110 4160 50  0000 C CNN
 F 1 "OptTermination" V 2575 3725 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 2115 4075 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm" H 2115 4075 50  0001 C CNN
 F 3 "~" H 2115 4075 50  0001 C CNN
 	1    2115 4075
 	0    -1   -1   0   
@@ -2162,12 +2162,12 @@ F 4 "C132438" H 1945 7840 50  0001 C CNN "LCSCStockCode"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Jumper:SolderJumper_2_Open JP1
+L Jumper:SolderJumper_2_Bridged JP1
 U 1 1 5F269089
 P 4315 930
 F 0 "JP1" H 4090 935 50  0000 C CNN
 F 1 "OptTermination" H 4270 845 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 4315 930 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 4315 930 50  0001 C CNN
 F 3 "~" H 4315 930 50  0001 C CNN
 	1    4315 930 
 	-1   0    0    1   
