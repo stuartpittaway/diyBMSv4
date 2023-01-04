@@ -119,26 +119,26 @@ Text Notes 4425 770  0    39   ~ 0
 $Comp
 L power:+3V3 #PWR0117
 U 1 1 5F2218B7
-P 1845 7340
-F 0 "#PWR0117" H 1845 7190 50  0001 C CNN
-F 1 "+3V3" H 1860 7513 50  0000 C CNN
-F 2 "" H 1845 7340 50  0001 C CNN
-F 3 "" H 1845 7340 50  0001 C CNN
-	1    1845 7340
+P 1045 7430
+F 0 "#PWR0117" H 1045 7280 50  0001 C CNN
+F 1 "+3V3" H 1060 7603 50  0000 C CNN
+F 2 "" H 1045 7430 50  0001 C CNN
+F 3 "" H 1045 7430 50  0001 C CNN
+	1    1045 7430
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0118
 U 1 1 5F2220F8
-P 1845 8240
-F 0 "#PWR0118" H 1845 7990 50  0001 C CNN
-F 1 "GND" H 1850 8067 50  0000 C CNN
-F 2 "" H 1845 8240 50  0001 C CNN
-F 3 "" H 1845 8240 50  0001 C CNN
-	1    1845 8240
+P 1045 8330
+F 0 "#PWR0118" H 1045 8080 50  0001 C CNN
+F 1 "GND" H 1050 8157 50  0000 C CNN
+F 2 "" H 1045 8330 50  0001 C CNN
+F 3 "" H 1045 8330 50  0001 C CNN
+	1    1045 8330
 	1    0    0    -1  
 $EndComp
-Text Label 2345 7940 0    50   ~ 0
+Text Label 1545 8030 0    50   ~ 0
 AVRISP_RESET
 Wire Notes Line
 	585  2150 5290 2150
@@ -147,14 +147,14 @@ Wire Notes Line
 Wire Notes Line
 	7660 3420 7660 540 
 Wire Notes Line
-	4435 2230 4435 3395
+	4490 2240 4490 3405
 Text Notes 4175 1935 0    39   ~ 0
 Using 4 pin connector \nto reduce part count
-Text Label 2345 7740 0    50   ~ 0
+Text Label 1545 7830 0    50   ~ 0
 VSPI_MOSI
-Text Label 2345 7640 0    50   ~ 0
+Text Label 1545 7730 0    50   ~ 0
 VSPI_MISO
-Text Label 2345 7840 0    50   ~ 0
+Text Label 1545 7930 0    50   ~ 0
 VSPI_CLK
 $Comp
 L power:+3V3 #PWR0107
@@ -1841,7 +1841,7 @@ L Device:LED D4
 U 1 1 5F496FCE
 P 3885 6075
 F 0 "D4" H 3885 5985 50  0000 C CNN
-F 1 "YELLOW LED" H 3875 6165 50  0000 C CNN
+F 1 "YELLOW LED" H 3815 6245 50  0000 C CNN
 F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3885 6075 50  0001 C CNN
 F 3 "" H 3885 6075 50  0001 C CNN
 F 4 "C72038" H 3885 6075 50  0001 C CNN "LCSCStockCode"
@@ -2152,13 +2152,13 @@ $EndComp
 $Comp
 L Connector:AVR-ISP-6 J8
 U 1 1 5F2203E9
-P 1945 7840
-F 0 "J8" H 1616 7936 50  0000 R CNN
-F 1 "2x3 2.54mm IDC Connectors" H 2585 7130 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" V 1695 7890 50  0001 C CNN
-F 3 "https://lcsc.com/product-detail/IDC-Connectors_Ckmtw-Shenzhen-Cankemeng-C132438_C132438.html" H 670 7290 50  0001 C CNN
-F 4 "C132438" H 1945 7840 50  0001 C CNN "LCSCStockCode"
-	1    1945 7840
+P 1145 7930
+F 0 "J8" H 816 8026 50  0000 R CNN
+F 1 "2x3 2.54mm IDC Connectors" H 1785 7220 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" V 895 7980 50  0001 C CNN
+F 3 "https://lcsc.com/product-detail/IDC-Connectors_Ckmtw-Shenzhen-Cankemeng-C132438_C132438.html" H -130 7380 50  0001 C CNN
+F 4 "C132438" H 1145 7930 50  0001 C CNN "LCSCStockCode"
+	1    1145 7930
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -2213,7 +2213,7 @@ F 6 "" H 2775 2970 50  0001 C CNN "JLCPCBRotation"
 	0    1    1    0   
 $EndComp
 Text Label 9495 4410 2    50   ~ 0
-VEDIRECT_RX
+IO34_INPUT
 Wire Wire Line
 	9745 4410 9495 4410
 Text Label 14935 9030 2    50   ~ 0
@@ -2508,9 +2508,9 @@ F 3 "" H 2090 875 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Notes Line
-	520  8905 5710 8905
+	510  9225 5700 9225
 Wire Notes Line
-	2950 8805 2950 7140
+	2155 9090 2155 7425
 Text Notes 5940 7030 0    39   ~ 0
 Panasonic AQY282SX\nSolid State Relay\n60V 500mA AC or DC
 $Comp
@@ -2575,7 +2575,7 @@ Wire Wire Line
 Connection ~ 3010 2570
 Wire Wire Line
 	3010 2570 3060 2570
-Text Notes 4430 3105 1    50   ~ 0
+Text Notes 4485 3115 1    50   ~ 0
 LCSC C2962096
 $Comp
 L Device:R R22
@@ -2630,21 +2630,6 @@ F 4 "C395878" H 805 2535 50  0001 C CNN "LCSCStockCode"
 	1    805  2535
 	-1   0    0    1   
 $EndComp
-$Comp
-L Connector:Conn_01x04_Female J6
-U 1 1 63C39F20
-P 3285 7950
-F 0 "J6" H 3420 7885 50  0000 R CNN
-F 1 "VE.DIRECT CONSUMER" V 3460 8350 50  0000 R CNN
-F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 3285 7950 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/lcsc/1810261108_JST-Sales-America-S4B-PH-SM4-TB-LF-SN_C265102.pdf" H 3285 7950 50  0001 C CNN
-F 4 "C265102" H 3285 7950 50  0001 C CNN "LCSCStockCode"
-F 5 "S4B-PH-SM4-TB(LF)(SN)" H 3285 7950 50  0001 C CNN "PartNumber"
-	1    3285 7950
-	-1   0    0    1   
-$EndComp
-Text Notes 3125 7250 0    39   ~ 0
-VE.DIRECT CONSUMER PORT (RECEIVE ONLY & ISOLATED)
 $Comp
 L INA229-Q1:INA229-Q1 U8
 U 1 1 63E01ED7
@@ -2882,129 +2867,6 @@ Text Notes 5845 8350 0    39   ~ 0
 VBUS
 NoConn ~ 14935 8930
 NoConn ~ 14935 8830
-Text Notes 2355 8855 0    39   ~ 0
-https://zanshin-sailing.com/wp-content/uploads/pdf-files/Electrical/victron-ve-direct-protocol.pdf
-$Comp
-L Isolator:6N137 U10
-U 1 1 63B60517
-P 4225 7800
-F 0 "U10" H 4225 8267 50  0000 C CNN
-F 1 "OR-6N137S-TA1" H 4060 8170 50  0000 C CNN
-F 2 "ControllerCircuit:SMD-8_6.6x9.8x2.54P" H 4025 7600 50  0001 L CIN
-F 3 "" H 4225 7800 50  0001 L CNN
-F 4 "C282487" H 4225 7800 50  0001 C CNN "LCSCStockCode"
-	1    4225 7800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3885 7800 3925 7800
-Wire Wire Line
-	3485 7850 3585 7850
-Wire Wire Line
-	3585 7850 3585 7800
-Wire Wire Line
-	3485 8050 3925 8050
-Wire Wire Line
-	3925 8050 3925 8000
-NoConn ~ 3485 7950
-NoConn ~ 3485 7750
-$Comp
-L power:+3V3 #PWR0114
-U 1 1 63C0CB23
-P 4525 7555
-F 0 "#PWR0114" H 4525 7405 50  0001 C CNN
-F 1 "+3V3" H 4540 7728 50  0000 C CNN
-F 2 "" H 4525 7555 50  0001 C CNN
-F 3 "" H 4525 7555 50  0001 C CNN
-	1    4525 7555
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4525 7555 4525 7600
-$Comp
-L power:GND #PWR0115
-U 1 1 63C61D09
-P 4760 8145
-F 0 "#PWR0115" H 4760 7895 50  0001 C CNN
-F 1 "GND" H 4765 7972 50  0000 C CNN
-F 2 "" H 4760 8145 50  0001 C CNN
-F 3 "" H 4760 8145 50  0001 C CNN
-	1    4760 8145
-	1    0    0    -1  
-$EndComp
 Text Notes 8105 4450 0    39   ~ 0
 IO34 used on previous \ncontroller versions \nas TCA9534A_INTERRUPT_PIN
-Text Label 4915 7800 0    50   ~ 0
-VEDIRECT_RX
-Connection ~ 4525 7600
-Wire Wire Line
-	4640 7600 4640 7500
-Wire Wire Line
-	4640 7500 4775 7500
-$Comp
-L Device:R R34
-U 1 1 63DB11CE
-P 4775 7650
-F 0 "R34" V 4568 7650 50  0000 C CNN
-F 1 "2K2" V 4659 7650 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" V 4705 7650 50  0001 C CNN
-F 3 "~" H 4775 7650 50  0001 C CNN
-F 4 "C17520" H 4775 7650 50  0001 C CNN "LCSCStockCode"
-F 5 "0805W8F2201T5E" H 4775 7650 50  0001 C CNN "PartNumber"
-	1    4775 7650
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	4525 7800 4775 7800
-Connection ~ 4775 7800
-Wire Wire Line
-	4775 7800 4915 7800
-$Comp
-L Device:C C15
-U 1 1 63DB3C8E
-P 5150 7995
-F 0 "C15" V 5270 8010 50  0000 C CNN
-F 1 "100nF" V 5015 8000 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 5188 7845 50  0001 C CNN
-F 3 "https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf" H 5150 7995 50  0001 C CNN
-F 4 "C49678" H 5150 7995 50  0001 C CNN "LCSCStockCode"
-F 5 "CC0805KRX7R9BB104" V 5150 7995 50  0001 C CNN "PartNumber"
-	1    5150 7995
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	5150 7845 5150 7500
-Wire Wire Line
-	5150 7500 4775 7500
-Connection ~ 4775 7500
-Wire Wire Line
-	4525 8000 4760 8000
-Wire Wire Line
-	4760 8000 4760 8145
-Wire Wire Line
-	5150 8145 4760 8145
-Connection ~ 4760 8145
-Wire Wire Line
-	4525 7600 4640 7600
-Wire Wire Line
-	4525 7700 4640 7700
-Wire Wire Line
-	4640 7700 4640 7600
-Connection ~ 4640 7600
-Text Notes 3300 8535 0    39   ~ 0
-OR-6N137S-TA1 MUST BE 3.3V COMP.  NOT ALL 6N137 ARE!
-$Comp
-L Device:R R33
-U 1 1 63E65D40
-P 3735 7800
-F 0 "R33" V 3528 7800 50  0000 C CNN
-F 1 "220R" V 3619 7800 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" V 3665 7800 50  0001 C CNN
-F 3 "~" H 3735 7800 50  0001 C CNN
-F 4 "C17557" V 3735 7800 50  0001 C CNN "LCSCStockCode"
-F 5 "0805W8F2200T5E" V 3735 7800 50  0001 C CNN "PartNumber"
-F 6 "" H 3735 7800 50  0001 C CNN "JLCPCBRotation"
-	1    3735 7800
-	0    1    1    0   
-$EndComp
 $EndSCHEMATC
