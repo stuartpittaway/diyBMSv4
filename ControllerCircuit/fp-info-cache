@@ -1,4 +1,4 @@
-19277540683184427
+19279217412486690
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -46962,6 +46962,13 @@ MicroSD card socket
 0
 13
 11
+ControllerCircuit
+LED_MHPC3528CRGBCT
+20mA Colorless, Common cathode Positive post RGB 120° 3528(mm)
+RGB led smd
+0
+4
+4
 ControllerCircuit
 MODULE_ESP32-DEVKITC-32D
 
