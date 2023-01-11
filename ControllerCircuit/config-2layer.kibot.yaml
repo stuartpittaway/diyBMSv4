@@ -15,7 +15,7 @@ filters:
     rotations:
       - ["^SOP-4_4.4x2.6mm_P1.27mm", 0.0]
       - ["^SO-4_4.4x3.6mm_P2.54mm", 270.0]
-      - ["^CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder", 180.0]
+      - ["^CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder", 0.0]
       - ["^VSSOP-8_2.3x2mm_P0.5mm", 180.0]
 
 global:
