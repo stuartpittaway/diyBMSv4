@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP INA229-Q1
+D 85-V, 20-Bit, Ultra-Precise Power/Energy/Charge Monitor With
+K SPI
+F https://www.ti.com/lit/ds/symlink/ina229-q1.pdf
+$ENDCMP
+#
+#End Doc Library
