@@ -2,14 +2,14 @@
 <export version="D">
   <design>
     <source>E:\source\diyBMSv4\ControllerCircuit\ControllerCircuit.sch</source>
-    <date>16/05/2021 16:12:07</date>
+    <date>10/03/2023 11:31:53</date>
     <tool>Eeschema (5.1.10)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>DIYBMS ESP32 CONTROLLER</title>
         <company>Stuart Pittaway</company>
-        <rev>1.1</rev>
-        <date>2021-04-08</date>
+        <rev>4.6</rev>
+        <date>2023-01-03</date>
         <source>ControllerCircuit.sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -19,975 +19,38 @@
     </sheet>
   </design>
   <components>
-    <comp ref="U4">
-      <value>ESP32-DEVKITC-32D</value>
-      <footprint>ControllerCircuit:MODULE_ESP32-DEVKITC-32D</footprint>
-      <datasheet>Espressif Systems</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C319202/C319202</field>
-      </fields>
-      <libsource lib="ControllerCircuit-rescue" part="ESP32-DEVKITC-32D-ControllerCircuit" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F20BE06</tstamp>
-    </comp>
-    <comp ref="R6">
-      <value>120R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17437</field>
-        <field name="PartNumber">0805W8F1200T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F247EC1</tstamp>
-    </comp>
-    <comp ref="JP1">
-      <value>OptTermination</value>
-      <footprint>Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Jumper" part="SolderJumper_2_Open" description="Solder Jumper, 2-pole, open"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F269089</tstamp>
-    </comp>
-    <comp ref="J8">
-      <value>2x3 2.54mm IDC Connectors</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical</footprint>
-      <datasheet>https://lcsc.com/product-detail/IDC-Connectors_Ckmtw-Shenzhen-Cankemeng-C132438_C132438.html</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C132438</field>
-      </fields>
-      <libsource lib="Connector" part="AVR-ISP-6" description="Atmel 6-pin ISP connector"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F2203E9</tstamp>
-    </comp>
-    <comp ref="D1">
-      <value>RGB</value>
-      <footprint>LED_SMD:LED_RGB_5050-6</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C219409</field>
-      </fields>
-      <libsource lib="Device" part="LED_RGB" description="RGB LED, 6 pin package"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5CD4CF59</tstamp>
-    </comp>
-    <comp ref="J1">
-      <value>ScrewTerminal</value>
-      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395880</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F383885</tstamp>
-    </comp>
-    <comp ref="U5">
-      <value>SN65HVD75DR</value>
-      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
-      <datasheet>https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C57928</field>
-        <field name="PartNumber">SN65HVD75DR</field>
-      </fields>
-      <libsource lib="ControllerCircuit-rescue" part="SN65HVD75DR-ControllerCircuit" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F3C4F7B</tstamp>
-    </comp>
-    <comp ref="C1">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F2401C0</tstamp>
-    </comp>
-    <comp ref="C2">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0.0</field>
-        <field name="LCSCStockCode">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F254302</tstamp>
-    </comp>
-    <comp ref="K1">
-      <value>SRD-05VDC-SL-C</value>
-      <footprint>ControllerCircuit:RELAY_SRD-05VDC-SL-C</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/1811021933_Ningbo-Songle-Relay-SRD-05VDC-SL-C_C35449.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C35449</field>
-        <field name="PartNumber">SRD-05VDC-SL-C</field>
-      </fields>
-      <libsource lib="ControllerCircuit-rescue" part="SRD-05VDC-SL-C-ControllerCircuit" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F3296D0</tstamp>
-    </comp>
-    <comp ref="D2">
-      <value>LL4148</value>
-      <footprint>Diode_SMD:D_MiniMELF</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C9808</field>
-        <field name="PartNumber">LL4148</field>
-      </fields>
-      <libsource lib="Device" part="D" description="Diode"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F32D25D</tstamp>
-    </comp>
-    <comp ref="Q1">
-      <value>AO3400A</value>
-      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/1812111733_Bourne-Semicon-Shenzhen-AO3400A_C344010.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C344010</field>
-        <field name="PartNumber">AO3400A</field>
-      </fields>
-      <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F32E594</tstamp>
-    </comp>
-    <comp ref="R10">
-      <value>220R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">90</field>
-        <field name="LCSCStockCode">C17557</field>
-        <field name="PartNumber">0805W8F2200T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F3E581B</tstamp>
-    </comp>
-    <comp ref="R11">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17414</field>
-        <field name="PartNumber">0805W8F1002T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F3EC654</tstamp>
-    </comp>
-    <comp ref="R12">
-      <value>560R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C28636</field>
-        <field name="PartNumber">0805W8F5600T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F425CDB</tstamp>
-    </comp>
-    <comp ref="D3">
-      <value>YELLOW LED</value>
-      <footprint>LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder</footprint>
-      <fields>
-        <field name="LCSCStockCode">C72038</field>
-      </fields>
-      <libsource lib="Device" part="LED" description="Light emitting diode"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F4262A9</tstamp>
-    </comp>
-    <comp ref="C3">
-      <value>22uF 6.3V</value>
-      <footprint>Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C126948</field>
-        <field name="PartNumber">CA45-A010M226T</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F2BC754</tstamp>
-    </comp>
-    <comp ref="C4">
-      <value>22uF 6.3V</value>
-      <footprint>Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C126948</field>
-        <field name="PartNumber">CA45-A010M226T</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F2BD460</tstamp>
-    </comp>
-    <comp ref="U6">
-      <value>AMS1117-3.3</value>
-      <footprint>Package_TO_SOT_SMD:SOT-223-3_TabPin2</footprint>
-      <datasheet>http://www.advanced-monolithic.com/pdf/ds1117.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C6186</field>
-        <field name="PartNumber">AMS1117-3.3</field>
-      </fields>
-      <libsource lib="Regulator_Linear" part="AMS1117-3.3" description="1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F2865B2</tstamp>
-    </comp>
-    <comp ref="F1">
-      <value>Fuse, 1.85A</value>
-      <footprint>Fuse:Fuse_2920_7451Metric</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/TLC-Electronic-TLC-LSMD185_C262041.pdf</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C262041</field>
-        <field name="PartNumber">TLC-LSMD185</field>
-      </fields>
-      <libsource lib="Device" part="Polyfuse" description="Resettable fuse, polymeric positive temperature coefficient"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F260C46</tstamp>
-    </comp>
-    <comp ref="K2">
-      <value>SRD-05VDC-SL-C</value>
-      <footprint>ControllerCircuit:RELAY_SRD-05VDC-SL-C</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/1811021933_Ningbo-Songle-Relay-SRD-05VDC-SL-C_C35449.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C35449</field>
-        <field name="PartNumber">SRD-05VDC-SL-C</field>
-      </fields>
-      <libsource lib="ControllerCircuit-rescue" part="SRD-05VDC-SL-C-ControllerCircuit" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496F5F</tstamp>
-    </comp>
-    <comp ref="D5">
-      <value>LL4148</value>
-      <footprint>Diode_SMD:D_MiniMELF</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C9808</field>
-        <field name="PartNumber">LL4148</field>
-      </fields>
-      <libsource lib="Device" part="D" description="Diode"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496F6B</tstamp>
-    </comp>
-    <comp ref="Q2">
-      <value>AO3400A</value>
-      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/1812111733_Bourne-Semicon-Shenzhen-AO3400A_C344010.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C344010</field>
-        <field name="PartNumber">AO3400A</field>
-      </fields>
-      <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496F77</tstamp>
-    </comp>
-    <comp ref="J3">
-      <value>ScrewTerminal3Pin</value>
-      <footprint>ControllerCircuit:Terminal-Block_5.0mm_3P-LCSC_C395850</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395850</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x03_Female" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496F8F</tstamp>
-    </comp>
-    <comp ref="R14">
-      <value>220R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">90</field>
-        <field name="LCSCStockCode">C17557</field>
-        <field name="PartNumber">0805W8F2200T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496F9F</tstamp>
-    </comp>
-    <comp ref="R15">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17414</field>
-        <field name="PartNumber">0805W8F1002T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496FAF</tstamp>
-    </comp>
-    <comp ref="R13">
-      <value>560R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C28636</field>
-        <field name="PartNumber">0805W8F5600T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496FC3</tstamp>
-    </comp>
-    <comp ref="D4">
-      <value>YELLOW LED</value>
-      <footprint>LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder</footprint>
-      <fields>
-        <field name="LCSCStockCode">C72038</field>
-      </fields>
-      <libsource lib="Device" part="LED" description="Light emitting diode"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F496FCE</tstamp>
-    </comp>
-    <comp ref="J4">
-      <value>ScrewTerminal</value>
-      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395880</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F27E98F</tstamp>
-    </comp>
-    <comp ref="C5">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F3310A5</tstamp>
-    </comp>
-    <comp ref="LCD1">
-      <value>LCD</value>
-      <footprint>ControllerCircuit:TFTSPI_2_8_240x320_TOUCH</footprint>
-      <fields>
-        <field name="LCSCStockCode">C52711/C358718</field>
-      </fields>
-      <libsource lib="ControllerCircuit-rescue" part="LCD-ControllerCircuit" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F38B804</tstamp>
-    </comp>
-    <comp ref="R4">
-      <value>300R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17617</field>
-        <field name="PartNumber">0805W8F3000T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F591730</tstamp>
-    </comp>
-    <comp ref="R5">
-      <value>2K2</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17520</field>
-        <field name="PartNumber">0805W8F2201T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F56376F</tstamp>
-    </comp>
-    <comp ref="R16">
-      <value>2K2</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17520</field>
-        <field name="PartNumber">0805W8F2201T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F56EC0B</tstamp>
-    </comp>
-    <comp ref="C6">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C49678</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F645FB3</tstamp>
-    </comp>
-    <comp ref="U8">
-      <value>TCA9534A</value>
-      <footprint>Package_SO:TSSOP-16_4.4x5mm_P0.65mm</footprint>
-      <datasheet>https://www.ti.com/product/TCA9534A</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C206010</field>
-        <field name="PartNumber">TCA9534APWR</field>
-      </fields>
-      <libsource lib="Interface_Expansion" part="TCA9534" description="8 Bit Port/Expander, I2C SMBUS, Interrupt output, TSSOP-16, SOIC-16"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F6B71B8</tstamp>
-    </comp>
-    <comp ref="TX1">
-      <value>Transmit</value>
-      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
-      <fields>
-        <field name="LCSCStockCode">C157932</field>
-        <field name="PartNumber">S2B-PH-K-S-GW</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5CD595C3</tstamp>
-    </comp>
-    <comp ref="R3">
-      <value>180R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C25270</field>
-        <field name="PartNumber">0805W8F1800T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5CE037A1</tstamp>
-    </comp>
-    <comp ref="R2">
-      <value>2K2</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17520</field>
-        <field name="PartNumber">0805W8F2201T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5CD5BA4A</tstamp>
-    </comp>
-    <comp ref="RX1">
-      <value>Receive</value>
-      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
-      <fields>
-        <field name="LCSCStockCode">C157932</field>
-        <field name="PartNumber">S2B-PH-K-S-GW</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5CD589E5</tstamp>
-    </comp>
-    <comp ref="U2">
-      <value>EL3H7(B)(TA)-G</value>
-      <footprint>Package_SO:SOP-4_4.4x2.6mm_P1.27mm</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">90</field>
-        <field name="LCSCStockCode">C32565</field>
-      </fields>
-      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5CD55A2D</tstamp>
-    </comp>
-    <comp ref="R8">
-      <value>100R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">90</field>
-        <field name="LCSCStockCode">C17408</field>
-        <field name="PartNumber">0805W8F1000T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F97A123</tstamp>
-    </comp>
-    <comp ref="J10">
-      <value>Conn_01x02_Female</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C376120</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x02_Female" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FA6DD26</tstamp>
-    </comp>
-    <comp ref="R17">
-      <value>300R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17617</field>
-        <field name="PartNumber">0805W8F3000T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FB04538</tstamp>
-    </comp>
-    <comp ref="R1">
-      <value>100R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17408</field>
-        <field name="PartNumber">0805W8F1000T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FB135F1</tstamp>
-    </comp>
-    <comp ref="J11">
-      <value>Conn_01x03_Female</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Connector" part="Conn_01x03_Female" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FBF88E4</tstamp>
-    </comp>
-    <comp ref="J2">
-      <value>ScrewTerminal3Pin</value>
-      <footprint>ControllerCircuit:Terminal-Block_5.0mm_3P-LCSC_C395850</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395850</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x03_Female" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F3432EC</tstamp>
-    </comp>
-    <comp ref="U9">
-      <value>AQY212GSZ</value>
-      <footprint>Package_SO:SO-4_4.4x3.6mm_P2.54mm</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C129283</field>
-      </fields>
-      <libsource lib="Relay_SolidState" part="ASSR-1218" description="Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FAC18A8</tstamp>
-    </comp>
-    <comp ref="R18">
-      <value>220R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17557</field>
-        <field name="PartNumber">0805W8F2200T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FAC37C7</tstamp>
-    </comp>
-    <comp ref="R19">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17414</field>
-        <field name="PartNumber">0805W8F1002T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FC5F324</tstamp>
-    </comp>
-    <comp ref="R20">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17414</field>
-        <field name="PartNumber">0805W8F1002T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FC8DD1E</tstamp>
-    </comp>
-    <comp ref="J7">
-      <value>ScrewTerminal</value>
-      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395880</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F22FEB4</tstamp>
-    </comp>
-    <comp ref="R21">
-      <value>150R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17471</field>
-        <field name="PartNumber">0805W8F1500T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FE43131</tstamp>
-    </comp>
-    <comp ref="D6">
-      <value>LED</value>
-      <footprint>LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Hubei-KENTO-Elec-Blue-light_C2293.pdf</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="Device" part="LED" description="Light emitting diode"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FEABF2A</tstamp>
-    </comp>
-    <comp ref="U10">
-      <value>ATtiny841-SSU</value>
-      <footprint>Package_SO:SOIC-14_3.9x8.7mm_P1.27mm</footprint>
-      <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="MCU_Microchip_ATtiny" part="ATtiny841-SSU" description="16MHz, 8kB Flash, 512B SRAM, 512B EEPROM, ADC, ACI, debugWIRE, SOIC-14"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FEBE1F3</tstamp>
-    </comp>
-    <comp ref="R23">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-        <field name="PartNumber">0805W8F1002T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FECFAEA</tstamp>
-    </comp>
-    <comp ref="J6">
-      <value>AVR-ISP-6</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical</footprint>
-      <datasheet>https://lcsc.com/product-detail/Pin-Header-Female-Header_Boom-Precision-Elec-2-54mm-2-3P-Header_C65114.html</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="Connector" part="AVR-ISP-6" description="Atmel 6-pin ISP connector"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FED0EBD</tstamp>
-    </comp>
-    <comp ref="R22">
-      <value>180R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FF180BF</tstamp>
-    </comp>
-    <comp ref="C8">
-      <value>100nF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FFD3AC4</tstamp>
-    </comp>
-    <comp ref="C9">
-      <value>1uF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-        <field name="PartNumber">CL21B105KBFNNNE</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FFD50D3</tstamp>
-    </comp>
-    <comp ref="J9">
-      <value>Conn_01x06_Female</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x06_Female" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60042DE0</tstamp>
-    </comp>
-    <comp ref="JP2">
-      <value>Conn_01x02_Female</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>602646A3</tstamp>
-    </comp>
-    <comp ref="JP3">
-      <value>Conn_01x02_Female</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>602A098E</tstamp>
-    </comp>
-    <comp ref="R24">
-      <value>10K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17414</field>
-        <field name="PartNumber">0805W8F1002T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FEDBE15</tstamp>
-    </comp>
     <comp ref="U3">
-      <value>TCA6408APWR</value>
-      <footprint>Package_SO:TSSOP-16_4.4x5mm_P0.65mm</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Texas-Instruments-TI-TCA6408APWR_C206177.pdf</datasheet>
+      <value>TCA6416APWR</value>
+      <footprint>Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm</footprint>
+      <datasheet>https://www.ti.com/lit/gpn/TCA6416A</datasheet>
       <fields>
-        <field name="LCSCStockCode">C206177</field>
-        <field name="PartNumber">TCA6408APWR</field>
+        <field name="LCSCStockCode">C130203</field>
       </fields>
-      <libsource lib="ControllerCircuit-rescue" part="TCA6408AQPWRQ1-ControllerCircuit" description=""/>
+      <libsource lib="ControllerCircuit" part="TCA6416APWR" description=""/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F6428C9</tstamp>
+      <tstamp>6218C9A5</tstamp>
     </comp>
-    <comp ref="C10">
-      <value>1uF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C28323</field>
-        <field name="PartNumber">CL21B105KBFNNNE</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>6020E8FE</tstamp>
-    </comp>
-    <comp ref="U12">
-      <value>AQY212GSZ</value>
-      <footprint>Package_SO:SO-4_4.4x3.6mm_P2.54mm</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/PANASONIC-AQY212GSZ_C129283.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C129283</field>
-      </fields>
-      <libsource lib="Relay_SolidState" part="ASSR-1218" description="Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FF5F6FF</tstamp>
-    </comp>
-    <comp ref="R25">
-      <value>220R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="JLCPCBRotation">0</field>
-        <field name="LCSCStockCode">C17557</field>
-        <field name="PartNumber">0805W8F2200T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FF5F70C</tstamp>
-    </comp>
-    <comp ref="J12">
-      <value>ScrewTerminal</value>
-      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395880</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FF89203</tstamp>
-    </comp>
-    <comp ref="JP4">
-      <value>OptTermination</value>
-      <footprint>Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Jumper" part="SolderJumper_2_Open" description="Solder Jumper, 2-pole, open"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FF74B21</tstamp>
-    </comp>
-    <comp ref="R9">
-      <value>120R</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17437</field>
-        <field name="PartNumber">0805W8F1200T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F3E48B4</tstamp>
-    </comp>
-    <comp ref="U1">
-      <value>TJA1057GT/3</value>
-      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
-      <datasheet>https://datasheet.lcsc.com/lcsc/1811151538_NXP-Semicon-TJA1057GT-3J_C112947.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C112947</field>
-      </fields>
-      <libsource lib="Interface_CAN_LIN" part="TJA1051T-3" description="High-Speed CAN Transceiver, separate VIO, silent mode, SOIC-8"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5FFD25FC</tstamp>
-    </comp>
-    <comp ref="JP5">
-      <value>CANBUS Volt Select</value>
-      <footprint>Jumper:SolderJumper-3_P1.3mm_Bridged12_RoundedPad1.0x1.5mm</footprint>
-      <datasheet>~</datasheet>
-      <libsource lib="Jumper" part="SolderJumper_3_Bridged12" description="3-pole Solder Jumper, pins 1+2 closed/bridged"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>6009A56D</tstamp>
-    </comp>
-    <comp ref="D8">
-      <value>NUP2105LT1G</value>
-      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
-      <datasheet>http://www.onsemi.com/pub_link/Collateral/NUP2105L-D.PDF</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C14486</field>
-      </fields>
-      <libsource lib="Power_Protection" part="NUP2105L" description="Dual Line CAN Bus Protector, 24Vrwm"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60229822</tstamp>
-    </comp>
-    <comp ref="J5">
-      <value>ScrewTerminal</value>
-      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395880</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60054FFC</tstamp>
-    </comp>
-    <comp ref="Q3">
-      <value>AO3401A</value>
-      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
-      <datasheet>https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C15127</field>
-      </fields>
-      <libsource lib="Transistor_FET" part="AO3401A" description="-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>5F8FC31C</tstamp>
-    </comp>
-    <comp ref="D7">
-      <value>D_Zener_Small</value>
-      <footprint>Diode_THT:D_5W_P10.16mm_Horizontal</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="DONOTPLACE">TRUE</field>
-        <field name="PartNumber">1N5338BRLG</field>
-      </fields>
-      <libsource lib="Device" part="D_Zener_Small" description="Zener diode, small symbol"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60260A34</tstamp>
-    </comp>
-    <comp ref="J14">
-      <value>ScrewTerminal</value>
-      <footprint>Connector_PinHeader_1.27mm:PinHeader_1x04_P1.27mm_Vertical</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C395880</field>
-      </fields>
-      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60A6FB21</tstamp>
-    </comp>
-    <comp ref="J15">
-      <value>Molex 0472192001</value>
-      <footprint>0472192001</footprint>
-      <datasheet>https://www.molex.com/pdm_docs/sd/472192001_sd.pdf</datasheet>
-      <fields>
-        <field name="Arrow Part Number">0472192001</field>
-        <field name="Arrow Price/Stock">https://www.arrow.com/en/products/0472192001/molex</field>
-        <field name="Description">Memory Card Connectors 1.10MM MICRO SD 08P HINGE TYPE</field>
-        <field name="Height">1.9</field>
-        <field name="LCSCStockCode">C164170</field>
-        <field name="Manufacturer_Name">Molex</field>
-        <field name="Manufacturer_Part_Number">0472192001</field>
-        <field name="Mouser Part Number">N/A</field>
-        <field name="Mouser Price/Stock">https://www.mouser.com/Search/Refine.aspx?Keyword=N%2FA</field>
-      </fields>
-      <libsource lib="0472192001" part="0472192001" description="Memory Card Connectors 1.10MM MICRO SD 08P HINGE TYPE"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>609B29DC</tstamp>
-    </comp>
-    <comp ref="R26">
-      <value>22K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17560</field>
-        <field name="PartNumber">0805W8F2202T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60C43896</tstamp>
-    </comp>
-    <comp ref="R7">
-      <value>51K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
-      <fields>
-        <field name="LCSCStockCode">C17737</field>
-        <field name="PartNumber">0805W8F5102T5E</field>
-      </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60C44049</tstamp>
-    </comp>
-    <comp ref="C7">
-      <value>1uF</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
-      <fields>
-        <field name="LCSCStockCode">C28323</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>60C442C4</tstamp>
-    </comp>
-    <comp ref="SW1">
+    <comp ref="SW2">
       <value>SW_Push</value>
       <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSCStockCode">PTS645SL502LFS</field>
+        <field name="LCSCStockCode">C455101</field>
+        <field name="PartNumber">XUNPU TS-1002-10026</field>
       </fields>
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>60C5E5A0</tstamp>
+      <tstamp>60DCF30D</tstamp>
     </comp>
-    <comp ref="R28">
-      <value>22K</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <datasheet>~</datasheet>
+    <comp ref="C11">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="LCSCStockCode">C17560</field>
-        <field name="PartNumber">0805W8F2202T5E</field>
+        <field name="LCSCStockCode">C28323</field>
       </fields>
-      <libsource lib="Device" part="R" description="Resistor"/>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>60DCE651</tstamp>
+      <tstamp>60DCF302</tstamp>
     </comp>
     <comp ref="R27">
       <value>51K</value>
@@ -1001,7 +64,31 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60DCF2F7</tstamp>
     </comp>
-    <comp ref="C11">
+    <comp ref="R28">
+      <value>22K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17560</field>
+        <field name="PartNumber">0805W8F2202T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>60DCE651</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>SW_Push</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C455101</field>
+        <field name="PartNumber">XUNPU TS-1002-10026</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>60C5E5A0</tstamp>
+    </comp>
+    <comp ref="C7">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
@@ -1009,18 +96,950 @@
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>60DCF302</tstamp>
+      <tstamp>60C442C4</tstamp>
     </comp>
-    <comp ref="SW2">
-      <value>SW_Push</value>
-      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+    <comp ref="R7">
+      <value>51K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="LCSCStockCode">PTS645SL502LFS</field>
+        <field name="LCSCStockCode">C17737</field>
+        <field name="PartNumber">0805W8F5102T5E</field>
       </fields>
-      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>60DCF30D</tstamp>
+      <tstamp>60C44049</tstamp>
+    </comp>
+    <comp ref="R26">
+      <value>22K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17560</field>
+        <field name="PartNumber">0805W8F2202T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>60C43896</tstamp>
+    </comp>
+    <comp ref="J15">
+      <value>Molex 0472192001</value>
+      <footprint>0472192001</footprint>
+      <datasheet>https://www.molex.com/pdm_docs/sd/472192001_sd.pdf</datasheet>
+      <fields>
+        <field name="Arrow Part Number">0472192001</field>
+        <field name="Arrow Price/Stock">https://www.arrow.com/en/products/0472192001/molex</field>
+        <field name="Description">Memory Card Connectors 1.10MM MICRO SD 08P HINGE TYPE</field>
+        <field name="Height">1.9</field>
+        <field name="JLCPCBRotation">180</field>
+        <field name="LCSCStockCode">C164170</field>
+        <field name="Manufacturer_Name">Molex</field>
+        <field name="Manufacturer_Part_Number">0472192001</field>
+        <field name="Mouser Part Number">N/A</field>
+        <field name="Mouser Price/Stock">https://www.mouser.com/Search/Refine.aspx?Keyword=N%2FA</field>
+      </fields>
+      <libsource lib="0472192001" part="0472192001" description="Memory Card Connectors 1.10MM MICRO SD 08P HINGE TYPE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>609B29DC</tstamp>
+    </comp>
+    <comp ref="J14">
+      <value>Unused header</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="DONOTPLACE">TRUE</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x07_Female" description="Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>60A6FB21</tstamp>
+    </comp>
+    <comp ref="D8">
+      <value>NUP2105LT1G</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>http://www.onsemi.com/pub_link/Collateral/NUP2105L-D.PDF</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C2976509</field>
+      </fields>
+      <libsource lib="Power_Protection" part="NUP2105L" description="Dual Line CAN Bus Protector, 24Vrwm"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>60229822</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>120R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17437</field>
+        <field name="PartNumber">0805W8F1200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F3E48B4</tstamp>
+    </comp>
+    <comp ref="JP4">
+      <value>OptTermination</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Jumper" part="SolderJumper_2_Bridged" description="Solder Jumper, 2-pole, closed/bridged"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FF74B21</tstamp>
+    </comp>
+    <comp ref="J12">
+      <value>ScrewTerminal</value>
+      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395880</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FF89203</tstamp>
+    </comp>
+    <comp ref="R25">
+      <value>220R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17557</field>
+        <field name="PartNumber">0805W8F2200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FF5F70C</tstamp>
+    </comp>
+    <comp ref="U12">
+      <value>AQY282SX</value>
+      <footprint>Package_SO:SO-4_4.4x3.6mm_P2.54mm</footprint>
+      <datasheet>https://datasheet.lcsc.com/lcsc/1912111437_PANASONIC-AQY282SX_C250827.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C250827</field>
+      </fields>
+      <libsource lib="Relay_SolidState" part="ASSR-1218" description="Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FF5F6FF</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSCStockCode">C28323</field>
+        <field name="PartNumber">CL21B105KBFNNNE</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>6020E8FE</tstamp>
+    </comp>
+    <comp ref="R24">
+      <value>22K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17560</field>
+        <field name="PartNumber">0805W8F2202T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FEDBE15</tstamp>
+    </comp>
+    <comp ref="R21">
+      <value>220R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17557</field>
+        <field name="PartNumber">0805W8F2200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FE43131</tstamp>
+    </comp>
+    <comp ref="J7">
+      <value>ScrewTerminal</value>
+      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395880</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F22FEB4</tstamp>
+    </comp>
+    <comp ref="R19">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17414</field>
+        <field name="PartNumber">0805W8F1002T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FC5F324</tstamp>
+    </comp>
+    <comp ref="R18">
+      <value>220R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17557</field>
+        <field name="PartNumber">0805W8F2200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FAC37C7</tstamp>
+    </comp>
+    <comp ref="U9">
+      <value>AQY282SX</value>
+      <footprint>Package_SO:SO-4_4.4x3.6mm_P2.54mm</footprint>
+      <datasheet>https://datasheet.lcsc.com/lcsc/1912111437_PANASONIC-AQY282SX_C250827.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C250827</field>
+      </fields>
+      <libsource lib="Relay_SolidState" part="ASSR-1218" description="Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FAC18A8</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>ScrewTerminal3Pin</value>
+      <footprint>ControllerCircuit:Terminal-Block_5.0mm_3P-LCSC_C395850</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395850</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x03_Female" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F3432EC</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>220R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17557</field>
+        <field name="PartNumber">0805W8F2200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FB04538</tstamp>
+    </comp>
+    <comp ref="J10">
+      <value>Conn_01x02_Female</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C376120</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x02_Female" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FA6DD26</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>120R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17437</field>
+        <field name="PartNumber">0805W8F1200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F97A123</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>EL3H7(B)(TA)-G</value>
+      <footprint>Package_SO:SOP-4_4.4x2.6mm_P1.27mm</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C32565</field>
+      </fields>
+      <libsource lib="Isolator" part="PC817" description="DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD55A2D</tstamp>
+    </comp>
+    <comp ref="RX1">
+      <value>Receive</value>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
+      <fields>
+        <field name="LCSCStockCode">C157932</field>
+        <field name="PartNumber">S2B-PH-K-S-GW</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD589E5</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>180R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C25270</field>
+        <field name="PartNumber">0805W8F1800T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE037A1</tstamp>
+    </comp>
+    <comp ref="TX1">
+      <value>Transmit</value>
+      <footprint>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</footprint>
+      <fields>
+        <field name="LCSCStockCode">C157932</field>
+        <field name="PartNumber">S2B-PH-K-S-GW</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x02_Male" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD595C3</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F645FB3</tstamp>
+    </comp>
+    <comp ref="R16">
+      <value>2K2</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17520</field>
+        <field name="PartNumber">0805W8F2201T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F56EC0B</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>2K2</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17520</field>
+        <field name="PartNumber">0805W8F2201T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F56376F</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>560R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C28636</field>
+        <field name="PartNumber">0805W8F5600T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F591730</tstamp>
+    </comp>
+    <comp ref="LCD1">
+      <value>LCD</value>
+      <footprint>ControllerCircuit:TFTSPI_2_8_240x320_TOUCH</footprint>
+      <fields>
+        <field name="LCSCStockCode">C52711/C358718</field>
+      </fields>
+      <libsource lib="ControllerCircuit-rescue" part="LCD-ControllerCircuit" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F38B804</tstamp>
+    </comp>
+    <comp ref="J4">
+      <value>ScrewTerminal</value>
+      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395880</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F27E98F</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>YELLOW LED</value>
+      <footprint>LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder</footprint>
+      <fields>
+        <field name="LCSCStockCode">C72038</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496FCE</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>560R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C28636</field>
+        <field name="PartNumber">0805W8F5600T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496FC3</tstamp>
+    </comp>
+    <comp ref="R15">
+      <value>51K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17737</field>
+        <field name="PartNumber">0805W8F5102T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496FAF</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>560R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C28636</field>
+        <field name="PartNumber">0805W8F5600T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496F9F</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>ScrewTerminal3Pin</value>
+      <footprint>ControllerCircuit:Terminal-Block_5.0mm_3P-LCSC_C395850</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395850</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x03_Female" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496F8F</tstamp>
+    </comp>
+    <comp ref="Q2">
+      <value>AO3400A</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1812111733_Bourne-Semicon-Shenzhen-AO3400A_C344010.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C344010</field>
+        <field name="PartNumber">AO3400A</field>
+      </fields>
+      <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496F77</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>LL4148</value>
+      <footprint>Diode_SMD:D_MiniMELF</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C9808</field>
+        <field name="PartNumber">LL4148</field>
+      </fields>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496F6B</tstamp>
+    </comp>
+    <comp ref="K2">
+      <value>SRD-05VDC-SL-C</value>
+      <footprint>ControllerCircuit:RELAY_SRD-05VDC-SL-C</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1811021933_Ningbo-Songle-Relay-SRD-05VDC-SL-C_C35449.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C35449</field>
+        <field name="PartNumber">SRD-05VDC-SL-C</field>
+      </fields>
+      <libsource lib="ControllerCircuit-rescue" part="SRD-05VDC-SL-C-ControllerCircuit" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F496F5F</tstamp>
+    </comp>
+    <comp ref="F1">
+      <value>Fuse, 1.85A</value>
+      <footprint>Fuse:Fuse_2920_7451Metric</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/TLC-Electronic-TLC-LSMD185_C262041.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C262041</field>
+        <field name="PartNumber">TLC-LSMD185</field>
+      </fields>
+      <libsource lib="Device" part="Polyfuse" description="Resettable fuse, polymeric positive temperature coefficient"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F260C46</tstamp>
+    </comp>
+    <comp ref="U6">
+      <value>AMS1117-3.3</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223-3_TabPin2</footprint>
+      <datasheet>http://www.advanced-monolithic.com/pdf/ds1117.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C6186</field>
+        <field name="PartNumber">AMS1117-3.3</field>
+      </fields>
+      <libsource lib="Regulator_Linear" part="AMS1117-3.3" description="1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F2865B2</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>22uF 6.3V</value>
+      <footprint>Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C110786</field>
+        <field name="PartNumber">TC212A226K006Y</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F2BD460</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>22uF 6.3V</value>
+      <footprint>Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C110786</field>
+        <field name="PartNumber">TC212A226K006Y</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F2BC754</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>YELLOW LED</value>
+      <footprint>LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder</footprint>
+      <fields>
+        <field name="LCSCStockCode">C72038</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F4262A9</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>560R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C28636</field>
+        <field name="PartNumber">0805W8F5600T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F425CDB</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>51K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17737</field>
+        <field name="PartNumber">0805W8F5102T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F3EC654</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>560R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C28636</field>
+        <field name="PartNumber">0805W8F5600T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F3E581B</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>AO3400A</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1812111733_Bourne-Semicon-Shenzhen-AO3400A_C344010.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C344010</field>
+        <field name="PartNumber">AO3400A</field>
+      </fields>
+      <libsource lib="Device" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F32E594</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>LL4148</value>
+      <footprint>Diode_SMD:D_MiniMELF</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Semtech-LL4148_C9808.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C9808</field>
+        <field name="PartNumber">LL4148</field>
+      </fields>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F32D25D</tstamp>
+    </comp>
+    <comp ref="K1">
+      <value>SRD-05VDC-SL-C</value>
+      <footprint>ControllerCircuit:RELAY_SRD-05VDC-SL-C</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/1811021933_Ningbo-Songle-Relay-SRD-05VDC-SL-C_C35449.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C35449</field>
+        <field name="PartNumber">SRD-05VDC-SL-C</field>
+      </fields>
+      <libsource lib="ControllerCircuit-rescue" part="SRD-05VDC-SL-C-ControllerCircuit" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F3296D0</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F254302</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F2401C0</tstamp>
+    </comp>
+    <comp ref="U5">
+      <value>SN65HVD75DR</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C57928</field>
+        <field name="PartNumber">SN65HVD75DR</field>
+      </fields>
+      <libsource lib="ControllerCircuit-rescue" part="SN65HVD75DR-ControllerCircuit" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F3C4F7B</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>ScrewTerminal</value>
+      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395880</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F383885</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>RGB</value>
+      <footprint>LED_SMD:LED_RGB_5050-6</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Hongli-Zhihui-HONGLITRONIC-HL-AF-5060H271BU46FU79GC-S1-THL_C219409.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C219409</field>
+      </fields>
+      <libsource lib="Device" part="LED_RGB" description="RGB LED, 6 pin package"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD4CF59</tstamp>
+    </comp>
+    <comp ref="J8">
+      <value>2x3 2.54mm IDC Connectors</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical</footprint>
+      <datasheet>https://lcsc.com/product-detail/IDC-Connectors_Ckmtw-Shenzhen-Cankemeng-C132438_C132438.html</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C132438</field>
+      </fields>
+      <libsource lib="Connector" part="AVR-ISP-6" description="Atmel 6-pin ISP connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F2203E9</tstamp>
+    </comp>
+    <comp ref="JP1">
+      <value>OptTermination</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Jumper" part="SolderJumper_2_Bridged" description="Solder Jumper, 2-pole, closed/bridged"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F269089</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>120R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17437</field>
+        <field name="PartNumber">0805W8F1200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F247EC1</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>ESP32-DEVKITC-32D</value>
+      <footprint>ControllerCircuit:MODULE_ESP32-DEVKITC-32D</footprint>
+      <datasheet>Espressif Systems</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C319202/C319202</field>
+      </fields>
+      <libsource lib="ControllerCircuit-rescue" part="ESP32-DEVKITC-32D-ControllerCircuit" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F20BE06</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>220R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17557</field>
+        <field name="PartNumber">0805W8F2200T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5FB135F1</tstamp>
+    </comp>
+    <comp ref="Q4">
+      <value>AO3400A</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C344010</field>
+        <field name="PartNumber">AO3400A</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="AO3400A" description="30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>621561B3</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>2K2</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17520</field>
+        <field name="PartNumber">0805W8F2201T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CD5BA4A</tstamp>
+    </comp>
+    <comp ref="R20">
+      <value>1M</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17514</field>
+        <field name="PartNumber">0805W8F1004T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>622000FE</tstamp>
+    </comp>
+    <comp ref="R29">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17414</field>
+        <field name="PartNumber">0805W8F1002T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>6215C521</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSCStockCode">C5672</field>
+        <field name="PartNumber">CL31A226KPHNNNE</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>621990FD</tstamp>
+    </comp>
+    <comp ref="U7">
+      <value>SN65HVD1050D</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>http://www.ti.com/lit/ds/symlink/sn65hvd1050.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C14019</field>
+      </fields>
+      <libsource lib="Interface_CAN_LIN" part="SN65HVD1050D" description="CAN Bus Transceiver, EMC optimised, 5.0V, 1Mbps, SOIC-8"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>62B73ECE</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>TXS0102DCU</value>
+      <footprint>Package_SO:VSSOP-8_2.3x2mm_P0.5mm</footprint>
+      <datasheet>http://www.ti.com/lit/gpn/txs0102</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C53434</field>
+      </fields>
+      <libsource lib="Logic_LevelTranslator" part="TXS0102DCU" description="2-Bit Bidirectional Voltage-Level Shifter for Open-Drain and Push-Pull Application, VSSOP-8"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>62B761EA</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>62C74E9E</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>62CA1150</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>MHPC3528CRGBCT</value>
+      <footprint>ControllerCircuit:LED_MHPC3528CRGBCT</footprint>
+      <datasheet>https://datasheet.lcsc.com/lcsc/2202141600_MEIHUA-MHPC3528CRGBCT_C2962096.pdf</datasheet>
+      <libsource lib="Device" part="LED_RGBC" description="RGB LED, red/green/blue/cathode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>62E88BE7</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17414</field>
+        <field name="PartNumber">0805W8F1002T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63AF7118</tstamp>
+    </comp>
+    <comp ref="Q3">
+      <value>AO3401A</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/Alpha-Omega-Semicon-AOS-AO3401A_C15127.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C15127</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="AO3401A" description="-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F8FC31C</tstamp>
+    </comp>
+    <comp ref="J5">
+      <value>ScrewTerminal</value>
+      <footprint>ControllerCircuit:Terminal-Block_3.81_2P-LCSC_C395878</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395878</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x02_Female" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>60054FFC</tstamp>
+    </comp>
+    <comp ref="U8">
+      <value>INA229</value>
+      <footprint>Package_SO:VSSOP-10_3x3mm_P0.5mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/ina229-q1.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C2846803</field>
+        <field name="PartNumber">INA229AIDGSR</field>
+      </fields>
+      <libsource lib="ControllerCircuit-rescue" part="INA229-Q1-INA229-Q1" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63E01ED7</tstamp>
+    </comp>
+    <comp ref="R23">
+      <value>10R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17415</field>
+        <field name="PartNumber">0805W8F100JT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63E03616</tstamp>
+    </comp>
+    <comp ref="R30">
+      <value>10R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17415</field>
+        <field name="PartNumber">0805W8F100JT5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63E042AA</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>0.1uF-100V</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSCStockCode">C696367</field>
+        <field name="PartNumber">C0805C104K1RECAUTO</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63E044A3</tstamp>
+    </comp>
+    <comp ref="J9">
+      <value>Shunt</value>
+      <footprint>ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C395880</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x04_Female" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63E639E4</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSCStockCode">C28323</field>
+        <field name="PartNumber">CL21B105KBFNNNE</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63F47EDE</tstamp>
+    </comp>
+    <comp ref="C14">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <datasheet>https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C49678</field>
+        <field name="PartNumber">CC0805KRX7R9BB104</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>63F4C55F</tstamp>
+    </comp>
+    <comp ref="R32">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17414</field>
+        <field name="PartNumber">0805W8F1002T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>640098B5</tstamp>
+    </comp>
+    <comp ref="R31">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="LCSCStockCode">C17414</field>
+        <field name="PartNumber">0805W8F1002T5E</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>64025E46</tstamp>
     </comp>
   </components>
   <libparts>
@@ -1139,15 +1158,15 @@
         <pin num="4" name="Pin_4" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Connector" part="Conn_01x06_Female">
-      <description>Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+    <libpart lib="Connector" part="Conn_01x07_Female">
+      <description>Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <docs>~</docs>
       <footprints>
         <fp>Connector*:*_1x??_*</fp>
       </footprints>
       <fields>
         <field name="Reference">J</field>
-        <field name="Value">Conn_01x06_Female</field>
+        <field name="Value">Conn_01x07_Female</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
@@ -1156,6 +1175,40 @@
         <pin num="4" name="Pin_4" type="passive"/>
         <pin num="5" name="Pin_5" type="passive"/>
         <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ControllerCircuit" part="TCA6416APWR">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TCA6416APWR</field>
+        <field name="Footprint">Package_SO:TSSOP-24_6.1x7.8mm_P0.65mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~INT~" type="output"/>
+        <pin num="2" name="VCCI" type="power_in"/>
+        <pin num="3" name="~RESET~" type="input"/>
+        <pin num="4" name="P0" type="BiDi"/>
+        <pin num="5" name="P1" type="BiDi"/>
+        <pin num="6" name="P2" type="BiDi"/>
+        <pin num="7" name="P3" type="BiDi"/>
+        <pin num="8" name="P4" type="BiDi"/>
+        <pin num="9" name="P5" type="BiDi"/>
+        <pin num="10" name="P6" type="BiDi"/>
+        <pin num="11" name="P7" type="BiDi"/>
+        <pin num="12" name="GND" type="power_in"/>
+        <pin num="13" name="P10" type="BiDi"/>
+        <pin num="14" name="P11" type="BiDi"/>
+        <pin num="15" name="P12" type="BiDi"/>
+        <pin num="16" name="P13" type="BiDi"/>
+        <pin num="17" name="P14" type="BiDi"/>
+        <pin num="18" name="P15" type="BiDi"/>
+        <pin num="19" name="P16" type="BiDi"/>
+        <pin num="20" name="P17" type="BiDi"/>
+        <pin num="21" name="ADDR" type="input"/>
+        <pin num="22" name="SCL" type="input"/>
+        <pin num="23" name="SDA" type="BiDi"/>
+        <pin num="24" name="VCCP" type="power_in"/>
       </pins>
     </libpart>
     <libpart lib="ControllerCircuit-rescue" part="ESP32-DEVKITC-32D-ControllerCircuit">
@@ -1205,6 +1258,28 @@
         <pin num="36" name="SD1" type="BiDi"/>
         <pin num="37" name="SD0" type="BiDi"/>
         <pin num="38" name="CLK" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="ControllerCircuit-rescue" part="INA229-Q1-INA229-Q1">
+      <footprints>
+        <fp>VSSOP*3x3mm*P0.5mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">INA229-Q1-INA229-Q1</field>
+        <field name="Footprint">Package_SO:VSSOP-10_3x3mm_P0.5mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="CS" type="input"/>
+        <pin num="2" name="MOSI" type="input"/>
+        <pin num="3" name="~Alert~" type="openCol"/>
+        <pin num="4" name="MISO" type="output"/>
+        <pin num="5" name="SCLK" type="input"/>
+        <pin num="6" name="VS" type="power_in"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="Vbus" type="input"/>
+        <pin num="9" name="Vin-" type="input"/>
+        <pin num="10" name="Vin+" type="input"/>
       </pins>
     </libpart>
     <libpart lib="ControllerCircuit-rescue" part="LCD-ControllerCircuit">
@@ -1265,31 +1340,6 @@
         <pin num="NO" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="ControllerCircuit-rescue" part="TCA6408AQPWRQ1-ControllerCircuit">
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">TCA6408AQPWRQ1-ControllerCircuit</field>
-        <field name="Footprint">Housings_SSOP:TSSOP-16_4.4x5mm_Pitch0.65mm</field>
-      </fields>
-      <pins>
-        <pin num="1" name="VCCI" type="power_in"/>
-        <pin num="2" name="ADDR" type="input"/>
-        <pin num="3" name="~RESET~" type="input"/>
-        <pin num="4" name="P0" type="BiDi"/>
-        <pin num="5" name="P1" type="BiDi"/>
-        <pin num="6" name="P2" type="BiDi"/>
-        <pin num="7" name="P3" type="BiDi"/>
-        <pin num="8" name="GND" type="power_in"/>
-        <pin num="9" name="P4" type="BiDi"/>
-        <pin num="10" name="P5" type="BiDi"/>
-        <pin num="11" name="P6" type="BiDi"/>
-        <pin num="12" name="P7" type="BiDi"/>
-        <pin num="13" name="~INT~" type="3state"/>
-        <pin num="14" name="SCL" type="input"/>
-        <pin num="15" name="SDA" type="BiDi"/>
-        <pin num="16" name="VCCP" type="power_in"/>
-      </pins>
-    </libpart>
     <libpart lib="Device" part="C">
       <description>Unpolarized capacitor</description>
       <docs>~</docs>
@@ -1317,24 +1367,6 @@
       <fields>
         <field name="Reference">D</field>
         <field name="Value">D</field>
-      </fields>
-      <pins>
-        <pin num="1" name="K" type="passive"/>
-        <pin num="2" name="A" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Device" part="D_Zener_Small">
-      <description>Zener diode, small symbol</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>TO-???*</fp>
-        <fp>*_Diode_*</fp>
-        <fp>*SingleDiode*</fp>
-        <fp>D_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">D</field>
-        <field name="Value">D_Zener_Small</field>
       </fields>
       <pins>
         <pin num="1" name="K" type="passive"/>
@@ -1377,6 +1409,25 @@
         <pin num="4" name="BA" type="passive"/>
         <pin num="5" name="GA" type="passive"/>
         <pin num="6" name="RA" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED_RGBC">
+      <description>RGB LED, red/green/blue/cathode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_RGBC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RA" type="passive"/>
+        <pin num="2" name="GA" type="passive"/>
+        <pin num="3" name="BA" type="passive"/>
+        <pin num="4" name="K" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Device" part="Polyfuse">
@@ -1423,15 +1474,15 @@
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Interface_CAN_LIN" part="TJA1051T-3">
-      <description>High-Speed CAN Transceiver, separate VIO, silent mode, SOIC-8</description>
-      <docs>http://www.nxp.com/documents/data_sheet/TJA1051.pdf</docs>
+    <libpart lib="Interface_CAN_LIN" part="SN65HVD1050D">
+      <description>CAN Bus Transceiver, EMC optimised, 5.0V, 1Mbps, SOIC-8</description>
+      <docs>http://www.ti.com/lit/ds/symlink/sn65hvd1050.pdf</docs>
       <footprints>
         <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
       </footprints>
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">TJA1051T-3</field>
+        <field name="Value">SN65HVD1050D</field>
         <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
       </fields>
       <pins>
@@ -1439,40 +1490,10 @@
         <pin num="2" name="GND" type="power_in"/>
         <pin num="3" name="VCC" type="power_in"/>
         <pin num="4" name="RXD" type="output"/>
-        <pin num="5" name="VIO" type="power_in"/>
+        <pin num="5" name="VREF" type="passive"/>
         <pin num="6" name="CANL" type="BiDi"/>
         <pin num="7" name="CANH" type="BiDi"/>
         <pin num="8" name="S" type="input"/>
-      </pins>
-    </libpart>
-    <libpart lib="Interface_Expansion" part="TCA9534">
-      <description>8 Bit Port/Expander, I2C SMBUS, Interrupt output, TSSOP-16, SOIC-16</description>
-      <docs>http://www.ti.com/lit/ds/symlink/tca9534.pdf</docs>
-      <footprints>
-        <fp>TSSOP*4.4x5mm*P0.65mm*</fp>
-        <fp>SOIC*7.5x10.3mm*P1.27mm*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">TCA9534</field>
-      </fields>
-      <pins>
-        <pin num="1" name="A0" type="input"/>
-        <pin num="2" name="A1" type="input"/>
-        <pin num="3" name="A2" type="input"/>
-        <pin num="4" name="P0" type="BiDi"/>
-        <pin num="5" name="P1" type="BiDi"/>
-        <pin num="6" name="P2" type="BiDi"/>
-        <pin num="7" name="P3" type="BiDi"/>
-        <pin num="8" name="GND" type="power_in"/>
-        <pin num="9" name="P4" type="BiDi"/>
-        <pin num="10" name="P5" type="BiDi"/>
-        <pin num="11" name="P6" type="BiDi"/>
-        <pin num="12" name="P7" type="BiDi"/>
-        <pin num="13" name="~INT~" type="openCol"/>
-        <pin num="14" name="SCL" type="input"/>
-        <pin num="15" name="SDA" type="BiDi"/>
-        <pin num="16" name="VDD" type="power_in"/>
       </pins>
     </libpart>
     <libpart lib="Isolator" part="PC817">
@@ -1496,66 +1517,41 @@
         <pin num="4" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Jumper" part="SolderJumper_2_Open">
-      <description>Solder Jumper, 2-pole, open</description>
+    <libpart lib="Jumper" part="SolderJumper_2_Bridged">
+      <description>Solder Jumper, 2-pole, closed/bridged</description>
       <docs>~</docs>
       <footprints>
-        <fp>SolderJumper*Open*</fp>
+        <fp>SolderJumper*Bridged*</fp>
       </footprints>
       <fields>
         <field name="Reference">JP</field>
-        <field name="Value">SolderJumper_2_Open</field>
+        <field name="Value">SolderJumper_2_Bridged</field>
       </fields>
       <pins>
         <pin num="1" name="A" type="passive"/>
         <pin num="2" name="B" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Jumper" part="SolderJumper_3_Bridged12">
-      <description>3-pole Solder Jumper, pins 1+2 closed/bridged</description>
-      <docs>~</docs>
+    <libpart lib="Logic_LevelTranslator" part="TXS0102DCU">
+      <description>2-Bit Bidirectional Voltage-Level Shifter for Open-Drain and Push-Pull Application, VSSOP-8</description>
+      <docs>http://www.ti.com/lit/gpn/txs0102</docs>
       <footprints>
-        <fp>SolderJumper*Bridged12*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">JP</field>
-        <field name="Value">SolderJumper_3_Bridged12</field>
-      </fields>
-      <pins>
-        <pin num="1" name="A" type="passive"/>
-        <pin num="2" name="C" type="input"/>
-        <pin num="3" name="B" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="MCU_Microchip_ATtiny" part="ATtiny441-SSU">
-      <aliases>
-        <alias>ATtiny841-SSU</alias>
-      </aliases>
-      <description>16MHz, 4kB Flash, 256B SRAM, 256B EEPROM, ADC, ACI, debugWIRE, SOIC-14</description>
-      <docs>http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-8495-8-bit-AVR-Microcontrollers-ATtiny441-ATtiny841_Datasheet.pdf</docs>
-      <footprints>
-        <fp>SOIC*3.9x8.7mm*P1.27mm*</fp>
+        <fp>VSSOP*2.3x2mm*P0.5mm*</fp>
       </footprints>
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">ATtiny441-SSU</field>
-        <field name="Footprint">Package_SO:SOIC-14_3.9x8.7mm_P1.27mm</field>
+        <field name="Value">TXS0102DCU</field>
+        <field name="Footprint">Package_SO:VSSOP-8_2.3x2mm_P0.5mm</field>
       </fields>
       <pins>
-        <pin num="1" name="VCC" type="power_in"/>
-        <pin num="2" name="XTAL1/PB0" type="BiDi"/>
-        <pin num="3" name="XTAL2/PB1" type="BiDi"/>
-        <pin num="4" name="~RESET~/PB3" type="BiDi"/>
-        <pin num="5" name="PB2" type="BiDi"/>
-        <pin num="6" name="PA7" type="BiDi"/>
-        <pin num="7" name="PA6" type="BiDi"/>
-        <pin num="8" name="PA5" type="BiDi"/>
-        <pin num="9" name="PA4" type="BiDi"/>
-        <pin num="10" name="PA3" type="BiDi"/>
-        <pin num="11" name="PA2" type="BiDi"/>
-        <pin num="12" name="PA1" type="BiDi"/>
-        <pin num="13" name="AREF/PA0" type="BiDi"/>
-        <pin num="14" name="GND" type="power_in"/>
+        <pin num="1" name="B2" type="BiDi"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="VCCA" type="power_in"/>
+        <pin num="4" name="A2" type="BiDi"/>
+        <pin num="5" name="A1" type="BiDi"/>
+        <pin num="6" name="OE" type="input"/>
+        <pin num="7" name="VCCB" type="power_in"/>
+        <pin num="8" name="B1" type="BiDi"/>
       </pins>
     </libpart>
     <libpart lib="Power_Protection" part="NUP2105L">
@@ -1650,6 +1646,87 @@
         <pin num="2" name="2" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Transistor_FET" part="BSS138">
+      <aliases>
+        <alias>2N7002</alias>
+        <alias>2N7002E</alias>
+        <alias>2N7002H</alias>
+        <alias>2N7002K</alias>
+        <alias>BS170F</alias>
+        <alias>BS870</alias>
+        <alias>BSN20</alias>
+        <alias>BSS123</alias>
+        <alias>BSS127S</alias>
+        <alias>DMG2302U</alias>
+        <alias>DMG3402L</alias>
+        <alias>DMG3404L</alias>
+        <alias>DMG3406L</alias>
+        <alias>DMG3414U</alias>
+        <alias>DMG3418L</alias>
+        <alias>DMN10H220L</alias>
+        <alias>DMN10H700S</alias>
+        <alias>DMN13H750S</alias>
+        <alias>DMN2041L</alias>
+        <alias>DMN2050L</alias>
+        <alias>DMN2056U</alias>
+        <alias>DMN2058U</alias>
+        <alias>DMN2075U</alias>
+        <alias>DMN2230U</alias>
+        <alias>DMN24H11DS</alias>
+        <alias>DMN24H3D5L</alias>
+        <alias>DMN3042L</alias>
+        <alias>DMN3051L</alias>
+        <alias>DMN30H4D0L</alias>
+        <alias>DMN3110S</alias>
+        <alias>DMN3150L</alias>
+        <alias>DMN3300U</alias>
+        <alias>DMN3404L</alias>
+        <alias>DMN6075S</alias>
+        <alias>DMN6140L</alias>
+        <alias>DMN67D7L</alias>
+        <alias>DMN67D8L</alias>
+        <alias>MMBF170</alias>
+        <alias>VN10LF</alias>
+        <alias>ZVN3306F</alias>
+        <alias>ZVN3310F</alias>
+        <alias>ZVN3320F</alias>
+        <alias>ZVN4106F</alias>
+        <alias>ZXM61N02F</alias>
+        <alias>ZXM61N03F</alias>
+        <alias>ZXMN10A07F</alias>
+        <alias>ZXMN2A01F</alias>
+        <alias>ZXMN2A14F</alias>
+        <alias>ZXMN2B01F</alias>
+        <alias>ZXMN2B14FH</alias>
+        <alias>ZXMN2F30FH</alias>
+        <alias>ZXMN2F34FH</alias>
+        <alias>ZXMN3A01F</alias>
+        <alias>ZXMN3A14F</alias>
+        <alias>ZXMN3B01F</alias>
+        <alias>ZXMN3B14F</alias>
+        <alias>ZXMN3F30FH</alias>
+        <alias>ZXMN6A07F</alias>
+        <alias>IRLML0030</alias>
+        <alias>IRLML2060</alias>
+        <alias>TSM2302CX</alias>
+        <alias>AO3400A</alias>
+      </aliases>
+      <description>50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23</description>
+      <docs>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BSS138</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Transistor_FET" part="TP0610T">
       <aliases>
         <alias>VP0610T</alias>
@@ -1691,6 +1768,9 @@
     <library logical="Connector">
       <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
     </library>
+    <library logical="ControllerCircuit">
+      <uri>E:\source\diyBMSv4\ControllerCircuit/ControllerCircuit.lib</uri>
+    </library>
     <library logical="ControllerCircuit-rescue">
       <uri>E:\source\diyBMSv4\ControllerCircuit/ControllerCircuit-rescue.lib</uri>
     </library>
@@ -1700,17 +1780,14 @@
     <library logical="Interface_CAN_LIN">
       <uri>C:\Program Files\KiCad\share\kicad\library/Interface_CAN_LIN.lib</uri>
     </library>
-    <library logical="Interface_Expansion">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Interface_Expansion.lib</uri>
-    </library>
     <library logical="Isolator">
       <uri>C:\Program Files\KiCad\share\kicad\library/Isolator.lib</uri>
     </library>
     <library logical="Jumper">
       <uri>C:\Program Files\KiCad\share\kicad\library/Jumper.lib</uri>
     </library>
-    <library logical="MCU_Microchip_ATtiny">
-      <uri>C:\Program Files\KiCad\share\kicad\library/MCU_Microchip_ATtiny.lib</uri>
+    <library logical="Logic_LevelTranslator">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Logic_LevelTranslator.lib</uri>
     </library>
     <library logical="Power_Protection">
       <uri>C:\Program Files\KiCad\share\kicad\library/Power_Protection.lib</uri>
@@ -1729,544 +1806,544 @@
     </library>
   </libraries>
   <nets>
-    <net code="1" name="+3V3">
-      <node ref="C1" pin="1"/>
-      <node ref="U5" pin="8"/>
-      <node ref="JP5" pin="3"/>
-      <node ref="R24" pin="2"/>
-      <node ref="U1" pin="5"/>
-      <node ref="R16" pin="2"/>
-      <node ref="C10" pin="1"/>
-      <node ref="R5" pin="2"/>
-      <node ref="J8" pin="2"/>
-      <node ref="C4" pin="1"/>
-      <node ref="U6" pin="2"/>
-      <node ref="R20" pin="2"/>
-      <node ref="R19" pin="2"/>
-      <node ref="J6" pin="2"/>
-      <node ref="R23" pin="1"/>
-      <node ref="U10" pin="1"/>
-      <node ref="R27" pin="2"/>
-      <node ref="R7" pin="2"/>
-      <node ref="C9" pin="2"/>
-      <node ref="J15" pin="4"/>
-      <node ref="J14" pin="1"/>
-      <node ref="LCD1" pin="14"/>
-      <node ref="U8" pin="16"/>
-      <node ref="C5" pin="2"/>
-      <node ref="U3" pin="1"/>
-      <node ref="RX1" pin="2"/>
-      <node ref="C6" pin="1"/>
-      <node ref="C8" pin="1"/>
-    </net>
-    <net code="2" name="Net-(J9-Pad1)">
-      <node ref="U10" pin="13"/>
-      <node ref="J9" pin="1"/>
-    </net>
-    <net code="3" name="Net-(J9-Pad2)">
-      <node ref="U10" pin="12"/>
-      <node ref="J9" pin="2"/>
-    </net>
-    <net code="4" name="Net-(J9-Pad5)">
-      <node ref="U10" pin="3"/>
-      <node ref="J9" pin="5"/>
-    </net>
-    <net code="5" name="Net-(J9-Pad4)">
-      <node ref="U10" pin="2"/>
-      <node ref="J9" pin="4"/>
-    </net>
-    <net code="6" name="Net-(D6-Pad2)">
+    <net code="1" name="/IO5">
+      <node ref="J15" pin="2"/>
       <node ref="R22" pin="1"/>
-      <node ref="D6" pin="2"/>
+      <node ref="U4" pin="29"/>
+      <node ref="LCD1" pin="SD4"/>
     </net>
-    <net code="7" name="Net-(J6-Pad5)">
-      <node ref="R23" pin="2"/>
-      <node ref="J6" pin="5"/>
-      <node ref="U10" pin="4"/>
+    <net code="2" name="/EXT_IO_D">
+      <node ref="J4" pin="4"/>
+      <node ref="U3" pin="7"/>
     </net>
-    <net code="8" name="Net-(R22-Pad2)">
-      <node ref="U10" pin="6"/>
-      <node ref="R22" pin="2"/>
+    <net code="3" name="Net-(D4-Pad1)">
+      <node ref="K2" pin="A2"/>
+      <node ref="D5" pin="2"/>
+      <node ref="D4" pin="1"/>
+      <node ref="Q2" pin="3"/>
     </net>
-    <net code="9" name="Net-(J9-Pad6)">
-      <node ref="J9" pin="6"/>
-      <node ref="U10" pin="5"/>
+    <net code="4" name="Net-(D4-Pad2)">
+      <node ref="D4" pin="2"/>
+      <node ref="R13" pin="1"/>
     </net>
-    <net code="10" name="/RESET">
-      <node ref="U4" pin="2"/>
-      <node ref="LCD1" pin="11"/>
-      <node ref="U3" pin="3"/>
-      <node ref="U10" pin="10"/>
+    <net code="5" name="Net-(J3-Pad2)">
+      <node ref="J3" pin="2"/>
+      <node ref="K2" pin="NC"/>
     </net>
-    <net code="11" name="Net-(J6-Pad1)">
-      <node ref="J6" pin="1"/>
-      <node ref="U10" pin="8"/>
-    </net>
-    <net code="12" name="/RELAY2">
-      <node ref="R14" pin="2"/>
-      <node ref="U3" pin="10"/>
-    </net>
-    <net code="13" name="/RELAY3_SSR">
-      <node ref="R18" pin="2"/>
-      <node ref="U3" pin="11"/>
-    </net>
-    <net code="14" name="/RELAY4_SSR">
-      <node ref="U3" pin="12"/>
-      <node ref="R25" pin="2"/>
-    </net>
-    <net code="15" name="/EXT_IO_A">
-      <node ref="U3" pin="4"/>
-      <node ref="J4" pin="1"/>
-    </net>
-    <net code="16" name="Net-(Q1-Pad1)">
-      <node ref="Q1" pin="1"/>
-      <node ref="R10" pin="1"/>
-      <node ref="R11" pin="2"/>
-    </net>
-    <net code="17" name="Net-(Q2-Pad1)">
-      <node ref="R14" pin="1"/>
+    <net code="6" name="Net-(Q2-Pad1)">
       <node ref="Q2" pin="1"/>
+      <node ref="R14" pin="1"/>
       <node ref="R15" pin="2"/>
     </net>
-    <net code="18" name="Net-(U4-Pad24)">
-      <node ref="U4" pin="24"/>
-    </net>
-    <net code="19" name="Net-(U4-Pad23)">
-      <node ref="U4" pin="23"/>
-    </net>
-    <net code="20" name="Net-(J10-Pad1)">
-      <node ref="U8" pin="12"/>
-      <node ref="J10" pin="1"/>
-      <node ref="R24" pin="1"/>
-    </net>
-    <net code="21" name="Net-(J3-Pad1)">
+    <net code="7" name="Net-(J3-Pad1)">
       <node ref="J3" pin="1"/>
       <node ref="K2" pin="COM"/>
     </net>
-    <net code="22" name="Net-(J2-Pad1)">
+    <net code="8" name="/RED_LED">
+      <node ref="U3" pin="14"/>
+      <node ref="R4" pin="2"/>
+    </net>
+    <net code="9" name="Net-(TX1-Pad2)">
+      <node ref="U2" pin="4"/>
+      <node ref="TX1" pin="2"/>
+    </net>
+    <net code="10" name="/IO36_INPUT">
+      <node ref="U4" pin="3"/>
+      <node ref="LCD1" pin="1"/>
+    </net>
+    <net code="11" name="/IO4">
+      <node ref="U4" pin="32"/>
+      <node ref="LCD1" pin="4"/>
+    </net>
+    <net code="12" name="/HSPI_MISO">
+      <node ref="LCD1" pin="6"/>
+      <node ref="U4" pin="13"/>
+    </net>
+    <net code="13" name="Net-(LCD1-Pad7)">
+      <node ref="R21" pin="1"/>
+      <node ref="LCD1" pin="7"/>
+    </net>
+    <net code="14" name="/HSPI_CLK">
+      <node ref="U4" pin="12"/>
+      <node ref="LCD1" pin="8"/>
+    </net>
+    <net code="15" name="/HSPI_MOSI">
+      <node ref="LCD1" pin="9"/>
+      <node ref="U4" pin="15"/>
+    </net>
+    <net code="16" name="/IO22">
+      <node ref="U4" pin="22"/>
+      <node ref="U5" pin="4"/>
+    </net>
+    <net code="17" name="Net-(J1-Pad3)">
+      <node ref="U5" pin="7"/>
+      <node ref="J1" pin="3"/>
+      <node ref="JP4" pin="1"/>
+    </net>
+    <net code="18" name="Net-(D1-Pad1)">
+      <node ref="R17" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="D6" pin="3"/>
+    </net>
+    <net code="19" name="Net-(JP1-Pad2)">
+      <node ref="JP1" pin="2"/>
+      <node ref="R6" pin="1"/>
+    </net>
+    <net code="20" name="/ESP3V3">
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="21" name="Net-(D2-Pad2)">
+      <node ref="K1" pin="A2"/>
+      <node ref="D2" pin="2"/>
+      <node ref="Q1" pin="3"/>
+      <node ref="D3" pin="1"/>
+    </net>
+    <net code="22" name="Net-(D3-Pad2)">
+      <node ref="D3" pin="2"/>
+      <node ref="R12" pin="1"/>
+    </net>
+    <net code="23" name="Net-(Q1-Pad1)">
+      <node ref="R10" pin="1"/>
+      <node ref="R11" pin="2"/>
+      <node ref="Q1" pin="1"/>
+    </net>
+    <net code="24" name="Net-(TX1-Pad1)">
+      <node ref="U2" pin="3"/>
+      <node ref="TX1" pin="1"/>
+    </net>
+    <net code="25" name="Net-(J2-Pad1)">
       <node ref="K1" pin="COM"/>
       <node ref="J2" pin="1"/>
     </net>
-    <net code="23" name="Net-(J2-Pad2)">
+    <net code="26" name="Net-(J2-Pad2)">
       <node ref="J2" pin="2"/>
       <node ref="K1" pin="NC"/>
     </net>
-    <net code="24" name="Net-(J2-Pad3)">
+    <net code="27" name="Net-(J2-Pad3)">
       <node ref="J2" pin="3"/>
       <node ref="K1" pin="NO"/>
     </net>
-    <net code="25" name="Net-(J3-Pad3)">
-      <node ref="K2" pin="NO"/>
-      <node ref="J3" pin="3"/>
+    <net code="28" name="/EXT_IO_A">
+      <node ref="J4" pin="1"/>
+      <node ref="U3" pin="4"/>
     </net>
-    <net code="26" name="Net-(J3-Pad2)">
-      <node ref="K2" pin="NC"/>
-      <node ref="J3" pin="2"/>
+    <net code="29" name="/EXT_IO_B">
+      <node ref="J4" pin="2"/>
+      <node ref="U3" pin="5"/>
     </net>
-    <net code="27" name="Net-(J12-Pad1)">
-      <node ref="U9" pin="3"/>
-      <node ref="J12" pin="1"/>
+    <net code="30" name="/EXT_IO_C">
+      <node ref="U3" pin="6"/>
+      <node ref="J4" pin="3"/>
     </net>
-    <net code="28" name="Net-(J12-Pad2)">
-      <node ref="J12" pin="2"/>
-      <node ref="U9" pin="4"/>
+    <net code="31" name="/RELAY1">
+      <node ref="R10" pin="2"/>
+      <node ref="U3" pin="8"/>
     </net>
-    <net code="29" name="Net-(TX1-Pad1)">
-      <node ref="TX1" pin="1"/>
-      <node ref="U2" pin="3"/>
+    <net code="32" name="/RELAY2">
+      <node ref="U3" pin="9"/>
+      <node ref="R14" pin="2"/>
     </net>
-    <net code="30" name="Net-(D7-Pad2)">
-      <node ref="D7" pin="2"/>
-      <node ref="R8" pin="1"/>
-      <node ref="Q3" pin="1"/>
-    </net>
-    <net code="31" name="FUSED5V">
-      <node ref="C3" pin="1"/>
-      <node ref="R12" pin="2"/>
-      <node ref="D7" pin="1"/>
-      <node ref="U4" pin="19"/>
-      <node ref="JP5" pin="1"/>
-      <node ref="R13" pin="2"/>
-      <node ref="Q3" pin="2"/>
-      <node ref="K1" pin="A1"/>
-      <node ref="K2" pin="A1"/>
-      <node ref="U6" pin="3"/>
-      <node ref="D5" pin="1"/>
+    <net code="33" name="FUSED5V">
       <node ref="J1" pin="1"/>
-      <node ref="U3" pin="16"/>
+      <node ref="Q3" pin="2"/>
+      <node ref="C2" pin="1"/>
+      <node ref="K1" pin="A1"/>
+      <node ref="U3" pin="24"/>
       <node ref="D2" pin="1"/>
+      <node ref="R12" pin="2"/>
+      <node ref="C3" pin="1"/>
+      <node ref="U6" pin="3"/>
+      <node ref="U7" pin="3"/>
+      <node ref="C5" pin="2"/>
+      <node ref="C9" pin="1"/>
+      <node ref="U1" pin="7"/>
+      <node ref="R13" pin="2"/>
+      <node ref="R24" pin="2"/>
+      <node ref="K2" pin="A1"/>
       <node ref="J7" pin="1"/>
+      <node ref="D5" pin="1"/>
+      <node ref="U4" pin="19"/>
+      <node ref="R27" pin="2"/>
+      <node ref="R7" pin="2"/>
+      <node ref="U3" pin="21"/>
     </net>
-    <net code="32" name="+5V">
-      <node ref="J5" pin="2"/>
-      <node ref="J5" pin="1"/>
-      <node ref="F1" pin="2"/>
-    </net>
-    <net code="33" name="Net-(R18-Pad1)">
-      <node ref="U9" pin="1"/>
-      <node ref="R18" pin="1"/>
-    </net>
-    <net code="34" name="Net-(D1-Pad1)">
-      <node ref="R17" pin="1"/>
-      <node ref="D1" pin="1"/>
-    </net>
-    <net code="35" name="Net-(D1-Pad3)">
-      <node ref="R1" pin="1"/>
-      <node ref="D1" pin="3"/>
-    </net>
-    <net code="36" name="/BLUE_LED">
-      <node ref="R1" pin="2"/>
-      <node ref="U8" pin="4"/>
-    </net>
-    <net code="37" name="Net-(LCD1-Pad7)">
-      <node ref="LCD1" pin="7"/>
-      <node ref="R21" pin="1"/>
-    </net>
-    <net code="38" name="Net-(J15-Pad1)">
+    <net code="34" name="Net-(J15-Pad1)">
       <node ref="J15" pin="1"/>
     </net>
-    <net code="39" name="Net-(J15-Pad8)">
-      <node ref="J15" pin="8"/>
+    <net code="35" name="/SW2OUTPUT">
+      <node ref="C11" pin="1"/>
+      <node ref="R28" pin="1"/>
+      <node ref="U3" pin="19"/>
     </net>
-    <net code="40" name="Net-(F1-Pad1)">
-      <node ref="F1" pin="1"/>
-      <node ref="Q3" pin="3"/>
+    <net code="36" name="Net-(U3-Pad18)">
+      <node ref="U3" pin="18"/>
     </net>
-    <net code="41" name="/IO35_INPUT">
-      <node ref="U4" pin="6"/>
-      <node ref="J14" pin="2"/>
+    <net code="37" name="/GREEN_LED">
+      <node ref="R17" pin="2"/>
+      <node ref="U3" pin="15"/>
     </net>
-    <net code="42" name="/IO33">
-      <node ref="U4" pin="8"/>
-      <node ref="J14" pin="3"/>
+    <net code="38" name="Net-(J10-Pad1)">
+      <node ref="U3" pin="20"/>
+      <node ref="J10" pin="1"/>
+      <node ref="R24" pin="1"/>
     </net>
-    <net code="43" name="/VSPI_MOSI">
-      <node ref="LCD1" pin="3"/>
-      <node ref="J8" pin="4"/>
-      <node ref="LCD1" pin="SD3"/>
-      <node ref="U4" pin="21"/>
-      <node ref="J15" pin="3"/>
+    <net code="39" name="/IO39_INPUT">
+      <node ref="R19" pin="1"/>
+      <node ref="U4" pin="4"/>
+      <node ref="U3" pin="1"/>
     </net>
-    <net code="44" name="/VSPI_CLK">
-      <node ref="U4" pin="28"/>
-      <node ref="LCD1" pin="SD1"/>
-      <node ref="J8" pin="3"/>
-      <node ref="J15" pin="5"/>
-      <node ref="LCD1" pin="5"/>
+    <net code="40" name="/RELAY3_SSR">
+      <node ref="U3" pin="10"/>
+      <node ref="R18" pin="2"/>
     </net>
-    <net code="45" name="/VSPI_MISO">
-      <node ref="J8" pin="1"/>
-      <node ref="LCD1" pin="SD2"/>
-      <node ref="LCD1" pin="2"/>
-      <node ref="U4" pin="27"/>
-      <node ref="J15" pin="7"/>
+    <net code="41" name="/DISPLAY_LED">
+      <node ref="U3" pin="16"/>
+      <node ref="R21" pin="2"/>
     </net>
-    <net code="46" name="Net-(R27-Pad1)">
-      <node ref="SW2" pin="1"/>
-      <node ref="R28" pin="2"/>
-      <node ref="R27" pin="1"/>
+    <net code="42" name="Net-(R18-Pad1)">
+      <node ref="R18" pin="1"/>
+      <node ref="U9" pin="1"/>
     </net>
-    <net code="47" name="Net-(R26-Pad2)">
-      <node ref="SW1" pin="1"/>
-      <node ref="R7" pin="1"/>
-      <node ref="R26" pin="2"/>
-    </net>
-    <net code="48" name="Net-(J12-Pad3)">
-      <node ref="J12" pin="3"/>
-      <node ref="U12" pin="3"/>
-    </net>
-    <net code="49" name="Net-(J12-Pad4)">
+    <net code="43" name="Net-(J12-Pad4)">
       <node ref="J12" pin="4"/>
       <node ref="U12" pin="4"/>
     </net>
-    <net code="50" name="Net-(JP4-Pad2)">
+    <net code="44" name="Net-(J12-Pad1)">
+      <node ref="U9" pin="3"/>
+      <node ref="J12" pin="1"/>
+    </net>
+    <net code="45" name="Net-(J12-Pad2)">
+      <node ref="U9" pin="4"/>
+      <node ref="J12" pin="2"/>
+    </net>
+    <net code="46" name="Net-(R3-Pad1)">
+      <node ref="R3" pin="1"/>
+      <node ref="U2" pin="1"/>
+    </net>
+    <net code="47" name="Net-(D8-Pad1)">
+      <node ref="D8" pin="1"/>
+      <node ref="J7" pin="4"/>
+      <node ref="JP1" pin="1"/>
+      <node ref="U7" pin="6"/>
+    </net>
+    <net code="48" name="Net-(J15-Pad8)">
+      <node ref="J15" pin="8"/>
+    </net>
+    <net code="49" name="Net-(J14-Pad2)">
+      <node ref="J14" pin="2"/>
+    </net>
+    <net code="50" name="Net-(J14-Pad3)">
+      <node ref="J14" pin="3"/>
+    </net>
+    <net code="51" name="Net-(J1-Pad2)">
+      <node ref="J1" pin="2"/>
+      <node ref="U5" pin="6"/>
+      <node ref="R9" pin="1"/>
+    </net>
+    <net code="52" name="Net-(JP4-Pad2)">
       <node ref="JP4" pin="2"/>
       <node ref="R9" pin="2"/>
     </net>
-    <net code="51" name="Net-(J1-Pad2)">
-      <node ref="U5" pin="6"/>
-      <node ref="R9" pin="1"/>
-      <node ref="J1" pin="2"/>
+    <net code="53" name="/RELAY4_SSR">
+      <node ref="R25" pin="2"/>
+      <node ref="U3" pin="11"/>
     </net>
-    <net code="52" name="Net-(R25-Pad1)">
+    <net code="54" name="Net-(R25-Pad1)">
       <node ref="R25" pin="1"/>
       <node ref="U12" pin="1"/>
     </net>
-    <net code="53" name="/ESP3V3">
-      <node ref="U4" pin="1"/>
+    <net code="55" name="+5V">
+      <node ref="J5" pin="1"/>
+      <node ref="F1" pin="2"/>
     </net>
-    <net code="54" name="Net-(D8-Pad1)">
-      <node ref="JP1" pin="1"/>
-      <node ref="J7" pin="4"/>
-      <node ref="U1" pin="6"/>
-      <node ref="D8" pin="1"/>
+    <net code="56" name="Net-(Q3-Pad1)">
+      <node ref="Q3" pin="1"/>
+      <node ref="R8" pin="1"/>
     </net>
-    <net code="55" name="Net-(D8-Pad2)">
-      <node ref="D8" pin="2"/>
-      <node ref="U1" pin="7"/>
-      <node ref="R6" pin="2"/>
-      <node ref="J7" pin="3"/>
+    <net code="57" name="Net-(F1-Pad1)">
+      <node ref="F1" pin="1"/>
+      <node ref="Q3" pin="3"/>
     </net>
-    <net code="56" name="/CANBUS_S">
-      <node ref="U8" pin="10"/>
-      <node ref="U1" pin="8"/>
+    <net code="58" name="/IO33">
+      <node ref="R31" pin="1"/>
+      <node ref="U8" pin="1"/>
+      <node ref="U4" pin="8"/>
     </net>
-    <net code="57" name="Net-(C2-Pad1)">
+    <net code="59" name="/VSPI_MOSI">
+      <node ref="U8" pin="2"/>
+      <node ref="J15" pin="3"/>
+      <node ref="J8" pin="4"/>
+      <node ref="LCD1" pin="SD3"/>
+      <node ref="U4" pin="21"/>
+      <node ref="LCD1" pin="3"/>
+    </net>
+    <net code="60" name="/IO35_INPUT">
+      <node ref="U8" pin="3"/>
+      <node ref="U4" pin="6"/>
+      <node ref="R32" pin="2"/>
+    </net>
+    <net code="61" name="/VSPI_MISO">
+      <node ref="LCD1" pin="SD2"/>
+      <node ref="LCD1" pin="2"/>
+      <node ref="U8" pin="4"/>
+      <node ref="U4" pin="27"/>
+      <node ref="J15" pin="7"/>
+      <node ref="J8" pin="1"/>
+    </net>
+    <net code="62" name="/VSPI_CLK">
+      <node ref="LCD1" pin="5"/>
+      <node ref="U8" pin="5"/>
+      <node ref="J8" pin="3"/>
+      <node ref="LCD1" pin="SD1"/>
+      <node ref="U4" pin="28"/>
+      <node ref="J15" pin="5"/>
+    </net>
+    <net code="63" name="Net-(C12-Pad2)">
+      <node ref="R30" pin="1"/>
+      <node ref="U8" pin="9"/>
+      <node ref="C12" pin="2"/>
+    </net>
+    <net code="64" name="Net-(D1-Pad2)">
+      <node ref="D1" pin="2"/>
+      <node ref="R4" pin="1"/>
+      <node ref="D6" pin="1"/>
+    </net>
+    <net code="65" name="GND">
+      <node ref="J15" pin="6"/>
+      <node ref="U3" pin="12"/>
+      <node ref="C10" pin="2"/>
+      <node ref="J7" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="SW1" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="D8" pin="3"/>
+      <node ref="U8" pin="7"/>
+      <node ref="J5" pin="2"/>
+      <node ref="U4" pin="20"/>
+      <node ref="U12" pin="2"/>
+      <node ref="J15" pin="G2"/>
+      <node ref="J10" pin="2"/>
+      <node ref="R15" pin="1"/>
+      <node ref="R8" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="J15" pin="G1"/>
+      <node ref="U9" pin="2"/>
+      <node ref="J15" pin="G3"/>
+      <node ref="J15" pin="G4"/>
+      <node ref="D6" pin="4"/>
+      <node ref="J14" pin="7"/>
+      <node ref="U7" pin="2"/>
+      <node ref="U4" pin="14"/>
+      <node ref="J8" pin="6"/>
+      <node ref="U7" pin="8"/>
+      <node ref="U1" pin="2"/>
+      <node ref="LCD1" pin="13"/>
+      <node ref="LCD1" pin="12"/>
+      <node ref="U6" pin="1"/>
+      <node ref="Q4" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="RX1" pin="1"/>
+      <node ref="J1" pin="4"/>
+      <node ref="C9" pin="2"/>
+      <node ref="U5" pin="5"/>
+      <node ref="D1" pin="4"/>
+      <node ref="D1" pin="5"/>
+      <node ref="C8" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="D1" pin="6"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="SW2" pin="2"/>
+      <node ref="U4" pin="26"/>
+      <node ref="R11" pin="1"/>
+      <node ref="C13" pin="1"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="C14" pin="1"/>
+      <node ref="C2" pin="2"/>
+    </net>
+    <net code="66" name="Net-(D1-Pad3)">
+      <node ref="D6" pin="2"/>
+      <node ref="D1" pin="3"/>
+      <node ref="R1" pin="1"/>
+    </net>
+    <net code="67" name="+3V3">
+      <node ref="U5" pin="8"/>
+      <node ref="C6" pin="1"/>
+      <node ref="R16" pin="2"/>
+      <node ref="R5" pin="2"/>
+      <node ref="LCD1" pin="14"/>
+      <node ref="J15" pin="4"/>
+      <node ref="U6" pin="2"/>
+      <node ref="C4" pin="1"/>
+      <node ref="C10" pin="1"/>
+      <node ref="U3" pin="2"/>
+      <node ref="C1" pin="1"/>
+      <node ref="R19" pin="2"/>
+      <node ref="J14" pin="1"/>
+      <node ref="J8" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="R20" pin="2"/>
       <node ref="U1" pin="3"/>
-      <node ref="C2" pin="1"/>
-      <node ref="JP5" pin="2"/>
+      <node ref="R2" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="R29" pin="2"/>
+      <node ref="R22" pin="2"/>
+      <node ref="R32" pin="1"/>
+      <node ref="U8" pin="6"/>
+      <node ref="R31" pin="2"/>
+      <node ref="U1" pin="6"/>
     </net>
-    <net code="58" name="Net-(J1-Pad3)">
-      <node ref="JP4" pin="1"/>
-      <node ref="U5" pin="7"/>
-      <node ref="J1" pin="3"/>
+    <net code="68" name="Net-(J9-Pad2)">
+      <node ref="R23" pin="2"/>
+      <node ref="J9" pin="2"/>
     </net>
-    <net code="59" name="/RELAY1">
-      <node ref="R10" pin="2"/>
-      <node ref="U3" pin="9"/>
+    <net code="69" name="Net-(C12-Pad1)">
+      <node ref="R23" pin="1"/>
+      <node ref="U8" pin="10"/>
+      <node ref="C12" pin="1"/>
     </net>
-    <net code="60" name="Net-(D3-Pad2)">
-      <node ref="R12" pin="1"/>
-      <node ref="D3" pin="2"/>
+    <net code="70" name="Net-(J9-Pad1)">
+      <node ref="R30" pin="2"/>
+      <node ref="J9" pin="1"/>
     </net>
-    <net code="61" name="Net-(D2-Pad2)">
-      <node ref="Q1" pin="3"/>
-      <node ref="D2" pin="2"/>
-      <node ref="K1" pin="A2"/>
-      <node ref="D3" pin="1"/>
+    <net code="71" name="Net-(J9-Pad3)">
+      <node ref="J9" pin="3"/>
     </net>
-    <net code="62" name="Net-(U4-Pad17)">
+    <net code="72" name="Net-(J9-Pad4)">
+      <node ref="J9" pin="4"/>
+      <node ref="U8" pin="8"/>
+    </net>
+    <net code="73" name="Net-(Q4-Pad1)">
+      <node ref="RX1" pin="2"/>
+      <node ref="Q4" pin="1"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="74" name="/BLUE_LED">
+      <node ref="R1" pin="2"/>
+      <node ref="U3" pin="13"/>
+    </net>
+    <net code="75" name="/IO34_INPUT">
+      <node ref="U4" pin="5"/>
+      <node ref="J14" pin="4"/>
+    </net>
+    <net code="76" name="/RESET">
+      <node ref="U3" pin="3"/>
+      <node ref="U4" pin="2"/>
+      <node ref="LCD1" pin="11"/>
+      <node ref="R29" pin="1"/>
+    </net>
+    <net code="77" name="Net-(U4-Pad16)">
+      <node ref="U4" pin="16"/>
+    </net>
+    <net code="78" name="Net-(U4-Pad17)">
       <node ref="U4" pin="17"/>
     </net>
-    <net code="63" name="Net-(U4-Pad37)">
+    <net code="79" name="Net-(U4-Pad18)">
+      <node ref="U4" pin="18"/>
+    </net>
+    <net code="80" name="Net-(U4-Pad23)">
+      <node ref="U4" pin="23"/>
+    </net>
+    <net code="81" name="Net-(U4-Pad24)">
+      <node ref="U4" pin="24"/>
+    </net>
+    <net code="82" name="/IO21">
+      <node ref="U5" pin="1"/>
+      <node ref="U4" pin="25"/>
+    </net>
+    <net code="83" name="/CANBUS_RX">
+      <node ref="U1" pin="4"/>
+      <node ref="U4" pin="30"/>
+    </net>
+    <net code="84" name="/CANBUS_TX">
+      <node ref="U1" pin="5"/>
+      <node ref="U4" pin="31"/>
+    </net>
+    <net code="85" name="Net-(U4-Pad36)">
+      <node ref="U4" pin="36"/>
+    </net>
+    <net code="86" name="Net-(U4-Pad37)">
       <node ref="U4" pin="37"/>
     </net>
-    <net code="64" name="Net-(U4-Pad38)">
+    <net code="87" name="Net-(U4-Pad38)">
       <node ref="U4" pin="38"/>
     </net>
-    <net code="65" name="/IO39_INPUT">
-      <node ref="U3" pin="13"/>
-      <node ref="R19" pin="1"/>
-      <node ref="U4" pin="4"/>
+    <net code="88" name="Net-(U7-Pad5)">
+      <node ref="U7" pin="5"/>
     </net>
-    <net code="66" name="/IO34_INPUT">
-      <node ref="U4" pin="5"/>
+    <net code="89" name="Net-(U1-Pad8)">
+      <node ref="U1" pin="8"/>
+      <node ref="U7" pin="1"/>
+    </net>
+    <net code="90" name="Net-(U1-Pad1)">
+      <node ref="U1" pin="1"/>
+      <node ref="U7" pin="4"/>
+    </net>
+    <net code="91" name="/SW1EXT">
+      <node ref="J14" pin="5"/>
+      <node ref="SW1" pin="1"/>
+      <node ref="R26" pin="2"/>
+      <node ref="R7" pin="1"/>
+    </net>
+    <net code="92" name="/SW2EXT">
+      <node ref="J14" pin="6"/>
+      <node ref="R27" pin="1"/>
+      <node ref="R28" pin="2"/>
+      <node ref="SW2" pin="1"/>
+    </net>
+    <net code="93" name="Net-(D8-Pad2)">
+      <node ref="J7" pin="3"/>
+      <node ref="R6" pin="2"/>
+      <node ref="U7" pin="7"/>
+      <node ref="D8" pin="2"/>
+    </net>
+    <net code="94" name="/IO2">
       <node ref="R20" pin="1"/>
-      <node ref="U8" pin="13"/>
+      <node ref="U4" pin="34"/>
+      <node ref="Q4" pin="3"/>
     </net>
-    <net code="67" name="/IO32">
-      <node ref="U10" pin="11"/>
+    <net code="95" name="/AVRISP_RESET">
+      <node ref="J8" pin="5"/>
+      <node ref="U4" pin="33"/>
+    </net>
+    <net code="96" name="/IO32">
       <node ref="R3" pin="2"/>
-      <node ref="J9" pin="3"/>
       <node ref="U4" pin="7"/>
     </net>
-    <net code="68" name="/IO25">
+    <net code="97" name="/IO26">
+      <node ref="U3" pin="22"/>
+      <node ref="U4" pin="10"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="98" name="/IO25">
       <node ref="U5" pin="3"/>
       <node ref="U5" pin="2"/>
       <node ref="U4" pin="9"/>
     </net>
-    <net code="69" name="Net-(U4-Pad36)">
-      <node ref="U4" pin="36"/>
-    </net>
-    <net code="70" name="Net-(U4-Pad16)">
-      <node ref="U4" pin="16"/>
-    </net>
-    <net code="71" name="/IO26">
-      <node ref="R5" pin="1"/>
-      <node ref="J11" pin="1"/>
-      <node ref="U10" pin="9"/>
-      <node ref="J6" pin="3"/>
-      <node ref="JP2" pin="1"/>
-      <node ref="U8" pin="14"/>
-      <node ref="JP2" pin="2"/>
-      <node ref="U3" pin="14"/>
-      <node ref="U4" pin="10"/>
-    </net>
-    <net code="72" name="/IO27">
-      <node ref="U4" pin="11"/>
-      <node ref="J11" pin="2"/>
-      <node ref="U8" pin="15"/>
-      <node ref="J6" pin="4"/>
-      <node ref="JP3" pin="2"/>
-      <node ref="JP3" pin="1"/>
-      <node ref="U3" pin="15"/>
-      <node ref="U10" pin="7"/>
-      <node ref="R16" pin="1"/>
-    </net>
-    <net code="73" name="Net-(U4-Pad18)">
-      <node ref="U4" pin="18"/>
-    </net>
-    <net code="74" name="/IO21">
-      <node ref="U4" pin="25"/>
-      <node ref="U5" pin="1"/>
-    </net>
-    <net code="75" name="/IO5">
-      <node ref="U4" pin="29"/>
-      <node ref="LCD1" pin="SD4"/>
-      <node ref="J15" pin="2"/>
-    </net>
-    <net code="76" name="/IO36_INPUT">
-      <node ref="U4" pin="3"/>
-      <node ref="LCD1" pin="1"/>
-    </net>
-    <net code="77" name="/CANBUS_RX">
-      <node ref="U4" pin="30"/>
-      <node ref="U1" pin="4"/>
-    </net>
-    <net code="78" name="/CANBUS_TX">
-      <node ref="U1" pin="1"/>
-      <node ref="U4" pin="31"/>
-    </net>
-    <net code="79" name="/IO2">
-      <node ref="RX1" pin="1"/>
-      <node ref="U4" pin="34"/>
-      <node ref="R2" pin="2"/>
-    </net>
-    <net code="80" name="/DISPLAY_DC">
-      <node ref="LCD1" pin="10"/>
+    <net code="99" name="/DISPLAY_DC">
       <node ref="U4" pin="35"/>
+      <node ref="LCD1" pin="10"/>
     </net>
-    <net code="81" name="Net-(D1-Pad2)">
-      <node ref="R4" pin="1"/>
-      <node ref="D1" pin="2"/>
+    <net code="100" name="/IO27">
+      <node ref="R16" pin="1"/>
+      <node ref="U4" pin="11"/>
+      <node ref="U3" pin="23"/>
     </net>
-    <net code="82" name="/IO22">
-      <node ref="U5" pin="4"/>
-      <node ref="U4" pin="22"/>
+    <net code="101" name="Net-(J12-Pad3)">
+      <node ref="J12" pin="3"/>
+      <node ref="U12" pin="3"/>
     </net>
-    <net code="83" name="Net-(JP1-Pad2)">
-      <node ref="R6" pin="1"/>
-      <node ref="JP1" pin="2"/>
-    </net>
-    <net code="84" name="/AVRISP_RESET">
-      <node ref="U4" pin="33"/>
-      <node ref="J8" pin="5"/>
-    </net>
-    <net code="85" name="/RED_LED">
-      <node ref="U8" pin="5"/>
-      <node ref="R4" pin="2"/>
-    </net>
-    <net code="86" name="Net-(TX1-Pad2)">
-      <node ref="U2" pin="4"/>
-      <node ref="TX1" pin="2"/>
-    </net>
-    <net code="87" name="Net-(R3-Pad1)">
-      <node ref="R3" pin="1"/>
-      <node ref="U2" pin="1"/>
-    </net>
-    <net code="88" name="/SW2OUTPUT">
-      <node ref="R28" pin="1"/>
-      <node ref="U8" pin="11"/>
-      <node ref="C11" pin="1"/>
-    </net>
-    <net code="89" name="/GREEN_LED">
-      <node ref="R17" pin="2"/>
-      <node ref="U8" pin="6"/>
-    </net>
-    <net code="90" name="/DISPLAY_LED">
-      <node ref="R21" pin="2"/>
-      <node ref="U8" pin="7"/>
-    </net>
-    <net code="91" name="/SW1OUTPUT">
-      <node ref="C7" pin="1"/>
-      <node ref="U8" pin="9"/>
+    <net code="102" name="/SW1OUTPUT">
+      <node ref="U3" pin="17"/>
       <node ref="R26" pin="1"/>
+      <node ref="C7" pin="1"/>
     </net>
-    <net code="92" name="/EXT_IO_B">
-      <node ref="U3" pin="5"/>
-      <node ref="J4" pin="2"/>
-    </net>
-    <net code="93" name="/EXT_IO_C">
-      <node ref="J4" pin="3"/>
-      <node ref="U3" pin="6"/>
-    </net>
-    <net code="94" name="/EXT_IO_D">
-      <node ref="J4" pin="4"/>
-      <node ref="U3" pin="7"/>
-    </net>
-    <net code="95" name="GND">
-      <node ref="U8" pin="2"/>
-      <node ref="U8" pin="3"/>
-      <node ref="J6" pin="6"/>
-      <node ref="U8" pin="1"/>
-      <node ref="U8" pin="8"/>
-      <node ref="R11" pin="1"/>
-      <node ref="U1" pin="2"/>
-      <node ref="U12" pin="2"/>
-      <node ref="J7" pin="2"/>
-      <node ref="U10" pin="14"/>
-      <node ref="D8" pin="3"/>
-      <node ref="J11" pin="3"/>
-      <node ref="D6" pin="1"/>
-      <node ref="J5" pin="4"/>
-      <node ref="J5" pin="3"/>
-      <node ref="C5" pin="1"/>
-      <node ref="Q1" pin="2"/>
-      <node ref="C9" pin="1"/>
-      <node ref="LCD1" pin="12"/>
-      <node ref="LCD1" pin="13"/>
-      <node ref="R15" pin="1"/>
-      <node ref="C2" pin="2"/>
-      <node ref="U5" pin="5"/>
-      <node ref="J1" pin="4"/>
-      <node ref="SW2" pin="2"/>
-      <node ref="D1" pin="6"/>
-      <node ref="U4" pin="14"/>
-      <node ref="C3" pin="2"/>
-      <node ref="J15" pin="6"/>
-      <node ref="J15" pin="G3"/>
-      <node ref="J15" pin="G2"/>
-      <node ref="J15" pin="G1"/>
-      <node ref="U4" pin="20"/>
-      <node ref="J14" pin="4"/>
-      <node ref="C11" pin="2"/>
-      <node ref="U4" pin="26"/>
-      <node ref="D1" pin="4"/>
-      <node ref="D1" pin="5"/>
-      <node ref="U6" pin="1"/>
-      <node ref="U2" pin="2"/>
-      <node ref="J10" pin="2"/>
-      <node ref="C6" pin="2"/>
-      <node ref="SW1" pin="2"/>
-      <node ref="C1" pin="2"/>
-      <node ref="C8" pin="2"/>
-      <node ref="R2" pin="1"/>
-      <node ref="R8" pin="2"/>
-      <node ref="J15" pin="G4"/>
-      <node ref="J8" pin="6"/>
-      <node ref="C10" pin="2"/>
-      <node ref="U3" pin="8"/>
-      <node ref="U3" pin="2"/>
-      <node ref="U9" pin="2"/>
-      <node ref="C7" pin="2"/>
-      <node ref="C4" pin="2"/>
-      <node ref="Q2" pin="2"/>
-    </net>
-    <net code="96" name="/IO4">
-      <node ref="U4" pin="32"/>
-      <node ref="LCD1" pin="4"/>
-    </net>
-    <net code="97" name="Net-(D4-Pad2)">
-      <node ref="R13" pin="1"/>
-      <node ref="D4" pin="2"/>
-    </net>
-    <net code="98" name="Net-(D4-Pad1)">
-      <node ref="Q2" pin="3"/>
-      <node ref="K2" pin="A2"/>
-      <node ref="D4" pin="1"/>
-      <node ref="D5" pin="2"/>
-    </net>
-    <net code="99" name="/HSPI_MISO">
-      <node ref="LCD1" pin="6"/>
-      <node ref="U4" pin="13"/>
-    </net>
-    <net code="100" name="/HSPI_CLK">
-      <node ref="U4" pin="12"/>
-      <node ref="LCD1" pin="8"/>
-    </net>
-    <net code="101" name="/HSPI_MOSI">
-      <node ref="U4" pin="15"/>
-      <node ref="LCD1" pin="9"/>
+    <net code="103" name="Net-(J3-Pad3)">
+      <node ref="K2" pin="NO"/>
+      <node ref="J3" pin="3"/>
     </net>
   </nets>
 </export>

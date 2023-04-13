@@ -16,10 +16,6 @@ on:
   # Allows you to run this work flow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  repo: stuartpittaway/diyBMSv4
-  main_branch: master
-
 jobs:
   generate-artifacts:
     runs-on: ubuntu-latest
@@ -33,36 +29,43 @@ jobs:
         git lfs install
 
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         lfs: true
 
-    - name: Extract branch name
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v6
+
+    - name: Running on branch
+      run: |
+        echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
 
     - name: Update the PCBs with on default branch with git hash
-      if: steps.extract_branch.outputs.branch == env.main_branch
+      if: steps.branch-name.outputs.is_default == 'true'
       run: |
         export COMMIT=$(git rev-parse --short HEAD)
-        echo "COMMIT = ${COMMIT}"    
-        echo "ref: ${{ github.ref }}"
-        echo "default: ${{ env.default }}"
+        echo "COMMIT = ${COMMIT}"
         sed -i "s!<<hash>>!${COMMIT}!" ControllerCircuit/ControllerCircuit.kicad_pcb
 
     - name: Update the PCBs with the git hash and BETA.
-      if: steps.extract_branch.outputs.branch != env.main_branch
+      if: steps.branch-name.outputs.is_default != 'true'
       run: |
         export COMMIT=$(git rev-parse --short HEAD)
         echo "COMMIT = ${COMMIT}"
         sed -i "s!<<hash>>!BETA-${COMMIT}!" ControllerCircuit/ControllerCircuit.kicad_pcb
 
-    - name: Prepare artifacts
+    - name: Remove existing export folder
       run: |
-        cd ControllerCircuit
-        rm -rf export/
-        kibot -c config-2layer.kibot.yaml -e ControllerCircuit.sch -b ControllerCircuit.kicad_pcb -d export
+        rm -rf ./ControllerCircuit/export/
+
+    - name: Run KiBot
+      uses: INTI-CMNB/KiBot@v2
+      with:
+        config: ./ControllerCircuit/config-2layer.kibot.yaml
+        dir: ./ControllerCircuit/export
+        schema: './ControllerCircuit/ControllerCircuit.sch'
+        board: './ControllerCircuit/ControllerCircuit.kicad_pcb'
 
     # Splitting this out to ensure a failed kibot run will mark a check as failed.
     - name: Prepare Gerbers artifact
@@ -71,14 +74,17 @@ jobs:
         zip -r -j ../controllercircuit_esp32_gerbers.zip *        
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v2
-      if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.repository != env.repo)
+      uses: actions/upload-artifact@v3
+      if: steps.branch-name.outputs.is_default != 'true'
       with:
         name: controllercircuit_esp32_gerbers
-        path: ControllerCircuit/export/controllercircuit_esp32_gerbers.zip
+        path: |
+          ControllerCircuit/export/controllercircuit_esp32_gerbers.zip
+          ControllerCircuit/export/ControllerCircuit_bom_jlc.csv
+          ControllerCircuit/export/ControllerCircuit_cpl_jlc.csv
 
     - name: Commit files
-      if: github.event_name == 'push' && github.repository == env.repo
+      if: steps.branch-name.outputs.is_default == 'true'
       run: |
         git add -f ControllerCircuit/export
         git config --local user.email "action@github.com"
