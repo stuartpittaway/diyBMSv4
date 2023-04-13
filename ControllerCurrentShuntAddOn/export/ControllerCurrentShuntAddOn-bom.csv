@@ -1,0 +1,8 @@
+Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber
+1,Unpolarized capacitor,C,C1 C3,100nF 100V,C_0805_2012Metric,2, ,https://datasheet.lcsc.com/szlcsc/2008131833_KEMET-C0805C104K1RECAUTO_C696367.pdf,C696367 C49678,C0805C104K1RECAUTO CC0805KRX7R9BB104
+2,Unpolarized capacitor,C,C2,1uF,C_0805_2012Metric,1, ,~,C28323,CL21B105KBFNNNE
+3,"Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x07_Female,J1,header,PinHeader_1x07_P2.54mm_Vertical,1, ,~,,
+4,"Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x04_Female,J2,header,PinHeader_1x04_P2.54mm_Vertical,1, ,~,,
+5,Resistor,R,R1 R2,10R,R_0805_2012Metric,2, ,~,C17415,0805W8F100JT5E
+6,Resistor,R,R3,10K,R_0805_2012Metric,1, ,~,C17414,0805W8F1002T5E
+7,"85-V, 20-Bit, Ultra-Precise Power/Energy/Charge Monitor With",INA229-Q1,U1,INA229,VSSOP-10_3x3mm_P0.5mm,1, ,https://www.ti.com/lit/ds/symlink/ina229-q1.pdf,C2846803,INA229AIDGSR

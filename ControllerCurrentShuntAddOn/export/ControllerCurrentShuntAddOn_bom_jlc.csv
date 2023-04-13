@@ -1,0 +1,8 @@
+"Comment","Designator","Footprint","LCSC Part #"
+"100nF 100V","C1,C3","C_0805_2012Metric","C696367 C49678"
+"1uF","C2","C_0805_2012Metric","C28323"
+"header","J1","PinHeader_1x07_P2.54mm_Vertical",""
+"header","J2","PinHeader_1x04_P2.54mm_Vertical",""
+"10R","R1,R2","R_0805_2012Metric","C17415"
+"10K","R3","R_0805_2012Metric","C17414"
+"INA229","U1","VSSOP-10_3x3mm_P0.5mm","C2846803"
