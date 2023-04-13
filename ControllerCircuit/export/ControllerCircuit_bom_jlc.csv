@@ -1,7 +1,7 @@
 "Comment","Designator","Footprint","LCSC Part #"
 "100nF","C1,C2,C6,C8,C9,C14","C_0805_2012Metric","C49678"
 "1uF","C7,C10,C11,C13","C_0805_2012Metric","C28323"
-"22uF 6.3V","C3,C4","CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder","C190381"
+"22uF 6.3V","C3,C4","CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder","C110786"
 "22uF","C5","C_1206_3216Metric","C5672"
 "0.1uF-100V","C12","C_0805_2012Metric","C696367"
 "LL4148","D2,D5","D_MiniMELF","C9808"
