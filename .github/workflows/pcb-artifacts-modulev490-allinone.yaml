@@ -81,7 +81,7 @@ jobs:
         rm -rf ./ModuleV490-AllInOne/export/gerbers
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: steps.branch-name.outputs.is_default != 'true'
       with:
         name: module_16s_gerbers
@@ -90,9 +90,9 @@ jobs:
     - name: Commit files
     #  if: steps.branch-name.outputs.is_default == 'true'
       run: |
-        git add -f Module_16S/export
+        git add -f ModuleV490-AllInOne/export
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git status
-        git commit -m "CI: pcb-artifacts-Module_16S"
+        git commit -m "CI: pcb-artifacts-ModuleV490-AllInOne"
         git push -u origin
