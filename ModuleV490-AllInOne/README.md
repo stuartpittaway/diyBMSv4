@@ -10,15 +10,15 @@ It uses an [STM32F030K6T6](https://www.st.com/en/microcontrollers-microprocessor
 ### Software
 The software for this board is available pre-compiled.  See this [link for details](https://github.com/stuartpittaway/diyBMSv4ESP32/tree/all-in-one/STM32All-In-One#readme)
 
-Details are in that README on programming the STM32 chip on this PCB.
+Details are in the README on programming the STM32 chip for this PCB.
 
 ### KiCAD 7
-This design uses KiCAD version 7.0.5.  Use the same or newer version for editing and viewing the files.
+This design uses KiCAD version 7.0.5.  Use the same or newer version for editing and viewing the files.  You don't need to install KiCAD if you just wish to build one.
 
 ### JLCPCB
-The files create PCB and design files suitable for "almost" full construction at JLCPCB.  
+This design will create a PCB and design files suitable for "almost" full construction at JLCPCB.  Some manual soldering will still be required for the connectors and cabling.
 
-Look inside the "export" folder for the relevant files.  You will need these files for the construction:
+Look inside the "export" folder for the relevant production files.  You will need these files for the construction:
 
 * module_16s_gerbers.zip
 * Module_16S_bom_jlc.csv
@@ -34,6 +34,8 @@ Before construction of the PCB you must determine what battery cells you wish to
 
 The PCB design has options for two voltage ranges, determined by parts U2 and U6.  *ONLY ONE OF THESE DEVICES MUST BE FITTED*
 
+The design uses a MAX14921 chip, this has a maximum of 16 cells and **65V** total battery voltage - do not exceed.
+
 ## LIFEPO4 cells upto 4.00V maximum
 
 Use part U2, a Microchip voltage reference "MCP1501-40E/SN".  This is a 4.096V ±0.1% reference chip.
@@ -43,6 +45,8 @@ This part is available on JLCPCB as part number C1575589.
 The pick and place file (CPL file) contains the part placement for this chip by default.  No further changes are required, except to double-check the order screens from JLCPCB.
 
 Do not install part U6.
+
+*This option has been tested by the author as working*
 
 ## Cell voltages upto 4.50V maximum
 
@@ -55,6 +59,8 @@ This part is NOT available from JLCPCB.  This part must be obtained from [other 
 Edit the pick and place (CPL file) before upload to JLCPCB to remove the line marked "U2".
 
 Do not install part U2.
+
+*This option has NOT been tested by the author, please feedback if you decide to experiment*
 
 ## BATTERY VOLTAGES BELOW 24V
 
@@ -83,18 +89,34 @@ Once the board is constructed, a wire link between J9 and pin 2  (indicated by s
 
 In this configuration test point "TP1" will be zero volt/not connected.
 
+*This option has NOT been tested by the author, please feedback if you decide to experiment*
 
 ## PASSIVE BALANCE BOARD
 
-The passive balance PCB is part of a seperate project folder.
+The passive balance PCB is part of a seperate project folder named "ModuleV490-PassiveBal".
 
 If you have no requirement for the passive balance board (its optional) then you can also omit the two headers marked J14 and J15 (both 22 pin).
 
 ## EXTERNAL TEMPERATURE SENSOR BOARD
 
-The external temperature sensor PCB is part of a seperate project folder.
+The external temperature sensor PCB is part of a seperate project folder named "TemperaturePCB".
+
+If you already have previous v4.50 DIYBMS monitoring boards, the same temperature sensor can be used with this design.
 
 # CONNECTING THE ALL-IN-ONE MONITORING BOARD
 
-Voltage monitoring connections are made using plugable terminal blocks, which are in male/female halves.
+Cell voltage connections are made using plugable terminal blocks.  The large 17 pin connector is connected to the most negative cell terminal, and then every positive connection to the other cells in the battery.
+
+Ensure that you have the correct sequence of cell voltages before connecting to the BMS.  Test the pins on the plug with a multimeter to ensure the voltage continualy increases as you move up the pins (when compared to negative pin).
+
+If you are using less than 16 cells, use wire connections between the screw terminals to link the highest cell to the remaining terminals.  For example, a 14S setup, would need a wire link between terminals 14 to 15 and 15 to 16.
+
+The two pin plug is used to power the BMS.  This needs to be connected to the negative and positive of the battery.  Note the correct orientation of the two pins, the positive is near the edge of the board.  The silkscreen on the bottom of the PCB has the details.
+
+Important:
+* Do not reverse polarity.
+* Connect the 17 pin connector FIRST before connecting the power connector.
+* Ensure the PRG/RUN jumper is in the RUN position for normal operation.
+* Ensure the PWR jumper is connected (except 24V setups see above).
+* If the LED flashes a sequence on start up, check the software README to determine the cause
 
