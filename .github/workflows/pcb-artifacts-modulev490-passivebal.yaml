@@ -81,14 +81,15 @@ jobs:
         rm -rf ./ModuleV490-PassiveBal/export/gerbers
   
     - name: upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: steps.branch-name.outputs.is_default != 'true'
       with:
         name: module_16s_passive_gerbers
-        path: Module_16S_PassiveBalanceAddOn/export/module_16s_passive_gerbers.zip
+        path: |
+          Module_16S_PassiveBalanceAddOn/export/module_16s_passive_gerbers.zip
 
     - name: Commit files
-      if: steps.branch-name.outputs.is_default == 'true'
+    #  if: steps.branch-name.outputs.is_default == 'true'
       run: |
         git add -f Module_16S_PassiveBalanceAddOn/export
         git config --local user.email "action@github.com"
