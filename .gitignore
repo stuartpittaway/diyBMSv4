@@ -8,18 +8,14 @@ dkms.conf
 .kicad_pcb-bak
 *.kicad_pcb-bak
 *.bak
-ESPControllerCircuit/fp-info-cache
+fp-info-cache
 
 **/.vscode
 *.sch-bak
 *.bck
 ControllerCircuit/ControllerCircuit-cache.lib
-ControllerCircuit/fp-info-cache
 ModuleV400/v4-cache.lib
 ModuleV400/v4-rescue.lib
 ModuleV421/ModuleV421-cache.lib
 ModuleV421/ModuleV421-rescue.lib
-ModuleV440/fp-info-cache
 ControllerCircuit/_autosave-ControllerCircuit.kicad_pcb
-ControllerCircuit/fp-info-cache
-ControllerCircuit/sym-lib-table
