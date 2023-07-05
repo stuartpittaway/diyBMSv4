@@ -81,11 +81,14 @@ jobs:
           rm -rf ./TemperaturePCB/export/gerbers
 
       - name: upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: steps.branch-name.outputs.is_default != 'true'
         with:
           name: TemperaturePCB_gerbers
-          path: TemperaturePCB/export/TemperaturePCB_gerbers.zip
+          path: |
+            TemperaturePCB/export/TemperaturePCB_gerbers.zip
+            TemperaturePCB/export/TemperaturePCB_bom_jlc.csv
+            TemperaturePCB/export/TemperaturePCB_cpl_jlc.csv
 
       - name: Commit files
       #  if: steps.branch-name.outputs.is_default == 'true'
