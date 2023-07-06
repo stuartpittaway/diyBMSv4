@@ -78,6 +78,7 @@ In this configuration, you do not require, and *MUST* not fit:
 * C44
 * C43
 * C45
+* JP1/PWR 2 pin header
 
 *Edit the pick and place and BOM files to remove any reference to the above parts, before ordering from JLCPCB*
 
