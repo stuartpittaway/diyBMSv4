@@ -4234,7 +4234,7 @@
   )
 
   (symbol (lib_id "mcp1502t-45e:MCP1502T-45E") (at 236.855 127 0) (unit 1)
-    (in_bom no) (on_board no) (dnp yes) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp yes) (fields_autoplaced)
     (uuid 35432b91-831a-4c39-99b4-6e5d6cd34109)
     (property "Reference" "U6" (at 236.855 118.11 0)
       (effects (font (size 1.27 1.27)))
