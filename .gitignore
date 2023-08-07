@@ -19,3 +19,4 @@ ModuleV400/v4-rescue.lib
 ModuleV421/ModuleV421-cache.lib
 ModuleV421/ModuleV421-rescue.lib
 ControllerCircuit/_autosave-ControllerCircuit.kicad_pcb
+*.zip
