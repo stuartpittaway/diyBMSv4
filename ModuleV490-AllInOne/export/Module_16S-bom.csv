@@ -40,7 +40,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 39,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U13,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,~,EL3H7(B)(TA)-G,C32565,
 40,battery measurement analog front-end,MAX14921,U1,MAX14921ECS+T,TQFP-80_12x12mm_P0.5mm,1, ,https://datasheet.lcsc.com/lcsc/2112141130_Maxim-Integrated-MAX14921ECS-T_C143358.pdf,MAX14921ECS+T,C2932577,
 41,"4.096V, 0.1%, 20mA, Precision Voltage Reference, SOIC-8",MCP1501-40xSN,U2,MCP1501-40xSN,SOIC-8_3.9x4.9mm_P1.27mm,1, ,http://ww1.microchip.com/downloads/en/DeviceDoc/20005474E.pdf,MCP1501-40E/SN,C1575589,
-42,,MCP33131-05-E/MS,U3,MCP33151-05-E/MS,MSOP-10_3x3mm_P0.5mm,1, ,https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP33151-XX-Family-Data-Sheet-DS20006220A.pdf,MCP33151-05-E/MS,C635984,
+42,14Bit 500kHz SPI ADCs,MCP33131-05-E/MS,U3,MCP33151-05-E/MS,MSOP-10_3x3mm_P0.5mm,1, ,https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP33151-XX-Family-Data-Sheet-DS20006220A.pdf,MCP33151-05-E/MS,C635984,
 43,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U4,RELAY1,SO-4_4.4x4.3mm_P2.54mm,1, ,,LT219-1,C2691601,
 44,"STMicroelectronics Arm Cortex-M0 MCU, 32KB flash, 4KB RAM, 48 MHz, 2.4-3.6V, 25 GPIO, LQFP32",STM32F030K6Tx,U5,STM32F030K6Tx,LQFP-32_7x7mm_P0.8mm,1, ,https://www.st.com/resource/en/datasheet/stm32f030k6.pdf,STM32F030K6T6,C46830,
 45,"Positive 60-250mA Low Dropout Regulator, Fixed Output, SOT-23",XC6206PxxxMR,U12,XC6206-1.8NR,SOT-23-3,1, ,https://www.torexsemi.com/file/xc6206/XC6206.pdf,XC6206-1.8NR,C2984870,
