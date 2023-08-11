@@ -137,3 +137,9 @@ Important:
 * Ensure the PWR jumper is connected (except <13V setups see above).
 * If the LED flashes a sequence on start up, check the software README to determine the cause
 * Ensure communication interface to controller uses correct wiring orientation
+
+# FAULT FINDING
+
+## All cells read similar voltage (4.096V or 4.500V)
+
+This indicates that the voltage reference is not reaching the ADC chip MCP33151.  Therefore, check voltage on TP5 and also soldering around U3 and U2/U6 depending on the V reference fitted.
