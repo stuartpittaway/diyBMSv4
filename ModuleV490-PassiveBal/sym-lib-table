@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "sznud3160")(type "KiCad")(uri "${KIPRJMOD}/sznud3160.kicad_sym")(options "")(descr ""))
+)

@@ -1,0 +1,101 @@
+name: pcb-artifacts-temperaturepcb
+
+on:
+  push:
+    paths:
+      - "TemperaturePCB/**.kicad_sch"
+      - "TemperaturePCB/**.kicad_pcb"
+      - ".github/workflows/pcb-artifacts-temperaturepcb.yaml"
+  pull_request:
+    paths:
+      - "TemperaturePCB/**.kicad_sch"
+      - "TemperaturePCB/**.kicad_pcb"
+      - ".github/workflows/pcb-artifacts-temperaturepcb.yaml"
+  workflow_dispatch:
+
+jobs:
+  generate-artifacts:
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:latest
+
+    steps:
+      - name: Update system repositories, Install Required Libraries and Initialize git-lfs
+        run: |
+          apt update
+          apt -y install git git-lfs zip librsvg2-bin imagemagick
+          git lfs install
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
+
+      - name: Running on branch
+        run: |
+          echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
+
+      - name: Date PCB
+        run: |
+          export DDDD=$(date)
+          echo "DDDD = ${DDDD}"
+          sed -i "s!<<date>>!${DDDD}!" TemperaturePCB/TemperaturePCB.kicad_pcb
+
+      - name: Update the PCBs with on default branch with git hash
+        if: steps.branch-name.outputs.is_default == 'true'
+        run: |
+          export COMMIT=$(git rev-parse --short HEAD)
+          echo "COMMIT = ${COMMIT}"
+          sed -i "s!<<hash>>!${COMMIT}!" TemperaturePCB/TemperaturePCB.kicad_pcb
+
+      - name: Update the PCBs with the git hash and BETA.
+        if: steps.branch-name.outputs.is_default != 'true'
+        run: |
+          export COMMIT=$(git rev-parse --short HEAD)
+          echo "COMMIT = ${COMMIT}"
+          sed -i "s!<<hash>>!BETA-${COMMIT}!" TemperaturePCB/TemperaturePCB.kicad_pcb
+
+      - name: Remove existing export folder
+        run: |
+          rm -rf ./TemperaturePCB/export/
+
+      - name: Run KiBot
+        uses: INTI-CMNB/KiBot@v2_k7
+        with:
+          config: ./TemperaturePCB/config-2layer.kibot.yaml
+          dir: ./TemperaturePCB/export
+          schema: "./TemperaturePCB/TemperaturePCB.kicad_sch"
+          board: "./TemperaturePCB/TemperaturePCB.kicad_pcb"
+
+      # Splitting this out to ensure a failed kibot run will mark a check as failed.
+      - name: Prepare Gerbers artifact
+        run: |
+          cd TemperaturePCB/export/gerbers
+          zip -r -j ../TemperaturePCB_gerbers.zip *
+
+      - name: Remove gerber folder
+        run: |
+          rm -rf ./TemperaturePCB/export/gerbers
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        if: steps.branch-name.outputs.is_default != 'true'
+        with:
+          name: TemperaturePCB_gerbers
+          path: |
+            TemperaturePCB/export/TemperaturePCB_gerbers.zip
+            TemperaturePCB/export/TemperaturePCB_bom_jlc.csv
+            TemperaturePCB/export/TemperaturePCB_cpl_jlc.csv
+
+      - name: Commit files
+      #  if: steps.branch-name.outputs.is_default == 'true'
+        run: |
+          git add -f TemperaturePCB/export
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git status
+          git commit -m "CI: pcb-artifacts-temperaturepcb"
+          git push -u origin

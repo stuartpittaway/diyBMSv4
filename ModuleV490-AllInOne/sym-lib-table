@@ -1,0 +1,9 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "maxim_integrated")(type "KiCad")(uri "${KIPRJMOD}/maxim_integrated.kicad_sym")(options "")(descr ""))
+  (lib (name "MicroChip")(type "KiCad")(uri "${KIPRJMOD}/MicroChip.kicad_sym")(options "")(descr ""))
+  (lib (name "XLSEMI")(type "KiCad")(uri "${KIPRJMOD}/XLSEMI.kicad_sym")(options "")(descr ""))
+  (lib (name "sznud3160")(type "KiCad")(uri "${KIPRJMOD}/sznud3160.kicad_sym")(options "")(descr ""))
+  (lib (name "mcp1502t-45e")(type "KiCad")(uri "${KIPRJMOD}/mcp1502t-45e.kicad_sym")(options "")(descr ""))
+  (lib (name "mcp33151")(type "KiCad")(uri "${KIPRJMOD}/mcp33151.kicad_sym")(options "")(descr ""))
+)

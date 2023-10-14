@@ -1,0 +1,99 @@
+name: pcb-artifacts-modulev490-passivebal
+
+on:
+  push:
+    paths:
+    - 'ModuleV490-PassiveBal/**.kicad_sch'
+    - 'ModuleV490-PassiveBal/**.kicad_pcb'
+    - '.github/workflows/pcb-artifacts-modulev490-passivebal.yaml'
+  pull_request:
+    paths:
+    - 'ModuleV490-PassiveBal/**.kicad_sch'
+    - 'ModuleV490-PassiveBal/**.kicad_pcb'
+    - '.github/workflows/pcb-artifacts-modulev490-passivebal.yaml'
+  workflow_dispatch:
+
+jobs:
+  generate-artifacts:
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:latest
+
+    steps:
+    - name: Update system repositories, Install Required Libraries and Initialize git-lfs
+      run: |
+        apt update
+        apt -y install git git-lfs zip librsvg2-bin imagemagick
+        git lfs install
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        lfs: true
+
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v6
+
+    - name: Running on branch
+      run: |
+        echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
+  
+    - name: Date PCB
+      run: |
+        export DDDD=$(date)
+        echo "DDDD = ${DDDD}"
+        sed -i "s!<<date>>!${DDDD}!" ModuleV490-PassiveBal/Module_16S_PassiveBalanceAddOn.kicad_pcb
+  
+    - name: Update the PCBs with on default branch with git hash
+      if: steps.branch-name.outputs.is_default == 'true'
+      run: |
+        export COMMIT=$(git rev-parse --short HEAD)
+        echo "COMMIT = ${COMMIT}"
+        sed -i "s!<<hash>>!${COMMIT}!" ModuleV490-PassiveBal/Module_16S_PassiveBalanceAddOn.kicad_pcb
+
+    - name: Update the PCBs with the git hash and BETA.
+      if: steps.branch-name.outputs.is_default != 'true'
+      run: |
+        export COMMIT=$(git rev-parse --short HEAD)
+        echo "COMMIT = ${COMMIT}"
+        sed -i "s!<<hash>>!BETA-${COMMIT}!" ModuleV490-PassiveBal/Module_16S_PassiveBalanceAddOn.kicad_pcb
+
+    - name: Remove existing export folder
+      run: |
+        rm -rf ./ModuleV490-PassiveBal/export/
+
+    - name: Run KiBot
+      uses: INTI-CMNB/KiBot@v2_k7
+      with:
+        config: ./ModuleV490-PassiveBal/config-2layer.kibot.yaml
+        dir: ./ModuleV490-PassiveBal/export
+        schema: './ModuleV490-PassiveBal/Module_16S_PassiveBalanceAddOn.kicad_sch'
+        board: './ModuleV490-PassiveBal/Module_16S_PassiveBalanceAddOn.kicad_pcb'
+
+    # Splitting this out to ensure a failed kibot run will mark a check as failed.
+    - name: Prepare Gerbers artifact
+      run: |
+        cd ModuleV490-PassiveBal/export/gerbers
+        zip -r -j ../module_16s_passive_gerbers.zip *        
+
+    - name: Remove gerber folder
+      run: |
+        rm -rf ./ModuleV490-PassiveBal/export/gerbers
+  
+    - name: upload artifacts
+      uses: actions/upload-artifact@v3
+      if: steps.branch-name.outputs.is_default != 'true'
+      with:
+        name: module_16s_passive_gerbers
+        path: |
+          ModuleV490-PassiveBal/export/module_16s_passive_gerbers.zip
+
+    - name: Commit files
+    #  if: steps.branch-name.outputs.is_default == 'true'
+      run: |
+        git add -f ModuleV490-PassiveBal/export
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git status
+        git commit -m "CI: pcb-artifacts-Module_16S_Passive"
+        git push -u origin
