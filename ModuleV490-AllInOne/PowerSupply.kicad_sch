@@ -2649,7 +2649,7 @@
     (property "PartNumber" "JK250-100U" (at 48.895 73.025 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSCStockCode" "C5183882" (at 48.895 73.025 0)
+    (property "LCSCStockCode" "C2680606" (at 48.895 73.025 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 8f703886-2e8e-4d49-bb6e-09d3afa0a046))
