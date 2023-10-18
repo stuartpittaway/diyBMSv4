@@ -16,7 +16,7 @@
 "68V, 500mW zener diode","D1","D_SOD-123","C242416"
 "SS210","D21","D_SMA","C432298"
 "White","D19","LED_0603_1608Metric","C2290"
-"Fuse, 100mA","F1","Fuse_Bourns_MF-RHT100","C5183882"
+"Fuse, 100mA","F1","Fuse_Bourns_MF-RHT100","C2680606"
 "BALANCE BOARD","J14,J15","PinSocket_1x22_P2.54mm_Vertical","C2886702"
 "BOOT_MODE","J2","PinHeader_1x03_P2.54mm_Vertical","C2935909"
 "CELL CONNECTOR PLUG","J6,J7","","C489973 C489980"
