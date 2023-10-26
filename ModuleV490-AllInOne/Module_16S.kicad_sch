@@ -2945,6 +2945,11 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 34370da9-366f-492a-bc6c-b50e90fd244d)
   )
+  (text "Getting the Most Out of the MAX14920/MAX14921 High-Accuracy Battery-Measurement AFEs"
+    (at 96.52 157.48 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom) (href "https://pdfserv.maximintegrated.com/en/an/AN5760.pdf"))
+    (uuid 595c608e-9f8c-48ac-ad28-be5699df78c4)
+  )
   (text "Eval Board" (at 18.415 34.925 0)
     (effects (font (size 1.27 1.27)) (justify left bottom) (href "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX14921EVKIT.pdf"))
     (uuid 6e8a1c8b-1d7d-4980-b770-eb7780ed321d)
