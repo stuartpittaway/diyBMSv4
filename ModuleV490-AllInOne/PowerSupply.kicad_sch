@@ -2643,7 +2643,7 @@
     (property "Footprint" "Fuse:Fuse_Bourns_MF-RHT100" (at 53.975 71.755 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (property "Datasheet" "https://datasheet.lcsc.com/lcsc/2210311730_Shenzhen-Jinkaisheng-Elec-JK250-100U_C5183882.pdf" (at 48.895 73.025 0)
+    (property "Datasheet" "https://datasheet.lcsc.com/lcsc/2304140030_Jinrui-Electronic-Materials-Co--JK250-100U_C2680606.pdf" (at 48.895 73.025 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "PartNumber" "JK250-100U" (at 48.895 73.025 90)
