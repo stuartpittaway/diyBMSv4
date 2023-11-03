@@ -22,6 +22,7 @@ https://jlcpcb.com/RSZ
 
 These parts are necessary for the DIYBMS CONTROLLER
 | Item | Qty | Reference(s) | Value | LibPart | Footprint | Datasheet | Arrow Part Number | Arrow Price/Stock | DONOTPLACE | Description | Field4 | Height | JLCPCBRotation | LCSCStockCode | Manufacturer_Name | Manufacturer_Part_Number | Mouser Part Number | Mouser Price/Stock | PartNumber |
+| ---- | --- | ------------ | ----- | ------- | --------- | --------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
 | 1 | 6 | C1, C2, C6, C8, C9, C14 | 100nF | Device:C | Capacitor_SMD:C_0805_2012Metric | https://datasheet.lcsc.com/szlcsc/YAGEO-CC0805KRX7R9BB104_C49678.pdf |  |  |  |  |  |  |  | C49678 |  |  |  |  | CC0805KRX7R9BB104 |
 | 2 | 2 | C3, C4 | 22uF 6.3V | Device:C | Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder | https://datasheet.lcsc.com/szlcsc/Hunan-Xiangyee-in-S-T-CA45-A010M226T_C126948.pdf |  |  |  |  |  |  |  | C110786 |  |  |  |  | TC212A226K006Y |
 | 3 | 1 | C5 | 22uF | Device:C | Capacitor_SMD:C_1206_3216Metric |  |  |  |  |  |  |  |  | C5672 |  |  |  |  | CL31A226KPHNNNE |
@@ -57,6 +58,7 @@ These parts are necessary for the DIYBMS CONTROLLER
 
 # Through Hole Component List
 | Item | Qty | Reference(s) | Value | LibPart | Footprint | Datasheet | Arrow Part Number | Arrow Price/Stock | DONOTPLACE | Description | Field4 | Height | JLCPCBRotation | LCSCStockCode | Manufacturer_Name | Manufacturer_Part_Number | Mouser Part Number | Mouser Price/Stock | PartNumber |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
 | 12 | 4 | J1, J4, J7, J12 | ScrewTerminal | Connector:Conn_01x04_Female | ControllerCircuit:Terminal-Block_3.81_4P_LCSC_C395880 | ~ |  |  |  |  |  |  |  | C395880 |  |  |  |  |  |
 | 13 | 2 | J2, J3 | ScrewTerminal3Pin | Connector:Conn_01x03_Female | ControllerCircuit:Terminal-Block_5.0mm_3P-LCSC_C395850 | ~ |  |  |  |  |  |  |  | C395850 |  |  |  |  |  |
 | 14 | 1 | J5 | ScrewTerminal | Connector:Conn_01x02_Female | ControllerCircuit:Terminal-Block_3.81_2P-LCSC_C395878 | ~ |  |  |  |  |  |  |  | C395878 |  |  |  |  |  |
