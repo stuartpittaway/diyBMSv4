@@ -35,7 +35,9 @@ The folder structure in the repository contains:
 * ESP8266ControllerCircuit - [legacy] the circuit board for the legacy ESP8266 based controller
 
 ## Modules for Controller
-* ModuleV450 - the latest module design, using ATTINY1624 chip. Recommended for both hand soldering or mass production
+* ModuleV490-AllInOne - Latest multi cell monitoring solution, recommended for 8 to 16S cell configurations.  No balancing, requires ModuleV490-PassiveBal passive balancer daughterboard if this is needed.
+* ModuleV490-PassiveBal - daughter board for the V490 multi-cell monitoring solution, provides 200mA per cell balance current, heatsink and fan control.
+* ModuleV450 - the latest SINGLE module design, using ATTINY1624 chip. Recommended for both hand soldering or mass production
 * ModuleV440 - [legacy] the module circuit board V4.40, final board using ATTINY841 chip
 * ModuleV400 - [legacy] the module circuit board V4.00, designed for easier hand soldering (larger parts)
 * ModuleV421 - [legacy] the module circuit board V4.21, designed for mass production using JLCPCB assembly service
