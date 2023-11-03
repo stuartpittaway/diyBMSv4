@@ -16,7 +16,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 15,Diode,D,D1,"68V, 500mW zener diode",D_SOD-123,1, ,~,MMSZ5266BT1G,C242416,
 16,Schottky diode,D_Schottky,D21,SS210,D_SMA,1, ,~,SS210,C432298,
 17,Light emitting diode,LED,D19,White,LED_0603_1608Metric,1, ,~,,C2290,
-18,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,"Fuse, 100mA",Fuse_Bourns_MF-RHT100,1, ,https://datasheet.lcsc.com/lcsc/2210311730_Shenzhen-Jinkaisheng-Elec-JK250-100U_C5183882.pdf,JK250-100U,C2680606,
+18,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,"Fuse, 100mA",Fuse_Bourns_MF-RHT100,1, ,https://datasheet.lcsc.com/lcsc/2304140030_Jinrui-Electronic-Materials-Co--JK250-100U_C2680606.pdf,JK250-100U,C2680606,
 19,"Generic connector, single row, 01x22, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x22,J14 J15,BALANCE BOARD,PinSocket_1x22_P2.54mm_Vertical,2, ,~,CS-1165SDIG-1*22,C2886702,
 20,"Generic connector, single row, 01x03, script generated",Conn_01x03_Socket,J2,BOOT_MODE,PinHeader_1x03_P2.54mm_Vertical,1, ,~,DZ254R-11-03-63,C2935909,
 21,"Generic connector, single row, 01x17, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x17,J6 J7,CELL CONNECTOR PLUG,,2, ,~,WJ15EDGK-3.81-17P WJ15EDGRC-3.81-17P,C489973 C489980,0
