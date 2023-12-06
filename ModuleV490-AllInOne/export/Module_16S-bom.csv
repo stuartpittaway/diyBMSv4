@@ -39,7 +39,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 38,"150mA low dropout linear regulator, wide input voltage range, 5.0V fixed positive output, SOT-23-5",AP2204K-5.0,U11,AP2204K-5.0TRG1,SOT-23-5,1, ,https://datasheet.lcsc.com/lcsc/1808291041_Diodes-Incorporated-AP2204K-5-0TRG1_C112031.pdf,AP2204K-5.0TRG1,C112031,
 39,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U13,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,~,EL3H7(B)(TA)-G,C32565,
 40,battery measurement analog front-end,MAX14921,U1,MAX14921ECS+T,TQFP-80_12x12mm_P0.5mm,1, ,https://datasheet.lcsc.com/lcsc/2112141130_Maxim-Integrated-MAX14921ECS-T_C143358.pdf,MAX14921ECS+T,C2932577,
-41,"4.096V, 0.1%, 20mA, Precision Voltage Reference, SOIC-8",MCP1501-40xSN,U2,MCP1501-40xSN,SOIC-8_3.9x4.9mm_P1.27mm,1, ,http://ww1.microchip.com/downloads/en/DeviceDoc/20005474E.pdf,MCP1501-40E/SN,C1575589,
+41,Voltage Reference Fixed 4.5V,MCP1502T-45E,U6,MCP1502T-45E/CHY,SOT-23-6,1, ,https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/MCP1502-Data-Sheet-20006593B.pdf,MCP1502T-45E/CHY,,
 42,14-bit Analog-to-Digital Converter (ADC),MCP33151-05-E/MS,U3,MCP33151-05-E/MS,MSOP-10_3x3mm_P0.5mm,1, ,https://www.microchip.com/en-us/product/mcp33151-05,MCP33151-05-E/MS,C635984,
 43,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U4,RELAY1,SO-4_4.4x4.3mm_P2.54mm,1, ,,LT219-1,C2691601,
 44,"STMicroelectronics Arm Cortex-M0 MCU, 32KB flash, 4KB RAM, 48 MHz, 2.4-3.6V, 25 GPIO, LQFP32",STM32F030K6Tx,U5,STM32F030K6Tx,LQFP-32_7x7mm_P0.8mm,1, ,https://www.st.com/resource/en/datasheet/stm32f030k6.pdf,STM32F030K6T6,C46830,
