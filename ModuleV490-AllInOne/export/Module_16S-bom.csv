@@ -19,7 +19,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 18,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,"Fuse, 100mA",Fuse_Bourns_MF-RHT100,1, ,https://datasheet.lcsc.com/lcsc/2304140030_Jinrui-Electronic-Materials-Co--JK250-100U_C2680606.pdf,JK250-100U,C2680606,
 19,"Generic connector, single row, 01x22, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x22,J14 J15,BALANCE BOARD,PinSocket_1x22_P2.54mm_Vertical,2, ,~,CS-1165SDIG-1*22,C2886702,
 20,"Generic connector, single row, 01x03, script generated",Conn_01x03_Socket,J2,BOOT_MODE,PinHeader_1x03_P2.54mm_Vertical,1, ,~,DZ254R-11-03-63,C2935909,
-21,"Generic connector, single row, 01x17, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x17,J6 J7,CELL CONNECTOR PLUG,,2, ,~,WJ15EDGK-3.81-17P WJ15EDGRC-3.81-17P,C489973 C489980,0
+21,"Generic connector, single row, 01x17, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x17,J6 J7,DB2EK-3.81-17P-GN-S,,2, ,~,DB2EK-3.81-17P-GN-S DB2ERC-3.81-17P-GN,C430370 C430372,0
 22,"Generic connector, single row, 01x02, script generated",Conn_01x02_Pin,J5,POWER_IN,"PhoenixContact_MC_1,5_2-G-3.81_1x02_P3.81mm_Horizontal",1, ,~,WJ15EDGRC-3.81-2P,C8387,
 23,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02,J10 J11 J12 J13,TEMP2,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,4, ,~,S2B-PH-K(LF)(SN),C265016,
 24,"Generic connector, single row, 01x04, script generated",Conn_01x04_Pin,J8,TXRX,"PhoenixContact_MC_1,5_4-G-3.81_1x04_P3.81mm_Horizontal",1, ,~,WJ15EDGRC-3.81-4P,C7245,

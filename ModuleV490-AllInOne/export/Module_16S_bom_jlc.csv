@@ -19,7 +19,7 @@
 "Fuse, 100mA","F1","Fuse_Bourns_MF-RHT100","C2680606"
 "BALANCE BOARD","J14,J15","PinSocket_1x22_P2.54mm_Vertical","C2886702"
 "BOOT_MODE","J2","PinHeader_1x03_P2.54mm_Vertical","C2935909"
-"CELL CONNECTOR PLUG","J6,J7","","C489973 C489980"
+"DB2EK-3.81-17P-GN-S","J6,J7","","C430370 C430372"
 "POWER_IN","J5","PhoenixContact_MC_1,5_2-G-3.81_1x02_P3.81mm_Horizontal","C8387"
 "TEMP2","J10,J11,J12,J13","JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal","C265016"
 "TXRX","J8","PhoenixContact_MC_1,5_4-G-3.81_1x04_P3.81mm_Horizontal","C7245"
