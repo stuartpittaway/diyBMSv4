@@ -1,7 +1,7 @@
 {
   "board": {
-    "active_layer": 49,
-    "active_layer_preset": "All Layers",
+    "active_layer": 0,
+    "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
     "hidden_nets": [],
@@ -68,7 +68,7 @@
     "zone_display_mode": 0
   },
   "meta": {
-    "filename": "TemperaturePCB.kicad_prl",
+    "filename": "panel.kicad_prl",
     "version": 3
   },
   "project": {

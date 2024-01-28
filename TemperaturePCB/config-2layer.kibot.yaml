@@ -130,6 +130,10 @@ outputs:
         suffix: GBS
       - layer: Edge.Cuts
         suffix: GKO
+      - layer: F.Paste
+        suffix: GTP
+      - layer: B.Paste
+        suffix: GBP
 
   - name: 'drill_file'
     comment: 'Drill file for Board House'
@@ -190,7 +194,7 @@ outputs:
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
-      only_smd: true
+      only_smd: false
       variant: jlcpcb
       columns:
         - id: Ref
