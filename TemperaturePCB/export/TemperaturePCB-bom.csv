@@ -1,3 +1,3 @@
 Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,LCSCStockCode,PartNumber
-1,"Generic connector, single row, 01x02, script generated",Conn_01x02_Socket,J1,S2B-PH-K(LF)(SN),JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,1, ,~,C265016,
+1,"Generic connector, single row, 01x02, script generated",Conn_01x02_Socket,J1,S2B-PH-SM4-TB(LF)(SN),JST_PH_S2B-PH-SM4-TB_1x02-1MP_P2.00mm_Horizontal,1, ,~,C295747,
 2,"Temperature dependent resistor, negative temperature coefficient",Thermistor_NTC,TH1,10K NTC,R_0805_2012Metric,1, ,https://datasheet.lcsc.com/szlcsc/Guangdong-Fenghua-Advanced-Tech-CMFB103F3950FANT_C51597.pdf,C51597,CMFB103F3950FANT
