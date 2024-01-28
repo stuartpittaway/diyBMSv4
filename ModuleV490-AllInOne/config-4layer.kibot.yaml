@@ -196,7 +196,7 @@ outputs:
       format: CSV
       units: millimeters
       separate_files_for_front_and_back: false
-      only_smd: true
+      only_smd: false
       variant: jlcpcb
       columns:
         - id: Ref
