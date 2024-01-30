@@ -38,7 +38,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 37,"DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4",PC817,U2,EL3H7(B)(TA)-G,SOP-4_4.4x2.6mm_P1.27mm,1, ,https://datasheet.lcsc.com/szlcsc/Everlight-Elec-EL3H7-B-TA-G_C32565.pdf,C32565,,,,,,,,,,
 38,,ESP32-DEVKITC-32D-ControllerCircuit,U4,ESP32-DEVKITC-32D,MODULE_ESP32-DEVKITC-32D,1, ,Espressif Systems,C319202/C319202,,,,,,,,,,
 39,,INA229-Q1-INA229-Q1,U8,INA229,VSSOP-10_3x3mm_P0.5mm,1, ,https://www.ti.com/lit/ds/symlink/ina229-q1.pdf,C2846803,,INA229AIDGSR,,,,,,,,
-40,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,LT219-1,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/lcsc/2102221642_Letex-LT219-1_C2691601.pdf,C250827,,,,,,,,,,
+40,"Form A, Solid State Relay (Photo MOSFET) 60V, 0.2A, 10Ohm, SO-4",ASSR-1218,U9 U12,LT219-1,SO-4_4.4x3.6mm_P2.54mm,2, ,https://datasheet.lcsc.com/lcsc/2102221642_Letex-LT219-1_C2691601.pdf,C2691601,,,,,,,,,,
 41,"CAN Bus Transceiver, EMC optimised, 5.0V, 1Mbps, SOIC-8",SN65HVD1050D,U7,SN65HVD1050D,SOIC-8_3.9x4.9mm_P1.27mm,1, ,http://www.ti.com/lit/ds/symlink/sn65hvd1050.pdf,C14019,,,,,,,,,,
 42,,SN65HVD75DR-ControllerCircuit,U5,SN65HVD75DR,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR,C57928,,SN65HVD75DR,,,,,,,,
 43,,TCA6416APWR,U3,TCA6416APWR,TSSOP-24_4.4x7.8mm_P0.65mm,1, ,https://www.ti.com/lit/gpn/TCA6416A,C130203,,,,,,,,,,
