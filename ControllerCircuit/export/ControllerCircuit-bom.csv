@@ -42,4 +42,4 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 41,"CAN Bus Transceiver, EMC optimised, 5.0V, 1Mbps, SOIC-8",SN65HVD1050D,U7,SN65HVD1050D,SOIC-8_3.9x4.9mm_P1.27mm,1, ,http://www.ti.com/lit/ds/symlink/sn65hvd1050.pdf,C14019,,,,,,,,,,,
 42,,SN65HVD75DR-ControllerCircuit,U5,SN65HVD75DR,SOIC-8_3.9x4.9mm_P1.27mm,1, ,https://www.ti.com/store/ti/en/p/product/?p=SN65HVD75DR,C57928,,SN65HVD75DR,,,,,,,,,
 43,,TCA6416APWR,U3,TCA6416APWR,TSSOP-24_4.4x7.8mm_P0.65mm,1, ,https://www.ti.com/lit/gpn/TCA6416A,C130203,,,,,,,,,,,
-44,"2-Bit Bidirectional Voltage-Level Shifter for Open-Drain and Push-Pull Application, VSSOP-8",TXS0102DCU,U1,TXS0102DCU,VSSOP-8_2.3x2mm_P0.5mm,1, ,http://www.ti.com/lit/gpn/txs0102,C53434,,,,,,,,,,,
+44,"2-Bit Bidirectional Voltage-Level Shifter for Open-Drain and Push-Pull Application, VSSOP-8",TXS0102DCU,U1,TXS0102DCU,VSSOP-8_2.3x2mm_P0.5mm,1, ,http://www.ti.com/lit/gpn/txs0102,C53434,180,,,,,,,,,,
