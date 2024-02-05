@@ -1,7 +1,7 @@
 Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datasheet,Sim.Enable,PartNumber,LCSCStockCode
 1,"Light emitting diode, small symbol",LED_Small,C0 C1 C2 C3 C4 C5 C6 C7 C8 C9 C10 C11 C12 C13 C14 C15,Yellow,LED_0603_1608Metric,16, ,~,,19-213/Y2C-CQ2R2L/3T(CY),C72038
 2,"Generic connector, single row, 01x22, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x22,J2 J5,22PIN,PinHeader_1x22_P2.54mm_Vertical,2, ,~,,X6511WV-22H-C30D60,C725954
-3,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02,J1,FAN_12V,JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical,1, ,~,,S2B-PH-K(LF)(SN),C265016
+3,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02,J1,FAN_12V,JST_PH_B2B-PH-SM4-TB_1x02-1MP_P2.00mm_Vertical,1, ,~,,B2B-PH-SM4-TB(LF)(SN),C2904974
 4,"N-MOSFET transistor, gate/source/drain",Q_NMOS_GSD,Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16,AO3400A,SOT-23,16, ,https://datasheet.lcsc.com/lcsc/2204291600_UMW-Youtai-Semiconductor-Co---Ltd--AO3400A_C347475.pdf,,AO3400A,C347475
 5,Industrial Inductive Load Driver,SZNUD3160,Q17,SZNUD3160,SOT-23,1, ,https://www.onsemi.com/pdf/datasheet/nud3160-d.pdf,,SZNUD3160LT1G,C894717
 6,Resistor,R,R26 R27 R28 R29 R30 R31 R38 R39 R40 R41 R42 R43 R48 R49 R50 R51,18R 2W,R_2512_6332Metric,16, ,~,,CRH2512J18R0E04Z,C175426
