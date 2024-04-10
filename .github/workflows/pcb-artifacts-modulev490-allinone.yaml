@@ -56,7 +56,7 @@ jobs:
 
     - name: Remove existing export folder
       run: |
-        rm -rf ./Module_16S/export/
+        rm -rf ./ModuleV490-AllInOne/export/
 
     - name: Run KiBot
       uses: INTI-CMNB/KiBot@v2_k7
