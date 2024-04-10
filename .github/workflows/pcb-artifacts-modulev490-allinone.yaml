@@ -21,6 +21,12 @@ jobs:
     container: setsoft/kicad_auto:ki7
 
     steps:
+    - name: Update system repositories, Install Required Libraries and Initialize git-lfs
+      run: |
+        apt update
+        apt -y install git git-lfs zip librsvg2-bin imagemagick
+        git lfs install
+
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
