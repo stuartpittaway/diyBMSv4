@@ -18,7 +18,7 @@ on:
 jobs:
   generate-artifacts:
     runs-on: ubuntu-latest
-
+    container: setsoft/kicad_auto:ki7
 
     steps:
     - name: Checkout Repository
