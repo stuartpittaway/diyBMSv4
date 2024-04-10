@@ -3,4 +3,5 @@
   (lib (name "COILMX")(type "KiCad")(uri "${KIPRJMOD}/COILMX.pretty")(options "")(descr ""))
   (lib (name "DIYBMS")(type "KiCad")(uri "${KIPRJMOD}/DIYBMS.pretty")(options "")(descr ""))
   (lib (name "Ningbo Kangnex Elec")(type "KiCad")(uri "${KIPRJMOD}/Ningbo Kangnex Elec.pretty")(options "")(descr ""))
+  (lib (name "SHOU_HAN")(type "KiCad")(uri "${KIPRJMOD}/SHOU_HAN.pretty")(options "")(descr ""))
 )
