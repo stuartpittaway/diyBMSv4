@@ -40,10 +40,6 @@ preflight:
   ignore_unconnected: false
 
 outputs:
-  - name: 'ibom'
-    comment: 'Interactive Bill of Materials'
-    type: ibom
-    dir: ibom
 
   - name: 'bom'
     comment: 'Bill of Materials'
@@ -54,16 +50,6 @@ outputs:
         hide_pcb_info: true
         hide_stats_info: true
       format: CSV
-
-  - name: 'html_bom'
-    comment: 'HTML BOM'
-    type: bom
-    dir: .
-    options:
-      html:
-        datasheet_as_link: Datasheet
-        digikey_link: Digikey
-        title: 'Bill of Materials'
 
   - name: 'print_sch'
     comment: "Print schematic (PDF)"
@@ -118,7 +104,6 @@ outputs:
       use_gerber_net_attributes: false
 
       output: '%f.%i'
-
 
     layers:
       # When Moving to Four Layer, Set G2L and G3L as the suffixes
