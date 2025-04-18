@@ -4073,7 +4073,7 @@
   )
 
   (symbol (lib_name "Conn_01x17_1") (lib_id "Connector_Generic:Conn_01x17") (at 180.975 40.64 0) (unit 1)
-    (in_bom yes) (on_board no) (dnp no)
+    (in_bom no) (on_board no) (dnp no)
     (uuid 44574af0-d6ce-44b1-afe1-c01f4f9028b1)
     (property "Reference" "J6" (at 182.88 46.99 0)
       (effects (font (size 1.27 1.27)) (justify left))
