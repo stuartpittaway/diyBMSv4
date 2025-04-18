@@ -18,7 +18,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 17,Light emitting diode,LED,D19,White,LED_0603_1608Metric,1, ,~,,C2290,
 18,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,Fuse 30mA,Fuse_0805_2012Metric,1, ,https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312012005_LUTE-0805L003-80XR_C19273358.pdf,0805L003/80XR,C19273358,
 19,"Generic connector, single row, 01x22, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x22,J14 J15,BALANCE BOARD,PinSocket_1x22_P2.54mm_Vertical,2, ,~,CS-1165SDIG-1*22,C2886702,
-20,"Generic connector, single row, 01x17, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x17,J6 J7,MALE PLUG,,2, ,~,DB2EK-3.81-17P-GN-S DB2ERC-3.81-17P-GN,C430370 C430372,0
+20,"Generic connector, single row, 01x17, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x17,J7,CELL CONNECTOR,WJ15EDGRC-3.81-17P,1, ,~,DB2ERC-3.81-17P-GN,C430372,
 21,"Generic connector, single row, 01x02, script generated",Conn_01x02_Pin,J5,POWER_IN,"PhoenixContact_MC_1,5_2-G-3.81_1x02_P3.81mm_Horizontal",1, ,~,WJ15EDGRC-3.81-2P,C8387,
 22,"Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_01x02,J10 J11 J12 J13,RELAY,JST_PH_S2B-PH-SM4-TB_1x02-1MP_P2.00mm_Horizontal,4, ,~,S2B-PH-SM4-TB(LF)(SN),C295747,
 23,"Generic connector, single row, 01x04, script generated",Conn_01x04_Pin,J8,TXRX,"PhoenixContact_MC_1,5_4-G-3.81_1x04_P3.81mm_Horizontal",1, ,~,WJ15EDGRC-3.81-4P,C7245,
