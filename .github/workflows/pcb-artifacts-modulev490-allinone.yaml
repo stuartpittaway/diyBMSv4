@@ -18,7 +18,7 @@ on:
 jobs:
   generate-artifacts:
     runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
+    container: setsoft/kicad_auto:ki7
 
     steps:
     - name: Update system repositories, Install Required Libraries and Initialize git-lfs
@@ -28,13 +28,13 @@ jobs:
         git lfs install
 
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         lfs: true
 
     - name: Get branch name
       id: branch-name
-      uses: tj-actions/branch-names@v7.0.7
+      uses: tj-actions/branch-names@v8
 
     - name: Running on branch
       run: |
@@ -62,7 +62,7 @@ jobs:
 
     - name: Remove existing export folder
       run: |
-        rm -rf ./Module_16S/export/
+        rm -rf ./ModuleV490-AllInOne/export/
 
     - name: Run KiBot
       uses: INTI-CMNB/KiBot@v2_k7
@@ -83,7 +83,7 @@ jobs:
         rm -rf ./ModuleV490-AllInOne/export/gerbers
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: steps.branch-name.outputs.is_default != 'true'
       with:
         name: module_16s_gerbers

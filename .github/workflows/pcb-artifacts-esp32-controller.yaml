@@ -41,7 +41,12 @@ jobs:
       run: |
         echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
 
-    - name: Update the PCBs with on default branch with git hash
+    - name: Date PCB
+      run: |
+        export DDDD=$(date)
+        echo "DDDD = ${DDDD}"
+        sed -i "s!<<date>>!${DDDD}!" ModuleV490-AllInOne/Module_16S.kicad_pcb
+    - name: Update the PCBs on default branch with git hash
       if: steps.branch-name.outputs.is_default == 'true'
       run: |
         export COMMIT=$(git rev-parse --short HEAD)
@@ -60,11 +65,11 @@ jobs:
         rm -rf ./ControllerCircuit/export/
 
     - name: Run KiBot
-      uses: INTI-CMNB/KiBot@v2
+      uses: INTI-CMNB/KiBot@v2_k7
       with:
         config: ./ControllerCircuit/config-2layer.kibot.yaml
         dir: ./ControllerCircuit/export
-        schema: './ControllerCircuit/ControllerCircuit.sch'
+        schema: './ControllerCircuit/ControllerCircuit.kicad_sch'
         board: './ControllerCircuit/ControllerCircuit.kicad_pcb'
 
     # Splitting this out to ensure a failed kibot run will mark a check as failed.
@@ -84,7 +89,7 @@ jobs:
           ControllerCircuit/export/ControllerCircuit_cpl_jlc.csv
 
     - name: Commit files
-      if: steps.branch-name.outputs.is_default == 'true'
+    #  if: steps.branch-name.outputs.is_default == 'true'
       run: |
         git add -f ControllerCircuit/export
         git config --local user.email "action@github.com"
