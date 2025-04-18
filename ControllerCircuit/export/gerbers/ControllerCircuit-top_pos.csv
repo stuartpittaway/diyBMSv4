@@ -20,10 +20,6 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "D5","LL4148","D_MiniMELF",61.6750,59.3000,0.0000,top
 "D8","NUP2105LT1G","SOT-23",79.0400,13.0000,-90.0000,top
 "F1","Fuse, 3A","Fuse_2920_7451Metric",86.7500,75.0500,0.0000,top
-"FID1","Fiducial_1mm_Mask2mm","Fiducial_1mm_Mask2mm",9.3000,84.1000,0.0000,top
-"FID2","Fiducial_1mm_Mask2mm","Fiducial_1mm_Mask2mm",7.3000,10.1500,0.0000,top
-"FID3","Fiducial_1mm_Mask2mm","Fiducial_1mm_Mask2mm",113.2000,11.8500,0.0000,top
-"FID4","Fiducial_1mm_Mask2mm","Fiducial_1mm_Mask2mm",113.7500,81.0000,0.0000,top
 "J15","Molex 0472192001","0472192001",100.7000,44.4000,-90.0000,top
 "Q1","AO3400A","SOT-23",116.8000,70.6000,180.0000,top
 "Q2","AO3400A","SOT-23",66.6750,57.8500,90.0000,top

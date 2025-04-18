@@ -12,7 +12,7 @@ Row,Description,Part,References,Value,Footprint,Quantity Per PCB,Status,Datashee
 11,"Generic connector, single row, 01x14, script generated",Conn_01x14_Socket,J13,14PinSocket,,1, ,https://datasheet.lcsc.com/lcsc/2110191530_Shenzhen-Kinghelm-Elec-KH-2-54FH-1X14P-H8-5_C2905420.pdf,C2905420,,,KH-2.54FH-1X14P-H8.5,,,,,,,,0
 12,"Generic connector, single row, 01x19, script generated",Conn_01x19_Socket,J6 J11,19PinSocket,,2, ,https://datasheet.lcsc.com/lcsc/2201121530_Shenzhen-Kinghelm-Elec-KH-2-54FH-1X19P-H8-5_C2932678.pdf,C2932678,,,KH-2.54FH-1X19P-H8.5,,,,,,,,0
 13,Atmel 6-pin ISP connector,AVR-ISP-6,J8,2x3 2.54mm IDC Connectors,PinHeader_2x03_P2.54mm_Vertical,1, ,https://lcsc.com/product-detail/IDC-Connectors_Ckmtw-Shenzhen-Cankemeng-C132438_C132438.html,C132438,,,,,,,,,,,
-14,,Conn_01x04_Female-Connector,J1 J4 J7 J9 J12 J17,4PinBlock,WJ15EDGRC-3.81-4P,6, ,~,C7245,,,,,,,,,,,
+14,,Conn_01x04_Female-Connector,J1 J4 J7 J9 J12 J17,4PinBlock,WJ15EDGRC-3.81-4P,6, ,~,C395880,,,,,,,,,,,
 15,"Generic connector, single row, 01x04, script generated",Conn_01x04_Socket,J16,4PinSocket,,1, ,~,C2905415,,,KH-2.54FH-1X4P-H8.5,,,,,,,,0
 16,,Conn_01x02_Female-Connector,J10,ESTOP,JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,1, ,~,C157932,,S2B-PH-K-S-GW,,,,,,,,,
 17,Memory Card Connectors 1.10MM MICRO SD 08P HINGE TYPE,0472192001,J15,Molex 0472192001,0472192001,1, ,https://www.molex.com/pdm_docs/sd/472192001_sd.pdf,C164170,180,,0472192001,1.9,Molex,N/A,https://www.mouser.com/Search/Refine.aspx?Keyword=N%2FA,0472192001,https://www.arrow.com/en/products/0472192001/molex,,
