@@ -33,7 +33,7 @@ jobs:
         git lfs install
 
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         lfs: true
 
@@ -71,7 +71,7 @@ jobs:
         zip -r -j ../modulev440_gerbers.zip *        
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.repository != env.repo)
       with:
         name: modulev440_gerbers
