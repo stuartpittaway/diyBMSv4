@@ -36,35 +36,13 @@ when registering for the first time.
 
 Before construction of the PCB you must determine what battery cells you wish to monitor and a suitable cell voltage range.
 
-The PCB design has options for two voltage ranges, determined by parts U2 and U6.  *ONLY ONE OF THESE CHIPS MUST BE FITTED*
-
 The design uses a MAX14921 chip, this has a maximum of 16 cells and **65V** total battery voltage - do not exceed.
-
-## LIFEPO4 cells up to 4.00V maximum
-
-Use part U2, a Microchip voltage reference "MCP1501-40E/SN".  This is a 4.096V ±0.1% reference chip.
-
-This part is available on JLCPCB as part number C1575589.
-
-The pick and place file (CPL file) contains the part placement for this chip by default.  No further changes are required, except to double-check the order screens from JLCPCB.
-
-Do not install part U6.
-
-*This option has been tested by the author as working*
 
 ## Cell voltages up to 4.50V maximum
 
-This is all 18650 style cell voltage chemistry - normally with a maximum of 4.25V.  This configuration can also be used with LIFEPO4 cells with voltages below 4.50V.
+This is all 18650 style cell voltage chemistry - normally with a maximum of 4.25V.  It can also be used with LIFEPO4 cells, which are well below 4.50V.
 
-Use part U6, a Microchip voltage reference "MCP1502T-45E/CHY".   This is a 4.500V ±0.1% reference chip.
-
-This part is NOT available from JLCPCB.  This part must be obtained from [other sources](https://www.digikey.co.uk/en/products/detail/microchip-technology/MCP1502T-45E-CHY/16549208) and **MANUALLY** soldered onto the board.  Note this is a very small chip (SOT-23-6) and difficult to solder.
-
-Edit the pick and place (CPL file) before upload to JLCPCB to remove the line marked "U2".
-
-Do not install part U2.
-
-*This option has NOT been tested by the author, please feedback if you decide to experiment*
+The voltage reference is part U6, a Microchip "MCP1502T-45E/CHY" - a 4.500V ±0.1% reference chip, JLCPCB part number C5236158.  It is included in the bill of materials and the pick and place file (CPL file), so it is fitted along with the rest of the board.
 
 ## BATTERY VOLTAGES ABOVE 24V & MINIMUM BELOW 12V
 
@@ -140,6 +118,6 @@ Important:
 
 # FAULT FINDING
 
-## All cells read similar voltage (4.096V or 4.500V)
+## All cells read similar voltage (4.500V)
 
-This indicates that the voltage reference is not reaching the ADC chip MCP33151.  Therefore, check voltage on TP5 and also soldering around U3 and U2/U6 depending on the V reference fitted.
+This indicates that the voltage reference is not reaching the ADC chip MCP33151.  Therefore, check voltage on TP5 and also soldering around U3 and U6.
