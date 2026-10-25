@@ -35,6 +35,8 @@ The folder structure in the repository contains:
 * ESP8266ControllerCircuit - [legacy] the circuit board for the legacy ESP8266 based controller
 
 ## Modules for Controller
+* ModuleV491-AllInOne - ModuleV490-AllInOne with the parts that are no longer available replaced.  Same board, same firmware.
+* ModuleV491-PassiveBal - ModuleV491 passive balancer daughterboard.  Same as ModuleV490-PassiveBal with red LEDs and a 220R series resistor, so the bypass indicators are still visible on low voltage chemistries.
 * ModuleV490-AllInOne - Latest multi cell monitoring solution, recommended for 8 to 16S cell configurations.  No balancing, requires ModuleV490-PassiveBal passive balancer daughterboard if this is needed.
 * ModuleV490-PassiveBal - daughter board for the V490 multi-cell monitoring solution, provides 200mA per cell balance current, heatsink and fan control.
 * ModuleV450 - the latest SINGLE module design, using ATTINY1624 chip. Recommended for both hand soldering or mass production

@@ -1,0 +1,100 @@
+name: pcb-artifacts-modulev491-allinone
+
+on:
+  push:
+    paths:
+    - 'ModuleV491-AllInOne/**.kicad_sch'
+    - 'ModuleV491-AllInOne/**.kicad_pcb'
+    - '.github/workflows/pcb-artifacts-modulev491-allinone.yaml'
+  pull_request:
+    paths:
+    - 'ModuleV491-AllInOne/**.kicad_sch'
+    - 'ModuleV491-AllInOne/**.kicad_pcb'
+    - '.github/workflows/pcb-artifacts-modulev491-allinone.yaml'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  generate-artifacts:
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:ki7
+
+    steps:
+    - name: Update system repositories, Install Required Libraries and Initialize git-lfs
+      run: |
+        apt update
+        apt -y install git git-lfs zip librsvg2-bin imagemagick
+        git lfs install
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        lfs: true
+
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v8
+
+    - name: Running on branch
+      run: |
+        echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
+  
+    - name: Date PCB
+      run: |
+        export DDDD=$(date)
+        echo "DDDD = ${DDDD}"
+        sed -i "s!<<date>>!${DDDD}!" ModuleV491-AllInOne/Module_16S.kicad_pcb
+  
+    - name: Update the PCBs on default branch with git hash
+      if: steps.branch-name.outputs.is_default == 'true'
+      run: |
+        export COMMIT=$(git rev-parse --short HEAD)
+        echo "COMMIT = ${COMMIT}"
+        sed -i "s!<<hash>>!${COMMIT}!" ModuleV491-AllInOne/Module_16S.kicad_pcb
+
+    - name: Update the PCBs with the git hash and BETA.
+      if: steps.branch-name.outputs.is_default != 'true'
+      run: |
+        export COMMIT=$(git rev-parse --short HEAD)
+        echo "COMMIT = ${COMMIT}"
+        sed -i "s!<<hash>>!BETA-${COMMIT}!" ModuleV491-AllInOne/Module_16S.kicad_pcb
+
+    - name: Remove existing export folder
+      run: |
+        rm -rf ./ModuleV491-AllInOne/export/
+
+    - name: Run KiBot
+      uses: INTI-CMNB/KiBot@v2_k7
+      with:
+        config: ./ModuleV491-AllInOne/config-4layer.kibot.yaml
+        dir: ./ModuleV491-AllInOne/export
+        schema: './ModuleV491-AllInOne/Module_16S.kicad_sch'
+        board: './ModuleV491-AllInOne/Module_16S.kicad_pcb'
+
+    # Splitting this out to ensure a failed kibot run will mark a check as failed.
+    - name: Prepare Gerbers artifact
+      run: |
+        cd ModuleV491-AllInOne/export/gerbers
+        zip -r -j ../module_16s_gerbers.zip *
+
+    - name: Remove gerber files/folder
+      run: |
+        rm -rf ./ModuleV491-AllInOne/export/gerbers
+
+    - name: upload artifacts
+      uses: actions/upload-artifact@v4
+      if: steps.branch-name.outputs.is_default != 'true'
+      with:
+        name: module_16s_v491_gerbers
+        path: ModuleV491-AllInOne/export/module_16s_gerbers.zip
+
+    - name: Commit files
+    #  if: steps.branch-name.outputs.is_default == 'true'
+      run: |
+        git add -f ModuleV491-AllInOne/export
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git status
+        git commit -m "CI: pcb-artifacts-ModuleV491-AllInOne"
+        git push -u origin
